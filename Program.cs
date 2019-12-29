@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RougeLikeRPG.Engine;
+using System;
 
 namespace RougeLikeRPG
 {
@@ -6,7 +7,9 @@ namespace RougeLikeRPG
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game game = new Game();
+            game.Start();
+            Console.ReadKey();
         }
     }
 }

@@ -30,20 +30,21 @@ namespace RougeLikeRPG.Core.Controls
         #endregion
         
         #region Public Methods
-        public void Draw()
+        public override void Draw()
         {
+            foreach (Cell cell in body)
+                Render.WithOffset(cell, 0, 0);
+
             foreach (Control item in Items) 
                 item.Draw();
         }
-
 
         ///<summary>
         /// Обновлени и все контролов на экране
         ///</summary>
         public void Update()
         {
-            foreach (Control item in Items) 
-                item.Draw();
+
         }
 
         ///<summary>
