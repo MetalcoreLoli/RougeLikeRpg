@@ -1,7 +1,9 @@
-﻿using RougeLikeRPG.Engine.Actors;
+﻿using RougeLikeRPG.Core;
+using RougeLikeRPG.Engine.Actors;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace RougeLikeRPG.Engine
 {
@@ -11,12 +13,28 @@ namespace RougeLikeRPG.Engine
     internal class Game
     {
         #region Private Members
-
+        /// <summary>
+        /// Игрок
+        /// </summary>
         private IActor _player;
+        
+        /// <summary>
+        /// Высота карты
+        /// </summary>
+        private Int32 _mapHeight = 15;
+        /// <summary>
+        /// Ширина Карты
+        /// </summary>
+        private Int32 _mapWidth = 30;
 
-        private Int32 _mapHeight;
-        private Int32 _mapWidth;
+        /// <summary>
+        /// Расположени карты на экране
+        /// </summary>
+        private Vector2D _mapLocation = new Vector2D(1, 1);
 
+        /// <summary>
+        /// Карта
+        /// </summary>
         private Map _map;
         #endregion
 
@@ -26,12 +44,9 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         public Game()
         {
-            _map = new Map(_mapWidth, _mapHeight);
+            _map = new Map(_mapWidth, _mapHeight, _mapLocation);
         }
-        
         #endregion
-
-        
 
         #region Public Methods
         
@@ -43,6 +58,7 @@ namespace RougeLikeRPG.Engine
             do
             {
                 Draw();
+                Thread.Sleep(1000);
             } while (true);
         }
         #endregion
@@ -57,7 +73,6 @@ namespace RougeLikeRPG.Engine
             Console.Clear();
             _map.Draw();
         }
-
         #endregion
     }
 }

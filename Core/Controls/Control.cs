@@ -37,7 +37,8 @@ namespace RougeLikeRPG.Core.Controls
             set
             {
                 _height = value;
-                body = InitBody(Width, Height);
+                if (Width > 0)
+                    body = InitBody(Width, Height);
             }
         }
         
@@ -50,7 +51,8 @@ namespace RougeLikeRPG.Core.Controls
             set
             {
                 _width = value;
-                body = InitBody(Width, Height);
+                if (Height > 0)
+                    body = InitBody(Width, Height);
             }
         }
 
@@ -68,6 +70,25 @@ namespace RougeLikeRPG.Core.Controls
 
         #region Public Methods
 
+        ///<summary>
+        ///Метод отрисовки левой и правой стены 
+        ///</summary>
+        ///<param name="body">тело в котором надо будет отрисовать стены</param>
+        ///<param name="width">высота тела </param>
+        ///<param name="height">ширина тела </param>
+        ///<param name="sym">символ стены</param> 
+        public  Cell[] DrawBordersWithSymbol(
+                Cell[] body,
+                Int32 width,
+                Int32 height,
+                char sym)
+        {
+            Cell[] temp = body;
+            temp = DrawLeftRightWalls(temp, width, height, sym);
+            temp = DrawUpDownWalls(temp, width, height, sym);
+            temp = DrawCornel(temp, width, height, sym);
+            return temp;
+        }
 
         ///<summary>
         ///Метод отрисовки левой и правой стены 
@@ -76,16 +97,27 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="width">высота тела </param>
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ стены</param> 
-        public static Cell[] DrawLeftRightWalls(
+        public Cell[] DrawLeftRightWalls(
                 Cell[] body, 
                 Int32 width, 
                 Int32 height,
                 char sym)
         {
             Cell[] temp = body;
-            
-            throw new Exception("TODO:");            
 
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    Int32 index = x + Width * y;
+                    if (x == 0 && y > 0)
+                        temp[index].Symbol = sym;
+                    if (x == width - 1 && y > 0)
+                        temp[index].Symbol = sym;
+
+                }
+            }
+            
             return temp;  
         }
 
@@ -97,7 +129,7 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ угла</param> 
         ///<returns>тело с углами</returns>
-        public static Cell[] DrawCornel(
+        public Cell[] DrawCornel(
                 Cell[] body, 
                 Int32 width, 
                 Int32 height,
@@ -125,7 +157,7 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ стен </param> 
         ///<returns>тело с стенами  </returns>
-        public static Cell[] DrawUpDownWalls(
+        public Cell[] DrawUpDownWalls(
                 Cell[] body, 
                 Int32 width, 
                 Int32 height, 
@@ -135,7 +167,7 @@ namespace RougeLikeRPG.Core.Controls
             for (int i = 1; i < width - 1; i++)
                 tmp[i].Symbol = sym;
 
-            for (int i = width * height - width - 2; i < width * height; i++)
+            for (int i = width * height - width; i < width * height; i++)
                 tmp[i].Symbol = sym;
             return tmp;
         }
@@ -152,7 +184,9 @@ namespace RougeLikeRPG.Core.Controls
                 for(int y = 0; y < height; y++)
                     temp[x + Width * y] = new Cell(
                             ' ', 
-                            new Vector2D(x, y) + Location);
+                            new Vector2D(x, y) + Location,
+                            ConsoleColor.White,
+                            ConsoleColor.Black);
             return temp;
         }
 
