@@ -1,5 +1,6 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Core.Controls;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,26 +16,30 @@ namespace RougeLikeRPG.Engine
         
         private char _mapCell = '.';
 
+        ///<summary>
+        ///Буффер, в котором находится вся карта
+        ///</summary>
+        private Cell[] _mapBuffer;
         #endregion
 
         #region Public Properties
-
+        ///<summary>
+        /// Актеры, которые находятся на карте
+        ///</summary>
         public List<Actors.Actor> Actors { get; set; }
         #endregion
 
         #region Contructors
         public Map(int mapWidth, int mapHeight, Core.Vector2D _mapLocation)
         {
-            Width = mapWidth;
-            Height = mapHeight;
-            Location = _mapLocation;
-
-            body = InitBody(Width, Height);
+            Width       = mapWidth;
+            Height      = mapHeight;
+            Location    = _mapLocation;
+            body        = InitBody(Width, Height);
         }
         #endregion
 
         #region Protected Methods
-
         protected override Cell[] InitBody(int width, int height)
         {
             Cell[] temp = base.InitBody(width, height);
@@ -52,13 +57,13 @@ namespace RougeLikeRPG.Engine
         #endregion
 
         #region Public Methods
-
+        
+        ///<summary>
+        /// Метод, обновляющий карту
+        ///</summary>
         public void Update()
         {
-            foreach (var item in collection)
-            {
-
-            }
+            
         }
 
         public override void Draw()

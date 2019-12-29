@@ -9,6 +9,10 @@ namespace RougeLikeRPG.Core.Controls
     internal abstract class Control
     {
         #region Private Members
+
+        private ConsoleColor _backColor = ConsoleColor.Black;
+        private ConsoleColor _foreColor = ConsoleColor.White;
+
         private Int32 _height;
 
         private Int32 _width;
@@ -27,6 +31,33 @@ namespace RougeLikeRPG.Core.Controls
         #endregion
 
         #region Public Properties
+        ///<summary>
+        /// Фон экрана
+        ///</summary>
+        public ConsoleColor BackgroundColor 
+        { 
+            get => _backColor; 
+            set
+            {
+                _backColor = value;
+                if (Width > 0 && Height > 0)
+                    body = InitBody(Width, Height);
+            }
+        }
+
+        ///<summary>
+        /// Цвет символов внутри
+        ///</summary>
+        public ConsoleColor ForegroundColor 
+        { 
+            get => _foreColor; 
+            set
+            {
+                _foreColor = value; 
+                if (Width > 0 && Height > 0)
+                    body = InitBody(Width, Height);
+            }
+        }
 
         ///<summary>
         /// Высота конторола, которая является высотой столбца
@@ -185,8 +216,8 @@ namespace RougeLikeRPG.Core.Controls
                     temp[x + Width * y] = new Cell(
                             ' ', 
                             new Vector2D(x, y) + Location,
-                            ConsoleColor.White,
-                            ConsoleColor.Black);
+                            ForegroundColor,
+                            BackgroundColor);
             return temp;
         }
 
