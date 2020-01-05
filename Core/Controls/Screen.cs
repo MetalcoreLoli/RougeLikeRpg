@@ -140,6 +140,12 @@ namespace RougeLikeRPG.Core.Controls
             Items.Add(item);
         }
 
+        public void AddRange(IEnumerable<Control> items)
+        {
+            foreach(Control item in items)
+                Add(item);
+        }
+
         ///<summary>
         /// Обновлени и все контролов на экране
         ///</summary>

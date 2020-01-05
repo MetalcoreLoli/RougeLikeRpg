@@ -1,7 +1,9 @@
 ﻿using RougeLikeRPG.Core;
+using RougeLikeRPG.Engine.Dices;
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -17,7 +19,7 @@ namespace RougeLikeRPG.Engine
         /// <summary>
         /// Игрок
         /// </summary>
-        private IActor _player;
+        private Player _player;
         
         /// <summary>
         /// Высота карты
@@ -81,6 +83,8 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         public Game()
         {
+            _player = new Player();
+            _player = NewPlayer();
             Initialization();            
         }
         #endregion
@@ -118,10 +122,18 @@ namespace RougeLikeRPG.Engine
         {
             _map.Update();
             //_inventoryScreen.Update();
-            //_statusScreen.Update();
+            _statusScreen.Update();
             _messageLogScreen.Update();
         }
 
+        private Player NewPlayer()
+        {
+            Player player = new Player();
+
+            player.Name = "Trap-chan";
+            player.Hp = player.MaxHp = DiceManager.CreateDices("2d8").RollAll().Sum();
+            return player;
+        }
 
         private void Initialization()
         {
@@ -168,7 +180,11 @@ namespace RougeLikeRPG.Engine
             _statusScreen.TitleLocation = new Vector2D(
                     (_statusScreen.Width - title.Length - 1) / 4, 2);
             _statusScreen.Title = title; 
+           
+            _statusScreen.AddRange(_player.GetStats().ToList());
+             
             _messageLogScreen.Title = "Message Log";
+
         }
         #endregion
     }

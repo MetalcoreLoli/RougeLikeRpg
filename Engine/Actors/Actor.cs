@@ -1,5 +1,7 @@
 ﻿using RougeLikeRPG.Core;
+using RougeLikeRPG.Core.Controls;
 using System;
+using System.Collections.Generic;
 
 namespace RougeLikeRPG.Engine.Actors
 {
@@ -31,6 +33,17 @@ namespace RougeLikeRPG.Engine.Actors
         public virtual void MoveTo(Vector2D position)
         { 
             
+        }
+
+
+        public IEnumerable<Control> GetStats()
+        {
+            var temp = new List<Control>(); 
+            var nameLable = new Lable($"Name: {Name}", new Vector2D(1, 1));
+            var hpLable = new Lable($"Hp: {Hp} / {MaxHp}", new Vector2D(1, 3));
+            temp.Add(nameLable);
+            temp.Add(hpLable);
+            return temp;
         }
         #endregion
 

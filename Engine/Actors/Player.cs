@@ -6,7 +6,7 @@ using System.Text;
 namespace RougeLikeRPG.Engine.Actors
 {
     internal class Player : Actor
-    {
-       
+    {       
+        
     }
 }
