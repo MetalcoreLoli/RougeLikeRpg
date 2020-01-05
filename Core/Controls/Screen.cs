@@ -13,23 +13,40 @@ namespace RougeLikeRPG.Core.Controls
         #region Private Members
         private string _title;
         
+            
+        private Vector2D _titleLocation = new Vector2D(1, 0);
         private Lable _lTitle;
         #endregion
         
         #region Public Properties
         ///<summary>
+        /// Расположение заголовка
+        ///</summary>
+        public Vector2D TitleLocation 
+        { 
+            get => _titleLocation;
+            set
+            {
+                _titleLocation = value;
+                _titleLocation = new Vector2D(_titleLocation.X, 0);
+            }
+        }
+
+        ///<summary>
         /// Элементы, что находятся на экране
         ///</summary>
         public List<Control> Items { get; set; }
 
-
+        ///<summary>
+        ///Заголовок экрана
+        ///</summary>
         public String Title 
         {
             get => _title;
             set
             {
                 _title = value;
-                _lTitle = new Lable("-| "+_title+" |-", new Vector2D(1, 0) + Location);
+                _lTitle = new Lable("-| "+_title+" |-", _titleLocation + Location);
             }
         }
         #endregion 
@@ -113,7 +130,10 @@ namespace RougeLikeRPG.Core.Controls
             foreach (Control item in Items) 
                 item.Draw();
         }
-
+        ///<summary>
+        /// Метод добавления контрола на экран 
+        ///</summary>
+        ///<param name="item">Контрол </param>
         public void Add(Control item)
         {
             item.Location += Location;

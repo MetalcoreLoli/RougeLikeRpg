@@ -164,6 +164,10 @@ namespace RougeLikeRPG.Engine
            
             _map                    = new Map(_mapWidth, _mapHeight, _mapLocation);
 
+            string title = "Status";
+            _statusScreen.TitleLocation = new Vector2D(
+                    (_statusScreen.Width - title.Length - 1) / 4, 2);
+            _statusScreen.Title = title; 
             _messageLogScreen.Title = "Message Log";
         }
         #endregion
