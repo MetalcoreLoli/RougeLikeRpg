@@ -1,4 +1,5 @@
-﻿using RougeLikeRPG.Engine;
+﻿using RougeLikeRPG.Core.Controls;
+using RougeLikeRPG.Engine;
 using System;
 
 namespace RougeLikeRPG
@@ -9,6 +10,7 @@ namespace RougeLikeRPG
         {
             Game game = new Game();
             game.Start();
+            Console.Clear();
             Console.ReadKey();
         }
     }

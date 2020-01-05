@@ -109,7 +109,7 @@ namespace RougeLikeRPG.Engine
         {
             Console.Clear();
             _map.Draw();
-            _inventoryScreen.Draw();
+           // _inventoryScreen.Draw();
             _statusScreen.Draw();
             _messageLogScreen.Draw();
         }
@@ -117,8 +117,8 @@ namespace RougeLikeRPG.Engine
         private void Update()
         {
             _map.Update();
-            _inventoryScreen.Update();
-            _statusScreen.Update();
+            //_inventoryScreen.Update();
+            //_statusScreen.Update();
             _messageLogScreen.Update();
         }
 
@@ -128,22 +128,25 @@ namespace RougeLikeRPG.Engine
             _statusScreenWidth          = 25;
             _statusScreenHeight         = _invetoryScreenHeight + _mapHeight;
 
-            _messageLogScreenWidth      = _statusScreenWidth + _mapWidth;
+            _mapWidth += _statusScreenWidth;
+
+            _messageLogScreenWidth      = /*_statusScreenWidth + */_mapWidth;
             _messageLogScreenHeight     = _invetoryScreenHeight;
 
-            _statusScreenLocation       = new Vector2D(_invetoryScreenWidth, 0);
+            _statusScreenLocation       = new Vector2D(_mapWidth, 0);
             _invetoryScreenLocation     = new Vector2D(0, 0);
-            _mapLocation                = new Vector2D(0, _invetoryScreenHeight);
+            _mapLocation                = new Vector2D(0, 0);
             _messageLogScreenLocation   = new Vector2D(
                                                         0,
-                                                        _mapHeight 
-                                                        + _invetoryScreenHeight
-                                                    );
+                                                        _mapHeight);
             
             _messageLogScreen       = new Screen(
                                                 _messageLogScreenWidth,
                                                 _messageLogScreenHeight,
-                                                _messageLogScreenLocation);
+                                                _messageLogScreenLocation,
+                                                "Message Log",
+                                                ConsoleColor.DarkCyan,
+                                                ConsoleColor.Black);
 
             _statusScreen           = new Screen(
                                                  _statusScreenWidth, 
@@ -155,11 +158,13 @@ namespace RougeLikeRPG.Engine
                                                 _invetoryScreenWidth, 
                                                 _invetoryScreenHeight,
                                                 _invetoryScreenLocation,
+                                                "",
                                                 ConsoleColor.DarkYellow,
                                                 ConsoleColor.Black); 
            
             _map                    = new Map(_mapWidth, _mapHeight, _mapLocation);
-        
+
+            _messageLogScreen.Title = "Message Log";
         }
         #endregion
     }

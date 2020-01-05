@@ -43,14 +43,14 @@ namespace RougeLikeRPG.Engine
         protected override Cell[] InitBody(int width, int height)
         {
             Cell[] temp = base.InitBody(width, height);
-            temp = DrawBordersWithSymbol(temp, width, height, '#');
+            
             for (int x = 1; x < width - 1; x++)
-            {
                 for (int y = 1; y < height - 1; y++)
-                {
                     temp[x + width * y].Symbol = _mapCell;
-                }
-            }
+            
+            temp = DrawLeftRightWalls(temp, Width, Height, '|');
+            temp = DrawUpDownWalls(temp, Width, Height, '-');
+            temp = DrawCornel(temp, Width, Height, '+');
             return temp;
         }
 
@@ -71,6 +71,10 @@ namespace RougeLikeRPG.Engine
             foreach (Cell cell in body)
                 Render.WithOffset(cell, 0, 0);
         }
+        #endregion
+
+        #region Private Methods 
+        
         #endregion
     }
 }

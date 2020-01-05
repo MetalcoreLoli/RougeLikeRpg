@@ -11,7 +11,9 @@ namespace RougeLikeRPG.Core.Controls
     {
         
         #region Private Members
-            
+        private string _title;
+        
+        private Lable _lTitle;
         #endregion
         
         #region Public Properties
@@ -19,6 +21,17 @@ namespace RougeLikeRPG.Core.Controls
         /// Элементы, что находятся на экране
         ///</summary>
         public List<Control> Items { get; set; }
+
+
+        public String Title 
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                _lTitle = new Lable("-| "+_title+" |-", new Vector2D(1, 0) + Location);
+            }
+        }
         #endregion 
         
         
@@ -34,12 +47,24 @@ namespace RougeLikeRPG.Core.Controls
                     new Vector2D(0, 0))
         {
         }
-        
+       
+        public Screen(Int32 width, Int32 height, string title)
+            : this(
+                    width, 
+                    height, 
+                    new Vector2D(0, 0),
+                    title,
+                    ConsoleColor.Black,
+                    ConsoleColor.White)
+        {
+        } 
+
         public Screen(Int32 width, Int32 height, Vector2D location)
             : this(
                     width, 
                     height, 
                     location,
+                    "",
                     ConsoleColor.Black,
                     ConsoleColor.White)
         {} 
@@ -48,13 +73,17 @@ namespace RougeLikeRPG.Core.Controls
                 Int32 width, 
                 Int32 height, 
                 Vector2D location,
+                string title,
                 ConsoleColor backColor,
                 ConsoleColor foreColor)
         {
+            Items = new List<Control>();
             Width   = width;
             Height  = height;
             Location = location;
+            Title   = title;
             body    = InitBody(width, height);    
+            _lTitle = new Lable(title);
         }
         #endregion
        
@@ -63,7 +92,10 @@ namespace RougeLikeRPG.Core.Controls
         protected override Cell[] InitBody(Int32 width, Int32 height)
         {
             Cell[] temp = base.InitBody(width, height);
-            temp = DrawBordersWithSymbol(temp, width, height, '#');
+            ///temp = DrawBordersWithSymbol(temp, width, height, '#');
+            temp = DrawLeftRightWalls(temp, Width, Height, '|');
+            temp = DrawUpDownWalls(temp, Width, Height, '-');
+            temp = DrawCornel(temp, Width, Height, '+');
             return temp;
         }
         #endregion
@@ -74,10 +106,18 @@ namespace RougeLikeRPG.Core.Controls
         {
             foreach (Cell cell in body)
                 Render.WithOffset(cell, 0, 0);
+
+            if(_lTitle != null)
+                _lTitle.Draw();
             
-            if (Items != null)
-                foreach (Control item in Items) 
-                    item.Draw();
+            foreach (Control item in Items) 
+                item.Draw();
+        }
+
+        public void Add(Control item)
+        {
+            item.Location += Location;
+            Items.Add(item);
         }
 
         ///<summary>
@@ -85,7 +125,7 @@ namespace RougeLikeRPG.Core.Controls
         ///</summary>
         public void Update()
         {
-            body = InitBody(Width, Height);
+           // body = InitBody(Width, Height);
         }
 
         ///<summary>

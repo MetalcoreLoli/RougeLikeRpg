@@ -10,8 +10,7 @@ namespace RougeLikeRPG.Core.Controls
     {
 
         #region Private Members
-        private string _text;
-        private Cell[] _textBody;  
+        private string _text = "";
         #endregion
 
         #region Public Properties
@@ -25,29 +24,38 @@ namespace RougeLikeRPG.Core.Controls
             set
             {
                 _text = value;
-                _textBody = InitTextBody(_text);
+                body = InitTextBody(_text);
             }
         }
         #endregion
 
         #region Constructors
         public Lable()
-            : this ("", 10, 5)
+            : this ("", 1, 1, new Vector2D(0, 1))
         {
         }
 
 
         public Lable (string text)
-            : this (text, 10, 5)
+            : this (text, text.Length, 1, new Vector2D(0, 1))
         {
         }
 
-        public Lable (string text, Int32 width, Int32 height)
+        public Lable (string text, Vector2D location) 
+            : this(text, text.Length, 1, location)
         {
-         
-            _textBody = InitTextBody(text);
-            body = InitBody(width, height);
-            //Initialization();
+        }
+
+        public Lable (
+                string text, 
+                Int32 width, 
+                Int32 height, 
+                Vector2D location)
+        {
+            
+            Location = location;
+            Text = text;
+            Initialization();
         }
 
         #endregion
@@ -57,20 +65,25 @@ namespace RougeLikeRPG.Core.Controls
         {
             foreach (Cell cell in body)
                 Render.WithOffset(cell, 0, 0);
-
-           foreach (Cell cell in _textBody)
-              Render.WithOffset(cell, 1, 1); 
         }
         #endregion 
+
+
+        #region Propercted Methods 
+        protected override Cell[] InitBody(int width, int height)
+        {
+            Cell[] temp = base.InitBody(width, height);
+            temp = InitTextBody(Text);
+            return temp;
+        }
+        #endregion
 
 
         #region Private Methods
 
         private void Initialization()
         {
-            body = DrawUpDownWalls(body, Width, Height, '-');
-            body = DrawCornel(body, Width, Height, '+');
-            body = DrawCornel(body, Width, Height, '|');
+            body = InitTextBody(Text);
         }
 
         ///<summary>
@@ -82,7 +95,11 @@ namespace RougeLikeRPG.Core.Controls
         {
             Cell[] temp = new Cell[text.Length];
             for (Int32 i = 0; i < text.Length; i++)
-               temp[i] = new Cell(text[i], new Vector2D(i, 0) + Location); 
+               temp[i] = new Cell(
+                       text[i], 
+                       new Vector2D(i, 0) + Location, 
+                       ConsoleColor.White, 
+                       ConsoleColor.Black); 
             return temp;
         }
         #endregion

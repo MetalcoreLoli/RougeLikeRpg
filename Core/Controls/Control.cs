@@ -108,7 +108,7 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="width">высота тела </param>
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ стены</param> 
-        public  Cell[] DrawBordersWithSymbol(
+        protected  Cell[] DrawBordersWithSymbol(
                 Cell[] body,
                 Int32 width,
                 Int32 height,
@@ -128,7 +128,7 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="width">высота тела </param>
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ стены</param> 
-        public Cell[] DrawLeftRightWalls(
+        protected Cell[] DrawLeftRightWalls(
                 Cell[] body, 
                 Int32 width, 
                 Int32 height,
@@ -160,7 +160,7 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ угла</param> 
         ///<returns>тело с углами</returns>
-        public Cell[] DrawCornel(
+        protected Cell[] DrawCornel(
                 Cell[] body, 
                 Int32 width, 
                 Int32 height,
@@ -175,7 +175,7 @@ namespace RougeLikeRPG.Core.Controls
             //Правый нижниый угол
             temp[width * height - 1].Symbol = sym;
             //Левый нижний угол
-            temp[width * height - width - 2].Symbol = sym;
+            temp[width * height - width].Symbol = sym;
 
             return temp;
         }
@@ -188,7 +188,7 @@ namespace RougeLikeRPG.Core.Controls
         ///<param name="height">ширина тела </param>
         ///<param name="sym">символ стен </param> 
         ///<returns>тело с стенами  </returns>
-        public Cell[] DrawUpDownWalls(
+        protected Cell[] DrawUpDownWalls(
                 Cell[] body, 
                 Int32 width, 
                 Int32 height, 
