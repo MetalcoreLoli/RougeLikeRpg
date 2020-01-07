@@ -7,6 +7,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using RougeLikeRPG.Engine.GameScreens;
 
 namespace RougeLikeRPG.Engine
 {
@@ -20,15 +22,15 @@ namespace RougeLikeRPG.Engine
         /// Игрок
         /// </summary>
         private Player _player;
-        
+
         /// <summary>
         /// Высота карты
         /// </summary>
-        private Int32 _mapHeight = 20;
+        private Int32 _mapHeight = 11;
         /// <summary>
         /// Ширина Карты
         /// </summary>
-        private Int32 _mapWidth = 50;
+        private Int32 _mapWidth = 30;
 
         /// <summary>
         /// Расположени карты на экране
@@ -75,6 +77,9 @@ namespace RougeLikeRPG.Engine
         private Vector2D _messageLogScreenLocation;
 
         private Screen _messageLogScreen;
+
+        //Экран создания персонажа
+        private CreatePlayerScreen _createPlayerScreen;
         #endregion
 
         #region Constructors
@@ -83,14 +88,16 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         public Game()
         {
+            _createPlayerScreen = new CreatePlayerScreen();
             _player = new Player();
             _player = NewPlayer();
-            Initialization();            
+            Initialization();
+            _map.AddActorToMap(_player);
         }
         #endregion
 
         #region Public Methods
-        
+
         /// <summary>
         /// Метод, который содержит игровой цикл
         /// </summary>
@@ -100,7 +107,7 @@ namespace RougeLikeRPG.Engine
             {
                 Draw();
                 Update();
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             } while (true);
         }
         #endregion
@@ -113,28 +120,29 @@ namespace RougeLikeRPG.Engine
         {
             Console.Clear();
             _map.Draw();
-           // _inventoryScreen.Draw();
-            _statusScreen.Draw();
             _messageLogScreen.Draw();
+            // _inventoryScreen.Draw();
+            _statusScreen.Draw();
         }
 
         private void Update()
         {
-            _map.Update();
-            //_inventoryScreen.Update();
-            _statusScreen.Update();
-            _messageLogScreen.Update();
+            _map.Player.MoveTo(Input.PlayerInput().Result);
+            //_map.Update();
+            ////_inventoryScreen.Update();
+            //_statusScreen.Update();
+            //_messageLogScreen.Update();
         }
 
-        private Player NewPlayer()
-        {
-            Player player = new Player();
+        /// <summary>
+        /// Ввод 
+        /// </summary>
+        /// <returns></returns>
 
-            player.Name = "Trap-chan";
-            player.Hp = player.MaxHp = DiceManager.CreateDices("2d8").RollAll().Sum();
-            return player;
-        }
 
+        private Player NewPlayer() => _createPlayerScreen.Start();
+
+      
         private void Initialization()
         {
             _statusScreenWidth          = 25;
