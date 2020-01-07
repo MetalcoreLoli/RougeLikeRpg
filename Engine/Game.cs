@@ -2,6 +2,7 @@
 using RougeLikeRPG.Engine.Dices;
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
+using RougeLikeRPG.Engine.Actors.Enums;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -92,7 +93,8 @@ namespace RougeLikeRPG.Engine
             _player = new Player();
             _player = NewPlayer();
             Initialization();
-            _map.AddActorToMap(_player);
+            
+           _map.AddActorToMap(_player);
         }
         #endregion
 
@@ -125,21 +127,63 @@ namespace RougeLikeRPG.Engine
             _statusScreen.Draw();
         }
 
+        private Vector2D PlayerMoveTo()
+        {
+            Vector2D vec = new Vector2D();
+            switch(Input.PlayerKeyInput().Result)
+            {
+                case ConsoleKey.UpArrow: 
+                    _map.Player.Direction = Direction.Up;
+                    vec = new Vector2D(0, -1); 
+                    break;
+                
+                case ConsoleKey.DownArrow: 
+                    _map.Player.Direction = Direction.Down;
+                    vec = new Vector2D(0, 1); 
+                    break;
+                
+                case ConsoleKey.LeftArrow: 
+                    _map.Player.Direction = Direction.Left;
+                    vec = new Vector2D(-1, 0); 
+                    break;
+                
+                case ConsoleKey.RightArrow: 
+                    _map.Player.Direction = Direction.Right;
+                    vec = new Vector2D(1, 0); 
+                    break;
+                
+                default: 
+                    vec = new Vector2D(0, 0); 
+                    break;
+            }
+            return vec;
+        }
         private void Update()
         {
-            _map.Player.MoveTo(Input.PlayerInput().Result);
-            //_map.Update();
-            ////_inventoryScreen.Update();
-            //_statusScreen.Update();
-            //_messageLogScreen.Update();
+           // Vector2D playersInput = Input.PlayerInput().Result;
+            Vector2D playersInput = PlayerMoveTo();
+
+            if ((playersInput + _map.Player.Position).X == _map.Width - 1)
+                playersInput.X--;
+
+            if ((playersInput + _map.Player.Position).Y == _map.Height- 1)
+                playersInput.Y--;
+
+            if((playersInput + _map.Player.Position).X == 0)
+                playersInput.X++;
+
+            if((playersInput + _map.Player.Position).Y == 0)
+                playersInput.Y++;
+
+            Console.Title = _map.Player.Direction.ToString();
+           // _map.Player.MoveTo(playersInput);
+           _map.Update();
         }
 
         /// <summary>
         /// Ввод 
         /// </summary>
         /// <returns></returns>
-
-
         private Player NewPlayer() => _createPlayerScreen.Start();
 
       
@@ -183,14 +227,14 @@ namespace RougeLikeRPG.Engine
                                                 ConsoleColor.Black); 
            
             _map                    = new Map(_mapWidth, _mapHeight, _mapLocation);
+            
 
             string title = "Status";
             _statusScreen.TitleLocation = new Vector2D(
                     (_statusScreen.Width - title.Length - 1) / 4, 2);
             _statusScreen.Title = title; 
-           
             _statusScreen.AddRange(_player.GetStats().ToList());
-             
+
             _messageLogScreen.Title = "Message Log";
 
         }

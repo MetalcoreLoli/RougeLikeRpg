@@ -133,9 +133,11 @@ namespace RougeLikeRPG.Core.Controls
         protected override Cell[] InitBody(int width, int height)
         {
             Cell[] temp = base.InitBody(width, height);
+            Int32 persent   = (Int32)((double)Value / (double)MaxValue * 100.0);
+            Int32 val       = (Int32)((double)width * (double)persent / 100.0);
             for (int i = 0; i < width; i++)
             {
-                if (i <= (Value + (width - MaxValue)))
+                if (i < val) 
                     temp[i].BackColor = ProgressColor;
                 else
                     temp[i].BackColor = BackgroundColor;
