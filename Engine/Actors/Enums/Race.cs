@@ -12,6 +12,8 @@ namespace RougeLikeRPG.Engine.Actors.Enums
         Halfling    = 3,
         UndeadHuman = 4,
         UndeadElf   = 5,
-        UndeadDrow  = 6
+        UndeadDrow  = 6,
+        None        = 7
+
     }
 }

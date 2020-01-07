@@ -1,5 +1,7 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.GameItems;
+using RougeLikeRPG.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +16,47 @@ namespace RougeLikeRPG.Engine.Actors
         string Name { get; set; }
 
         /// <summary>
+        /// Раса игрока
+        /// </summary>
+        Race Race { get; set; }
+
+        Inventory Inventory { get; set; }
+
+        #region Equipped Items
+        /// <summary>
+        /// Шлем
+        /// </summary>
+        ArmorItem Head { get; set; }
+
+        /// <summary>
+        /// Доспех
+        /// </summary>
+        ArmorItem Armor { get; set; }
+
+        /// <summary>
+        /// Ноги
+        /// </summary>
+        ArmorItem Foots { get; set; }
+
+        /// <summary>
+        /// Оружие в Левой руке
+        /// </summary>
+        WeaponItem LeftArm { get; set; }
+
+        /// <summary>
+        /// Оружие в Правой Руке
+        /// </summary>
+        WeaponItem RightArm { get; set; }
+
+        /// <summary>
+        /// Класс брони
+        /// </summary>
+        public Int32 ArmorClass { get; set; }
+        #endregion
+
+        #region Stats
+
+        /// <summary>
         /// Текущий уровень персонажа
         /// </summary>
         Int32 Level { get; set; }
@@ -22,7 +65,7 @@ namespace RougeLikeRPG.Engine.Actors
         /// Текущие количество Hp актера
         /// </summary>
         Int32 Hp { get; set; }
-        
+
         /// <summary>
         /// Максимально количество Hp актера
         /// </summary>
@@ -46,7 +89,6 @@ namespace RougeLikeRPG.Engine.Actors
         /// Нужное количество опыта для повышения
         /// </summary>
         Int32 MaxExp { get; set; }
-        #region Stats
         /// <summary>
         /// Сила
         /// </summary>
@@ -94,6 +136,7 @@ namespace RougeLikeRPG.Engine.Actors
         Int32 LuckyMod { get; set; }
         #endregion
 
-        Race Race { get; set; }
+
+
     }
 }

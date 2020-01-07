@@ -25,14 +25,20 @@ namespace RougeLikeRPG.Engine.GameScreens
             _helpScreen = new Screen(30, 18, new Vector2D(29, 4));
             _helpScreen.Title = "Help";
             _helpScreen.AddRange(new List<Control> { 
-                new Lable("R     - to roll stats", new Vector2D(1, 1)),
-                new Lable("Enter - to confirm roll", new Vector2D(1, 2)),
-                new Lable("-> - to change race", new Vector2D(1, 3)),
-                new Lable("<- - to change race", new Vector2D(1, 4)),
+                new Lable("R     - to roll stats",      new Vector2D(1, 1)),
+                new Lable("Enter - to confirm roll",    new Vector2D(1, 2)),
+                new Lable("->    - to change race",     new Vector2D(1, 3)),
+                new Lable("<-    - to change race",     new Vector2D(1, 4)),
             });
 
             _statsScreen = new Screen(25, 21, new Vector2D(1, 1));
             _statsScreen.Title = "Player's Stats";
+
+            Items.AddRange(new List<Control> { 
+                _inputPlayerNameScreen,
+                _helpScreen,
+                _statsScreen
+            });
 
             IsAlive = true;
         }
@@ -44,7 +50,7 @@ namespace RougeLikeRPG.Engine.GameScreens
 
             do
             {
-                DrawAll();
+                Draw();
                 Update(player);
             } while (IsAlive);
             return player;
@@ -62,13 +68,12 @@ namespace RougeLikeRPG.Engine.GameScreens
             if (player.Name ==  null)
                 player.Name = InputName();
 
-            //RollPlayerStats(player);
-            
             switch (Input.PlayerKeyInput().Result)
             {
                 case ConsoleKey.R: RollPlayerStats(player); break;
                 case ConsoleKey.Enter: IsAlive = false;  break;
                 case ConsoleKey.RightArrow:
+                    if (player.Race + 1 != Actors.Enums.Race.None)
                         player.Race++; 
                     break;
                 case ConsoleKey.LeftArrow: 
@@ -76,17 +81,11 @@ namespace RougeLikeRPG.Engine.GameScreens
                         player.Race--; 
                     break;
             }
+            StartItems(player);
             _statsScreen.Items = new List<Control>();
             _statsScreen.AddRange(player.GetStats());
         }
 
-        private void DrawAll()
-        { 
-           Draw();
-            _statsScreen.Draw();
-            _inputPlayerNameScreen.Draw();
-            _helpScreen.Draw();
-        }
         private void RollPlayerStats(Player player)
         {
             player.Symbol = '@';
@@ -109,6 +108,15 @@ namespace RougeLikeRPG.Engine.GameScreens
             Int32[] values = DiceManager.CreateDices("4d6").RollAll();
             Int32 minDiceValue = values.Min();
             return values.Where(val => val != minDiceValue).Sum();
+        }
+
+        private void StartItems(Player player)
+        {
+            player.ArmorClass = 0;
+            player.Equip(new GameItems.Items.Weapon.ShortSword());
+            player.Equip(new GameItems.Items.Weapon.Dagger());
+            player.Equip(new GameItems.Items.Armor.LeatherArmor());
+            player.Equip(new GameItems.Items.Armor.LeatherBoots());
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.GameItems;
+using RougeLikeRPG.Engine.GameItems.Enums;
+using RougeLikeRPG.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
 
@@ -91,6 +94,14 @@ namespace RougeLikeRPG.Engine.Actors
         public int LuckyMod { get; set; }
         #endregion
         public Race Race { get; set; }
+        public Inventory Inventory { get; set; }
+
+        public ArmorItem Head { get; set; }
+        public ArmorItem Armor { get; set; }
+        public ArmorItem Foots { get; set; }
+        public WeaponItem LeftArm { get; set; }
+        public WeaponItem RightArm { get; set; }
+        public int ArmorClass { get; set; }
 
         #endregion
 
@@ -132,12 +143,12 @@ namespace RougeLikeRPG.Engine.Actors
             var chrLable        = new Lable($"Chr:    {Chari} ({((ChariMod > 0) ? $"+{ChariMod}" : $"{ChariMod}")})", new Vector2D(1, 12));
             var lineOneLable    = new Lable("-----------------------", new Vector2D(1, 13));
 
-            var headLable           = new Lable("Head:", new Vector2D(1, 14));
-            var armorLable          = new Lable("Armor:", new Vector2D(1, 15));
-            var footsLable          = new Lable("Foots:", new Vector2D(1, 16));
-            var lArmLable           = new Lable("Lt Hand:", new Vector2D(1, 17));
-            var rArmLable           = new Lable("Rh Hand:", new Vector2D(1, 18));
-            var armorClassLable     = new Lable("Ar Class:", new Vector2D(1, 19));
+            var headLable           = new Lable($"Head:     {(Head != null? Head.Name : "Nothing")}", new Vector2D(1, 14));
+            var armorLable          = new Lable($"Armor:    {(Armor != null ? Armor.Name : "Nothing")}", new Vector2D(1, 15));
+            var footsLable          = new Lable($"Foots:    {(Foots != null ? Foots.Name : "Nothing")}", new Vector2D(1, 16));
+            var lArmLable           = new Lable($"Lt Hand:  {(LeftArm != null? LeftArm.Name : "Nothing")}", new Vector2D(1, 17));
+            var rArmLable           = new Lable($"Rh Hand:  {(RightArm != null ? RightArm.Name : "Nothing")}", new Vector2D(1, 18));
+            var armorClassLable     = new Lable($"Ar Class: {ArmorClass}", new Vector2D(1, 19));
 
             hpProgerss.Text     = $"Hp:     {Hp} / {MaxHp}";
             mpProgerss.Text     = $"Mana:   {Mana} / {MaxMana}";
@@ -176,6 +187,46 @@ namespace RougeLikeRPG.Engine.Actors
             return modificator;
         }
         #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Метожд для экипирование шмотки
+        /// </summary>
+        /// <param name="item">Шмотка</param>
+        public void Equip(Item item)
+        {
+            if (item is ArmorItem)
+            {
+                switch (item.EquipType)
+                {
+                    case ItemEquipType.Head:
+                        Head = item as ArmorItem;
+                        ArmorClass += Head.ArmorClass;
+                        break;
+
+                    case ItemEquipType.Armor:
+                        Armor = item as ArmorItem;
+                        ArmorClass += Armor.ArmorClass;
+                        break;
+
+                    case ItemEquipType.Foots:
+                        Foots = item as ArmorItem;
+                        ArmorClass += Foots.ArmorClass;
+                        break;
+                }
+            }
+
+            if (item is WeaponItem)
+            {
+                if (LeftArm == null)
+                    LeftArm = item as WeaponItem;
+                else if (RightArm == null)
+                    RightArm = item as WeaponItem;
+
+            }
+        }
+        #endregion
+
 
     }
 }
