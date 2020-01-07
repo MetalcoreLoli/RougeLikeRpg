@@ -1,6 +1,6 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Core.Controls;
-
+using RougeLikeRPG.Engine.Actors;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +23,11 @@ namespace RougeLikeRPG.Engine
         #endregion
 
         #region Public Properties
+        /// <summary>
+        /// Игрок
+        /// </summary>
+        public Player Player { get; internal set; }
+
         ///<summary>
         /// Актеры, которые находятся на карте
         ///</summary>
@@ -30,12 +35,20 @@ namespace RougeLikeRPG.Engine
         #endregion
 
         #region Contructors
-        public Map(int mapWidth, int mapHeight, Core.Vector2D _mapLocation)
+
+        public Map(int mapWidth, int mapHeight, Core.Vector2D _mapLocation) 
+            :this(mapWidth, mapHeight, _mapLocation, null, null)
+        {
+        }
+
+        public Map(int mapWidth, int mapHeight, Core.Vector2D _mapLocation, Player player, IEnumerable<Actor> actors)
         {
             Width       = mapWidth;
             Height      = mapHeight;
             Location    = _mapLocation;
             body        = InitBody(Width, Height);
+            if (player != null)
+                AddActorToMap(player);
         }
         #endregion
 
@@ -57,7 +70,24 @@ namespace RougeLikeRPG.Engine
         #endregion
 
         #region Public Methods
-        
+
+        public void AddActorToMap(Actor actor)
+        { 
+           if(actor is Player)
+           {
+                actor.Position += Location + 1;
+                Player = actor as Player;
+           }
+           else
+                Actors.Add(actor);
+        }
+
+        public void AddRangeOfActorToMap(IEnumerable<Actor> actors)
+        {
+            foreach (Actor actor in actors)
+                AddActorToMap(actor);
+        }
+
         ///<summary>
         /// Метод, обновляющий карту
         ///</summary>
@@ -70,11 +100,20 @@ namespace RougeLikeRPG.Engine
         {
             foreach (Cell cell in body)
                 Render.WithOffset(cell, 0, 0);
+            
+            //Отрисовка игрока
+            if (Player != null)
+                Render.WithOffset(Player, 0, 0);
+            
+            //Отрисовка других актеров
+            if (Actors != null)
+                foreach (Actor actor in Actors)
+                    Render.WithOffset(actor, 0, 0);
         }
         #endregion
 
         #region Private Methods 
-        
+
         #endregion
     }
 }

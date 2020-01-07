@@ -28,6 +28,15 @@ namespace RougeLikeRPG.Engine.Actors
         Int32 MaxHp { get; set; }
 
         /// <summary>
+        /// Текущие количество Mp актера
+        /// </summary>
+        Int32 Mana { get; set; }
+
+        /// <summary>
+        /// Максимально количество Mp актера
+        /// </summary>
+        Int32 MaxMana { get; set; }
+        /// <summary>
         /// Текущее количество опыта актера
         /// </summary>
         Int32 Exp { get; set; }

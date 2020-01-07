@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RougeLikeRPG.Engine
 {
@@ -24,11 +25,11 @@ namespace RougeLikeRPG.Engine
         /// <summary>
         /// Высота карты
         /// </summary>
-        private Int32 _mapHeight = 20;
+        private Int32 _mapHeight = 10;
         /// <summary>
         /// Ширина Карты
         /// </summary>
-        private Int32 _mapWidth = 50;
+        private Int32 _mapWidth = 30;
 
         /// <summary>
         /// Расположени карты на экране
@@ -85,7 +86,8 @@ namespace RougeLikeRPG.Engine
         {
             _player = new Player();
             _player = NewPlayer();
-            Initialization();            
+            Initialization();
+            _map.AddActorToMap(_player);
         }
         #endregion
 
@@ -100,7 +102,7 @@ namespace RougeLikeRPG.Engine
             {
                 Draw();
                 Update();
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             } while (true);
         }
         #endregion
@@ -113,25 +115,46 @@ namespace RougeLikeRPG.Engine
         {
             Console.Clear();
             _map.Draw();
-           // _inventoryScreen.Draw();
-            _statusScreen.Draw();
             _messageLogScreen.Draw();
+            // _inventoryScreen.Draw();
+            _statusScreen.Draw();
         }
 
         private void Update()
         {
-            _map.Update();
-            //_inventoryScreen.Update();
-            _statusScreen.Update();
-            _messageLogScreen.Update();
+            _map.Player.MoveTo(PlayerInput().Result);
+            //_map.Update();
+            ////_inventoryScreen.Update();
+            //_statusScreen.Update();
+            //_messageLogScreen.Update();
+        }
+
+        /// <summary>
+        /// Ввод 
+        /// </summary>
+        /// <returns></returns>
+        private async Task<Vector2D> PlayerInput()
+        {
+            return await Task.Run(() => Console.ReadKey().Key switch
+            {
+                 ConsoleKey.UpArrow     => Task<Vector2D>.FromResult(new Vector2D(0,  -1)),
+                 ConsoleKey.DownArrow   => Task<Vector2D>.FromResult(new Vector2D(0,  1)),
+                 ConsoleKey.LeftArrow   => Task<Vector2D>.FromResult(new Vector2D(-1, 0)),
+                 ConsoleKey.RightArrow  => Task<Vector2D>.FromResult(new Vector2D(1,  0)),
+                 _                      => Task<Vector2D>.FromResult(new Vector2D(0,  0))
+            });
         }
 
         private Player NewPlayer()
         {
-            Player player = new Player();
-
-            player.Name = "Trap-chan";
-            player.Hp = player.MaxHp = DiceManager.CreateDices("2d8").RollAll().Sum();
+            Player player   = new Player();
+            player.Name     = "Trap-chan";
+            player.Symbol   = '@';
+            player.Color    = ConsoleColor.White;
+            //player.Hp = 17;
+            //player.MaxHp = 17;
+            player.Hp = player.MaxHp = DiceManager.CreateDices("2d12").RollAll().Sum();
+            player.Mana     = player.MaxMana = 2;
             return player;
         }
 
