@@ -124,13 +124,13 @@ namespace RougeLikeRPG.Engine.Actors
             var hpProgerss  = new Progressbar(23, 1, ConsoleColor.DarkRed,      ConsoleColor.DarkGray,      new Vector2D(1, 3), Hp,     MaxHp);
             var mpProgerss  = new Progressbar(23, 1, ConsoleColor.DarkBlue,     ConsoleColor.DarkGray,      new Vector2D(1, 4), Mana,   MaxMana);
 
-            var lineLable = new Lable("-----------------------", new Vector2D(1, 7));
-            var strLable    = new Lable($"Str:    {Str} ({((StrMod > 0)? $"+{StrMod}": $"{StrMod}")})", new Vector2D(1, 8));
-            var dexLable    = new Lable($"Dex:    {Dex} ({((DexMod > 0) ? $"+{DexMod}" : $"{DexMod}")})", new Vector2D(1, 9));
-            var intelLable  = new Lable($"Int:    {Intell} ({((IntellMod > 0) ? $"+{IntellMod}" : $"{IntellMod}")})", new Vector2D(1, 10));
-            var lckLable    = new Lable($"Lck:    {Lucky} ({((LuckyMod > 0) ? $"+{LuckyMod}" : $"{LuckyMod}")})", new Vector2D(1, 11));
-            var chrLable    = new Lable($"Chr:    {Chari} ({((ChariMod > 0) ? $"+{ChariMod}" : $"{ChariMod}")})", new Vector2D(1, 12));
-            var lineOneLable = new Lable("-----------------------", new Vector2D(1, 13));
+            var lineLable       = new Lable("-----------------------", new Vector2D(1, 7));
+            var strLable        = new Lable($"Str:    {Str} ({((StrMod > 0)? $"+{StrMod}": $"{StrMod}")})", new Vector2D(1, 8));
+            var dexLable        = new Lable($"Dex:    {Dex} ({((DexMod > 0) ? $"+{DexMod}" : $"{DexMod}")})", new Vector2D(1, 9));
+            var intelLable      = new Lable($"Int:    {Intell} ({((IntellMod > 0) ? $"+{IntellMod}" : $"{IntellMod}")})", new Vector2D(1, 10));
+            var lckLable        = new Lable($"Lck:    {Lucky} ({((LuckyMod > 0) ? $"+{LuckyMod}" : $"{LuckyMod}")})", new Vector2D(1, 11));
+            var chrLable        = new Lable($"Chr:    {Chari} ({((ChariMod > 0) ? $"+{ChariMod}" : $"{ChariMod}")})", new Vector2D(1, 12));
+            var lineOneLable    = new Lable("-----------------------", new Vector2D(1, 13));
 
             var headLable           = new Lable("Head:", new Vector2D(1, 14));
             var armorLable          = new Lable("Armor:", new Vector2D(1, 15));
@@ -165,9 +165,6 @@ namespace RougeLikeRPG.Engine.Actors
             temp.Add(lArmLable);
             temp.Add(rArmLable);
             temp.Add(armorClassLable);
-
-            //temp.Add(hpLable);
-            //temp.Add(mpLable);
             return temp;
         }
         #endregion

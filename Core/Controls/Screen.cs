@@ -100,7 +100,7 @@ namespace RougeLikeRPG.Core.Controls
             Location = location;
             Title   = title;
             body    = InitBody(width, height);    
-            _lTitle = new Lable(title);
+           // _lTitle = new Lable(title);
         }
         #endregion
        

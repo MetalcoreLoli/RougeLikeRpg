@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using RougeLikeRPG.Engine.GameScreens;
 
 namespace RougeLikeRPG.Engine
 {
@@ -76,6 +77,9 @@ namespace RougeLikeRPG.Engine
         private Vector2D _messageLogScreenLocation;
 
         private Screen _messageLogScreen;
+
+        //Экран создания персонажа
+        private CreatePlayerScreen _createPlayerScreen;
         #endregion
 
         #region Constructors
@@ -84,6 +88,7 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         public Game()
         {
+            _createPlayerScreen = new CreatePlayerScreen();
             _player = new Player();
             _player = NewPlayer();
             Initialization();
@@ -122,7 +127,7 @@ namespace RougeLikeRPG.Engine
 
         private void Update()
         {
-            _map.Player.MoveTo(PlayerInput().Result);
+            _map.Player.MoveTo(Input.PlayerInput().Result);
             //_map.Update();
             ////_inventoryScreen.Update();
             //_statusScreen.Update();
@@ -133,48 +138,11 @@ namespace RougeLikeRPG.Engine
         /// Ввод 
         /// </summary>
         /// <returns></returns>
-        private async Task<Vector2D> PlayerInput()
-        {
-            return await Task.Run(() => Console.ReadKey().Key switch
-            {
-                ConsoleKey.UpArrow => Task<Vector2D>.FromResult(new Vector2D(0, -1)),
-                ConsoleKey.DownArrow => Task<Vector2D>.FromResult(new Vector2D(0, 1)),
-                ConsoleKey.LeftArrow => Task<Vector2D>.FromResult(new Vector2D(-1, 0)),
-                ConsoleKey.RightArrow => Task<Vector2D>.FromResult(new Vector2D(1, 0)),
-                _ => Task<Vector2D>.FromResult(new Vector2D(0, 0))
-            });
-        }
 
-        private Player NewPlayer()
-        {
-            Player player = new Player();
-            player.Name = "Test-chan";
-            player.Symbol = '@';
-            player.Color = ConsoleColor.White;
-            //player.Hp = 17;
-            //player.MaxHp = 17;
-            player.Hp = player.MaxHp = DiceManager.CreateDices("2d8").RollAll().Sum();
-            player.Mana = player.MaxMana = 2;
-            player.Exp = 0;
-            player.MaxExp = 20;
-            player.Level = 1;
 
-            player.Race = Actors.Enums.Race.UndeadDrow;
+        private Player NewPlayer() => _createPlayerScreen.Start();
 
-            player.Str = RollStat();
-            player.Dex = RollStat();
-            player.Intell = RollStat();
-            player.Lucky = RollStat();
-            player.Chari = RollStat();
-            return player;
-        }
-
-        private Int32 RollStat()
-        {
-            Int32[] values = DiceManager.CreateDices("4d6").RollAll();
-            Int32 minDiceValue = values.Min();
-            return values.Where(val => val != minDiceValue).Sum();
-        }
+      
         private void Initialization()
         {
             _statusScreenWidth          = 25;
