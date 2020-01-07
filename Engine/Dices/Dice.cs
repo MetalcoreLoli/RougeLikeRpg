@@ -58,7 +58,7 @@ namespace RougeLikeRPG.Engine.Dices
         ///<returns>Возвращает значение кости </returns>
         public Int32 Roll()
         {
-            Int32 index = new Random(DateTime.Now.Millisecond).Next(0, CountOfEdges - 1);
+            Int32 index = new Random().Next(0, CountOfEdges);
             _value = Edges[index].Number;
             return _value;
         } 

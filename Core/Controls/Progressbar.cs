@@ -11,14 +11,31 @@ namespace RougeLikeRPG.Core.Controls
 
         private ConsoleColor _progressColor;
         private ConsoleColor _backColor;
+        private ConsoleColor _textColor = ConsoleColor.Black;
 
-        private Lable _lText;
+        /// <summary>
+        /// Текст, котороый отрисуется на прогрессбаре
+        /// </summary>
+        private String _text = "";
+
+        //private Lable _lText;
 
         private Int32 _value = 5;
         private Int32 _maxValue = 17;
         #endregion
 
         #region Public Properties
+
+        public String Text
+        {
+            get => _text;
+            set
+            {
+                _text = value;
+                if (Width > 0 && Height > 0)
+                    body = InitBody(Width, Height);
+            }
+        }
 
         /// <summary>
         /// Цвет линии прогресса
@@ -46,6 +63,18 @@ namespace RougeLikeRPG.Core.Controls
                 if (Width > 0 && Height > 0)
                     body = InitBody(Width, Height);
             }
+        }
+
+        public ConsoleColor TextColor
+        {
+            get => _textColor;
+            set 
+            {
+                _textColor = value;
+                if (Width > 0 && Height > 0)
+                    body = InitBody(Width, Height);
+            }
+
         }
 
         /// <summary>
@@ -110,9 +139,14 @@ namespace RougeLikeRPG.Core.Controls
                     temp[i].BackColor = ProgressColor;
                 else
                     temp[i].BackColor = BackgroundColor;
-
             }
-
+            
+            if (Text.Length <= width)
+                for (int i = 0; i < Text.Length; i++)
+                {
+                    temp[i].Color = TextColor;
+                    temp[i].Symbol = Text[i];
+                }
             return temp;
         }
 

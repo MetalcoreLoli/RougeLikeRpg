@@ -1,4 +1,5 @@
 ﻿using RougeLikeRPG.Core;
+using RougeLikeRPG.Engine.Actors.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,5 +46,54 @@ namespace RougeLikeRPG.Engine.Actors
         /// Нужное количество опыта для повышения
         /// </summary>
         Int32 MaxExp { get; set; }
+        #region Stats
+        /// <summary>
+        /// Сила
+        /// </summary>
+        Int32 Str { get; set; }
+        /// <summary>
+        /// Ловкость
+        /// </summary>
+        Int32 Dex { get; set; }
+        /// <summary>
+        /// Интелект
+        /// </summary>
+        Int32 Intell { get; set; }
+        /// <summary>
+        /// Харизма
+        /// </summary>
+        Int32 Chari { get; set; }
+        /// <summary>
+        /// Удача
+        /// </summary>
+        Int32 Lucky { get; set; }
+
+        #endregion
+
+        #region Modificators
+        /// <summary>
+        /// Сила
+        /// </summary>
+        Int32 StrMod { get; set; }
+        /// <summary>
+        /// Ловкость
+        /// </summary>
+        Int32 DexMod { get; set; }
+        /// <summary>
+        /// Интелект
+        /// </summary>
+        Int32 IntellMod { get; set; }
+        /// <summary>
+        /// Харизма
+        /// </summary>
+        Int32 ChariMod { get; set; }
+
+        /// <summary>
+        /// Удача
+        /// </summary>
+        Int32 LuckyMod { get; set; }
+        #endregion
+
+        Race Race { get; set; }
     }
 }
