@@ -4,6 +4,7 @@ using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RougeLikeRPG.Engine
@@ -15,7 +16,8 @@ namespace RougeLikeRPG.Engine
     {
         #region Private members
 
-        private char _mapCell = '.';
+        private char _mapWalkableCell = '.';
+        private char _mapBorder = '#';
 
         private Cell[] _mapBody;
         ///<summary>
@@ -27,6 +29,8 @@ namespace RougeLikeRPG.Engine
         private Int32 _mapBufferWidth;
 
         private Int32 _mapBufferSize;
+
+        private Vector2D _mapBufferOffset;
         #endregion
 
         #region Public Properties
@@ -59,13 +63,14 @@ namespace RougeLikeRPG.Engine
             Height = mapHeight;
             Location = _mapLocation;
             Player = player;
+            
             body = InitBody(Width, Height);
+
             _mapBufferWidth = Width;
             _mapBufferHeight = 25;
             _mapBufferSize = _mapBufferWidth * _mapBufferHeight;
-            _mapBuffer = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
-            //_mapBody    = new Cell[] 
-
+            _mapBody = _mapBuffer = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
+            
             if (player != null)
                 AddActorToMap(player);
         }
@@ -103,16 +108,25 @@ namespace RougeLikeRPG.Engine
                 AddActorToMap(actor);
         }
 
-
+        /// <summary>
+        /// Метод проверки ячейки на, то что туда можно пройти
+        /// </summary>
+        /// <param name="x">Х</param>
+        /// <param name="y">У</param>
+        /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Int32 x, Int32 y)
         {
-            foreach (Cell cell in _mapBuffer)
-                if (cell != null)
-                    if (cell.Position.X == x && cell.Position.Y == y)
-                        if (cell.Symbol == _mapCell)
-                            return true;
-            return false;
+            Cell cell = _mapBuffer[x + _mapBufferWidth * y];
+            return cell != null || cell.Symbol == _mapWalkableCell;
         }
+
+        /// <summary>
+        /// Метод проверки ячейки на, то что туда можно пройти
+        /// </summary>
+        /// <param name="vec">Позиция точки проверки</param>
+        /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
+        public bool IsWalkable(Vector2D vec) => IsWalkable(vec.X, vec.Y);
+
 
         public void Update()
         {
@@ -122,30 +136,17 @@ namespace RougeLikeRPG.Engine
                     Cell cell = _mapBuffer[i];
                     if (cell != null)
                     {
-                        if (Player.Direction == Direction.Up)
-                        {
-                            if (Player.Position.Y + 1 > cell.Position.Y + 1)
-                            cell.Position = new Vector2D(cell.Position.X, cell.Position.Y + 1);
-                        }
-                        if (Player.Direction == Direction.Down)
-                        {
-                            if (Player.Position.Y < _mapBufferHeight)
-                            cell.Position = new Vector2D(cell.Position.X, cell.Position.Y - 1);
-                            //Player.MoveTo(new Vector2D(0, -1));
-                        }
-
-                        if (Player.Direction == Direction.Left)
-                        {
-                            cell.Position = new Vector2D(cell.Position.X + 1, cell.Position.Y);
-                        }
-                        if (Player.Direction == Direction.Right)
-                        {
-                            cell.Position = new Vector2D(cell.Position.X - 1, cell.Position.Y);
-                        }
-
+                        cell.Position += _mapBufferOffset;
                     }
                 }
         }
+
+        public void PlayerMoveTo(Vector2D vec)
+        {
+            Vector2D offset = new Vector2D(vec.X * -1, vec.Y * -1);
+            _mapBufferOffset = offset;
+        }
+
 
         public override void Draw()
         {
@@ -154,12 +155,10 @@ namespace RougeLikeRPG.Engine
 
             foreach (Cell cell in _mapBuffer)
             {
-                if (cell != null)
                 if (cell.Position.X > 0 && cell.Position.Y > 0)
                     if (cell.Position.X < Width - 1
                             && cell.Position.Y < Height - 1)
                         Render.WithOffset(cell, 0, 0);
-
             }
 
             //Отрисовка игрока игрокаока игрокагрокаока игрока
@@ -178,17 +177,18 @@ namespace RougeLikeRPG.Engine
         {
             Cell[] temp = new Cell[mapWidth * mapHeight];
 
-            for (Int32 x = 1; x < mapWidth; x++)
-                for (Int32 y = 1; y < mapHeight; y++)
+            for (Int32 x = 0; x < mapWidth; x++)
+                for (Int32 y = 0; y < mapHeight; y++)
                 {
                     temp[x + mapWidth * y]
                         = new Cell(
-                                _mapCell,
-                                new Vector2D(x, y) + Location,
+                                _mapWalkableCell,
+                                new Vector2D(x, y) + Location + 1,
                                 ConsoleColor.White,
                                 ConsoleColor.Black);
                 }
 
+            temp = DrawBordersWithSymbol(temp, mapWidth, mapHeight, _mapBorder);
             return temp;
         }
         #endregion

@@ -26,5 +26,6 @@ namespace RougeLikeRPG.Core
         
         public static Vector2D operator -(Vector2D a, Int32 b)
             => new Vector2D(a.X - b, a.Y - b);
+       
     }
 }
