@@ -2,6 +2,7 @@
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.GameMaps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,10 @@ namespace RougeLikeRPG.Engine
             _mapBufferWidth = Width;
             _mapBufferHeight = 25;
             _mapBufferSize = _mapBufferWidth * _mapBufferHeight;
-            _mapBody = _mapBuffer = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
+            //_mapBody = _mapBuffer = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
+            var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).Map;
+            map = DrawBordersWithSymbol(map, _mapBufferWidth, _mapBufferHeight, '#');
+            _mapBody = _mapBuffer = map;
             
             if (player != null)
                 AddActorToMap(player);
