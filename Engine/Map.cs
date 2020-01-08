@@ -127,7 +127,8 @@ namespace RougeLikeRPG.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Vector2D vec) => IsWalkable(vec.X, vec.Y);
 
-
+        public Cell GetCell(Int32 x, Int32 y) => _mapBuffer.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
+        public Cell GetCell(Vector2D pos) => GetCell(pos.X, pos.Y);
         public void Update()
         {
             if (_mapBuffer != null)
@@ -136,7 +137,8 @@ namespace RougeLikeRPG.Engine
                     Cell cell = _mapBuffer[i];
                     if (cell != null)
                     {
-                        cell.Position += _mapBufferOffset;
+                        if (IsWalkable(Player.Position + _mapBufferOffset))
+                            cell.Position += _mapBufferOffset;
                     }
                 }
         }

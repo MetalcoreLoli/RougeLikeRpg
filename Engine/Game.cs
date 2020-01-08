@@ -177,7 +177,11 @@ namespace RougeLikeRPG.Engine
 
             Console.Title = _map.Player.Direction.ToString();
             //_map.Player.MoveTo(playersInput);
-            _map.PlayerMoveTo(playersInput);
+            var mapCell = _map.GetCell(playersInput + _map.Player.Position);
+            if (mapCell.Symbol == '.')
+                _map.PlayerMoveTo(playersInput);
+            else 
+                _map.PlayerMoveTo(new Vector2D(0, 0));
             _map.Update();
         }
 
