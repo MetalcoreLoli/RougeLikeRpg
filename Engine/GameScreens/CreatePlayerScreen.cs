@@ -88,20 +88,20 @@ namespace RougeLikeRPG.Engine.GameScreens
 
         private void RollPlayerStats(Player player)
         {
-            player.Symbol = '@';
-            player.Color = ConsoleColor.White;
+            player.Color    = ConsoleColor.White;
+            player.Symbol   = '@';
             //player.Hp = 17;
             //player.MaxHp = 17;
-            player.Hp = player.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
-            player.Mana = player.MaxMana = 2;
-            player.Exp = 0;
-            player.MaxExp = 20;
-            player.Level = 1;
-            player.Str = RollStat();
-            player.Dex = RollStat();
-            player.Intell = RollStat();
-            player.Lucky = RollStat();
-            player.Chari = RollStat();
+            player.Hp       = player.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
+            player.Mana     = player.MaxMana = 2;
+            player.Exp      = 0;
+            player.MaxExp   = 20;
+            player.Level    = 1;
+            player.Str      = RollStat();
+            player.Dex      = RollStat();
+            player.Intell   = RollStat();
+            player.Lucky    = RollStat();
+            player.Chari    = RollStat();
         }
         private Int32 RollStat()
         {

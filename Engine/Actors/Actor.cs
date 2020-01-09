@@ -126,14 +126,14 @@ namespace RougeLikeRPG.Engine.Actors
 
         public IEnumerable<Control> GetStats()
         {
-            var temp        = new List<Control>(); 
-            var nameLable   = new Lable($"Name: {Name}", new Vector2D(1, 1));
-            var raceLable   = new Lable($"Race: {Race}", new Vector2D(1, 2));
-            var lvlLable    = new Lable($"Level: {Level}", new Vector2D(1, 5));
+            var temp            = new List<Control>(); 
+            var nameLable       = new Lable($"Name: {Name}", new Vector2D(1, 1));
+            var raceLable       = new Lable($"Race: {Race}", new Vector2D(1, 2));
+            var lvlLable        = new Lable($"Level: {Level}", new Vector2D(1, 5));
             
-            var lvlProgerss = new Progressbar(23, 1, ConsoleColor.DarkYellow,   ConsoleColor.DarkGray,      new Vector2D(1, 6), Exp,    MaxExp);
-            var hpProgerss  = new Progressbar(23, 1, ConsoleColor.DarkRed,      ConsoleColor.DarkGray,      new Vector2D(1, 3), Hp,     MaxHp);
-            var mpProgerss  = new Progressbar(23, 1, ConsoleColor.DarkBlue,     ConsoleColor.DarkGray,      new Vector2D(1, 4), Mana,   MaxMana);
+            var lvlProgerss     = new Progressbar(23, 1, ConsoleColor.DarkYellow,   ConsoleColor.DarkGray,      new Vector2D(1, 6), Exp,    MaxExp);
+            var hpProgerss      = new Progressbar(23, 1, ConsoleColor.DarkRed,      ConsoleColor.DarkGray,      new Vector2D(1, 3), Hp,     MaxHp);
+            var mpProgerss      = new Progressbar(23, 1, ConsoleColor.DarkBlue,     ConsoleColor.DarkGray,      new Vector2D(1, 4), Mana,   MaxMana);
 
             var lineLable       = new Lable("-----------------------", new Vector2D(1, 7));
             var strLable        = new Lable($"Str:    {Str} ({((StrMod > 0)? $"+{StrMod}": $"{StrMod}")})", new Vector2D(1, 8));
@@ -150,10 +150,10 @@ namespace RougeLikeRPG.Engine.Actors
             var rArmLable           = new Lable($"Rh Hand:  {(RightArm != null ? RightArm.Name : "Nothing")}", new Vector2D(1, 18));
             var armorClassLable     = new Lable($"Ar Class: {ArmorClass}", new Vector2D(1, 19));
 
-            hpProgerss.Text     = $"Hp:     {Hp} / {MaxHp}";
-            mpProgerss.Text     = $"Mana:   {Mana} / {MaxMana}";
-            lvlProgerss.Text    = $"Exp:    {Exp} / {MaxExp}";
-            hpProgerss.TextColor = mpProgerss.TextColor = ConsoleColor.White;
+            hpProgerss.Text         = $"Hp:     {Hp} / {MaxHp}";
+            mpProgerss.Text         = $"Mana:   {Mana} / {MaxMana}";
+            lvlProgerss.Text        = $"Exp:    {Exp} / {MaxExp}";
+            hpProgerss.TextColor    = mpProgerss.TextColor = ConsoleColor.White;
 
             temp.Add(lineLable);
             temp.Add(strLable);
