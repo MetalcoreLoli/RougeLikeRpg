@@ -152,12 +152,12 @@ namespace RougeLikeRPG.Engine
         }
 
 
-        public override void Draw()
+        public async override void Draw()
         {
-            foreach (Cell cell in body)
+            await foreach (Cell cell in GetCellsAsync(body))
                 Render.WithOffset(cell, 0, 0);
 
-            foreach (Cell cell in _mapBuffer)
+            await foreach(Cell cell in GetCellsAsync(_mapBuffer))
             {
                 if (cell.Position.X > 0 && cell.Position.Y > 0)
                     if (cell.Position.X < Width - 1
@@ -177,6 +177,8 @@ namespace RougeLikeRPG.Engine
         #endregion
 
         #region Private Methods 
+
+       
         private Cell[] MapBufferInit(Int32 mapWidth, Int32 mapHeight)
         {
             Cell[] temp = new Cell[mapWidth * mapHeight];

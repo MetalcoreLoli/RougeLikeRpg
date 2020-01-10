@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using RougeLikeRPG.Core;
 
 namespace RougeLikeRPG.Core.Controls
@@ -19,7 +22,6 @@ namespace RougeLikeRPG.Core.Controls
         
         private Vector2D _location;
         #endregion  
-
 
         #region Protected Members
         
@@ -100,6 +102,14 @@ namespace RougeLikeRPG.Core.Controls
         #endregion
 
         #region Public Methods
+        public Cell GetCellByPosition(Int32 x, Int32 y)
+        {
+            return body.FirstOrDefault(cell => cell.Position.X.Equals(x) && cell.Position.Y.Equals(y));
+        }
+
+        public Cell GetCellByPosition(Vector2D pos) => GetCellByPosition(pos.X, pos.Y);
+
+        //public Cell[] GetBody() => body;
 
         ///<summary>
         ///Метод отрисовки левой и правой стены 
@@ -203,8 +213,19 @@ namespace RougeLikeRPG.Core.Controls
             return tmp;
         }
         #endregion
-        
+
         #region Protected Methods
+    
+        protected async IAsyncEnumerable<Cell> GetCellsAsync(Cell[] cells)
+        {
+           for (int i = 0; i < cells.Length; i++)
+            {
+                await Task.Delay(0);
+                yield return cells[i];
+
+            }
+        }
+
         ///<summary>
         /// Метод инициализирует тело контрола
         ///</summary> 

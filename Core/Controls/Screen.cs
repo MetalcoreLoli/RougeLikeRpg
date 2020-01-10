@@ -119,15 +119,16 @@ namespace RougeLikeRPG.Core.Controls
 
 
         #region Public Methods
-        public override void Draw()
+
+        public async override void Draw()
         {
-            foreach (Cell cell in body)
+            await foreach (Cell cell in GetCellsAsync(body))
                 Render.WithOffset(cell, 0, 0);
 
             if(_lTitle != null)
                 _lTitle.Draw();
-            
-            foreach (Control item in Items) 
+
+            foreach (Control item in Items)
                 item.Draw();
         }
         ///<summary>
@@ -138,6 +139,15 @@ namespace RougeLikeRPG.Core.Controls
         {
             item.Location += Location;
             Items.Add(item);
+
+            //for (int x = 0; x < item.Width; x++)
+            //    for (int y = 0; y < item.Height; y++)
+            //    {
+            //        Vector2D itemCellPostion = new Vector2D(x, y) + item.Location;
+            //        Cell cell = item.GetCellByPosition(itemCellPostion);
+            //        if (cell != null)
+            //            body[cell.Position.X + Width * cell.Position.Y] = cell;
+            //    }
         }
 
         public void AddRange(IEnumerable<Control> items)
@@ -166,8 +176,12 @@ namespace RougeLikeRPG.Core.Controls
                 body[i].Symbol = ' ';
                 body[i].BackColor = color; 
             }
-            foreach (Cell cell in body)
-                Render.WithOffset(cell, 0, 0);
+            body = DrawLeftRightWalls(body, Width, Height, '|');
+            body = DrawUpDownWalls(body, Width, Height, '-');
+            body = DrawCornel(body, Width, Height, '+');
+
+            //foreach (Cell cell in body)
+            //    Render.WithOffset(cell, 0, 0);
         }
         #endregion
 

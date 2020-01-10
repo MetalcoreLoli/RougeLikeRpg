@@ -95,6 +95,7 @@ namespace RougeLikeRPG.Engine
             Initialization();
             
            _map.AddActorToMap(_player);
+
         }
         #endregion
 
@@ -105,6 +106,8 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         public void Start()
         {
+            Console.Clear();
+           
             do
             {
                 Draw();
@@ -120,11 +123,11 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         private void Draw()
         {
-            Console.Clear();
+            //Thread.Sleep(250);
             _map.Draw();
-            _messageLogScreen.Draw();
-            // _inventoryScreen.Draw();
             _statusScreen.Draw();
+            _messageLogScreen.Draw();
+            // Console.Clear();
         }
 
         private Vector2D PlayerMoveTo()
@@ -158,31 +161,35 @@ namespace RougeLikeRPG.Engine
             }
             return vec;
         }
-        private void Update()
+        private async void Update()
         {
-           // Vector2D playersInput = Input.PlayerInput().Result;
-            Vector2D playersInput = PlayerMoveTo();
+            await Task.Factory.StartNew(() => {
+                Vector2D playersInput = PlayerMoveTo();
 
-            if ((playersInput + _map.Player.Position).X == _map.Width - 1)
-                playersInput.X--;
+                if ((playersInput + _map.Player.Position).X == _map.Width - 1)
+                    playersInput.X--;
 
-            if ((playersInput + _map.Player.Position).Y == _map.Height- 1)
-                playersInput.Y--;
+                if ((playersInput + _map.Player.Position).Y == _map.Height - 1)
+                    playersInput.Y--;
 
-            if((playersInput + _map.Player.Position).X == 0)
-                playersInput.X++;
+                if ((playersInput + _map.Player.Position).X == 0)
+                    playersInput.X++;
 
-            if((playersInput + _map.Player.Position).Y == 0)
-                playersInput.Y++;
+                if ((playersInput + _map.Player.Position).Y == 0)
+                    playersInput.Y++;
 
-            Console.Title = _map.Player.Direction.ToString();
-            //_map.Player.MoveTo(playersInput);
-            var mapCell = _map.GetCell(playersInput + _map.Player.Position);
-            if (mapCell.Symbol == '.')
-                _map.PlayerMoveTo(playersInput);
-            else 
-                _map.PlayerMoveTo(new Vector2D(0, 0));
-            _map.Update();
+                Console.Title = _map.Player.Direction.ToString();
+                //_map.Player.MoveTo(playersInput);
+
+                var mapCell = _map.GetCell(playersInput + _map.Player.Position);
+                if (mapCell.Symbol == '.')
+                    _map.PlayerMoveTo(playersInput);
+                else
+                    _map.PlayerMoveTo(new Vector2D(0, 0));
+                _map.Update();
+            });
+                // Vector2D playersInput = Input.PlayerInput().Result;
+              
         }
 
         /// <summary>
