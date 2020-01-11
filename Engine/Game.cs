@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using RougeLikeRPG.Engine.GameScreens;
+using RougeLikeRPG.Engine.Events;
+using RougeLikeRPG.Engine.Actors.Monsters;
 
 namespace RougeLikeRPG.Engine
 {
@@ -83,6 +85,11 @@ namespace RougeLikeRPG.Engine
         private CreatePlayerScreen _createPlayerScreen;
         #endregion
 
+        #region Events
+
+        public event EventHandler<KeyDownEventArgs> KeyDown;
+        #endregion
+
         #region Constructors
         /// <summary>
         ///  Коструктор по умолчанию
@@ -93,10 +100,53 @@ namespace RougeLikeRPG.Engine
             _player = new Player();
             _player = NewPlayer();
             Initialization();
-            
+            KeyDown += Game_KeyDown;
            _map.AddActorToMap(_player);
 
         }
+
+        private void Game_KeyDown(object sender, KeyDownEventArgs e)
+        {
+            //if ((playersInput + _map.Player.Position).X == _map.Width - 1)
+            //    playersInput.X--;
+
+            //if ((playersInput + _map.Player.Position).Y == _map.Height - 1)
+            //    playersInput.Y--;
+
+            //if ((playersInput + _map.Player.Position).X == 0)
+            //    playersInput.X++;
+
+            //if ((playersInput + _map.Player.Position).Y == 0)
+            //    playersInput.Y++;
+
+            //_map.Player.MoveTo(playersInput);
+
+
+            Vector2D playersInput = PlayerMoveTo(e.Key);
+            Console.Title = _map.Player.Direction.ToString();
+
+            PlayerMove(playersInput);
+        }
+
+        private void PlayerMove(Vector2D playersInput)
+        {
+            var mapCell = _map.GetCell(playersInput + _map.Player.Position);
+            var actor = _map.GetActor(playersInput + _map.Player.Position);
+            if (mapCell.Symbol == '.' && actor == null)
+                _map.PlayerMoveTo(playersInput);
+            else if (actor != null)
+            {
+                if (actor is Monster)
+                {
+                    _map.Player.Attack(actor);
+                    actor.Attack(_map.Player);
+                }
+            }
+            else
+                _map.PlayerMoveTo(new Vector2D(0, 0));
+        }
+
+        
         #endregion
 
         #region Public Methods
@@ -107,7 +157,6 @@ namespace RougeLikeRPG.Engine
         public void Start()
         {
             Console.Clear();
-           
             do
             {
                 Draw();
@@ -124,72 +173,61 @@ namespace RougeLikeRPG.Engine
         private void Draw()
         {
             //Thread.Sleep(250);
+            //Console.Clear();
             _map.Draw();
             _statusScreen.Draw();
             _messageLogScreen.Draw();
-            // Console.Clear();
         }
 
-        private Vector2D PlayerMoveTo()
+
+        private Vector2D PlayerMoveTo(ConsoleKey key)
         {
-            Vector2D vec = new Vector2D();
-            switch(Input.PlayerKeyInput().Result)
+            Vector2D vec = new Vector2D(0, 0);
+            switch (key)
             {
-                case ConsoleKey.UpArrow: 
+                case ConsoleKey.UpArrow:
                     _map.Player.Direction = Direction.Up;
-                    vec = new Vector2D(0, -1); 
+                    vec = new Vector2D(0, -1);
                     break;
-                
-                case ConsoleKey.DownArrow: 
+
+                case ConsoleKey.DownArrow:
                     _map.Player.Direction = Direction.Down;
-                    vec = new Vector2D(0, 1); 
+                    vec = new Vector2D(0, 1);
                     break;
-                
-                case ConsoleKey.LeftArrow: 
+
+                case ConsoleKey.LeftArrow:
                     _map.Player.Direction = Direction.Left;
-                    vec = new Vector2D(-1, 0); 
+                    vec = new Vector2D(-1, 0);
                     break;
-                
-                case ConsoleKey.RightArrow: 
+
+                case ConsoleKey.RightArrow:
                     _map.Player.Direction = Direction.Right;
-                    vec = new Vector2D(1, 0); 
+                    vec = new Vector2D(1, 0);
                     break;
-                
-                default: 
-                    vec = new Vector2D(0, 0); 
+
+                default:
+                    vec = new Vector2D(0, 0);
                     break;
             }
             return vec;
         }
-        private async void Update()
+
+        private async void PlayerInput()
         {
-            await Task.Factory.StartNew(() => {
-                Vector2D playersInput = PlayerMoveTo();
+            OnKeyDown(Input.PlayerKeyInput().Result);
+        }
+        private void Update()
+        {
+            if (_player.Hp > 0)
+                PlayerInput();
+            else
+                _player.Color = ConsoleColor.DarkGray;
 
-                if ((playersInput + _map.Player.Position).X == _map.Width - 1)
-                    playersInput.X--;
 
-                if ((playersInput + _map.Player.Position).Y == _map.Height - 1)
-                    playersInput.Y--;
+            _map.Update();
 
-                if ((playersInput + _map.Player.Position).X == 0)
-                    playersInput.X++;
-
-                if ((playersInput + _map.Player.Position).Y == 0)
-                    playersInput.Y++;
-
-                Console.Title = _map.Player.Direction.ToString();
-                //_map.Player.MoveTo(playersInput);
-
-                var mapCell = _map.GetCell(playersInput + _map.Player.Position);
-                if (mapCell.Symbol == '.')
-                    _map.PlayerMoveTo(playersInput);
-                else
-                    _map.PlayerMoveTo(new Vector2D(0, 0));
-                _map.Update();
-            });
-                // Vector2D playersInput = Input.PlayerInput().Result;
-              
+            _statusScreen.Items = new List<Control>();
+            _statusScreen.AddRange(_player.GetStats());
         }
 
         /// <summary>
@@ -198,7 +236,9 @@ namespace RougeLikeRPG.Engine
         /// <returns></returns>
         private Player NewPlayer() => _createPlayerScreen.Start();
 
-      
+
+        private void OnKeyDown(ConsoleKey key) => KeyDown?.Invoke(this, new KeyDownEventArgs(key));
+
         private void Initialization()
         {
             _statusScreenWidth          = 25;

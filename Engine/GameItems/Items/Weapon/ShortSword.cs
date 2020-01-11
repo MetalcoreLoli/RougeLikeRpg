@@ -10,6 +10,7 @@ namespace RougeLikeRPG.Engine.GameItems.Items.Weapon
             : base("1d6")
         {
             Name = "Short Sword";
+            Modificator = Enums.WeaponItemModificator.Dex;
         }
     }
 }

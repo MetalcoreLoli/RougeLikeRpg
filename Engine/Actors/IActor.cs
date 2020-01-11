@@ -19,6 +19,10 @@ namespace RougeLikeRPG.Engine.Actors
         /// Раса игрока
         /// </summary>
         Race Race { get; set; }
+        /// <summary>
+        /// Отражает состояни актера
+        /// </summary>
+        bool IsDead { get; set; }
 
         Inventory Inventory { get; set; }
 

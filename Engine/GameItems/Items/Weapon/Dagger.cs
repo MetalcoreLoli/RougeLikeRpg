@@ -9,6 +9,7 @@ namespace RougeLikeRPG.Engine.GameItems.Items.Weapon
         public Dagger() : base("1d4") 
         {
             Name = "Dagger";
+            Modificator = Enums.WeaponItemModificator.Dex;
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.Dices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RougeLikeRPG.Engine.Actors
@@ -18,6 +20,14 @@ namespace RougeLikeRPG.Engine.Actors
         /// Зона видимости игрока`
         ///</summary> 
         public Int32 Fov { get; set; } = 5;
-        #endregion         
+        #endregion
+
+        #region Constructors
+
+        #endregion
+
+        #region Public Methods
+      
+        #endregion
     }
 }

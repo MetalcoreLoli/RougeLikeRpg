@@ -1,11 +1,13 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.Dices;
 using RougeLikeRPG.Engine.GameItems;
 using RougeLikeRPG.Engine.GameItems.Enums;
 using RougeLikeRPG.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RougeLikeRPG.Engine.Actors
 {
@@ -22,14 +24,33 @@ namespace RougeLikeRPG.Engine.Actors
         private Int32 _lucky;
         private Int32 _char;
         #endregion
+
+        private Int32 _lvl = 1;
+        private Int32 _exp = 0;
         #endregion
 
         #region Public Properties
         public string       Name { get; set; }
-        public int          Level { get; set; }
+        public int          Level
+        {
+            get => _lvl; 
+            set
+            {
+                _lvl = value;
+            }
+        }
         public int          Hp { get; set; }
         public int          MaxHp { get; set; }
-        public int          Exp { get; set; }
+        public int Exp
+        {
+            get => _exp;
+            set
+            {
+                _exp = value;
+                if (_exp >= MaxExp)
+                    LevelUp();
+            }
+        }
         public int          MaxExp { get; set; }
         public char         Symbol { get; set; }
         public Vector2D     Position { get; set; }
@@ -102,10 +123,45 @@ namespace RougeLikeRPG.Engine.Actors
         public WeaponItem LeftArm { get; set; }
         public WeaponItem RightArm { get; set; }
         public int ArmorClass { get; set; }
+        public bool IsDead { get; set; }
 
         #endregion
 
         #region Public Methods
+
+        public string Attack(Actor enemy)
+        {
+            string message = "";
+            if (LeftArm != null)
+            {
+                Int32 isHitL = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(LeftArm.Modificator);
+                if (isHitL > 10)
+                {
+                    Int32 leftHandDamage = LeftArm.RolledDamage;
+                    enemy.Hp -= leftHandDamage;
+                    message += $"{enemy.Name} was hitten by {LeftArm.Name} at {leftHandDamage}";
+                }
+                else
+                    message += $"{Name} was missed by {LeftArm.Name}";
+            }
+           
+
+            if (RightArm != null)
+            {
+                Int32 isHitR = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(RightArm.Modificator);
+                if (isHitR > 10)
+                {
+                    Int32 rightHandDamage = RightArm.RolledDamage;
+                    enemy.Hp -= rightHandDamage;
+                    message += $"and {enemy.Name} was hitten by {RightArm.Name} at {rightHandDamage}";
+                }
+                else
+                    message += $"{Name} was missed by {RightArm.Name}";
+            }
+          
+
+            return message;
+        }
 
         /// <summary>
         ///  Методо отвечающий за перемещение актера
@@ -123,7 +179,12 @@ namespace RougeLikeRPG.Engine.Actors
         {
             Position += position;
         }
-
+        public Int32 RollStat()
+        {
+            Int32[] values = DiceManager.CreateDices("4d6").RollAll();
+            Int32 minDiceValue = values.Min();
+            return values.Where(val => val != minDiceValue).Sum();
+        }
         public IEnumerable<Control> GetStats()
         {
             var temp            = new List<Control>(); 
@@ -153,7 +214,7 @@ namespace RougeLikeRPG.Engine.Actors
             hpProgerss.Text         = $"Hp:     {Hp} / {MaxHp}";
             mpProgerss.Text         = $"Mana:   {Mana} / {MaxMana}";
             lvlProgerss.Text        = $"Exp:    {Exp} / {MaxExp}";
-            hpProgerss.TextColor    = mpProgerss.TextColor = ConsoleColor.White;
+            hpProgerss.TextColor    = mpProgerss.TextColor = lvlProgerss.TextColor = ConsoleColor.White;
 
             temp.Add(lineLable);
             temp.Add(strLable);
@@ -180,7 +241,24 @@ namespace RougeLikeRPG.Engine.Actors
         }
         #endregion
 
+
+        #region Pro
+
+        #endregion
+
         #region Private Methods
+
+        private Int32 GetValueOfModificatorByWeapon(WeaponItemModificator modificator)
+        {
+            return modificator switch
+            {
+                WeaponItemModificator.Str => StrMod,
+                WeaponItemModificator.Dex => DexMod,
+                WeaponItemModificator.Int => IntellMod,
+                WeaponItemModificator.Lck => LuckyMod,
+                _ => 0
+            };
+        }
         private Int32 CalculateModificator(Int32 statValue)
         {
             Int32 modificator = (statValue - 10 != 0) ? (statValue - 10) / 2 : 0;
@@ -189,6 +267,15 @@ namespace RougeLikeRPG.Engine.Actors
         #endregion
 
         #region Public Properties
+
+        public void LevelUp()
+        {
+            Level++;
+            MaxExp *= 2;
+            MaxHp += DiceManager.CreateDices("2d6").RollAll().Sum();
+            Hp = MaxHp;
+        }
+
         /// <summary>
         /// Метожд для экипирование шмотки
         /// </summary>

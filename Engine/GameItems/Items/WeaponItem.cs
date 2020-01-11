@@ -1,4 +1,5 @@
 ﻿using RougeLikeRPG.Engine.Dices;
+using RougeLikeRPG.Engine.GameItems.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace RougeLikeRPG.Engine.GameItems.Items
 
         #region Public Properties
 
+        public WeaponItemModificator Modificator { get; set; }
         /// <summary>
         /// Урон
         /// </summary>

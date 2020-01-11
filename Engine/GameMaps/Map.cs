@@ -2,6 +2,7 @@
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.GameMaps;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,11 @@ namespace RougeLikeRPG.Engine
             _mapBufferSize = _mapBufferWidth * _mapBufferHeight;
             var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).EmptyMap;
             _mapBody = _mapBuffer = Tile.ToCellsArray(map.Body);
-            
+            Actors = new List<Actor>();
+            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 1) });
+            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
+            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
+            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
             if (player != null)
                 AddActorToMap(player);
         }
@@ -100,8 +105,11 @@ namespace RougeLikeRPG.Engine
                 actor.Position += new Vector2D(Width / 2, Height / 2) + Location;
                 Player = actor as Player;
             }
-            else
+            else 
+            {
+                actor.Position += Location;
                 Actors.Add(actor);
+            }
         }
 
         public void AddRangeOfActorToMap(IEnumerable<Actor> actors)
@@ -118,8 +126,8 @@ namespace RougeLikeRPG.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Int32 x, Int32 y)
         {
-            Cell cell = _mapBuffer[x + _mapBufferWidth * y];
-            return cell != null || cell.Symbol == _mapWalkableCell;
+            bool flag = false;
+            return  flag;
         }
 
         /// <summary>
@@ -131,6 +139,10 @@ namespace RougeLikeRPG.Engine
 
         public Cell GetCell(Int32 x, Int32 y) => _mapBuffer.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
         public Cell GetCell(Vector2D pos) => GetCell(pos.X, pos.Y);
+
+        public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
+        public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
+
         public void Update()
         {
             if (_mapBuffer != null)
@@ -139,10 +151,28 @@ namespace RougeLikeRPG.Engine
                     Cell cell = _mapBuffer[i];
                     if (cell != null)
                     {
-                        if (IsWalkable(Player.Position + _mapBufferOffset))
-                            cell.Position += _mapBufferOffset;
+                         cell.Position += _mapBufferOffset;
                     }
                 }
+            if (Actors != null)
+            {
+                for (int i = 0; i < Actors.Count; i++)
+                {
+                    if (Actors[i].Hp <= 0)
+                        Actors[i].IsDead = true;
+                }
+                Actors.ForEach(actor => { 
+                    if (actor is Monster && actor.IsDead)
+                        Player.Exp += (actor as Monster).DropExp;
+                   
+                });
+                Actors.RemoveAll(actor => actor.IsDead);
+                //MonstersMove();
+                foreach (Actor actor in Actors)
+                    actor.Position += _mapBufferOffset; 
+            }
+
+            _mapBufferOffset = new Vector2D(0, 0);
         }
 
         public void PlayerMoveTo(Vector2D vec)
@@ -165,20 +195,44 @@ namespace RougeLikeRPG.Engine
                         Render.WithOffset(cell, 0, 0);
             }
 
-            //Отрисовка игрока игрокаока игрокагрокаока игрока
+            //Отрисовка игрока игрока
             if (Player != null)
                 Render.WithOffset(Player, 0, 0);
 
-            //Отрисовка других актеровгих актеров
+            //Отрисовка других актеров
             if (Actors != null)
                 foreach (Actor actor in Actors)
-                    Render.WithOffset(actor, 0, 0);
+                    if (actor.Position.X > 0 && actor.Position.Y > 0)
+                        if (actor.Position.X < Width - 1
+                                && actor.Position.Y < Height - 1)
+                            Render.WithOffset(actor, 0, 0);
         }
         #endregion
 
         #region Private Methods 
 
-       
+        private void MonstersMove()
+        {
+            Actors.ForEach(actor => {
+                if (actor is Monster)
+                {
+                    Vector2D move = (actor as Monster).Move();
+                    var mapCell = GetCell(move + actor.Position);
+                    var ac = GetActor(move + actor.Position);
+                    if (mapCell != null) 
+                    {
+                        if (mapCell.Symbol == '.' && ac == null)
+                            actor.Position += move;
+                        else if (ac != null)
+                        {
+                            if (ac is Player)
+                                actor.Attack(ac);
+                        }
+                    }
+                    
+                }
+            });
+        }
         private Cell[] MapBufferInit(Int32 mapWidth, Int32 mapHeight)
         {
             Cell[] temp = new Cell[mapWidth * mapHeight];
