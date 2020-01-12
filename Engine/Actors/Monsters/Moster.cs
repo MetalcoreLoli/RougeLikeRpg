@@ -8,7 +8,6 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
 {
     internal abstract class Monster : Actor
     {
-        public Int32 DropExp { get; set; }
 
         public Vector2D Move()
         {

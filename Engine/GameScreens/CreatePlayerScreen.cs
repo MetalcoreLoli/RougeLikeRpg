@@ -65,8 +65,8 @@ namespace RougeLikeRPG.Engine.GameScreens
         }
         private void Update(Player player)
         {
-            if (player.Name ==  null)
-                player.Name = InputName();
+            if (player.Name == null)
+                player.Name = "Trap-chan";//InputName();
 
             switch (Input.PlayerKeyInput().Result)
             {

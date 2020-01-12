@@ -124,6 +124,7 @@ namespace RougeLikeRPG.Engine.Actors
         public WeaponItem RightArm { get; set; }
         public int ArmorClass { get; set; }
         public bool IsDead { get; set; }
+        public Int32 DropExp { get; set; }
 
         #endregion
 
@@ -232,9 +233,18 @@ namespace RougeLikeRPG.Engine.Actors
             Int32 isHit = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(weapon.Modificator);
             if (isHit > 10)
             {
-                Int32 damage = isHit != 20? weapon.RolledDamage : weapon.RolledDamage + weapon.RolledDamage;
-                actor.Hp -= damage;
-                message += $"{actor.Name} was hitten by {weapon.Name} at {damage} ";
+                if (actor.Hp > 0)
+                { 
+                    Int32 damage = isHit != 20? weapon.RolledDamage : weapon.RolledDamage + weapon.RolledDamage;
+                    actor.Hp -= damage;
+                    message += $"{actor.Name} was hitten by {weapon.Name} at {damage} ";
+                }
+                if (actor.Hp <= 0)
+                {
+                    actor.IsDead = true;
+                    message = $"{actor.Name} was killed by {Name} with {weapon.Name} and Drop Exp: {actor.DropExp} ";
+                    Exp += actor.DropExp;
+                }
             }
             else
                 message += $"{Name} was missed by {weapon.Name} ";

@@ -140,6 +140,7 @@ namespace RougeLikeRPG.Engine
                 {
                     string playerAttack = _map.Player.Attack(actor);
                     string actorAttack = actor.Attack(_map.Player);
+                    (_messageLogScreen as MessageLogScreen).Add(actorAttack);
                     (_messageLogScreen as MessageLogScreen).Add(playerAttack);
                 }
             }

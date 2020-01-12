@@ -161,8 +161,8 @@ namespace RougeLikeRPG.Engine
                     if (Actors[i].Hp <= 0)
                     {
                         Actors[i].IsDead = true;
-                        if (Actors[i] is Monster && Actors[i].IsDead)
-                            Player.Exp += (Actors[i] as Monster).DropExp;
+                        //if (Actors[i] is Monster && Actors[i].IsDead)
+                        //    Player.Exp += (Actors[i] as Monster).DropExp;
                     }
                 }
                 Actors.RemoveAll(actor => actor.IsDead);

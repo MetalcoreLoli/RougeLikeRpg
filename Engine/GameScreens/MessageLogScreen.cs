@@ -24,15 +24,18 @@ namespace RougeLikeRPG.Engine.GameScreens
         public void Add(string text)
         {
             string msg = "";
-            string msgOne = "";
-            foreach (char s in text.Take(Width - 2))
-                msg += s;
-
-            foreach (char s in text.Skip(Width - 2))
-                msgOne += s;
-            
-            AddMessageToLog(msg);
-            AddMessageToLog(msgOne);
+            List<string> messages = new List<string>();
+            IEnumerable<char> _text = text;
+            while (_text.Count() >= 1) 
+            {
+                foreach (char s in _text.Take(Width - 2))
+                    msg += s;
+                messages.Add(msg);
+                msg = "";
+                _text = _text.Skip(Width - 2);
+            } 
+            foreach (string  message in messages)
+                AddMessageToLog(message);
         }
 
         private void AddMessageToLog(string Message)
