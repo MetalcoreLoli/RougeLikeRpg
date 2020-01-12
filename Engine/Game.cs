@@ -138,8 +138,9 @@ namespace RougeLikeRPG.Engine
             {
                 if (actor is Monster)
                 {
-                    _map.Player.Attack(actor);
-                    actor.Attack(_map.Player);
+                    string playerAttack = _map.Player.Attack(actor);
+                    string actorAttack = actor.Attack(_map.Player);
+                    (_messageLogScreen as MessageLogScreen).Add(playerAttack);
                 }
             }
             else
@@ -224,6 +225,18 @@ namespace RougeLikeRPG.Engine
                 _player.Color = ConsoleColor.DarkGray;
 
 
+            foreach (var line in _messageLogScreen.Items)
+            {
+                if (line is Lable)
+                {
+                    (line as Lable).SetColorToWord(_player.Name, ConsoleColor.DarkGray);
+                    foreach (Actor actor in _map.Actors)
+                    {
+                        (line as Lable).SetColorToWord(actor.Name, actor.Color);
+                    }
+                }
+            }
+
             _map.Update();
 
             _statusScreen.Items = new List<Control>();
@@ -256,7 +269,7 @@ namespace RougeLikeRPG.Engine
                                                         0,
                                                         _mapHeight);
             
-            _messageLogScreen       = new Screen(
+            _messageLogScreen       = new MessageLogScreen(
                                                 _messageLogScreenWidth,
                                                 _messageLogScreenHeight,
                                                 _messageLogScreenLocation,

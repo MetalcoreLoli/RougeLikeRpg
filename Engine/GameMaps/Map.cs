@@ -74,10 +74,10 @@ namespace RougeLikeRPG.Engine
             var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).EmptyMap;
             _mapBody = _mapBuffer = Tile.ToCellsArray(map.Body);
             Actors = new List<Actor>();
-            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 1) });
-            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
-            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
-            AddActorToMap(new Actors.Monsters.Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
+            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 1) });
+            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
+            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
+            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
             if (player != null)
                 AddActorToMap(player);
         }
@@ -159,13 +159,12 @@ namespace RougeLikeRPG.Engine
                 for (int i = 0; i < Actors.Count; i++)
                 {
                     if (Actors[i].Hp <= 0)
+                    {
                         Actors[i].IsDead = true;
+                        if (Actors[i] is Monster && Actors[i].IsDead)
+                            Player.Exp += (Actors[i] as Monster).DropExp;
+                    }
                 }
-                Actors.ForEach(actor => { 
-                    if (actor is Monster && actor.IsDead)
-                        Player.Exp += (actor as Monster).DropExp;
-                   
-                });
                 Actors.RemoveAll(actor => actor.IsDead);
                 //MonstersMove();
                 foreach (Actor actor in Actors)
@@ -209,7 +208,7 @@ namespace RougeLikeRPG.Engine
         }
         #endregion
 
-        #region Private Methods 
+        #region Private Methods
 
         private void MonstersMove()
         {

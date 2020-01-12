@@ -133,32 +133,10 @@ namespace RougeLikeRPG.Engine.Actors
         {
             string message = "";
             if (LeftArm != null)
-            {
-                Int32 isHitL = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(LeftArm.Modificator);
-                if (isHitL > 10)
-                {
-                    Int32 leftHandDamage = LeftArm.RolledDamage;
-                    enemy.Hp -= leftHandDamage;
-                    message += $"{enemy.Name} was hitten by {LeftArm.Name} at {leftHandDamage}";
-                }
-                else
-                    message += $"{Name} was missed by {LeftArm.Name}";
-            }
+                message += HitByWeapon(enemy, LeftArm);
            
-
             if (RightArm != null)
-            {
-                Int32 isHitR = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(RightArm.Modificator);
-                if (isHitR > 10)
-                {
-                    Int32 rightHandDamage = RightArm.RolledDamage;
-                    enemy.Hp -= rightHandDamage;
-                    message += $"and {enemy.Name} was hitten by {RightArm.Name} at {rightHandDamage}";
-                }
-                else
-                    message += $"{Name} was missed by {RightArm.Name}";
-            }
-          
+                message += "and "+HitByWeapon(enemy, RightArm);
 
             return message;
         }
@@ -248,6 +226,20 @@ namespace RougeLikeRPG.Engine.Actors
 
         #region Private Methods
 
+        private string HitByWeapon(Actor actor, WeaponItem weapon)
+        {
+            string message = "";
+            Int32 isHit = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(weapon.Modificator);
+            if (isHit > 10)
+            {
+                Int32 damage = isHit != 20? weapon.RolledDamage : weapon.RolledDamage + weapon.RolledDamage;
+                actor.Hp -= damage;
+                message += $"{actor.Name} was hitten by {weapon.Name} at {damage} ";
+            }
+            else
+                message += $"{Name} was missed by {weapon.Name} ";
+            return message;
+        }
         private Int32 GetValueOfModificatorByWeapon(WeaponItemModificator modificator)
         {
             return modificator switch
