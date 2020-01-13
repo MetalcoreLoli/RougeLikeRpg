@@ -107,6 +107,7 @@ namespace RougeLikeRPG.Core.Controls
             return body.FirstOrDefault(cell => cell.Position.X.Equals(x) && cell.Position.Y.Equals(y));
         }
 
+ 
         public Cell GetCellByPosition(Vector2D pos) => GetCellByPosition(pos.X, pos.Y);
 
         //public Cell[] GetBody() => body;

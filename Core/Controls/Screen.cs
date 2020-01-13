@@ -120,6 +120,7 @@ namespace RougeLikeRPG.Core.Controls
 
         #region Public Methods
 
+      
         public async override void Draw()
         {
             await foreach (Cell cell in GetCellsAsync(body))

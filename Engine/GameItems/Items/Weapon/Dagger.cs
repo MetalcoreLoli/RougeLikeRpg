@@ -10,6 +10,10 @@ namespace RougeLikeRPG.Engine.GameItems.Items.Weapon
         {
             Name = "Dagger";
             Modificator = Enums.WeaponItemModificator.Dex;
+            Rare = new Rare
+            {
+                Color = Enums.WeaponRareColor.None
+            };
         }
     }
 }

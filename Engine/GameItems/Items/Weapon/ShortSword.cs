@@ -11,6 +11,9 @@ namespace RougeLikeRPG.Engine.GameItems.Items.Weapon
         {
             Name = "Short Sword";
             Modificator = Enums.WeaponItemModificator.Dex;
+            Rare = new Rare {
+                Color = Enums.WeaponRareColor.Common
+            };
         }
     }
 }

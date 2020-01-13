@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using RougeLikeRPG.Engine.GameScreens;
 using RougeLikeRPG.Engine.Events;
 using RougeLikeRPG.Engine.Actors.Monsters;
+using RougeLikeRPG.Engine.GameItems.Items;
 
 namespace RougeLikeRPG.Engine
 {
@@ -83,6 +84,8 @@ namespace RougeLikeRPG.Engine
 
         //Экран создания персонажа
         private CreatePlayerScreen _createPlayerScreen;
+
+        private LevelUpMenuScreen _levelUpMenuScreen;
         #endregion
 
         #region Events
@@ -101,8 +104,18 @@ namespace RougeLikeRPG.Engine
             _player = NewPlayer();
             Initialization();
             KeyDown += Game_KeyDown;
-           _map.AddActorToMap(_player);
+            _map.AddActorToMap(_player);
 
+            _player.LevelUp += _player_LevelUp;
+        }
+
+        private void _player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
+        {
+            string levelUpMessage = $"+Level of {e.Actor.Name} was Upped+";
+            (_messageLogScreen as MessageLogScreen).Add(levelUpMessage);
+            var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
+            line.SetColorToWord(levelUpMessage, ConsoleColor.Yellow);
+           // _levelUpMenuScreen.Show();
         }
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
@@ -148,7 +161,7 @@ namespace RougeLikeRPG.Engine
                 _map.PlayerMoveTo(new Vector2D(0, 0));
         }
 
-        
+
         #endregion
 
         #region Public Methods
@@ -218,6 +231,7 @@ namespace RougeLikeRPG.Engine
         {
             OnKeyDown(Input.PlayerKeyInput().Result);
         }
+        
         private void Update()
         {
             if (_player.Hp > 0)
@@ -225,25 +239,51 @@ namespace RougeLikeRPG.Engine
             else
                 _player.Color = ConsoleColor.DarkGray;
 
+            SetColorsToText();
+             
+            _map.Update();
+            
+            _statusScreen.Items = new List<Control>();
+            _statusScreen.AddRange(_player.GetStats());
+        }
 
+        private void SetColorsToText()
+        {
             foreach (var line in _messageLogScreen.Items)
             {
                 if (line is Lable)
                 {
                     (line as Lable).SetColorToWord(_player.Name, ConsoleColor.DarkGray);
+                    if (_player.LeftArm != null)
+                        SetColorToItemInText(_player.LeftArm, line as Lable);
+
+                    if (_player.RightArm != null)
+                        SetColorToItemInText(_player.RightArm, line as Lable);
+                    
                     foreach (Actor actor in _map.Actors)
                     {
                         (line as Lable).SetColorToWord(actor.Name, actor.Color);
+                        if (actor.LeftArm != null)
+                            SetColorToItemInText(actor.LeftArm, line as Lable);
+
+                        if (actor.RightArm != null)
+                            SetColorToItemInText(actor.RightArm, line as Lable);
                     }
                 }
             }
-
-            _map.Update();
-
-            _statusScreen.Items = new List<Control>();
-            _statusScreen.AddRange(_player.GetStats());
         }
 
+        private void SetColorToItemInText(WeaponItem weapon, Lable line)
+        {
+            if (weapon.Name.Split(' ').Count() > 1)
+            {
+                var name = weapon.Name.Split(' ');
+                foreach (var word in name)
+                    line.SetColorToWord(word, (ConsoleColor)weapon.Rare.Color);
+            }
+            else
+                line.SetColorToWord(weapon.Name, (ConsoleColor)weapon.Rare.Color);
+        }
         /// <summary>
         /// Ввод 
         /// </summary>
@@ -277,6 +317,14 @@ namespace RougeLikeRPG.Engine
                                                 "Message Log",
                                                 ConsoleColor.DarkCyan,
                                                 ConsoleColor.Black);
+
+            _levelUpMenuScreen = new LevelUpMenuScreen(
+                                               50,
+                                               25,
+                                               new Vector2D(0, 0),
+                                               "Level Up Menu",
+                                               ConsoleColor.DarkCyan,
+                                               ConsoleColor.Black);
 
             _statusScreen           = new Screen(
                                                  _statusScreenWidth, 

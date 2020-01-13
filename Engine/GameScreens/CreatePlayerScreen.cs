@@ -11,14 +11,18 @@ namespace RougeLikeRPG.Engine.GameScreens
 {
     internal class CreatePlayerScreen : Screen
     {
-
+        private Player player;
         private Screen _statsScreen;
         private Screen _inputPlayerNameScreen;
         private Screen _helpScreen;
+
+        private Render _render;
         private bool IsAlive = false;
         public CreatePlayerScreen() 
             : base(60, 23,  new Vector2D(0, 0), "Player creating screen", ConsoleColor.White, ConsoleColor.Black)
         {
+
+            _render = new Render();
             _inputPlayerNameScreen = new Screen(25, 3, new Vector2D(29, 1));
             _inputPlayerNameScreen.Title = "Input Player Name";
 
@@ -30,9 +34,10 @@ namespace RougeLikeRPG.Engine.GameScreens
                 new Lable("->    - to change race",     new Vector2D(1, 3)),
                 new Lable("<-    - to change race",     new Vector2D(1, 4)),
             });
-
+            player = new Player();
             _statsScreen = new Screen(25, 21, new Vector2D(1, 1));
             _statsScreen.Title = "Player's Stats";
+            _statsScreen.AddRange(player.GetStats());
 
             Items.AddRange(new List<Control> { 
                 _inputPlayerNameScreen,
@@ -40,13 +45,14 @@ namespace RougeLikeRPG.Engine.GameScreens
                 _statsScreen
             });
 
+            
+
             IsAlive = true;
         }
 
         public Player Start()
         {
             Console.Clear();
-            Player player = new Player();
 
             do
             {
@@ -63,8 +69,13 @@ namespace RougeLikeRPG.Engine.GameScreens
             Console.SetCursorPosition(cursor.left, cursor.top);
             return name;
         }
+
+
         private void Update(Player player)
         {
+            //Console.Clear();
+
+
             if (player.Name == null)
                 player.Name = "Trap-chan";//InputName();
 
@@ -81,9 +92,15 @@ namespace RougeLikeRPG.Engine.GameScreens
                         player.Race--; 
                     break;
             }
+
+
             StartItems(player);
+            
             _statsScreen.Items = new List<Control>();
-            _statsScreen.AddRange(player.GetStats());
+            var playerStats = player.GetStats();
+            _statsScreen.AddRange(playerStats);
+            
+            
         }
 
         private void RollPlayerStats(Player player)

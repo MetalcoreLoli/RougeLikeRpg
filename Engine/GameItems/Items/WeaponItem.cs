@@ -18,7 +18,7 @@ namespace RougeLikeRPG.Engine.GameItems.Items
         #endregion
 
         #region Public Properties
-
+        public Rare Rare { get; set; }
         public WeaponItemModificator Modificator { get; set; }
         /// <summary>
         /// Урон

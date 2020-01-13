@@ -1,6 +1,7 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.Actors.Events;
 using RougeLikeRPG.Engine.Dices;
 using RougeLikeRPG.Engine.GameItems;
 using RougeLikeRPG.Engine.GameItems.Enums;
@@ -48,7 +49,7 @@ namespace RougeLikeRPG.Engine.Actors
             {
                 _exp = value;
                 if (_exp >= MaxExp)
-                    LevelUp();
+                    UpLevel();
             }
         }
         public int          MaxExp { get; set; }
@@ -126,7 +127,10 @@ namespace RougeLikeRPG.Engine.Actors
         public bool IsDead { get; set; }
         public Int32 DropExp { get; set; }
 
+        public event EventHandler<LevelUpEventArgs> LevelUp;
         #endregion
+
+
 
         #region Public Methods
 
@@ -266,17 +270,22 @@ namespace RougeLikeRPG.Engine.Actors
             Int32 modificator = (statValue - 10 != 0) ? (statValue - 10) / 2 : 0;
             return modificator;
         }
+
+        private void OnLevelUp(Actor actor) => LevelUp?.Invoke(this, new LevelUpEventArgs(actor));
+
         #endregion
 
         #region Public Properties
 
-        public void LevelUp()
+        public void UpLevel()
         {
+            OnLevelUp(this);
             Level++;
             MaxExp *= 2;
             MaxHp += DiceManager.CreateDices("2d6").RollAll().Sum();
             Hp = MaxHp;
         }
+
 
         /// <summary>
         /// Метожд для экипирование шмотки

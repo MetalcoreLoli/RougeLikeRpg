@@ -1,5 +1,6 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.Actors.Events;
 using RougeLikeRPG.Engine.GameItems;
 using RougeLikeRPG.Engine.GameItems.Items;
 using System;
@@ -140,7 +141,9 @@ namespace RougeLikeRPG.Engine.Actors
         Int32 LuckyMod { get; set; }
         #endregion
 
-
+        #region Events
+        event EventHandler<LevelUpEventArgs> LevelUp;
+        #endregion
 
     }
 }
