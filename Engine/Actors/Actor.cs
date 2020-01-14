@@ -127,23 +127,23 @@ namespace RougeLikeRPG.Engine.Actors
         public bool IsDead { get; set; }
         public Int32 DropExp { get; set; }
 
-        public event EventHandler<LevelUpEventArgs> LevelUp;
         #endregion
 
-
+        #region Events
+        public event EventHandler<LevelUpEventArgs> LevelUp;
+        public event EventHandler<AttackingEventArgs> Attacking;
+        public event EventHandler<ActorDyingEventArgs> Dying;
+        #endregion
 
         #region Public Methods
 
-        public string Attack(Actor enemy)
+        public void Attack(Actor enemy)
         {
-            string message = "";
             if (LeftArm != null)
-                message += HitByWeapon(enemy, LeftArm);
+                HitByWeapon(enemy, LeftArm);
            
             if (RightArm != null)
-                message += "and "+HitByWeapon(enemy, RightArm);
-
-            return message;
+                HitByWeapon(enemy, RightArm);
         }
 
         /// <summary>
@@ -224,35 +224,28 @@ namespace RougeLikeRPG.Engine.Actors
         }
         #endregion
 
-
-        #region Pro
-
-        #endregion
-
         #region Private Methods
 
-        private string HitByWeapon(Actor actor, WeaponItem weapon)
+        private void HitByWeapon(Actor actor, WeaponItem weapon)
         {
-            string message = "";
             Int32 isHit = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(weapon.Modificator);
             if (isHit > 10)
             {
+                Int32 damage = isHit != 20 ? weapon.RolledDamage : weapon.RolledDamage + weapon.RolledDamage;
                 if (actor.Hp > 0)
-                { 
-                    Int32 damage = isHit != 20? weapon.RolledDamage : weapon.RolledDamage + weapon.RolledDamage;
+                {
                     actor.Hp -= damage;
-                    message += $"{actor.Name} was hitten by {weapon.Name} at {damage} ";
+                    OnAttack(false, damage, actor);
                 }
                 if (actor.Hp <= 0)
                 {
                     actor.IsDead = true;
-                    message = $"{actor.Name} was killed by {Name} with {weapon.Name} and Drop Exp: {actor.DropExp} ";
                     Exp += actor.DropExp;
+                    OnDying(actor.Name, damage, actor.DropExp);
                 }
             }
             else
-                message += $"{Name} was missed by {weapon.Name} ";
-            return message;
+                OnAttack(true, 0, actor);
         }
         private Int32 GetValueOfModificatorByWeapon(WeaponItemModificator modificator)
         {
@@ -272,7 +265,8 @@ namespace RougeLikeRPG.Engine.Actors
         }
 
         private void OnLevelUp(Actor actor) => LevelUp?.Invoke(this, new LevelUpEventArgs(actor));
-
+        private void OnAttack(bool isMissed, Int32 damage, Actor actor) => Attacking?.Invoke(this, new AttackingEventArgs(isMissed, damage, actor));
+        private void OnDying(String name, Int32 damage, Int32 dropExp) => Dying?.Invoke(this, new ActorDyingEventArgs(name, damage, dropExp));
         #endregion
 
         #region Public Properties

@@ -45,8 +45,6 @@ namespace RougeLikeRPG.Engine.GameScreens
                 _statsScreen
             });
 
-            
-
             IsAlive = true;
         }
 
@@ -77,7 +75,7 @@ namespace RougeLikeRPG.Engine.GameScreens
 
 
             if (player.Name == null)
-                player.Name = "Trap-chan";//InputName();
+                player.Name = InputName();
 
             switch (Input.PlayerKeyInput().Result)
             {

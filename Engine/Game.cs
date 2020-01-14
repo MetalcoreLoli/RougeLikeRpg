@@ -106,7 +106,39 @@ namespace RougeLikeRPG.Engine
             KeyDown += Game_KeyDown;
             _map.AddActorToMap(_player);
 
-            _player.LevelUp += _player_LevelUp;
+            _player.LevelUp     += _player_LevelUp;
+            _player.Attacking   += _hit_Attacking;
+            _player.Dying       += _actor_Dying;
+
+
+        }
+
+        private void _hit_Attacking(object sender, Actors.Events.AttackingEventArgs e)
+        {
+            Actor actor = sender as Actor;
+            if (!e.IsMissed)
+            {
+                string leftArm = "";
+                string rightArm = "";
+
+                if (actor.LeftArm != null)
+                    leftArm = $"{e.Enemy.Name} was hitten by {actor.Name} with {actor.LeftArm.Name} at {actor.LeftArm.RolledDamage}";
+
+                if (actor.RightArm != null)
+                    rightArm = $"{e.Enemy.Name} was hitten by {actor.Name} with {actor.RightArm.Name} at {actor.RightArm.RolledDamage}";
+                (_messageLogScreen as MessageLogScreen).Add(leftArm + $"{(rightArm == "" ? "" : " and ")}" + rightArm);
+                SetColorsToText();
+            }
+        }
+        private void _actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
+        {
+            (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Player).Name)} and drop exp: {e.DropExp}");
+            SetColorsToText();
+        }
+
+        private void _player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
+        {
+
         }
 
         private void _player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
@@ -115,7 +147,9 @@ namespace RougeLikeRPG.Engine
             (_messageLogScreen as MessageLogScreen).Add(levelUpMessage);
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
             line.SetColorToWord(levelUpMessage, ConsoleColor.Yellow);
-           // _levelUpMenuScreen.Show();
+            SetColorsToText();
+
+            // _levelUpMenuScreen.Show();
         }
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
@@ -151,10 +185,8 @@ namespace RougeLikeRPG.Engine
             {
                 if (actor is Monster)
                 {
-                    string playerAttack = _map.Player.Attack(actor);
-                    string actorAttack = actor.Attack(_map.Player);
-                    (_messageLogScreen as MessageLogScreen).Add(actorAttack);
-                    (_messageLogScreen as MessageLogScreen).Add(playerAttack);
+                    _map.Player.Attack(actor);
+                    actor.Attack(_map.Player);
                 }
             }
             else
@@ -242,7 +274,13 @@ namespace RougeLikeRPG.Engine
             SetColorsToText();
              
             _map.Update();
-            
+
+            foreach (var actor in _map.Actors)
+            { 
+                actor.Attacking     += _hit_Attacking;
+                actor.Dying         += _actor_Dying;
+            }
+
             _statusScreen.Items = new List<Control>();
             _statusScreen.AddRange(_player.GetStats());
         }
