@@ -110,7 +110,11 @@ namespace RougeLikeRPG.Engine
             _player.Attacking   += _hit_Attacking;
             _player.Dying       += _actor_Dying;
 
-
+            foreach (var actor in _map.Actors)
+            {
+                actor.Attacking += _hit_Attacking;
+                actor.Dying += _actor_Dying;
+            }
         }
 
         private void _hit_Attacking(object sender, Actors.Events.AttackingEventArgs e)
@@ -132,7 +136,7 @@ namespace RougeLikeRPG.Engine
         }
         private void _actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
         {
-            (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Player).Name)} and drop exp: {e.DropExp}");
+            (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Actor).Name)} and drop exp: {e.DropExp}");
             SetColorsToText();
         }
 
@@ -275,11 +279,7 @@ namespace RougeLikeRPG.Engine
              
             _map.Update();
 
-            foreach (var actor in _map.Actors)
-            { 
-                actor.Attacking     += _hit_Attacking;
-                actor.Dying         += _actor_Dying;
-            }
+            
 
             _statusScreen.Items = new List<Control>();
             _statusScreen.AddRange(_player.GetStats());

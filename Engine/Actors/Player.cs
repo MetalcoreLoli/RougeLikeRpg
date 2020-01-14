@@ -23,7 +23,10 @@ namespace RougeLikeRPG.Engine.Actors
         #endregion
 
         #region Constructors
-
+        public Player()
+        {
+            DropExp = 10000000;
+        }
         #endregion
 
         #region Public Methods

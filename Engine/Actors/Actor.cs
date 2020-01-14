@@ -28,20 +28,21 @@ namespace RougeLikeRPG.Engine.Actors
 
         private Int32 _lvl = 1;
         private Int32 _exp = 0;
+
         #endregion
 
         #region Public Properties
-        public string       Name { get; set; }
-        public int          Level
+        public string Name { get; set; }
+        public int Level
         {
-            get => _lvl; 
+            get => _lvl;
             set
             {
                 _lvl = value;
             }
         }
-        public int          Hp { get; set; }
-        public int          MaxHp { get; set; }
+        public int Hp { get; set; }
+        public int MaxHp { get; set; }
         public int Exp
         {
             get => _exp;
@@ -52,18 +53,18 @@ namespace RougeLikeRPG.Engine.Actors
                     UpLevel();
             }
         }
-        public int          MaxExp { get; set; }
-        public char         Symbol { get; set; }
-        public Vector2D     Position { get; set; }
+        public int MaxExp { get; set; }
+        public char Symbol { get; set; }
+        public Vector2D Position { get; set; }
         public ConsoleColor Color { get; set; }
         public ConsoleColor BackColor { get; set; }
         public int Mana { get; set; }
         public int MaxMana { get; set; }
 
         #region Stats
-        public int Str 
+        public int Str
         {
-            get => _str; 
+            get => _str;
             set
             {
                 _str = value;
@@ -71,35 +72,35 @@ namespace RougeLikeRPG.Engine.Actors
             }
         }
         public int Dex
-        { 
-            get => _dex; 
+        {
+            get => _dex;
             set
             {
                 _dex = value;
                 DexMod = CalculateModificator(_dex);
             }
         }
-        public int Intell 
-        { 
-            get => _intell; 
+        public int Intell
+        {
+            get => _intell;
             set
             {
                 _intell = value;
                 IntellMod = CalculateModificator(_intell);
             }
         }
-        public int Chari 
-        { 
-            get => _char; 
+        public int Chari
+        {
+            get => _char;
             set
             {
                 _char = value;
                 ChariMod = CalculateModificator(_char);
             }
         }
-        public int Lucky 
-        { 
-            get => _lucky; 
+        public int Lucky
+        {
+            get => _lucky;
             set
             {
                 _lucky = value;
