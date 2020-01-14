@@ -190,7 +190,7 @@ namespace RougeLikeRPG.Engine
                 if (actor is Monster)
                 {
                     _map.Player.Attack(actor);
-                    actor.Attack(_map.Player);
+                    //actor.Attack(_map.Player);
                 }
             }
             else

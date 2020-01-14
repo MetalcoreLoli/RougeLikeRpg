@@ -65,7 +65,7 @@ namespace RougeLikeRPG.Engine
             Height = mapHeight;
             Location = _mapLocation;
             Player = player;
-            
+
             body = InitBody(Width, Height);
 
             _mapBufferWidth = Width;
@@ -105,7 +105,7 @@ namespace RougeLikeRPG.Engine
                 actor.Position += new Vector2D(Width / 2, Height / 2) + Location;
                 Player = actor as Player;
             }
-            else 
+            else
             {
                 actor.Position += Location;
                 Actors.Add(actor);
@@ -127,7 +127,7 @@ namespace RougeLikeRPG.Engine
         public bool IsWalkable(Int32 x, Int32 y)
         {
             bool flag = false;
-            return  flag;
+            return flag;
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace RougeLikeRPG.Engine
                     Cell cell = _mapBuffer[i];
                     if (cell != null)
                     {
-                         cell.Position += _mapBufferOffset;
+                        cell.Position += _mapBufferOffset;
                     }
                 }
             if (Actors != null)
@@ -166,9 +166,9 @@ namespace RougeLikeRPG.Engine
                     }
                 }
                 Actors.RemoveAll(actor => actor.IsDead);
-                //MonstersMove();
+                MonstersMove();
                 foreach (Actor actor in Actors)
-                    actor.Position += _mapBufferOffset; 
+                    actor.Position += _mapBufferOffset;
             }
 
             _mapBufferOffset = new Vector2D(0, 0);
@@ -186,7 +186,7 @@ namespace RougeLikeRPG.Engine
             await foreach (Cell cell in GetCellsAsync(body))
                 Render.WithOffset(cell, 0, 0);
 
-            await foreach(Cell cell in GetCellsAsync(_mapBuffer))
+            await foreach (Cell cell in GetCellsAsync(_mapBuffer))
             {
                 if (cell.Position.X > 0 && cell.Position.Y > 0)
                     if (cell.Position.X < Width - 1
@@ -212,23 +212,42 @@ namespace RougeLikeRPG.Engine
 
         private void MonstersMove()
         {
-            Actors.ForEach(actor => {
+            Actors.ForEach(actor =>
+            {
                 if (actor is Monster)
                 {
-                    Vector2D move = (actor as Monster).Move();
-                    var mapCell = GetCell(move + actor.Position);
-                    var ac = GetActor(move + actor.Position);
-                    if (mapCell != null) 
+
+                    var mon = actor as Monster;
+                    Vector2D move = mon.Move();
+
+                    if (mon.IsActorInUpFov(Player))
+                        move = mon.Move(Direction.Up);
+
+                    if (mon.IsActorInDownFov(Player))
+                        move = mon.Move(Direction.Down);
+
+                    if (mon.IsActorInLeftFov(Player))
+                        move = mon.Move(Direction.Left);
+
+                    if (mon.IsActorInRigthFov(Player))
+                        move = mon.Move(Direction.Right);
+
+                    if (!mon.IsActorInFov(Player))
+                        move = mon.Move();
+
+                    var pos = mon.Position + move;
+                    if (pos.X == Player.Position.X && pos.Y == Player.Position.Y)
+                        mon.Attack(Player);
+                    else
                     {
-                        if (mapCell.Symbol == '.' && ac == null)
-                            actor.Position += move;
-                        else if (ac != null)
+                        var mapCell = GetCell(move + actor.Position);
+                        var ac = GetActor(move + actor.Position);
+                        if (mapCell != null)
                         {
-                            if (ac is Player)
-                                actor.Attack(ac);
+                            if (mapCell.Symbol == '.' && ac == null)
+                                actor.Position += move;
                         }
                     }
-                    
                 }
             });
         }
