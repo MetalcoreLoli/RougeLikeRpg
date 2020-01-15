@@ -181,16 +181,19 @@ namespace RougeLikeRPG.Engine
 
         private void PlayerMove(Vector2D playersInput)
         {
+
             var mapCell = _map.GetCell(playersInput + _map.Player.Position);
             var actor = _map.GetActor(playersInput + _map.Player.Position);
             if (mapCell.Symbol == '.' && actor == null)
+            { 
+                _player.MoveTo(playersInput);
                 _map.PlayerMoveTo(playersInput);
+            }
             else if (actor != null)
             {
                 if (actor is Monster)
                 {
                     _map.Player.Attack(actor);
-                    //actor.Attack(_map.Player);
                 }
             }
             else
@@ -278,11 +281,59 @@ namespace RougeLikeRPG.Engine
             SetColorsToText();
              
             _map.Update();
-
-            
+            MonstersMove();
 
             _statusScreen.Items = new List<Control>();
             _statusScreen.AddRange(_player.GetStats());
+        }
+        private void MonstersMove()
+        {
+            _map.Actors.ForEach(actor =>
+            {
+                if (actor is Monster)
+                {
+                    var mon = actor as Monster;
+                    Vector2D move = new Vector2D(0, 0);
+
+                    if (mon.IsActorInUpFov(_player))
+                    {
+                        move += mon.Move(Direction.Up);
+                    }
+
+                    if (mon.IsActorInDownFov(_player))
+                    {
+                        move += mon.Move(Direction.Down);
+                    }
+
+                    if (mon.IsActorInLeftFov(_player))
+                    {
+                        move += mon.Move(Direction.Left);
+                    }
+
+                    if (mon.IsActorInRigthFov(_player))
+                    {
+                        move += mon.Move(Direction.Right);
+                    }
+
+                    if (!mon.IsActorInFov(_player))
+                        move += mon.Move();
+
+                    var pos = move + actor.Position;
+
+                    if (pos.X == _player.Position.X && pos.Y == _player.Position.Y)
+                        mon.Attack(_player);
+                    else
+                    {
+                        var mapCell = _map.GetCell(move + actor.Position);
+                        var ac = _map.GetActor(move + actor.Position);
+                        if (mapCell != null)
+                        {
+                            if (mapCell.Symbol == '.' && ac == null)
+                                actor.Position += move;
+                        }
+                    }
+                }
+            });
         }
 
         private void SetColorsToText()

@@ -166,7 +166,8 @@ namespace RougeLikeRPG.Engine
                     }
                 }
                 Actors.RemoveAll(actor => actor.IsDead);
-                MonstersMove();
+                // MonstersMove();
+                Player.Position += _mapBufferOffset;
                 foreach (Actor actor in Actors)
                     actor.Position += _mapBufferOffset;
             }
@@ -179,7 +180,6 @@ namespace RougeLikeRPG.Engine
             Vector2D offset = new Vector2D(vec.X * -1, vec.Y * -1);
             _mapBufferOffset = offset;
         }
-
 
         public async override void Draw()
         {
@@ -210,47 +210,7 @@ namespace RougeLikeRPG.Engine
 
         #region Private Methods
 
-        private void MonstersMove()
-        {
-            Actors.ForEach(actor =>
-            {
-                if (actor is Monster)
-                {
-
-                    var mon = actor as Monster;
-                    Vector2D move = mon.Move();
-
-                    if (mon.IsActorInUpFov(Player))
-                        move = mon.Move(Direction.Up);
-
-                    if (mon.IsActorInDownFov(Player))
-                        move = mon.Move(Direction.Down);
-
-                    if (mon.IsActorInLeftFov(Player))
-                        move = mon.Move(Direction.Left);
-
-                    if (mon.IsActorInRigthFov(Player))
-                        move = mon.Move(Direction.Right);
-
-                    if (!mon.IsActorInFov(Player))
-                        move = mon.Move();
-
-                    var pos = mon.Position + move;
-                    if (pos.X == Player.Position.X && pos.Y == Player.Position.Y)
-                        mon.Attack(Player);
-                    else
-                    {
-                        var mapCell = GetCell(move + actor.Position);
-                        var ac = GetActor(move + actor.Position);
-                        if (mapCell != null)
-                        {
-                            if (mapCell.Symbol == '.' && ac == null)
-                                actor.Position += move;
-                        }
-                    }
-                }
-            });
-        }
+       
         private Cell[] MapBufferInit(Int32 mapWidth, Int32 mapHeight)
         {
             Cell[] temp = new Cell[mapWidth * mapHeight];

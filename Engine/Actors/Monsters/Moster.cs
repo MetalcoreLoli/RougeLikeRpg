@@ -15,34 +15,49 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
         
         public bool IsActorInUpFov(Actor actor)
         {
+            Vector2D pos = this.Position + Move(Direction.Up);
             for (int i = 0; i < FovX; i++)
             {
-                Vector2D pos = this.Position + Move(Direction.Up);
-                pos.X -= i;
                 if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
                     return true;
+                pos.X++;
             }
             return false;
         }
 
         public bool IsActorInDownFov(Actor actor)
         {
+            Vector2D pos = this.Position + Move(Direction.Down);
             for (int i = 0; i < FovX; i++)
             {
-                Vector2D pos = this.Position + Move(Direction.Down);
-                pos.X += i;
+                pos.X--;
                 if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
                     return true;
             }
             return false;
         }
-        
+
+        public bool IsInAttackFov(Actor actor)
+        {
+            Vector2D[] fov = new Vector2D[4];
+            for (int i = 0; i < fov.Length; i++)
+                fov[i] = Move((Direction)i);
+            
+            for (int i = 0; i < fov.Length; i++)
+            {
+                Vector2D pos = fov[i];
+                if (pos.X.Equals(actor.Position.X)
+                    && pos.Y.Equals(actor.Position.Y))
+                    return true;
+            }
+            return false;
+        }
         public bool IsActorInLeftFov(Actor actor)
         {
+            Vector2D pos = this.Position + Move(Direction.Left);
             for (int i = 0; i < FovY; i++)
             {
-                Vector2D pos = this.Position + Move(Direction.Left);
-                pos.Y -= i;
+                pos.Y--;
                 if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
                     return true;
             }
@@ -51,10 +66,10 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
         
         public bool IsActorInRigthFov(Actor actor)
         {
+            Vector2D pos = this.Position + Move(Direction.Right);
             for (int i = 0; i < FovY; i++)
             {
-                Vector2D pos = this.Position + Move(Direction.Right);
-                pos.Y += i;
+                pos.Y++;
                 if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
                     return true;
             }

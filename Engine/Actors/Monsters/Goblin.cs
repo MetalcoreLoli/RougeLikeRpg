@@ -18,13 +18,13 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
             Color = ConsoleColor.Green;
             DropExp = DiceManager.CreateDices("2d4").RollAll().Sum() + 1;
             Str     = RollStat();
-            Dex     = RollStat();
+            Dex     = RollStat() + 15;
             Intell  = RollStat();
             Lucky   = RollStat();
             Chari   = RollStat();
 
-            FovX = 2;
-            FovY = 2;
+            FovX = 3;
+            FovY = 3;
         }
     }
 }
