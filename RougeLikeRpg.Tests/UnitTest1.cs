@@ -24,6 +24,7 @@ namespace RougeLikeRpg.Tests
         public void Vector2DMultyOnScalar()
         {
             Assert.AreEqual(vector * 3, new Vector2D(6, 6));
+            Assert.AreEqual(4 * vector, new Vector2D(8, 8));
         }
     }
 }

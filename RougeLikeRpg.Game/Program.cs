@@ -1,7 +1,9 @@
 ﻿using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine;
 using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("RougeLikeRpg.Tests")]
 namespace RougeLikeRPG
 {
     class Program

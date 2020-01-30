@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("RougeLikeRpg.Tests")]
 namespace RougeLikeRPG.Core
 {
  
@@ -15,7 +14,6 @@ namespace RougeLikeRPG.Core
             X = x;
             Y = y;
         }
-
 
         public static Vector2D operator +(Vector2D a, Vector2D b)
             => new Vector2D(a.X + b.X, a.Y + b.Y);
@@ -33,6 +31,9 @@ namespace RougeLikeRPG.Core
            => (b.X * a.X) + (b.Y * a.Y);
 
         public static Vector2D operator *(Vector2D a, Int32 b)
+          => new Vector2D(a.X * b, a.Y * b);
+
+        public static Vector2D operator *(Int32 b, Vector2D a)
           => new Vector2D(a.X * b, a.Y * b);
 
         public override bool Equals(object obj)
