@@ -4,7 +4,7 @@ using System;
 
 namespace RougeLikeRpg.Tests
 {
-    public class Tests
+    public class VectorTests
     {
         Vector2D vector;
         [SetUp]

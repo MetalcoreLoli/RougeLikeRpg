@@ -152,7 +152,7 @@ namespace RougeLikeRPG.Engine
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
             line.SetColorToWord(levelUpMessage, ConsoleColor.Yellow);
             SetColorsToText();
-            _levelUpMenuScreen.Show();
+            //_levelUpMenuScreen.Show();
         }
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)

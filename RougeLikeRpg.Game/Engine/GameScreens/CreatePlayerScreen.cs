@@ -1,6 +1,7 @@
 ﻿using RougeLikeRPG.Core;
 using RougeLikeRPG.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
+using RougeLikeRPG.Engine.Actors.Builders;
 using RougeLikeRPG.Engine.Dices;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace RougeLikeRPG.Engine.GameScreens
 {
     internal class CreatePlayerScreen : Screen
     {
-        private Player player;
+        private PlayerBuilder builder;
+
         private Screen _statsScreen;
         private Screen _inputPlayerNameScreen;
         private Screen _helpScreen;
@@ -21,7 +23,8 @@ namespace RougeLikeRPG.Engine.GameScreens
         public CreatePlayerScreen() 
             : base(60, 23,  new Vector2D(0, 0), "Player creating screen", ConsoleColor.White, ConsoleColor.Black)
         {
-
+            builder = new PlayerBuilder();
+            
             _render = new Render();
             _inputPlayerNameScreen = new Screen(25, 3, new Vector2D(29, 1));
             _inputPlayerNameScreen.Title = "Input Player Name";
@@ -34,10 +37,10 @@ namespace RougeLikeRPG.Engine.GameScreens
                 new Lable("->    - to change race",     new Vector2D(1, 3)),
                 new Lable("<-    - to change race",     new Vector2D(1, 4)),
             });
-            player = new Player();
+
             _statsScreen = new Screen(25, 21, new Vector2D(1, 1));
             _statsScreen.Title = "Player's Stats";
-            _statsScreen.AddRange(player.GetStats());
+            _statsScreen.AddRange(builder.Get().GetStats());
 
             Items.AddRange(new List<Control> { 
                 _inputPlayerNameScreen,
@@ -45,6 +48,8 @@ namespace RougeLikeRPG.Engine.GameScreens
                 _statsScreen
             });
 
+            PlayersSymbolAndColors();
+            
             IsAlive = true;
         }
 
@@ -53,9 +58,9 @@ namespace RougeLikeRPG.Engine.GameScreens
             do
             {
                 Draw();
-                Update(player);
+                Update(builder.Get());
             } while (IsAlive);
-            return player;
+            return builder.Get();
         }
 
         //private new void Draw()
@@ -83,6 +88,12 @@ namespace RougeLikeRPG.Engine.GameScreens
         //    //    Console.WriteLine(l);
         //}
 
+        private void PlayersSymbolAndColors()
+        {
+            builder.SetColor(ConsoleColor.White);
+            builder.SetSymbol('@');
+        }
+
         private string InputName()
         {
             (int left, int top) cursor = (Console.CursorLeft, Console.CursorTop);
@@ -95,57 +106,29 @@ namespace RougeLikeRPG.Engine.GameScreens
         private void Update(Player player)
         {
             //Console.Clear();
-
-
-            if (player.Name == null)
-                player.Name = InputName();
+            if (builder.Get().Name == null)
+                builder.SetName(InputName());
 
             switch (Input.PlayerKeyInput().Result)
             {
-                case ConsoleKey.R: RollPlayerStats(player); break;
+                case ConsoleKey.R: builder.RollStats(); break;
                 case ConsoleKey.Enter: IsAlive = false;  break;
                 case ConsoleKey.RightArrow:
-                    if (player.Race + 1 != Actors.Enums.Race.None)
-                        player.Race++; 
+                    if (builder.Get().Race + 1 != Actors.Enums.Race.None)
+                        builder.Get().Race++; 
                     break;
                 case ConsoleKey.LeftArrow: 
-                    if (player.Race > 0)
-                        player.Race--; 
+                    if (builder.Get().Race > 0)
+                        builder.Get().Race--; 
                     break;
             }
 
 
-            StartItems(player);
+            StartItems(builder.Get());
             
             _statsScreen.Items = new List<Control>();
-            var playerStats = player.GetStats();
+            var playerStats = builder.Get().GetStats();
             _statsScreen.AddRange(playerStats);
-            
-            
-        }
-
-        private void RollPlayerStats(Player player)
-        {
-            player.Color    = ConsoleColor.White;
-            player.Symbol   = '@';
-            //player.Hp = 17;
-            //player.MaxHp = 17;
-            player.Hp       = player.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
-            player.Mana     = player.MaxMana = 2;
-            player.Exp      = 0;
-            player.MaxExp   = 20;
-            player.Level    = 1;
-            player.Str      = RollStat();
-            player.Dex      = RollStat();
-            player.Intell   = RollStat();
-            player.Lucky    = RollStat();
-            player.Chari    = RollStat();
-        }
-        private Int32 RollStat()
-        {
-            Int32[] values = DiceManager.CreateDices("4d6").RollAll();
-            Int32 minDiceValue = values.Min();
-            return values.Where(val => val != minDiceValue).Sum();
         }
 
         private void StartItems(Player player)

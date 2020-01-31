@@ -26,6 +26,7 @@ namespace RougeLikeRPG.Engine.Actors
         public Player()
         {
             DropExp = 10000000;
+            IsDead = false;
         }
         #endregion
 
