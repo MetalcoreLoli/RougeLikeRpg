@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RougeLikeRPG.Engine.Actors.Builders
 {
-    internal class PlayerBuilder
+    internal class PlayerBuilder : ActorBuilder<Player>
     {
         private Player player;
         #region Constructor
@@ -15,12 +15,12 @@ namespace RougeLikeRPG.Engine.Actors.Builders
             player = new Player();
         }
         #endregion
-        internal void SetName(string name)
+        internal override void SetName(string name)
         {
             player.Name = name;
         }
 
-        internal void RollStats()
+        internal override void RollStats()
         {
             player.Hp       = player.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
             player.Mana     = player.MaxMana = 2;
@@ -34,17 +34,17 @@ namespace RougeLikeRPG.Engine.Actors.Builders
             player.Chari    = player.RollStat();
         }
 
-        internal void SetSymbol(char symbol)
+        internal override void SetSymbol(char symbol)
         {
             player.Symbol = symbol;
         }
 
-        internal void SetColor(ConsoleColor color)
+        internal override void SetColor(ConsoleColor color)
         {
             player.Color = color;
         }
 
-        internal Player Get()
+        internal override Player Get()
         {
             return player;
         }
