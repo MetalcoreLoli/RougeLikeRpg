@@ -70,6 +70,11 @@ namespace RougeLikeRPG.Core.Controls
                 Render.WithOffset(cell, 0, 0);
         }
 
+        public void SetColorToPrase(string phrace, ConsoleColor color, ConsoleColor backColor = ConsoleColor.Black)
+        {
+            foreach (var word in phrace.Split(' '))
+                SetColorToWord(word, color, backColor);
+        }
         public void SetColorToWord(string word, ConsoleColor color, ConsoleColor backColor = ConsoleColor.Black)
         {
             var lBody = body.ToList();

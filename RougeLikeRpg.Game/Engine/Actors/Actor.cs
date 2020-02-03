@@ -258,7 +258,7 @@ namespace RougeLikeRPG.Engine.Actors
                 if (actor.Hp > 0)
                 {
                     actor.Hp -= damage;
-                    OnAttack(false, damage, actor);
+                    OnAttack(false, damage, actor, weapon);
                 }
                 if (actor.Hp <= 0)
                 {
@@ -268,7 +268,7 @@ namespace RougeLikeRPG.Engine.Actors
                 }
             }
             else
-                OnAttack(true, 0, actor);
+                OnAttack(true, 0, actor, weapon);
         }
         private Int32 GetValueOfModificatorByWeapon(WeaponItemModificator modificator)
         {
@@ -289,7 +289,7 @@ namespace RougeLikeRPG.Engine.Actors
 
         protected virtual void OnMoving(Vector2D vector) => Moving?.Invoke(this, new MovingEventArgs(vector));
         protected virtual void OnLevelUp(Actor actor) => LevelUp?.Invoke(this, new LevelUpEventArgs(actor));
-        protected virtual void OnAttack(bool isMissed, Int32 damage, Actor actor) => Attacking?.Invoke(this, new AttackingEventArgs(isMissed, damage, actor));
+        protected virtual void OnAttack(bool isMissed, Int32 damage, Actor actor, WeaponItem weapon) => Attacking?.Invoke(this, new AttackingEventArgs(isMissed, damage, actor, weapon));
         protected virtual void OnDying(String name, Int32 damage, Int32 dropExp) => Dying?.Invoke(this, new ActorDyingEventArgs(name, damage, dropExp));
         #endregion
 
@@ -342,7 +342,5 @@ namespace RougeLikeRPG.Engine.Actors
             }
         }
         #endregion
-
-
     }
 }

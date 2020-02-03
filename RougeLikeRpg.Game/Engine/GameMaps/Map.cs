@@ -74,10 +74,10 @@ namespace RougeLikeRPG.Engine
             var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).EmptyMap;
             _mapBody = _mapBuffer = Tile.ToCellsArray(map.Body);
             Actors = new List<Actor>();
-            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 1) });
-            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
-            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
-            AddActorToMap(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
+            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 1) });
+            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
+            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
+            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
             if (player != null)
                 AddActorToMap(player);
         }
@@ -153,7 +153,6 @@ namespace RougeLikeRPG.Engine
 
         public Cell GetCell(Int32 x, Int32 y) => _mapBuffer.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
         public Cell GetCell(Vector2D pos) => GetCell(pos.X, pos.Y);
-
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
         public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
 
@@ -164,28 +163,21 @@ namespace RougeLikeRPG.Engine
                 {
                     Cell cell = _mapBuffer[i];
                     if (cell != null)
-                    {
                         cell.Position += _mapBufferOffset;
-                    }
                 }
+            Player.Position += _mapBufferOffset;
             if (Actors != null)
             {
                 for (int i = 0; i < Actors.Count; i++)
                 {
                     if (Actors[i].Hp <= 0)
-                    {
                         Actors[i].IsDead = true;
-                        //if (Actors[i] is Monster && Actors[i].IsDead)
-                        //    Player.Exp += (Actors[i] as Monster).DropExp;
-                    }
                 }
                 Actors.RemoveAll(actor => actor.IsDead);
                 // MonstersMove();
-                Player.Position += _mapBufferOffset;
                 foreach (Actor actor in Actors)
-                    actor.Position += _mapBufferOffset;
+                    actor.Position +=  _mapBufferOffset;
             }
-
             _mapBufferOffset = new Vector2D(0, 0);
         }
 

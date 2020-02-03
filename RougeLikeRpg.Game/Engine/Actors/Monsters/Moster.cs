@@ -111,6 +111,7 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
                     vec = new Vector2D(1, 0);
                     break;
             }
+            MoveTo(vec);
             OnMoving(vec);
             return vec;
         }
