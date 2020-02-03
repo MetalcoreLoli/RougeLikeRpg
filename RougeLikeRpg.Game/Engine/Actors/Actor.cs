@@ -51,7 +51,7 @@ namespace RougeLikeRPG.Engine.Actors
                 if (_hp <= 0)
                 { 
                     IsDead = true;
-                    OnDying(Name, damage, DropExp);
+                   // OnDying(Name, damage, DropExp);
                 }
             }
         }
@@ -147,10 +147,16 @@ namespace RougeLikeRPG.Engine.Actors
         public event EventHandler<LevelUpEventArgs> LevelUp;
         public event EventHandler<AttackingEventArgs> Attacking;
         public event EventHandler<ActorDyingEventArgs> Dying;
+        public event EventHandler<MovingEventArgs> Moving;
         #endregion
 
         #region Public Methods
 
+        public void IfDo(Actor actor, Func<Actor, Actor, bool> canAction, Action<Actor, Actor> action)
+        {
+            if (canAction(this, actor))
+                action(this, actor);
+        }
         public void Attack(Actor enemy)
         {
             if (LeftArm != null)
@@ -175,6 +181,8 @@ namespace RougeLikeRPG.Engine.Actors
         public virtual void MoveTo(Vector2D position)
         {
             Position += position;
+            OnMoving(position);
+
         }
         public Int32 RollStat()
         {
@@ -278,9 +286,10 @@ namespace RougeLikeRPG.Engine.Actors
             return modificator;
         }
 
-        private void OnLevelUp(Actor actor) => LevelUp?.Invoke(this, new LevelUpEventArgs(actor));
-        private void OnAttack(bool isMissed, Int32 damage, Actor actor) => Attacking?.Invoke(this, new AttackingEventArgs(isMissed, damage, actor));
-        private void OnDying(String name, Int32 damage, Int32 dropExp) => Dying?.Invoke(this, new ActorDyingEventArgs(name, damage, dropExp));
+        protected virtual void OnMoving(Vector2D vector) => Moving?.Invoke(this, new MovingEventArgs(vector));
+        protected virtual void OnLevelUp(Actor actor) => LevelUp?.Invoke(this, new LevelUpEventArgs(actor));
+        protected virtual void OnAttack(bool isMissed, Int32 damage, Actor actor) => Attacking?.Invoke(this, new AttackingEventArgs(isMissed, damage, actor));
+        protected virtual void OnDying(String name, Int32 damage, Int32 dropExp) => Dying?.Invoke(this, new ActorDyingEventArgs(name, damage, dropExp));
         #endregion
 
         #region Public Properties

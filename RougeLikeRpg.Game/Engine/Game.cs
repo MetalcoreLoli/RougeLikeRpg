@@ -107,13 +107,53 @@ namespace RougeLikeRPG.Engine
             _map.AddActorToMap(_player);
 
             _player.LevelUp     += _player_LevelUp;
-            _player.Attacking   += _hit_Attacking;
+           // _player.Attacking   += _hit_Attacking;
             _player.Dying       += _actor_Dying;
-            
+            _player.Moving      += _player_Moving;
+
             foreach (var actor in _map.Actors)
             {
                 actor.Attacking += _hit_Attacking;
                 actor.Dying += _actor_Dying;
+                actor.Moving += Actor_Moving;
+            }
+        }
+
+        private void Actor_Moving(object sender, Actors.Events.MovingEventArgs e)
+        {
+            Actor actor = sender as Actor;
+            if (!_map.IsWalkable(actor.Position))
+                actor.Position -= e.MovingPosition;
+
+            if (actor is Monster)
+            {
+                var mon = (actor as Monster);
+                //if ((mon.Position + e.MovingPosition).Equals(_player.Position))
+                mon.IfDo(_player, 
+                    (monster, player) => (monster.Position + e.MovingPosition).Equals(player.Position), 
+                    (monster, player) => monster.Attack(player));
+            }
+        }
+
+        private void _player_Moving(object sender, Actors.Events.MovingEventArgs e)
+        {
+            Player pl = sender as Player;
+            if (_map.IsWalkable(pl.Position))
+                _map.PlayerMoveTo(e.MovingPosition);
+            else
+                pl.Position -= e.MovingPosition;
+
+            foreach (Actor actor in _map.Actors)
+            {
+                if (actor is Monster)
+                {
+                    var mon = (actor as Monster);
+                    //if ((_player.Position + e.MovingPosition).Equals(mon.Position))
+                    //    _player.Attack(mon);
+                    _player.IfDo(mon, 
+                        (player, monster) => (player.Position + e.MovingPosition).Equals(monster.Position), 
+                        (player, monster) => player.Attack(monster));
+                }
             }
         }
 
@@ -121,19 +161,9 @@ namespace RougeLikeRPG.Engine
         {
             Actor actor = sender as Actor;
             if (!e.IsMissed)
-            {
-                string leftArm = "";
-                string rightArm = "";
-
-                if (actor.LeftArm != null)
-                    leftArm = $"{e.Enemy.Name} was hitten by {actor.Name} with {actor.LeftArm.Name} at {actor.LeftArm.RolledDamage}";
-
-                if (actor.RightArm != null)
-                    rightArm = $"{e.Enemy.Name} was hitten by {actor.Name} with {actor.RightArm.Name} at {actor.RightArm.RolledDamage}";
-                (_messageLogScreen as MessageLogScreen).Add(leftArm + $"{(rightArm == "" ? "" : " and ")}" + rightArm);
-                SetColorsToText();
-            }
+                HitMessages(actor, e.Enemy);
         }
+
         private void _actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
         {
             (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Actor).Name)} and drop exp: {e.DropExp}");
@@ -142,7 +172,9 @@ namespace RougeLikeRPG.Engine
 
         private void _player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
         {
-
+            Player actor = sender as Player;
+            if (!e.IsMissed)
+                HitMessages(actor, e.Enemy);
         }
 
         private void _player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
@@ -178,25 +210,39 @@ namespace RougeLikeRPG.Engine
             PlayerMove(playersInput);
         }
 
+        private void HitMessages(Actor actor, Actor enemy)
+        {
+            string leftArm = "";
+            string rightArm = "";
+
+            if (actor.LeftArm != null)
+                leftArm = $"{enemy.Name} was hitten by {actor.Name} with {actor.LeftArm.Name} at {actor.LeftArm.RolledDamage}";
+
+            if (actor.RightArm != null)
+                rightArm = $"{enemy.Name} was hitten by {actor.Name} with {actor.RightArm.Name} at {actor.RightArm.RolledDamage}";
+            (_messageLogScreen as MessageLogScreen).Add(leftArm + $"{(rightArm == "" ? "" : " and ")}" + rightArm);
+            SetColorsToText();
+          
+        }
+
         private void PlayerMove(Vector2D playersInput)
         {
 
-            var mapCell = _map.GetCell(playersInput + _map.Player.Position);
-            var actor = _map.GetActor(playersInput + _map.Player.Position);
-            if (mapCell.Symbol == '.' && actor == null)
-            { 
-                _player.MoveTo(playersInput);
-                _map.PlayerMoveTo(playersInput);
-            }
-            else if (actor != null)
-            {
-                if (actor is Monster)
-                {
-                    _map.Player.Attack(actor);
-                }
-            }
-            else
-                _map.PlayerMoveTo(new Vector2D(0, 0));
+            //var mapCell = _map.GetCell(playersInput + _map.Player.Position);
+            //var actor = _map.GetActor(playersInput + _map.Player.Position);
+            //if (mapCell.Symbol == '.' && actor == null)
+            //{ 
+            _player.MoveTo(playersInput);
+            //}
+            //else if (actor != null)
+            //{
+            //    if (actor is Monster)
+            //    {
+            //        _map.Player.Attack(actor);
+            //    }
+            //}
+            //else
+            //    _map.PlayerMoveTo(new Vector2D(0, 0));
         }
 
 
@@ -317,20 +363,20 @@ namespace RougeLikeRPG.Engine
                     if (!mon.IsActorInFov(_player))
                         move += mon.Move();
 
-                    var pos = move + actor.Position;
+                    //var pos = move + actor.Position;
 
-                    if (pos.X == _player.Position.X && pos.Y == _player.Position.Y)
-                        mon.Attack(_player);
-                    else
-                    {
-                        var mapCell = _map.GetCell(move + actor.Position);
-                        var ac = _map.GetActor(move + actor.Position);
-                        if (mapCell != null)
-                        {
-                            if (mapCell.Symbol == '.' && ac == null)
-                                actor.Position += move;
-                        }
-                    }
+                    //if (pos.X == _player.Position.X && pos.Y == _player.Position.Y)
+                    //    mon.Attack(_player);
+                    //else
+                    //{
+                    //    var mapCell = _map.GetCell(move + actor.Position);
+                    //    var ac = _map.GetActor(move + actor.Position);
+                    //    if (mapCell != null)
+                    //    {
+                    //        if (mapCell.Symbol == '.' && ac == null)
+                    //            actor.Position += move;
+                    //    }
+                    //}
                 }
             });
         }

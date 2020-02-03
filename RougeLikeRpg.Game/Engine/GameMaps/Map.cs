@@ -127,6 +127,20 @@ namespace RougeLikeRPG.Engine
         public bool IsWalkable(Int32 x, Int32 y)
         {
             bool flag = false;
+            foreach (Cell cell in _mapBody)
+            {
+                if (cell.Position.X.Equals(x) && cell.Position.Y.Equals(y))
+                {
+                    if (cell.Symbol.Equals('.')) flag = true;
+                }
+            }
+            foreach (Actor actor in Actors)
+            {
+                if (actor.Position.X.Equals(x) && actor.Position.Y.Equals(y))
+                {
+                    flag = false;
+                }
+            }
             return flag;
         }
 
