@@ -129,6 +129,7 @@ namespace RougeLikeRPG.Engine.Actors
         public int ChariMod { get; set; }
         public int LuckyMod { get; set; }
         #endregion
+
         public Race Race { get; set; }
         public Inventory Inventory { get; set; }
 

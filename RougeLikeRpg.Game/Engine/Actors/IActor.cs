@@ -9,7 +9,7 @@ using System.Text;
 
 namespace RougeLikeRPG.Engine.Actors
 {
-    internal interface IActor : IRenderable
+    internal interface IActor : IRenderable, IStatsModificator
     {
         /// <summary>
         /// Имя актера
@@ -115,30 +115,6 @@ namespace RougeLikeRPG.Engine.Actors
         /// </summary>
         Int32 Lucky { get; set; }
 
-        #endregion
-
-        #region Modificators
-        /// <summary>
-        /// Сила
-        /// </summary>
-        Int32 StrMod { get; set; }
-        /// <summary>
-        /// Ловкость
-        /// </summary>
-        Int32 DexMod { get; set; }
-        /// <summary>
-        /// Интелект
-        /// </summary>
-        Int32 IntellMod { get; set; }
-        /// <summary>
-        /// Харизма
-        /// </summary>
-        Int32 ChariMod { get; set; }
-
-        /// <summary>
-        /// Удача
-        /// </summary>
-        Int32 LuckyMod { get; set; }
         #endregion
 
         #region Events

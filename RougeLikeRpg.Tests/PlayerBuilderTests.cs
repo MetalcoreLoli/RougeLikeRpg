@@ -10,7 +10,7 @@ namespace RougeLikeRpg.Tests
     public class PlayerBuilderTests
     {
         Player player;
-        PlayerBuilder builder;
+        ActorBuilder<Player> builder;
 
         [SetUp]
         public void Setup()
