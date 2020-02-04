@@ -74,7 +74,7 @@ namespace RougeLikeRPG.Engine
             var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).EmptyMap;
             _mapBody = _mapBuffer = Tile.ToCellsArray(map.Body);
             Actors = new List<Actor>();
-            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 1) });
+            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2 - 3, Height / 2) });
             Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
             Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
             Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
@@ -143,7 +143,26 @@ namespace RougeLikeRPG.Engine
             }
             return flag;
         }
-
+        public bool IsWalkable(Actor actor)
+        {
+            bool flag = false;
+            foreach (Cell cell in _mapBody)
+            {
+                if (cell.Position.Equals(actor.Position))
+                {
+                    if (cell.Symbol.Equals('.')) flag = true;
+                }
+            }
+            if (actor.Position.Equals(Player.Position))
+                flag = false;
+            foreach (Actor actr in Actors)
+            {
+                if (!actor.GetHashCode().Equals(actr.GetHashCode()))
+                    if (actr.Position.Equals(actor.Position))
+                        flag = false;
+            }
+            return flag;
+        }
         /// <summary>
         /// Метод проверки ячейки на, то что туда можно пройти
         /// </summary>

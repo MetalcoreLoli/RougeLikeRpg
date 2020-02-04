@@ -125,16 +125,20 @@ namespace RougeLikeRPG.Engine
         private void Actor_Moving(object sender, Actors.Events.MovingEventArgs e)
         {
             Actor actor = sender as Actor;
-            if (!_map.IsWalkable(actor.Position))
-            { 
+            //actor.IsMoving = true;
+            if (!(_map.IsWalkable(actor)))
+            {
                 actor.Position -= e.MovingPosition;
                 if (actor is Monster)
                 {
                     var mon = (actor as Monster);
-                    mon.IfDo(_player,
-                        (monster, player) => (monster.Position + e.MovingPosition).Equals(player.Position),
-                        (monster, player) => monster.Attack(player));
+                    if (mon.IsActorInFov(_player))
+                        mon.Attack(_player);
+                    //mon.IfDo(_player,
+                    //    (monster, player) => (monster.Position + e.MovingPosition).Equals(player.Position),
+                    //    (monster, player) => monster.Attack(player));
                 }
+                actor.IsMoving = false;
             }
         }
 
@@ -146,6 +150,7 @@ namespace RougeLikeRPG.Engine
             else
             {
                 pl.Position -= e.MovingPosition;
+                pl.IsMoving = false;
                 foreach (Actor actor in _map.Actors)
                 {
                     if (actor is Monster)
@@ -185,7 +190,7 @@ namespace RougeLikeRPG.Engine
         private void _player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
         {
             string levelUpMessage = $"+Level of {e.Actor.Name} was Upped+  ";
-            (_messageLogScreen as MessageLogScreen).Add(levelUpMessage);
+            (_messageLogScreen as MessageLogScreen).Add(levelUpMessage); 
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
             line.SetColorToWord(levelUpMessage, ConsoleColor.Yellow);
             SetColorsToText();
@@ -312,45 +317,11 @@ namespace RougeLikeRPG.Engine
                 if (actor is Monster)
                 {
                     var mon = actor as Monster;
-                    Vector2D move = new Vector2D(0, 0);
-
-                    //if (mon.IsActorInUpFov(_player))
-                    //{
-                    //    move += mon.Move(Direction.Up);
-                    //}
-
-                    //if (mon.IsActorInDownFov(_player))
-                    //{
-                    //    move += mon.Move(Direction.Down);
-                    //}
-
-                    //if (mon.IsActorInLeftFov(_player))
-                    //{
-                    //    move += mon.Move(Direction.Left);
-                    //}
-
-                    //if (mon.IsActorInRigthFov(_player))
-                    //{
-                    //    move += mon.Move(Direction.Right);
-                    //}
-
-                    if (!mon.IsActorInFov(_player))
-                        mon.Move();
-
-                    //var pos = move + actor.Position;
-
-                    //if (pos.X == _player.Position.X && pos.Y == _player.Position.Y)
-                    //    mon.Attack(_player);
-                    //else
-                    //{
-                    //    var mapCell = _map.GetCell(move + actor.Position);
-                    //    var ac = _map.GetActor(move + actor.Position);
-                    //    if (mapCell != null)
-                    //    {
-                    //        if (mapCell.Symbol == '.' && ac == null)
-                    //            actor.Position += move;
-                    //    }
-                    //}
+                    Direction moveDir = Direction.None;
+                    if (mon.IsActorInFov(_player, 5, 5, out moveDir))
+                        mon.MoveTo(mon.MoveDirectionVector(moveDir));
+                    else
+                        mon.MoveTo(mon.MoveRandomDirectionVector());
                 }
             });
         }

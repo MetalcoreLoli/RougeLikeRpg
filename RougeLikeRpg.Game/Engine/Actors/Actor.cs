@@ -129,7 +129,7 @@ namespace RougeLikeRPG.Engine.Actors
         public int ChariMod { get; set; }
         public int LuckyMod { get; set; }
         #endregion
-
+        public Boolean IsMoving { get; set; } = false;
         public Race Race { get; set; }
         public Inventory Inventory { get; set; }
 
@@ -182,8 +182,8 @@ namespace RougeLikeRPG.Engine.Actors
         public virtual void MoveTo(Vector2D position)
         {
             Position += position;
+            IsMoving = true;
             OnMoving(position);
-
         }
         public Int32 RollStat()
         {

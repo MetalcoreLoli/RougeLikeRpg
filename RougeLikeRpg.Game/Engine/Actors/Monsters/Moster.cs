@@ -12,85 +12,69 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
         public Int32 FovX { get; set; }
 
         public Int32 FovY { get; set; }
-        
-        public bool IsActorInUpFov(Actor actor)
+
+        public bool IsActorInFov(Actor actor, Int32 fovX, Int32 fovY, out Direction direction)
         {
-            Vector2D pos = this.Position + Move(Direction.Up);
-            for (int i = 0; i < FovX; i++)
+            var mon_position = this.Position;
+            direction = Direction.None;
+            if (IsInFov(actor, mon_position, fovX, Direction.Up))
             {
-                if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
-                    return true;
-                pos.X++;
+                direction = Direction.Up;
+                return true;
+            }
+            if (IsInFov(actor, mon_position, fovX, Direction.Down))
+            {
+                direction = Direction.Down;
+                return true;
+            }
+            if (IsInFov(actor, mon_position, fovY, Direction.Left))
+            {
+                direction = Direction.Left;
+                return true;
+            }
+            if (IsInFov(actor, mon_position, fovY, Direction.Right))
+            {
+                direction = Direction.Right;
+                return true;
             }
             return false;
         }
 
-        public bool IsActorInDownFov(Actor actor)
+        public bool IsInFov(Actor actor, Vector2D start, Int32 fovRange, Direction direction)
         {
-            Vector2D pos = this.Position + Move(Direction.Down);
-            for (int i = 0; i < FovX; i++)
+            Vector2D pos = start;
+            for (int i = 0; i < fovRange; i++)
             {
-                pos.X--;
-                if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
+                pos += MoveDirectionVector(direction);
+                if (pos.Equals(actor.Position))
                     return true;
             }
             return false;
         }
-
-        public bool IsInAttackFov(Actor actor)
-        {
-            Vector2D[] fov = new Vector2D[4];
-            for (int i = 0; i < fov.Length; i++)
-                fov[i] = Move((Direction)i);
-            
-            for (int i = 0; i < fov.Length; i++)
-            {
-                Vector2D pos = fov[i];
-                if (pos.X.Equals(actor.Position.X)
-                    && pos.Y.Equals(actor.Position.Y))
-                    return true;
-            }
-            return false;
-        }
-        public bool IsActorInLeftFov(Actor actor)
-        {
-            Vector2D pos = this.Position + Move(Direction.Left);
-            for (int i = 0; i < FovY; i++)
-            {
-                pos.Y--;
-                if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
-                    return true;
-            }
-            return false;
-        }
-        
-        public bool IsActorInRigthFov(Actor actor)
-        {
-            Vector2D pos = this.Position + Move(Direction.Right);
-            for (int i = 0; i < FovY; i++)
-            {
-                pos.Y++;
-                if (pos.X == actor.Position.X && pos.Y == actor.Position.Y)
-                    return true;
-            }
-            return false;
-        }
-        
         public bool IsActorInFov(Actor actor)
         {
-            return IsActorInUpFov(actor) || IsActorInDownFov(actor) 
-                || IsActorInLeftFov(actor) || IsActorInRigthFov(actor);
+            if ((this.Position + this.MoveDirectionVector(Direction.Up)).Equals(actor.Position))
+                return true;
+
+            else if ((this.Position + this.MoveDirectionVector(Direction.Down)).Equals(actor.Position))
+                return true;
+
+            else if ((this.Position + this.MoveDirectionVector(Direction.Right)).Equals(actor.Position))
+                return true;
+
+            else if ((this.Position + this.MoveDirectionVector(Direction.Left)).Equals(actor.Position))
+                return true;
+
+            else return false;
         }
-       
 
-
-        public Vector2D Move()
+        public Vector2D MoveRandomDirectionVector()
         {
             Direction dir = (Direction)new Random().Next(1, 5);
-            return Move(dir);
+            return MoveDirectionVector(dir);
         }
 
-        public Vector2D Move(Direction dir)
+        public Vector2D MoveDirectionVector(Direction dir)
         {
             Vector2D vec = new Vector2D(0, 0);
             switch (dir)
@@ -111,8 +95,6 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
                     vec = new Vector2D(1, 0);
                     break;
             }
-            MoveTo(vec);
-            OnMoving(vec);
             return vec;
         }
     }
