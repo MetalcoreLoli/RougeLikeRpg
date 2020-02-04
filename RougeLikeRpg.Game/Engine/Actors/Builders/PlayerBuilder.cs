@@ -48,5 +48,15 @@ namespace RougeLikeRPG.Engine.Actors.Builders
         {
             return player;
         }
+
+        internal override void SetFovX(int fov)
+        {
+            player.FovX = fov;
+        }
+
+        internal override void SetFovY(int fov)
+        {
+            player.FovY = fov;
+        }
     }
 }

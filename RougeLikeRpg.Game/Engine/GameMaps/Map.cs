@@ -214,9 +214,14 @@ namespace RougeLikeRPG.Engine
             await foreach (Cell cell in GetCellsAsync(_mapBuffer))
             {
                 if (cell.Position.X > 0 && cell.Position.Y > 0)
-                    if (cell.Position.X < Width - 1
-                            && cell.Position.Y < Height - 1)
+                {
+                    if (    cell.Position.X < Player.Position.X + 5 /* Width - 1*/
+                         && cell.Position.Y < Player.Position.Y + 4 /*Height - 1*/
+                         && cell.Position.X > Player.Position.X - 5
+                         && cell.Position.Y > Player.Position.Y - 4)
                         Render.WithOffset(cell, 0, 0);
+                }
+                    
             }
 
             //Отрисовка игрока игрока
@@ -227,9 +232,14 @@ namespace RougeLikeRPG.Engine
             if (Actors != null)
                 foreach (Actor actor in Actors)
                     if (actor.Position.X > 0 && actor.Position.Y > 0)
-                        if (actor.Position.X < Width - 1
-                                && actor.Position.Y < Height - 1)
+                    {
+                        if (    actor.Position.X < Player.Position.X + Player.FovX /* Width - 1*/
+                             && actor.Position.Y < Player.Position.Y + Player.FovY /*Height - 1*/
+                             && actor.Position.X > Player.Position.X - Player.FovX
+                             && actor.Position.Y > Player.Position.Y - Player.FovY)
                             Render.WithOffset(actor, 0, 0);
+                    }
+                        
         }
         #endregion
 

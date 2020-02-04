@@ -24,7 +24,10 @@ namespace RougeLikeRPG.Engine.GameScreens
             : base(60, 23,  new Vector2D(0, 0), "Player creating screen", ConsoleColor.White, ConsoleColor.Black)
         {
             builder = new PlayerBuilder();
-            
+
+            builder.SetFovX(5);
+            builder.SetFovY(4);
+
             _render = new Render();
             _inputPlayerNameScreen = new Screen(25, 3, new Vector2D(29, 1));
             _inputPlayerNameScreen.Title = "Input Player Name";

@@ -44,5 +44,15 @@ namespace RougeLikeRPG.Engine.Actors.Monsters.Builders
         }
 
         internal override T Get() => monster;
+
+        internal override void SetFovX(int fov)
+        {
+            monster.FovX = fov;
+        }
+
+        internal override void SetFovY(int fov)
+        {
+            monster.FovY = fov;
+        }
     }
 }

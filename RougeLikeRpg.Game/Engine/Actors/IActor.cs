@@ -25,6 +25,8 @@ namespace RougeLikeRPG.Engine.Actors
         /// </summary>
         bool IsDead { get; set; }
 
+        Int32 FovX { get; set; }
+        Int32 FovY { get; set; }
         Inventory Inventory { get; set; }
 
         #region Equipped Items

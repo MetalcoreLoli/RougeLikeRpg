@@ -141,6 +141,8 @@ namespace RougeLikeRPG.Engine.Actors
         public int ArmorClass { get; set; }
         public bool IsDead { get; set; }
         public Int32 DropExp { get; set; }
+        public int FovX { get; set; }
+        public int FovY { get; set; }
 
         #endregion
 
