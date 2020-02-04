@@ -185,6 +185,92 @@ namespace RougeLikeRPG.Engine.Actors
             IsMoving = true;
             OnMoving(position);
         }
+
+        public bool IsActorInFovXY(Actor actor, Int32 fovX, Int32 fovY, out Direction direction)
+        {
+            var mon_position = this.Position;
+            direction = Direction.None;
+            if (IsActorInFov(actor, mon_position, fovX, Direction.Up))
+            {
+                direction = Direction.Up;
+                return true;
+            }
+            if (IsActorInFov(actor, mon_position, fovX, Direction.Down))
+            {
+                direction = Direction.Down;
+                return true;
+            }
+            if (IsActorInFov(actor, mon_position, fovY, Direction.Left))
+            {
+                direction = Direction.Left;
+                return true;
+            }
+            if (IsActorInFov(actor, mon_position, fovY, Direction.Right))
+            {
+                direction = Direction.Right;
+                return true;
+            }
+            return false;
+        }
+        
+        public bool IsActorInFov(Actor actor, Vector2D start, Int32 fovRange, Direction direction)
+        {
+            Vector2D pos = start;
+            for (int i = 0; i < fovRange; i++)
+            {
+                pos += MoveDirectionVector(direction);
+                if (pos.Equals(actor.Position))
+                    return true;
+            }
+            return false;
+        }
+
+        public bool IsActorInFov(Actor actor)
+        {
+            if ((this.Position + MoveDirectionVector(Direction.Up)).Equals(actor.Position))
+                return true;
+
+            else if ((this.Position + MoveDirectionVector(Direction.Down)).Equals(actor.Position))
+                return true;
+
+            else if ((this.Position + MoveDirectionVector(Direction.Right)).Equals(actor.Position))
+                return true;
+
+            else if ((this.Position + MoveDirectionVector(Direction.Left)).Equals(actor.Position))
+                return true;
+
+            else return false;
+        }
+
+        public static Vector2D MoveDirectionVector(Direction dir)
+        {
+            Vector2D vec = new Vector2D(0, 0);
+            switch (dir)
+            {
+                case Direction.Up:
+                    vec = new Vector2D(0, -1);
+                    break;
+
+                case Direction.Down:
+                    vec = new Vector2D(0, 1);
+                    break;
+
+                case Direction.Left:
+                    vec = new Vector2D(-1, 0);
+                    break;
+
+                case Direction.Right:
+                    vec = new Vector2D(1, 0);
+                    break;
+            }
+            return vec;
+        }
+        public static Vector2D MoveRandomDirectionVector()
+        {
+            Direction dir = (Direction)new Random().Next(1, 5);
+            return MoveDirectionVector(dir);
+        }
+
         public Int32 RollStat()
         {
             Int32[] values = DiceManager.CreateDices("4d6").RollAll();

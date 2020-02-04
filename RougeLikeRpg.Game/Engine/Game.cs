@@ -265,22 +265,22 @@ namespace RougeLikeRPG.Engine
             {
                 case ConsoleKey.UpArrow:
                     _map.Player.Direction = Direction.Up;
-                    vec = new Vector2D(0, -1);
+                    vec = Actor.MoveDirectionVector(Direction.Up);
                     break;
 
                 case ConsoleKey.DownArrow:
                     _map.Player.Direction = Direction.Down;
-                    vec = new Vector2D(0, 1);
+                    vec = Actor.MoveDirectionVector(Direction.Down);
                     break;
 
                 case ConsoleKey.LeftArrow:
                     _map.Player.Direction = Direction.Left;
-                    vec = new Vector2D(-1, 0);
+                    vec = Actor.MoveDirectionVector(Direction.Left);
                     break;
 
                 case ConsoleKey.RightArrow:
                     _map.Player.Direction = Direction.Right;
-                    vec = new Vector2D(1, 0);
+                    vec = Actor.MoveDirectionVector(Direction.Right);
                     break;
 
                 default:
@@ -318,10 +318,10 @@ namespace RougeLikeRPG.Engine
                 {
                     var mon = actor as Monster;
                     Direction moveDir = Direction.None;
-                    if (mon.IsActorInFov(_player, 5, 5, out moveDir))
-                        mon.MoveTo(mon.MoveDirectionVector(moveDir));
+                    if (mon.IsActorInFovXY(_player, 5, 5, out moveDir))
+                        mon.MoveTo(Actor.MoveDirectionVector(moveDir));
                     else
-                        mon.MoveTo(mon.MoveRandomDirectionVector());
+                        mon.MoveTo(Actor.MoveRandomDirectionVector());
                 }
             });
         }
