@@ -25,7 +25,7 @@ namespace RougeLikeRPG.Engine.GameScreens
         {
             builder = new PlayerBuilder();
 
-            builder.SetFovX(5);
+            builder.SetFovX(15);
             builder.SetFovY(4);
 
             _render = new Render();
@@ -125,10 +125,9 @@ namespace RougeLikeRPG.Engine.GameScreens
                         builder.Get().Race--; 
                     break;
             }
-
-
-            StartItems(builder.Get());
             
+            StartItems(builder.Get());
+
             _statsScreen.Items = new List<Control>();
             var playerStats = builder.Get().GetStats();
             _statsScreen.AddRange(playerStats);

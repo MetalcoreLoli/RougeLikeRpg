@@ -104,20 +104,19 @@ namespace RougeLikeRPG.Engine
             Initialization();
             KeyDown += Game_KeyDown;
 
-           
             _player.Position    += new Vector2D(_map.Width / 2, _map.Height / 2) + _map.Location;
-            _player.LevelUp     += _player_LevelUp;
-            _player.Attacking   += _player_Attacking;
-            _player.Dying       += _actor_Dying;
-            _player.Moving      += _player_Moving;
+            _player.LevelUp     += Player_LevelUp;
+            _player.Attacking   += Player_Attacking;
+            _player.Dying       += Actor_Dying;
+            _player.Moving      += Player_Moving;
 
             _map.Player = _player;
 
 
             foreach (var actor in _map.Actors)
             {
-                actor.Attacking += _hit_Attacking;
-                actor.Dying += _actor_Dying;
+                actor.Attacking += Hit_Attacking;
+                actor.Dying += Actor_Dying;
                 actor.Moving += Actor_Moving;
             }
         }
@@ -134,15 +133,12 @@ namespace RougeLikeRPG.Engine
                     var mon = (actor as Monster);
                     if (mon.IsActorInFov(_player))
                         mon.Attack(_player);
-                    //mon.IfDo(_player,
-                    //    (monster, player) => (monster.Position + e.MovingPosition).Equals(player.Position),
-                    //    (monster, player) => monster.Attack(player));
                 }
                 actor.IsMoving = false;
             }
         }
 
-        private void _player_Moving(object sender, Actors.Events.MovingEventArgs e)
+        private void Player_Moving(object sender, Actors.Events.MovingEventArgs e)
         {
             Player pl = sender as Player;
             if (_map.IsWalkable(pl.Position))
@@ -164,7 +160,7 @@ namespace RougeLikeRPG.Engine
             }
         }
 
-        private void _hit_Attacking(object sender, Actors.Events.AttackingEventArgs e)
+        private void Hit_Attacking(object sender, Actors.Events.AttackingEventArgs e)
         {
             Actor actor = sender as Actor;
             if (!e.IsMissed)
@@ -172,13 +168,13 @@ namespace RougeLikeRPG.Engine
             else MissMessages(actor, e.Weapon);
         }
 
-        private void _actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
+        private void Actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
         {
             (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Actor).Name)} and drop exp: {e.DropExp}");
             SetColorsToText();
         }
 
-        private void _player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
+        private void Player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
         {
             Player actor = sender as Player;
             if (!e.IsMissed)
@@ -187,21 +183,19 @@ namespace RougeLikeRPG.Engine
 
         }
 
-        private void _player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
+        private void Player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
         {
             string levelUpMessage = $"+Level of {e.Actor.Name} was Upped+  ";
             (_messageLogScreen as MessageLogScreen).Add(levelUpMessage); 
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
             line.SetColorToWord(levelUpMessage, ConsoleColor.Yellow);
             SetColorsToText();
-            //_levelUpMenuScreen.Show();
         }
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
         {
             Vector2D playersInput = PlayerMoveTo(e.Key);
             Console.Title = _map.Player.Direction.ToString();
-
             PlayerMove(playersInput);
         }
 
@@ -260,34 +254,27 @@ namespace RougeLikeRPG.Engine
 
         private Vector2D PlayerMoveTo(ConsoleKey key)
         {
-            Vector2D vec = new Vector2D(0, 0);
             switch (key)
             {
                 case ConsoleKey.UpArrow:
                     _map.Player.Direction = Direction.Up;
-                    vec = Actor.MoveDirectionVector(Direction.Up);
-                    break;
+                    return Actor.MoveDirectionVector(Direction.Up);
 
                 case ConsoleKey.DownArrow:
                     _map.Player.Direction = Direction.Down;
-                    vec = Actor.MoveDirectionVector(Direction.Down);
-                    break;
+                    return Actor.MoveDirectionVector(Direction.Down);
 
                 case ConsoleKey.LeftArrow:
                     _map.Player.Direction = Direction.Left;
-                    vec = Actor.MoveDirectionVector(Direction.Left);
-                    break;
+                    return Actor.MoveDirectionVector(Direction.Left);
 
                 case ConsoleKey.RightArrow:
                     _map.Player.Direction = Direction.Right;
-                    vec = Actor.MoveDirectionVector(Direction.Right);
-                    break;
+                    return Actor.MoveDirectionVector(Direction.Right);
 
                 default:
-                    vec = new Vector2D(0, 0);
-                    break;
+                    return new Vector2D(0, 0);
             }
-            return vec;
         }
 
         private async void PlayerInput()
@@ -328,31 +315,26 @@ namespace RougeLikeRPG.Engine
 
         private void SetColorsToText()
         {
-            foreach (var line in _messageLogScreen.Items)
+            foreach (Lable line in from line in _messageLogScreen.Items
+                                 where line is Lable
+                                 select line)
             {
-                if (line is Lable)
+                line.SetColorToWord("miss", ConsoleColor.DarkRed);
+                line.SetColorToPrase($"+Level of {_player.Name} Upped+", ConsoleColor.DarkYellow);
+                line.SetColorToWord(_player.Name, ConsoleColor.DarkGray);
+
+                if (_player.LeftArm != null)
+                    SetColorToItemInText(_player.LeftArm, line);
+                if (_player.RightArm != null)
+                    SetColorToItemInText(_player.RightArm, line);
+                foreach (Actor actor in _map.Actors)
                 {
-                    (line as Lable).SetColorToWord("miss", ConsoleColor.DarkRed);
-                    //(line as Lable).SetColorToWord($"+Level", ConsoleColor.Yellow);
-                    //(line as Lable).SetColorToWord($"Upped+", ConsoleColor.Yellow);
-                    (line as Lable).SetColorToPrase($"+Level of {_player.Name} Upped+", ConsoleColor.DarkYellow);
-                    //$"+Level of {e.Actor.Name} was Upped+"
-                    (line as Lable).SetColorToWord(_player.Name, ConsoleColor.DarkGray);
-                    if (_player.LeftArm != null)
-                        SetColorToItemInText(_player.LeftArm, line as Lable);
+                    line.SetColorToWord(actor.Name, actor.Color);
+                    if (actor.LeftArm != null)
+                        SetColorToItemInText(actor.LeftArm, line);
 
-                    if (_player.RightArm != null)
-                        SetColorToItemInText(_player.RightArm, line as Lable);
-                    
-                    foreach (Actor actor in _map.Actors)
-                    {
-                        (line as Lable).SetColorToWord(actor.Name, actor.Color);
-                        if (actor.LeftArm != null)
-                            SetColorToItemInText(actor.LeftArm, line as Lable);
-
-                        if (actor.RightArm != null)
-                            SetColorToItemInText(actor.RightArm, line as Lable);
-                    }
+                    if (actor.RightArm != null)
+                        SetColorToItemInText(actor.RightArm, line);
                 }
             }
         }
@@ -374,7 +356,6 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         /// <returns></returns>
         private Player NewPlayer() => _createPlayerScreen.Start();
-
 
         private void OnKeyDown(ConsoleKey key) => KeyDown?.Invoke(this, new KeyDownEventArgs(key));
 
