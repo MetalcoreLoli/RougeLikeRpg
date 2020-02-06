@@ -1,5 +1,5 @@
-﻿using RougeLikeRPG.Core;
-using RougeLikeRPG.Core.Controls;
+﻿using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Graphic.Core.Controls;
 using System;
 using System.Collections.Generic;
 using System.Text;

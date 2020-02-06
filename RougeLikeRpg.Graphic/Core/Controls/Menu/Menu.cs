@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Core.Controls.Menu
+namespace RougeLikeRPG.Graphic.Core.Controls.Menu
 {
     /// <summary>
     /// Меню
     /// </summary>
-    internal class Menu : Control
+    public class Menu : Control
     {
         #region Private Members
         /// <summary>

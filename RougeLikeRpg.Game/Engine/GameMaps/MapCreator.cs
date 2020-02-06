@@ -1,5 +1,5 @@
 using System;
-using RougeLikeRPG.Core;
+using RougeLikeRPG.Graphic.Core;
 
 namespace RougeLikeRPG.Engine.GameMaps 
 {

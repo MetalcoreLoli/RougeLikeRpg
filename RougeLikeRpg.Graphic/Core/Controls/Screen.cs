@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using RougeLikeRPG.Core;
+using RougeLikeRPG.Graphic.Core;
 
-namespace RougeLikeRPG.Core.Controls
+namespace RougeLikeRPG.Graphic.Core.Controls
 {
     ///<summary>
     /// Класс контейнер для контролов
     ///</summary>
-    internal class Screen : Control
+    public class Screen : Control
     {
         
         #region Private Members

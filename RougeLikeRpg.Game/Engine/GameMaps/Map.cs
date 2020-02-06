@@ -1,5 +1,5 @@
-﻿using RougeLikeRPG.Core;
-using RougeLikeRPG.Core.Controls;
+﻿using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Graphic.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
 using RougeLikeRPG.Engine.Actors.Monsters;
@@ -49,7 +49,7 @@ namespace RougeLikeRPG.Engine
 
         #region Contructors
 
-        public Map(int mapWidth, int mapHeight, Core.Vector2D _mapLocation)
+        public Map(int mapWidth, int mapHeight, Graphic.Core.Vector2D _mapLocation)
             : this(mapWidth, mapHeight, _mapLocation, null, null)
         {
         }
@@ -57,7 +57,7 @@ namespace RougeLikeRPG.Engine
         public Map(
                 int mapWidth,
                 int mapHeight,
-                Core.Vector2D _mapLocation,
+                Graphic.Core.Vector2D _mapLocation,
                 Player player,
                 IEnumerable<Actor> actors)
         {

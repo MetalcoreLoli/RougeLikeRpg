@@ -1,6 +1,6 @@
-﻿using RougeLikeRPG.Core;
+﻿using RougeLikeRPG.Graphic.Core;
 using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Core.Controls;
+using RougeLikeRPG.Graphic.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
 using System;

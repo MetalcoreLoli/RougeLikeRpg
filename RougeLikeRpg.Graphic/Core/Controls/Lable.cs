@@ -1,15 +1,15 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using RougeLikeRPG.Core;
-using RougeLikeRPG.Core.Controls.Text;
+using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Graphic.Core.Controls.Text;
 
-namespace RougeLikeRPG.Core.Controls
+namespace RougeLikeRPG.Graphic.Core.Controls
 {
     ///<summary>
     /// Метка содежриt в себе текст
     ///</summary>
-    internal class Lable : Control
+    public class Lable : Control
     {
 
         #region Private Members

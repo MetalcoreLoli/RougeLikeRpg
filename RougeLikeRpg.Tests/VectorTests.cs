@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using RougeLikeRPG.Core;
+using RougeLikeRPG.Graphic.Core;
 using System;
 
 namespace RougeLikeRpg.Tests

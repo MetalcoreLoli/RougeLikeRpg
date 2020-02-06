@@ -1,10 +1,10 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace RougeLikeRPG.Core
+namespace RougeLikeRPG.Graphic.Core
 {
  
-    internal struct Vector2D
+    public struct Vector2D
     {
         public Int32 X { get; set; }
         public Int32 Y { get; set; }

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace RougeLikeRPG.Core
+namespace RougeLikeRPG.Graphic.Core
 {
     ///<summary>
     ///Класс занимающийся отрисовкой объектов
     ///<summary>
-    internal class Render
+    public class Render
     {
 
 

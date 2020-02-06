@@ -1229,11 +1229,24 @@
       "RougeLikeRPG/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "RougeLikeRpg.Graphic": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/RougeLikeRPG.dll": {}
         },
         "runtime": {
           "bin/placeholder/RougeLikeRPG.dll": {}
+        }
+      },
+      "RougeLikeRpg.Graphic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/RougeLikeRpg.Graphic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RougeLikeRpg.Graphic.dll": {}
         }
       }
     }
@@ -4583,6 +4596,11 @@
       "type": "project",
       "path": "../RougeLikeRpg.Game/RougeLikeRPG.csproj",
       "msbuildProject": "../RougeLikeRpg.Game/RougeLikeRPG.csproj"
+    },
+    "RougeLikeRpg.Graphic/1.0.0": {
+      "type": "project",
+      "path": "../RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
+      "msbuildProject": "../RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj"
     }
   },
   "projectFileDependencyGroups": {

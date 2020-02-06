@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Core.Controls
+namespace RougeLikeRPG.Graphic.Core.Controls
 {
-    internal class Progressbar : Control
+    public class Progressbar : Control
     {
 
         #region Private Members

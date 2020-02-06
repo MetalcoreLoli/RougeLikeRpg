@@ -1,0 +1,8 @@
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/bin/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.deps.json
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/bin/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.dll
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/bin/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.pdb
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.csprojAssemblyReference.cache
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.AssemblyInfoInputs.cache
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.AssemblyInfo.cs
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.dll
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.pdb

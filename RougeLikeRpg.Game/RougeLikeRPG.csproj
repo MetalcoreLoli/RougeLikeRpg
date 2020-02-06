@@ -9,4 +9,8 @@
     <Folder Include="Engine\Magick\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RougeLikeRpg.Graphic\RougeLikeRpg.Graphic.csproj" />
+  </ItemGroup>
+
 </Project>

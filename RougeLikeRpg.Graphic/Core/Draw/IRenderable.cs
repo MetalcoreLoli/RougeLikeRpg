@@ -1,9 +1,9 @@
 using  System;
 
 
-namespace RougeLikeRPG.Core
+namespace RougeLikeRPG.Graphic.Core
 {
-    internal interface IRenderable
+    public interface IRenderable
     {
        Char Symbol { get; set; } 
        Vector2D Position { get; set; }

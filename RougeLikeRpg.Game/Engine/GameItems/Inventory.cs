@@ -1,4 +1,4 @@
-﻿using RougeLikeRPG.Core.Controls;
+﻿using RougeLikeRPG.Graphic.Core.Controls;
 using RougeLikeRPG.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;

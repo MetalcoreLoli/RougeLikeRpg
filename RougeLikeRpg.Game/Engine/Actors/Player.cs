@@ -1,4 +1,4 @@
-﻿using RougeLikeRPG.Core;
+﻿using RougeLikeRPG.Graphic.Core;
 using RougeLikeRPG.Engine.Actors.Enums;
 using RougeLikeRPG.Engine.Dices;
 using System;

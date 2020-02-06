@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "RougeLikeRpg.Graphic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/RougeLikeRpg.Graphic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RougeLikeRpg.Graphic.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "RougeLikeRpg.Graphic/1.0.0": {
+      "type": "project",
+      "path": "../RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
+      "msbuildProject": "../RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "RougeLikeRpg.Graphic >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/home/daniel/.nuget/packages/": {}
@@ -30,7 +49,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
+              "projectPath": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

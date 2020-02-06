@@ -1,9 +1,9 @@
 using System;
 
 
-namespace RougeLikeRPG.Core
+namespace RougeLikeRPG.Graphic.Core
 {
-    internal class Cell : IRenderable
+    public class Cell : IRenderable
     {
         #region Public Properties
         

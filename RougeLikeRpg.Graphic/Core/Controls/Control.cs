@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RougeLikeRPG.Core;
+using RougeLikeRPG.Graphic.Core;
 
-namespace RougeLikeRPG.Core.Controls
+namespace RougeLikeRPG.Graphic.Core.Controls
 {
     ///<summary>
     /// Родительский класс для всех элементов графического интерфейса
     ///</summary>
-    internal abstract class Control
+    public abstract class Control
     {
         #region Private Members
 

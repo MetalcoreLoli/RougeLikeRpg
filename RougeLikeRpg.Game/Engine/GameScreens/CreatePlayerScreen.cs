@@ -1,5 +1,5 @@
-﻿using RougeLikeRPG.Core;
-using RougeLikeRPG.Core.Controls;
+﻿using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Graphic.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Builders;
 using RougeLikeRPG.Engine.Dices;

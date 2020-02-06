@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Core.Controls.Menu
+namespace RougeLikeRPG.Graphic.Core.Controls.Menu
 {
     /// <summary>
     /// Пункт меню
     /// </summary>
-    internal class MenuItem : Control
+    public class MenuItem : Control
     {
         #region Public Methods
         public override void Draw()

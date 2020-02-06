@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Core.Controls.Text
+namespace RougeLikeRPG.Graphic.Core.Controls.Text
 {
     /// <summary>
     /// Слово
     /// </summary>
-    internal class Word
+    public class Word
     {
         #region Private Members
         
