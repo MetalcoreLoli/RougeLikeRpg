@@ -16,10 +16,6 @@ namespace RougeLikeRPG.Engine.Actors
         ///</summary>
         public Direction Direction { get; set; } 
 
-        ///<summary>
-        /// Зона видимости игрока`
-        ///</summary> 
-        public Int32 Fov { get; set; } = 5;
         #endregion
 
         #region Constructors

@@ -8,11 +8,5 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
 {
     internal abstract class Monster : Actor
     {
-
-        public Int32 FovX { get; set; }
-
-        public Int32 FovY { get; set; }
-
-      
     }
 }

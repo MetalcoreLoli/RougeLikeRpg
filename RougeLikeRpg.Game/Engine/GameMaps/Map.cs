@@ -149,9 +149,7 @@ namespace RougeLikeRPG.Engine
             foreach (Cell cell in _mapBody)
             {
                 if (cell.Position.Equals(actor.Position))
-                {
                     if (cell.Symbol.Equals('.')) flag = true;
-                }
             }
             if (actor.Position.Equals(Player.Position))
                 flag = false;
@@ -215,15 +213,14 @@ namespace RougeLikeRPG.Engine
             {
                 if (cell.Position.X > 0 && cell.Position.Y > 0)
                 {
-                    if (    cell.Position.X < Player.Position.X + 5 /* Width - 1*/
-                         && cell.Position.Y < Player.Position.Y + 4 /*Height - 1*/
-                         && cell.Position.X > Player.Position.X - 5
-                         && cell.Position.Y > Player.Position.Y - 4)
+                    if (    cell.Position.X < Player.Position.X + Player.FovX /* Width - 1*/
+                         && cell.Position.Y < Player.Position.Y + Player.FovY /*Height - 1*/
+                         && cell.Position.X > Player.Position.X - Player.FovX
+                         && cell.Position.Y > Player.Position.Y - Player.FovY)
                         Render.WithOffset(cell, 0, 0);
                 }
-                    
             }
-
+            
             //Отрисовка игрока игрока
             if (Player != null)
                 Render.WithOffset(Player, 0, 0);
@@ -239,7 +236,6 @@ namespace RougeLikeRPG.Engine
                              && actor.Position.Y > Player.Position.Y - Player.FovY)
                             Render.WithOffset(actor, 0, 0);
                     }
-                        
         }
         #endregion
 
