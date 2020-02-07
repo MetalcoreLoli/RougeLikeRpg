@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using RougeLikeRPG.Engine.Actors.Builders;
+using RougeLikeRPG.Engine.Actors.Enums;
 using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.Actors.Monsters.Builders;
 
@@ -40,6 +41,33 @@ namespace RougeLikeRpg.Tests
             Assert.AreEqual(symbol, builder.Get().Symbol);
         }
 
+        [Test]
+        public void BuilderSetRaceTest()
+        {
+            builder.SetRace(Race.Human);
+            Assert.AreEqual(Race.Human, builder.Get().Race);
+        }
+
+        [Test]
+        public void BuilderRollStatsTest()
+        {
+            builder.RollStats();
+            Assert.Less(0, builder.Get().Dex);
+            Assert.Less(0, builder.Get().Str);
+            Assert.Less(0, builder.Get().Lucky);
+            Assert.Less(0, builder.Get().Intell);
+            Assert.Less(0, builder.Get().Chari);
+        }
+
+        [Test]
+        public void BuilderSetFovXY()
+        {
+            builder.SetFovX(15);
+            builder.SetFovY(4);
+
+            Assert.AreEqual(builder.Get().FovX, 15);
+            Assert.AreEqual(builder.Get().FovY, 4);
+        }
         [Test]
         public void MonsterBuilderSetColorTest()
         {

@@ -867,8 +867,16 @@
         }
       },
       "RougeLikeRPG/1.0.0": {
+        "dependencies": {
+          "RougeLikeRpg.Graphic": "1.0.0"
+        },
         "runtime": {
           "RougeLikeRPG.dll": {}
+        }
+      },
+      "RougeLikeRpg.Graphic/1.0.0": {
+        "runtime": {
+          "RougeLikeRpg.Graphic.dll": {}
         }
       }
     }
@@ -1321,6 +1329,11 @@
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
     "RougeLikeRPG/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RougeLikeRpg.Graphic/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -20,6 +20,11 @@ namespace RougeLikeRPG.Engine.Actors.Builders
             player.Name = name;
         }
 
+        internal override void SetRace(Enums.Race race)
+        {
+            
+        }
+
         internal override void RollStats()
         {
             player.Hp       = player.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
