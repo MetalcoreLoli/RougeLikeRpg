@@ -192,3 +192,5 @@ D:/Projects/CSharp/Games/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1
 /home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.csproj.CopyComplete
 /home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.dll
 /home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.pdb
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/bin/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.dll
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/bin/Debug/netcoreapp3.1/RougeLikeRpg.Graphic.pdb

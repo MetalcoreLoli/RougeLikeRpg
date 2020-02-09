@@ -43,6 +43,11 @@ namespace RougeLikeRPG.Engine.Actors.Monsters.Builders
             monster.Color = color;
         }
 
+        internal override void SetRace(Enums.Race race)
+        {
+            
+        }
+
         internal override T Get() => monster;
 
         internal override void SetFovX(int fov)
