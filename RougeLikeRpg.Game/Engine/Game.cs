@@ -13,6 +13,7 @@ using RougeLikeRPG.Engine.GameScreens;
 using RougeLikeRPG.Engine.Events;
 using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.GameItems.Items;
+using RougeLikeRPG.Engine.Core;
 
 namespace RougeLikeRPG.Engine
 {
@@ -319,7 +320,9 @@ namespace RougeLikeRPG.Engine
                                  where line is Lable
                                  select line)
             {
-                line.SetColorToWord("miss", ConsoleColor.DarkRed);
+                foreach (var word in KeyWords.Words)
+                    line.SetColorToWord(word.Key, word.Value);
+                
                 line.SetColorToPrase($"+Level of {_player.Name} Upped+", ConsoleColor.DarkYellow);
                 line.SetColorToWord(_player.Name, ConsoleColor.DarkGray);
 
@@ -419,7 +422,6 @@ namespace RougeLikeRPG.Engine
             _statusScreen.AddRange(_player.GetStats().ToList());
 
             _messageLogScreen.Title = "Message Log";
-
         }
         #endregion
     }
