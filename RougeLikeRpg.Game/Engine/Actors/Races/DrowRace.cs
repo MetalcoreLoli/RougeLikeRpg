@@ -3,12 +3,13 @@ using RougeLikeRPG.Engine.Actors;
 
 namespace RougeLikeRPG.Engine.Actors.Races
 {
-    internal class HumanRace : RaceAbstract
+    internal class DrowRace : RaceAbstract
     {
-        public HumanRace()
+        public DrowRace()
         {
             ChariMod    = 3;
-            IntellMod   = 1;
+            IntellMod   = 4;
+            DexMod      = 1;
         }
     }
 }

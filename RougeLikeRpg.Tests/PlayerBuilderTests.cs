@@ -60,7 +60,7 @@ namespace RougeLikeRpg.Tests
             Assert.Less(0, builder.Get().Intell);
             Assert.Less(0, builder.Get().Chari);
         }
-
+    
         [Test]
         public void BuilderSetFovXY()
         {

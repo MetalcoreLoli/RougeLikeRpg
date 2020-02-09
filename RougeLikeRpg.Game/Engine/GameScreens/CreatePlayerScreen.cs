@@ -118,11 +118,17 @@ namespace RougeLikeRPG.Engine.GameScreens
                 case ConsoleKey.Enter: IsAlive = false;  break;
                 case ConsoleKey.RightArrow:
                     if (builder.Get().Race + 1 != Actors.Enums.Race.None)
-                        builder.Get().Race++; 
+                    {
+                        builder.Get().Race++;
+                        builder.SetRace(builder.Get().Race);
+                    }
                     break;
-                case ConsoleKey.LeftArrow: 
+                case ConsoleKey.LeftArrow:
                     if (builder.Get().Race > 0)
-                        builder.Get().Race--; 
+                    {
+                        builder.Get().Race--;
+                        builder.SetRace(builder.Get().Race);
+                    }
                     break;
             }
             

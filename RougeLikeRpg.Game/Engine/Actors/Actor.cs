@@ -132,7 +132,6 @@ namespace RougeLikeRPG.Engine.Actors
         public Boolean IsMoving { get; set; } = false;
         public Race Race { get; set; }
         public Inventory Inventory { get; set; }
-
         public ArmorItem Head { get; set; }
         public ArmorItem Armor { get; set; }
         public ArmorItem Foots { get; set; }
