@@ -21,8 +21,10 @@ namespace RougeLikeRPG.Engine.Actors
         #region Constructors
         public Player()
         {
+            BookOfSpells = new Magick.BookOfSpells();
             DropExp = 10000000;
             IsDead = false;
+            BookOfSpells.SpellsMap.Add(ConsoleKey.Q, new Magick.HealingSpell(this));
         }
         #endregion
 

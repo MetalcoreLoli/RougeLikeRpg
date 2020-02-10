@@ -9,6 +9,7 @@ using RougeLikeRPG.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RougeLikeRPG.Engine.Magick;
 
 namespace RougeLikeRPG.Engine.Actors
 {
@@ -131,6 +132,7 @@ namespace RougeLikeRPG.Engine.Actors
         #endregion
         public Boolean IsMoving { get; set; } = false;
         public Race Race { get; set; }
+        public BookOfSpells BookOfSpells { get; set; }
         public Inventory Inventory { get; set; }
         public ArmorItem Head { get; set; }
         public ArmorItem Armor { get; set; }

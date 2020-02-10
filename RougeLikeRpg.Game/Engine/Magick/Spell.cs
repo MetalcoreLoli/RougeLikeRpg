@@ -7,21 +7,13 @@ namespace RougeLikeRPG.Engine.Magick
     {
         #region Public Members
         
-        public event EventHandler Casting;
         #endregion
 
         #region Protected Methods
-        protected virtual void OnCast()
-        {
-            Casting?.Invoke(this, null);
-        }
         #endregion
         
         #region Public Methods
-        public virtual void Cast()
-        {
-            OnCast();
-        }
+        public abstract void Cast();
         #endregion
     }
 }

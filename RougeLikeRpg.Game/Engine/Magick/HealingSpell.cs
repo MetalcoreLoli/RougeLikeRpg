@@ -14,8 +14,7 @@ namespace RougeLikeRPG.Engine.Magick
         #endregion
 
         #region Public Properties
-        
-        public Int32 CountOfCast { get; set; }
+
         #endregion
        
         #region Constructor
@@ -23,7 +22,6 @@ namespace RougeLikeRPG.Engine.Magick
         public HealingSpell(Actor actorToheal)
         {
             _actorToHeal = actorToheal;    
-            CountOfCast = actorToheal.MaxMana;
         }
         #endregion
 
@@ -35,12 +33,11 @@ namespace RougeLikeRPG.Engine.Magick
             {
                 var color = _actorToHeal.Color;
                 _actorToHeal.Color = ConsoleColor.Yellow;
-                Int32 healingValue = DiceManager.CreateDices("2d8").RollAll().Sum() * (_actorToHeal.Level / 2 + 1);
+                Int32 healingValue = DiceManager.CreateDices($"{_actorToHeal.Level}d8").RollAll().Sum();
                 _actorToHeal.Hp += healingValue < _actorToHeal.MaxHp? healingValue : _actorToHeal.MaxHp - Math.Abs((_actorToHeal.MaxHp - healingValue));
                 _actorToHeal.Mana--;
                 Thread.Sleep(250);
                 _actorToHeal.Color = color;
-                OnCast();
             }
         }
         #endregion
