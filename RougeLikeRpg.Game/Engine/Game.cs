@@ -197,6 +197,7 @@ namespace RougeLikeRPG.Engine
         {
             Vector2D playersInput = PlayerMoveTo(e.Key);
             Console.Title = _map.Player.Direction.ToString();
+            PlayerCastSpells(e.Key);
             PlayerMove(playersInput);
         }
 
@@ -213,7 +214,17 @@ namespace RougeLikeRPG.Engine
             (_messageLogScreen as MessageLogScreen).Add(messsage);
             SetColorsToText();
         }
-
+        
+        private void PlayerCastSpells(ConsoleKey key)
+        {
+            switch(key)
+            {
+                case ConsoleKey.Q: 
+                    new Magick.HealingSpell(_player).Cast();
+                    break;
+            }
+        }
+        
         private void PlayerMove(Vector2D playersInput)
         {
             _player.MoveTo(playersInput);
