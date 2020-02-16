@@ -3,6 +3,7 @@ using RougeLikeRPG.Engine.Dices;
 using RougeLikeRPG.Graphic.Core.Controls;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRPG.Engine.Magick;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -48,7 +49,6 @@ namespace RougeLikeRPG.Engine
             _player.Moving      += Player_Moving;
 
             _player.BookOfSpells.Casting += Player_CastingSpells;
-
             _map.Player = _player;
             _statusScreen.AddRange(_player.GetStats().ToList());
         }

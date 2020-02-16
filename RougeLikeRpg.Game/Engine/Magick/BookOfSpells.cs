@@ -10,13 +10,15 @@ namespace RougeLikeRPG.Engine.Magick
         #region Events
         public event EventHandler<CastingSpellEventArgs> Casting;
         #endregion
+
         #region Public Properties
         public List<ISpell> Spells { get; set; }
         public Dictionary<ConsoleKey, ISpell> SpellsMap { get; private set; }
         #endregion
 
         #region Privet Methods
-        private void OnCasting(ISpell spell) => Casting?.Invoke(this, new CastingSpellEventArgs(spell));
+        private void OnCasting(ISpell spell)
+            => Casting?.Invoke(spell, new CastingSpellEventArgs(spell.Name));
         #endregion
 
         #region Constuctor
@@ -27,14 +29,17 @@ namespace RougeLikeRPG.Engine.Magick
         #endregion
 
         #region   
-        public void CastMappedSpell(ConsoleKey key)
+        public ISpell CastMappedSpell(ConsoleKey key)
         {
             if (SpellsMap.Keys.Contains(key))
             {
                 ISpell spell = SpellsMap[key];
                 spell.Cast();
                 OnCasting(spell);
+                return spell ;
             }
+            else 
+                return null;
         }
         #endregion
     }

@@ -90,7 +90,7 @@ namespace RougeLikeRPG.Engine
 
         private void Player_CastingSpells(object sender, Magick.Events.CastingSpellEventArgs e)
         {
-            (_messageLogScreen as MessageLogScreen).Add($"{_player.Name} casting {nameof(e.Spell)}");
+            (_messageLogScreen as MessageLogScreen).Add($"{_player.Name} casting {(e.Name)}");
         }
 
         private void Actor_Moving(object sender, Actors.Events.MovingEventArgs e)
