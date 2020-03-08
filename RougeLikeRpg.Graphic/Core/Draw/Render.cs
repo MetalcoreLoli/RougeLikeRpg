@@ -27,17 +27,22 @@ namespace RougeLikeRPG.Graphic.Core
             Console.ResetColor();
             Console.SetCursorPosition(cursor.Item1, cursor.Item2);
             */
-            Console.Write($"\x1b[{(obj.Position.Y + 1)};{(obj.Position.X + 1)}H");
+            MoveCursorTo(obj.Position);
             Console.Write($"{SetBackColor(obj)}{SetColor(obj)}{obj.Symbol}\x1b[39m\x1b[39m");
         }
 
-
+        static void MoveCursorTo(Vector2D position)
+        {
+            Console.Write($"\x1b[{(position.Y + 1)};{(position.X + 1)}H");
+        }
+        
         static string SetBackColor(IRenderable obj)
         {
             return obj.BackColor switch
             {
                 ConsoleColor.DarkRed => "\x1b[48;5;9m",
                 ConsoleColor.DarkBlue=> "\x1b[48;5;12m",
+                ConsoleColor.DarkYellow=> "\x1b[48;5;3m",
                 _ => "\x1b[48;5;0m"
             };
         }
