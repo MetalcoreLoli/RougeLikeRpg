@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {}
+    "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {}
   },
   "projects": {
-    "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
+    "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
+        "projectUniqueName": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
         "projectName": "RougeLikeRpg.Graphic",
-        "projectPath": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
-        "packagesPath": "/home/metalcoreLoli/.nuget/packages/",
-        "outputPath": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/",
+        "projectPath": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
+        "packagesPath": "/home/daniel/.nuget/packages/",
+        "outputPath": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/metalcoreLoli/.nuget/NuGet/NuGet.Config"
+          "/home/daniel/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -50,7 +50,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/metalcoreLoli/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -4612,19 +4612,19 @@
     ]
   },
   "packageFolders": {
-    "/home/metalcoreLoli/.nuget/packages/": {}
+    "/home/daniel/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
+      "projectUniqueName": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
       "projectName": "RougeLikeRpg.Tests",
-      "projectPath": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
-      "packagesPath": "/home/metalcoreLoli/.nuget/packages/",
-      "outputPath": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/",
+      "projectPath": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
+      "packagesPath": "/home/daniel/.nuget/packages/",
+      "outputPath": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/metalcoreLoli/.nuget/NuGet/NuGet.Config"
+        "/home/daniel/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -4635,8 +4635,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj": {
-              "projectPath": "/home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj"
+            "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj": {
+              "projectPath": "/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj"
             }
           }
         }
@@ -4678,7 +4678,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/metalcoreLoli/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
       }
     }
   }

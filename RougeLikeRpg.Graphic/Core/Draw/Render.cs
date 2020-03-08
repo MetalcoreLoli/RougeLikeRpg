@@ -8,8 +8,6 @@ namespace RougeLikeRPG.Graphic.Core
     ///<summary>
     public class Render
     {
-
-
         ///<summary>
         /// Метод отрисовки отбъектов
         ///</summary>
@@ -21,13 +19,37 @@ namespace RougeLikeRPG.Graphic.Core
                 Int32 offX,
                 Int32 offY)
         {
-            (Int32, Int32) cursor = (Console.CursorLeft, Console.CursorTop);
+            /*(Int32, Int32) cursor = (Console.CursorLeft, Console.CursorTop);
             Console.SetCursorPosition(obj.Position.X + offX, obj.Position.Y + offY);
             Console.BackgroundColor = obj.BackColor;
             Console.ForegroundColor = obj.Color;
             Console.Write(obj.Symbol);
             Console.ResetColor();
             Console.SetCursorPosition(cursor.Item1, cursor.Item2);
+            */
+            Console.Write($"\x1b[{(obj.Position.Y + 1)};{(obj.Position.X + 1)}H");
+            Console.Write($"{SetBackColor(obj)}{SetColor(obj)}{obj.Symbol}\x1b[39m\x1b[39m");
+        }
+
+
+        static string SetBackColor(IRenderable obj)
+        {
+            return obj.BackColor switch
+            {
+                ConsoleColor.DarkRed => "\x1b[48;5;9m",
+                ConsoleColor.DarkBlue=> "\x1b[48;5;12m",
+                _ => "\x1b[48;5;0m"
+            };
+        }
+        static string SetColor(IRenderable obj)
+        {
+            return (obj.Color) switch
+            {
+                ConsoleColor.White => "\x1b[38;5;15m",
+                ConsoleColor.Green => "\x1b[38;5;10m",
+                ConsoleColor.DarkCyan => "\x1b[38;2;255;219;88m",
+                _ => "\x1b[38;5;15m"
+            };    
         }
     }
 }

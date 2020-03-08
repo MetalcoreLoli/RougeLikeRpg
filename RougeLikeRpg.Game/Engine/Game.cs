@@ -184,7 +184,7 @@ namespace RougeLikeRPG.Engine
                     line.SetColorToWord(word.Key, word.Value);
                 
                 line.SetColorToPrase($"+Level of {_player.Name} Upped+", ConsoleColor.DarkYellow);
-                line.SetColorToWord(_player.Name, ConsoleColor.DarkGray);
+                line.SetColorToWord(_player.Name, ConsoleColor.DarkYellow);
 
                 if (_player.LeftArm != null)
                     SetColorToItemInText(_player.LeftArm, line);
