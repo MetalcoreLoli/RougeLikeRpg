@@ -38,8 +38,17 @@ namespace RougeLikeRPG.Graphic.Core
 
         public override bool Equals(object obj)
         {
-            Vector2D b = (Vector2D)obj;
-            return this.X.Equals(b.X) && this.Y.Equals(b.Y);
+            if (obj is Vector2D b)
+                return this.X.Equals(b.X) && this.Y.Equals(b.Y);
+            else throw new Exception("Не совпадение типов !!!");
+
         }
+
+        public static bool operator ==(Vector2D a, Vector2D b)
+            => a.Equals(b);
+
+        public static bool operator !=(Vector2D a, Vector2D b)
+          => !a.Equals(b);
+
     }
 }

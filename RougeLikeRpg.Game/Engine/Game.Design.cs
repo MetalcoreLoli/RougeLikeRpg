@@ -28,11 +28,11 @@ namespace RougeLikeRPG.Engine
         /// <summary>
         /// Высота карты
         /// </summary>
-        private Int32 _mapHeight = 11;
+        private Int32 _mapHeight = 20;
         /// <summary>
         /// Ширина Карты
         /// </summary>
-        private Int32 _mapWidth = 30;
+        private Int32 _mapWidth = 37;
 
         /// <summary>
         /// Расположени карты на экране

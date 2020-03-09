@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RougeLikeRpg.Graphic.Core;
+using RougeLikeRPG.Engine.GameMaps.Dungeon;
 
 namespace RougeLikeRPG.Engine
 {
@@ -34,6 +35,8 @@ namespace RougeLikeRPG.Engine
         private Int32 _mapBufferSize;
 
         private Vector2D _mapBufferOffset;
+
+        Dungeon dungeon;
         #endregion
 
         #region Public Properties
@@ -67,18 +70,39 @@ namespace RougeLikeRPG.Engine
             Location = _mapLocation;
             Player = player;
 
-            body = InitBody(Width, Height);
 
             _mapBufferWidth = Width;
             _mapBufferHeight = 25;
             _mapBufferSize = _mapBufferWidth * _mapBufferHeight;
             var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).EmptyMap;
+            body = InitBody(Width, Height);
+
             _mapBody = _mapBuffer = Tile.ToCellsArray(map.Body);
             Actors = new List<Actor>();
-            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2 - 3, Height / 2) });
-            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
-            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
-            Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
+
+            //SetSymbol(Width / 2 - 3, Height / 2, '+');
+            //SetSymbol(Width / 2 - 4, Height / 2, '+');
+            //SetSymbol(Width / 2 - 5, Height / 2, '+');
+
+            dungeon = new Dungeon(Width, Height, Location)
+            {
+                MaxRoomHeight = 10,
+                MinRoomHeight = 5,
+                MaxRoomWidth = 10,
+                MinRoomWidth = 5,
+                CountOfRooms = 18
+            };
+            foreach (var cell in dungeon.Generate())
+                SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol);
+
+            foreach (var room in dungeon.Rooms)
+                foreach (var goblin in room.Actors)
+                    Actors.Add(goblin);
+
+            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2 - 3, Height / 2) });
+            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
+            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
+            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
             if (player != null)
                 AddActorToMap(player);
         }
@@ -88,29 +112,35 @@ namespace RougeLikeRPG.Engine
         protected override Cell[] InitBody(int width, int height)
         {
             Cell[] temp = base.InitBody(width, height);
+            //Cell[] temp = GenerateDungeon(Width, Height, Location);
 
-            temp = DrawLeftRightWalls(temp, Width, Height, '|');
-            temp = DrawUpDownWalls(temp, Width, Height, '-');
-            temp = DrawCornel(temp, Width, Height, '+');
+            //temp = DrawLeftRightWalls(temp, Width, Height, '|');
+            //temp = DrawUpDownWalls(temp, Width, Height, '-');
+            //temp = DrawCornel(temp, Width, Height, '+');
+
             return temp;
         }
-
         #endregion
 
         #region Public Methods
 
         public void AddActorToMap(Actor actor)
         {
-            if (actor is Player)
+            if (actor is Player player)
             {
-                actor.Position += new Vector2D(Width / 2, Height / 2) + Location;
-                Player = actor as Player;
+                player.Position += dungeon.Rooms.FirstOrDefault().GetCenter() + Location;
+                Player = player;
             }
             else
             {
                 actor.Position += Location;
                 Actors.Add(actor);
             }
+        }
+
+        public void SetSymbol(int x, int y, char symbol)
+        {
+            _mapBody[x + Width * y].Symbol = symbol;
         }
 
         public void AddRangeOfActorToMap(IEnumerable<Actor> actors)
@@ -214,14 +244,14 @@ namespace RougeLikeRPG.Engine
             {
                 if (cell.Position.X > 0 && cell.Position.Y > 0)
                 {
-                    if (    cell.Position.X < Player.Position.X + Player.FovX /* Width - 1*/
+                    if (cell.Position.X < Player.Position.X + Player.FovX /* Width - 1*/
                          && cell.Position.Y < Player.Position.Y + Player.FovY /*Height - 1*/
                          && cell.Position.X > Player.Position.X - Player.FovX
                          && cell.Position.Y > Player.Position.Y - Player.FovY)
                         Render.WithOffset(cell, 0, 0);
                 }
             }
-            
+
             //Отрисовка игрока игрока
             if (Player != null)
                 Render.WithOffset(Player, 0, 0);

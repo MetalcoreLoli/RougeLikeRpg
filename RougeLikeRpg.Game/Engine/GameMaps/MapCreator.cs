@@ -46,8 +46,21 @@ namespace RougeLikeRPG.Engine.GameMaps
                                 ColorManager.White,
                                 ColorManager.Black);
                 }
-            
-            return temp;
+
+            return GenerateDungeon(width, height, new Vector2D(0, 0)); 
+        }
+
+        private Cell[] GenerateDungeon(int width, int height, Vector2D location)
+        {
+            Dungeon.Dungeon dungeon = new Dungeon.Dungeon(width, height, location)
+            {
+                MaxRoomHeight = 10,
+                MinRoomHeight = 5,
+                MaxRoomWidth = 10,
+                MinRoomWidth = 5,
+                CountOfRooms = 10
+            };
+            return dungeon.Generate();
         }
         #endregion
     }
