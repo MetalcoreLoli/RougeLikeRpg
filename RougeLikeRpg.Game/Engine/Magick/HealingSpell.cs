@@ -56,7 +56,7 @@ namespace RougeLikeRPG.Engine.Magick
 
         private Int32 CurrentHealingValue(Int32 playersHp, Int32 healingValue, Int32 playersMaxHp)
         {
-            return ((playersHp + healingValue) - playersMaxHp);    
+            return Math.Abs((playersHp + healingValue) - playersMaxHp);    
         }
     }
 }

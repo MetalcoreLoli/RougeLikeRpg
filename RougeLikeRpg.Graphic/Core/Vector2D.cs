@@ -4,10 +4,10 @@ using System.Runtime.CompilerServices;
 namespace RougeLikeRPG.Graphic.Core
 {
  
-    public struct Vector2D
+    public readonly struct Vector2D
     {
-        public Int32 X { get; set; }
-        public Int32 Y { get; set; }
+        public Int32 X { get; }
+        public Int32 Y { get; }
 
         public Vector2D(Int32 x, Int32 y)
         {

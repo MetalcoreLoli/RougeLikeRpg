@@ -389,9 +389,10 @@ namespace RougeLikeRPG.Engine.Actors
         {
             OnLevelUp(this);
             Level++;
-            MaxExp *= 2;
-            MaxHp += DiceManager.CreateDices("2d6").RollAll().Sum();
-            Hp = MaxHp;
+            MaxExp  *= 2;
+            MaxHp   += DiceManager.CreateDices("2d6").RollAll().Sum();
+            Hp      = MaxHp;
+            Mana    = (Level % 2 == 0 ? MaxMana += 1: MaxMana);
         }
 
 

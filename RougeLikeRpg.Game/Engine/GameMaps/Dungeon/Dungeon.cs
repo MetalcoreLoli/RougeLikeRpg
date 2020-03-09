@@ -91,6 +91,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                     CreateVecticalPath(prev.GetCenter().Y, current.GetCenter().Y, prev.GetCenter().X, ColorManager.White, ColorManager.Black);
                 }
             }
+            Console.Title = "Location was generated";
             return body;
         }
 
