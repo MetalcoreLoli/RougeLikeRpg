@@ -2,7 +2,7 @@ using System;
 
 namespace RougeLikeRPG.Graphic.Core
 {
-    struct Color
+    public struct Color
     {
         public Int32 Red {get; set;}
         public Int32 Green {get; set;}

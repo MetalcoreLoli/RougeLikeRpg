@@ -1,5 +1,5 @@
+using RougeLikeRPG.Graphic.Core;
 using System;
-
 
 namespace RougeLikeRPG.Engine.Actors.Builders
 {
@@ -9,7 +9,7 @@ namespace RougeLikeRPG.Engine.Actors.Builders
         internal abstract void SetFovX(int fov);
         internal abstract void SetFovY(int fov);
         internal abstract void SetSymbol(char symbol);
-        internal abstract void SetColor(ConsoleColor color);
+        internal abstract void SetColor(Color color);
         internal abstract void SetRace(Enums.Race race);
         internal abstract void RollStats();
         internal abstract T    Get();

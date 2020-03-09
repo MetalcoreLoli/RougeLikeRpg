@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RougeLikeRpg.Graphic.Core;
 using RougeLikeRPG.Graphic.Core;
 
 namespace RougeLikeRPG.Graphic.Core.Controls
@@ -13,8 +14,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
     {
         #region Private Members
 
-        private ConsoleColor _backColor = ConsoleColor.Black;
-        private ConsoleColor _foreColor = ConsoleColor.White;
+        private Color _backColor = ColorManager.Black;
+        private Color _foreColor = ColorManager.White;
 
         private Int32 _height;
 
@@ -36,7 +37,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///<summary>
         /// Фон экрана
         ///</summary>
-        public ConsoleColor BackgroundColor 
+        public Color BackgroundColor 
         { 
             get => _backColor; 
             set
@@ -50,7 +51,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///<summary>
         /// Цвет символов внутри
         ///</summary>
-        public ConsoleColor ForegroundColor 
+        public Color ForegroundColor 
         { 
             get => _foreColor; 
             set

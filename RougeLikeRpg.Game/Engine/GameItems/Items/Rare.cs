@@ -1,4 +1,5 @@
 ﻿using RougeLikeRPG.Engine.GameItems.Enums;
+using RougeLikeRPG.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace RougeLikeRPG.Engine.GameItems.Items
         #region Private Members
 
         private String _name = WeaponRareColor.Common.ToString();
-        private WeaponRareColor _color = WeaponRareColor.Common;
+        private Color _color = WeaponRareColor.Common;
         #endregion
 
         #region Public Properties
@@ -28,7 +29,7 @@ namespace RougeLikeRPG.Engine.GameItems.Items
                     Color = ConvertStringToColor(_name);
             }
         }
-        public WeaponRareColor Color 
+        public Color Color 
         { 
             get => _color;
             set 
@@ -39,15 +40,15 @@ namespace RougeLikeRPG.Engine.GameItems.Items
             }
         }
 
-        private WeaponRareColor ConvertStringToColor(string color)
+        private Color ConvertStringToColor(string color)
         {
             return color.ToLower() switch
             {
-                "common"    => WeaponRareColor.Common,
-                "trash"     => WeaponRareColor.Trash,
-                "rare" => WeaponRareColor.Rare,
-                "legendary" => WeaponRareColor.Legendary,
-                _ => WeaponRareColor.None
+                "common"    =>  WeaponRareColor.Common,
+                "trash"     =>  WeaponRareColor.Trash,
+                "rare" =>       WeaponRareColor.Rare,
+                "legendary" =>  WeaponRareColor.Legendary,
+                _ =>            WeaponRareColor.None
             };
         }
         #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RougeLikeRpg.Graphic.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,13 +17,13 @@ namespace RougeLikeRPG.Graphic.Core.Controls.Text
         private Vector2D _location;
         private string _text;
 
-        private ConsoleColor _color;
-        private ConsoleColor _backColor;
+        private Color _color;
+        private Color _backColor;
 
         #endregion
 
         #region Public Properties
-        public ConsoleColor Color
+        public Color Color
         {
             get => _color;
             set
@@ -31,7 +32,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls.Text
                 body = InitTextBody(Text);
             }
         }
-        public ConsoleColor BackColor
+        public Color BackColor
         {
             get => _backColor;
             set
@@ -70,7 +71,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls.Text
 
         }
 
-        public Word(string word, Vector2D location, ConsoleColor color, ConsoleColor backColor)
+        public Word(string word, Vector2D location, Color color, Color backColor)
         {
             Text = word;
             Location = location;
@@ -84,11 +85,11 @@ namespace RougeLikeRPG.Graphic.Core.Controls.Text
             body = word;
         }
 
-        public Word(Cell[] word, Vector2D location) :this(word, location, ConsoleColor.White, ConsoleColor.Black)
+        public Word(Cell[] word, Vector2D location) :this(word, location, ColorManager.White, ColorManager.Black)
         {
         }
 
-        public Word(Cell[] word, Vector2D location, ConsoleColor color, ConsoleColor backColor)
+        public Word(Cell[] word, Vector2D location, Color color, Color backColor)
         {
             Text = TextFromCells(word);
             Location = location;

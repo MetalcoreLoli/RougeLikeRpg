@@ -215,7 +215,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///</summary>
         ///<param name="color">Цвет, которым заполнится очищенное пространоство,
         ///по умолчанию - черный</param>
-        public void Clear(ConsoleColor color = ConsoleColor.Black)
+        public void Clear(Color color)
         {
             for (int i = 0; i < Height * Width; i++)
             {

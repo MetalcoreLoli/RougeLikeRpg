@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRPG.Engine.GameScreens
 {
@@ -27,7 +28,7 @@ namespace RougeLikeRPG.Engine.GameScreens
 
             builder.SetFovX(15);
             builder.SetFovY(4);
-
+            builder.SetColor(new Color(255, 102, 0));
             _render = new Render();
             _inputPlayerNameScreen = new Screen(25, 3, new Vector2D(29, 1));
             _inputPlayerNameScreen.Title = "Input Player Name";
@@ -93,7 +94,7 @@ namespace RougeLikeRPG.Engine.GameScreens
 
         private void PlayersSymbolAndColors()
         {
-            builder.SetColor(ConsoleColor.White);
+            builder.SetColor(ColorManager.White);
             builder.SetSymbol('@');
         }
 

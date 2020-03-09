@@ -9,8 +9,8 @@ namespace RougeLikeRPG.Graphic.Core
         
         public char Symbol { get; set; }
         public Vector2D Position { get; set; }
-        public ConsoleColor Color { get; set; } 
-        public ConsoleColor BackColor { get; set; } 
+        public Color Color { get; set; } 
+        public Color BackColor { get; set; } 
         
         #endregion 
 
@@ -30,8 +30,8 @@ namespace RougeLikeRPG.Graphic.Core
         public Cell(
                 char symbol, 
                 Vector2D position, 
-                ConsoleColor color, 
-                ConsoleColor backColor) 
+                Color color, 
+                Color backColor) 
             : this (symbol, position) 
         {
             Color = color;

@@ -15,6 +15,7 @@ using RougeLikeRPG.Engine.Events;
 using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.GameItems.Items;
 using RougeLikeRPG.Engine.Core;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRPG.Engine
 {
@@ -148,7 +149,7 @@ namespace RougeLikeRPG.Engine
             if (_player.Hp > 0)
                 PlayerInput();
             else
-                _player.Color = ConsoleColor.DarkGray;
+                _player.Color = ColorManager.DarkGray;
 
             SetColorsToText();
              
@@ -181,10 +182,10 @@ namespace RougeLikeRPG.Engine
                                  select line)
             {
                 foreach (var word in KeyWords.Words)
-                    line.SetColorToWord(word.Key, word.Value);
+                    line.SetColorToWord(word.Key, word.Value, ColorManager.Black);
                 
-                line.SetColorToPrase($"+Level of {_player.Name} Upped+", ConsoleColor.DarkYellow);
-                line.SetColorToWord(_player.Name, ConsoleColor.DarkYellow);
+                line.SetColorToPrase($"+Level of {_player.Name} Upped+", ColorManager.DarkYellow, ColorManager.Black);
+                line.SetColorToWord(_player.Name, new Color(255, 102, 0), ColorManager.Black);
 
                 if (_player.LeftArm != null)
                     SetColorToItemInText(_player.LeftArm, line);
@@ -192,7 +193,7 @@ namespace RougeLikeRPG.Engine
                     SetColorToItemInText(_player.RightArm, line);
                 foreach (Actor actor in _map.Actors)
                 {
-                    line.SetColorToWord(actor.Name, actor.Color);
+                    line.SetColorToWord(actor.Name, actor.Color, ColorManager.Black);
                     if (actor.LeftArm != null)
                         SetColorToItemInText(actor.LeftArm, line);
 
@@ -208,10 +209,10 @@ namespace RougeLikeRPG.Engine
             {
                 var name = weapon.Name.Split(' ');
                 foreach (var word in name)
-                    line.SetColorToWord(word, (ConsoleColor)weapon.Rare.Color);
+                    line.SetColorToWord(word, weapon.Rare.Color, ColorManager.Black);
             }
             else
-                line.SetColorToWord(weapon.Name, (ConsoleColor)weapon.Rare.Color);
+                line.SetColorToWord(weapon.Name, weapon.Rare.Color, ColorManager.Black);
         }
 
         /// <summary>

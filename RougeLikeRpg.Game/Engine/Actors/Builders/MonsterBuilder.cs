@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using RougeLikeRPG.Engine.Actors.Builders;
 using RougeLikeRPG.Engine.Dices;
+using RougeLikeRPG.Graphic.Core;
 
 namespace RougeLikeRPG.Engine.Actors.Monsters.Builders
 {
@@ -38,7 +39,7 @@ namespace RougeLikeRPG.Engine.Actors.Monsters.Builders
             monster.Symbol = symbol;
         }
 
-        internal override void SetColor(ConsoleColor color)
+        internal override void SetColor(Color color)
         {
             monster.Color = color;
         }

@@ -1,4 +1,5 @@
 using System;
+using RougeLikeRpg.Graphic.Core;
 using RougeLikeRPG.Graphic.Core;
 
 namespace RougeLikeRPG.Engine.GameMaps 
@@ -42,8 +43,8 @@ namespace RougeLikeRPG.Engine.GameMaps
                         = new Cell(
                                 '.',
                                 new Vector2D(x, y),
-                                ConsoleColor.White,
-                                ConsoleColor.Black);
+                                ColorManager.White,
+                                ColorManager.Black);
                 }
             
             return temp;

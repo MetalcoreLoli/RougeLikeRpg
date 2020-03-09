@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using RougeLikeRpg.Graphic.Core;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Dices;
 using RougeLikeRPG.Engine.Magick.Events;
@@ -42,7 +43,7 @@ namespace RougeLikeRPG.Engine.Magick
             if (_actorToHeal.Mana > 0)
             {
                 var color = _actorToHeal.Color;
-                _actorToHeal.Color = ConsoleColor.Yellow;
+                _actorToHeal.Color = ColorManager.Yellow;
                 Int32 healingValue = DiceManager.CreateDices($"{_actorToHeal.Level}d8").RollAll().Sum();
                 _actorToHeal.Hp += CurrentHealingValue(_actorToHeal.Hp, healingValue, _actorToHeal.MaxHp);
                 _actorToHeal.Mana--;

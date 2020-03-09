@@ -14,6 +14,7 @@ using RougeLikeRPG.Engine.Events;
 using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.GameItems.Items;
 using RougeLikeRPG.Engine.Core;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRPG.Engine
 {
@@ -160,7 +161,7 @@ namespace RougeLikeRPG.Engine
             string levelUpMessage = $"+Level of {e.Actor.Name} was Upped+  ";
             (_messageLogScreen as MessageLogScreen).Add(levelUpMessage); 
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
-            line.SetColorToWord(levelUpMessage, ConsoleColor.Yellow);
+            line.SetColorToWord(levelUpMessage, ColorManager.Yellow, ColorManager.Black);
             SetColorsToText();
         }
 

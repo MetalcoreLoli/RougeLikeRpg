@@ -1,15 +1,17 @@
-﻿using System;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRPG.Graphic.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace RougeLikeRPG.Engine.GameItems.Enums
 {
-    internal enum WeaponRareColor
+    internal class WeaponRareColor
     {
-        Trash       = ConsoleColor.DarkGray, 
-        Common      = ConsoleColor.DarkBlue,
-        Rare        = ConsoleColor.DarkMagenta,
-        Legendary   = ConsoleColor.DarkYellow,
-        None        = ConsoleColor.DarkCyan
+        public static Color Trash       { get; } = ColorManager.DarkGray;
+        public static Color Common      { get; } = ColorManager.DarkBlue;
+        public static Color Rare        { get; } = ColorManager.DarkMagenta;
+        public static Color Legendary   { get; } = ColorManager.DarkYellow;
+        public static Color None        { get; } = ColorManager.DarkCyan;
     }
 }

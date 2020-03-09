@@ -7,7 +7,7 @@ namespace RougeLikeRPG.Graphic.Core
     {
        Char Symbol { get; set; } 
        Vector2D Position { get; set; }
-       ConsoleColor Color { get; set; } 
-       ConsoleColor BackColor { get; set; } 
+       Color Color { get; set; } 
+       Color BackColor { get; set; } 
     }
 }

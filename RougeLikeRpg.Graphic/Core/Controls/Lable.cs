@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using RougeLikeRPG.Graphic.Core;
 using RougeLikeRPG.Graphic.Core.Controls.Text;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRPG.Graphic.Core.Controls
 {
@@ -70,12 +71,12 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                 Render.WithOffset(cell, 0, 0);
         }
 
-        public void SetColorToPrase(string phrace, ConsoleColor color, ConsoleColor backColor = ConsoleColor.Black)
+        public void SetColorToPrase(string phrace, Color color, Color backColor)
         {
             foreach (var word in phrace.Split(' '))
                 SetColorToWord(word, color, backColor);
         }
-        public void SetColorToWord(string word, ConsoleColor color, ConsoleColor backColor = ConsoleColor.Black)
+        public void SetColorToWord(string word, Color color, Color backColor)
         {
             var lBody = body.ToList();
             List<Word> wordsInbody = GetWordsFrom(lBody.ToArray());
@@ -136,7 +137,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             return wordsInbody;
         }
 
-        private Cell[] CreateCellsFromText(String text, ConsoleColor color = ConsoleColor.White, ConsoleColor backColor = ConsoleColor.Black)
+        private Cell[] CreateCellsFromText(String text, Color color, Color backColor)
         {
             Cell[] temp = new Cell[text.Length];
             for (Int32 i = 0; i < text.Length; i++)
@@ -164,8 +165,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                temp[i] = new Cell(
                        text[i], 
                        new Vector2D(i, 0) + Location, 
-                       ConsoleColor.White, 
-                       ConsoleColor.Black); 
+                       ColorManager.White, 
+                       ColorManager.Black); 
             return temp;
         }
         #endregion

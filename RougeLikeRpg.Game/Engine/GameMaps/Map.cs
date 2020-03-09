@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRPG.Engine
 {
@@ -253,8 +254,8 @@ namespace RougeLikeRPG.Engine
                         = new Cell(
                                 _mapWalkableCell,
                                 new Vector2D(x, y) + Location + 1,
-                                ConsoleColor.White,
-                                ConsoleColor.Black);
+                                ColorManager.White,
+                                ColorManager.Black);
                 }
 
             temp = DrawBordersWithSymbol(temp, mapWidth, mapHeight, _mapBorder);

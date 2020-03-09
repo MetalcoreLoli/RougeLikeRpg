@@ -1,4 +1,5 @@
-﻿using RougeLikeRPG.Graphic.Core;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRPG.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,15 +10,15 @@ namespace RougeLikeRPG.Engine.GameMaps
     {
         public char Symbol { get; set; }
         public Vector2D Position { get; set; }
-        public ConsoleColor Color { get; set; }
-        public ConsoleColor BackColor { get; set; }
+        public Color Color { get; set; }
+        public Color BackColor { get; set; }
 
         public Tile(char Symbol, Vector2D position) 
-            : this(Symbol, position, ConsoleColor.White, ConsoleColor.Black)
+            : this(Symbol, position, ColorManager.White, ColorManager.Black)
         {
         }
 
-        public Tile(char Symbol, Vector2D position, ConsoleColor color , ConsoleColor backColor)
+        public Tile(char Symbol, Vector2D position, Color color , Color backColor)
         {
             this.Symbol = Symbol;
             Position = position;

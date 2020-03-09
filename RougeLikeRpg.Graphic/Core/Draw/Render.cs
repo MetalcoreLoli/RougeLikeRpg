@@ -38,23 +38,11 @@ namespace RougeLikeRPG.Graphic.Core
         
         static string SetBackColor(IRenderable obj)
         {
-            return obj.BackColor switch
-            {
-                ConsoleColor.DarkRed => "\x1b[48;5;9m",
-                ConsoleColor.DarkBlue=> "\x1b[48;5;12m",
-                ConsoleColor.DarkYellow=> "\x1b[48;5;3m",
-                _ => "\x1b[48;5;0m"
-            };
+            return $"\x1b[48;2;{obj.BackColor.Red};{obj.BackColor.Green};{obj.BackColor.Blue}m";
         }
         static string SetColor(IRenderable obj)
         {
-            return (obj.Color) switch
-            {
-                ConsoleColor.White => "\x1b[38;5;15m",
-                ConsoleColor.Green => "\x1b[38;5;10m",
-                ConsoleColor.DarkCyan => "\x1b[38;2;255;219;88m",
-                _ => "\x1b[38;5;15m"
-            };    
+            return $"\x1b[38;2;{obj.Color.Red};{obj.Color.Green};{obj.Color.Blue}m";
         }
     }
 }

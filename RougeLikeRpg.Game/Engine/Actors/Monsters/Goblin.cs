@@ -1,4 +1,5 @@
-﻿using RougeLikeRPG.Engine.Dices;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRPG.Engine.Dices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
             Hp = MaxHp = Dices.DiceManager.CreateDice("3d8").Roll();
             LeftArm     = new GameItems.Items.Weapon.Dagger();
             //RightArm    = new GameItems.Items.Weapon.ShortSword();
-            Symbol = 'G';
-            Color = ConsoleColor.Green;
+            Symbol  = 'G';
+            Color   = ColorManager.Green;
             DropExp = DiceManager.CreateDices("2d4").RollAll().Sum() + 1;
             Str     = RollStat();
             Dex     = RollStat() + 5;

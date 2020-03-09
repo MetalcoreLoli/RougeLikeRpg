@@ -1,4 +1,6 @@
-﻿using RougeLikeRPG.Graphic.Core.Controls.Text;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Graphic.Core.Controls.Text;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +9,9 @@ namespace RougeLikeRPG.Engine.Core
 {
     internal static class KeyWords
     {
-        public static Dictionary<String, ConsoleColor> Words = new Dictionary<string, ConsoleColor> {
-            ["Goblin"]  = ConsoleColor.DarkGreen,
-            ["miss"]    = ConsoleColor.DarkRed
+        public static Dictionary<string, Color> Words = new Dictionary<string, Color> {
+            ["Goblin"]  = ColorManager.DarkGreen,
+            ["miss"]    = ColorManager.DarkRed
         };
     }
 }

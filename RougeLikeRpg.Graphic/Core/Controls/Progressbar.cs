@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RougeLikeRpg.Graphic.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,9 +10,9 @@ namespace RougeLikeRPG.Graphic.Core.Controls
 
         #region Private Members
 
-        private ConsoleColor _progressColor;
-        private ConsoleColor _backColor;
-        private ConsoleColor _textColor = ConsoleColor.Black;
+        private Color _progressColor;
+        private Color _backColor;
+        private Color _textColor = ColorManager.Black;
 
         /// <summary>
         /// Текст, котороый отрисуется на прогрессбаре
@@ -40,7 +41,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         /// <summary>
         /// Цвет линии прогресса
         /// </summary>
-        public ConsoleColor ProgressColor
+        public Color ProgressColor
         {
             get => _progressColor;
             set
@@ -54,7 +55,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         /// <summary>
         /// Цвет фона
         /// </summary>
-        public new ConsoleColor BackgroundColor
+        public new Color BackgroundColor
         {
             get => _backColor;
             set
@@ -65,7 +66,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             }
         }
 
-        public ConsoleColor TextColor
+        public Color TextColor
         {
             get => _textColor;
             set 
@@ -108,7 +109,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         #endregion
 
         #region Constructor
-        public Progressbar(Int32 width, Int32 height, ConsoleColor progressColor, ConsoleColor background, Vector2D location, Int32 Value, Int32 MaxValue)
+        public Progressbar(Int32 width, Int32 height, Color progressColor, Color background, Vector2D location, Int32 Value, Int32 MaxValue)
         {
             Width           = width;
             Height          = height;

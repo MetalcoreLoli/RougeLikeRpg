@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RougeLikeRPG.Engine.Magick;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRPG.Engine.Actors
 {
@@ -70,8 +71,8 @@ namespace RougeLikeRPG.Engine.Actors
         public int MaxExp { get; set; }
         public char Symbol { get; set; }
         public Vector2D Position { get; set; }
-        public ConsoleColor Color { get; set; }
-        public ConsoleColor BackColor { get; set; }
+        public Color Color { get; set; }
+        public Color BackColor { get; set; }
         public int Mana { get; set; }
         public int MaxMana { get; set; }
 
@@ -287,9 +288,9 @@ namespace RougeLikeRPG.Engine.Actors
             var raceLable       = new Lable($"Race: {Race}", new Vector2D(1, 2));
             var lvlLable        = new Lable($"Level: {Level}", new Vector2D(1, 5));
             
-            var lvlProgerss     = new Progressbar(23, 1, ConsoleColor.DarkYellow,   ConsoleColor.DarkGray,      new Vector2D(1, 6), Exp,    MaxExp);
-            var hpProgerss      = new Progressbar(23, 1, ConsoleColor.DarkRed,      ConsoleColor.DarkGray,      new Vector2D(1, 3), Hp,     MaxHp);
-            var mpProgerss      = new Progressbar(23, 1, ConsoleColor.DarkBlue,     ConsoleColor.DarkGray,      new Vector2D(1, 4), Mana,   MaxMana);
+            var lvlProgerss     = new Progressbar(23, 1, ColorManager.DarkYellow,   ColorManager.DarkGray,      new Vector2D(1, 6), Exp,    MaxExp);
+            var hpProgerss      = new Progressbar(23, 1, ColorManager.DarkRed,      ColorManager.DarkGray,      new Vector2D(1, 3), Hp,     MaxHp);
+            var mpProgerss      = new Progressbar(23, 1, ColorManager.DarkBlue,     ColorManager.DarkGray,      new Vector2D(1, 4), Mana,   MaxMana);
 
             var lineLable       = new Lable("-----------------------", new Vector2D(1, 7));
             var strLable        = new Lable($"Str:    {Str} ({((StrMod > 0)? $"+{StrMod}": $"{StrMod}")})", new Vector2D(1, 8));
@@ -309,7 +310,7 @@ namespace RougeLikeRPG.Engine.Actors
             hpProgerss.Text         = $"Hp:     {Hp} / {MaxHp}";
             mpProgerss.Text         = $"Mana:   {Mana} / {MaxMana}";
             lvlProgerss.Text        = $"Exp:    {Exp} / {MaxExp}";
-            hpProgerss.TextColor    = mpProgerss.TextColor = lvlProgerss.TextColor = ConsoleColor.White;
+            hpProgerss.TextColor    = mpProgerss.TextColor = lvlProgerss.TextColor = ColorManager.White;
 
             temp.Add(lineLable);
             temp.Add(strLable);

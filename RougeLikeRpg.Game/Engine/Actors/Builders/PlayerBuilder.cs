@@ -1,6 +1,7 @@
 ﻿using RougeLikeRPG.Engine.Actors.Enums;
 using RougeLikeRPG.Engine.Actors.Races;
 using RougeLikeRPG.Engine.Dices;
+using RougeLikeRPG.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,7 +88,7 @@ namespace RougeLikeRPG.Engine.Actors.Builders
             player.Symbol = symbol;
         }
 
-        internal override void SetColor(ConsoleColor color)
+        internal override void SetColor(Color color)
         {
             player.Color = color;
         }
