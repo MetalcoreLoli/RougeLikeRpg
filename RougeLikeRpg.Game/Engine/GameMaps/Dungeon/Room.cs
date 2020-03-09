@@ -35,7 +35,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                 int x = new Random().Next(1, Width - 1);
                 int y = new Random().Next(1, Height - 1);
                 Actors.Add(new Actors.Monsters.Goblin() { 
-                    Position = new Vector2D(x, y)
+                    Position = new Vector2D(x, y) + Location
                 });
             }
         }

@@ -97,7 +97,7 @@ namespace RougeLikeRPG.Engine
 
             foreach (var room in dungeon.Rooms)
                 foreach (var goblin in room.Actors)
-                    Actors.Add(goblin);
+                    AddActorToMap(goblin);
 
             //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2 - 3, Height / 2) });
             //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
