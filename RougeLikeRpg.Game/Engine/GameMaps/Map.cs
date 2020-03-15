@@ -71,40 +71,7 @@ namespace RougeLikeRPG.Engine
             Player = player;
 
 
-            _mapBufferWidth = Width;
-            _mapBufferHeight = 25;
-            _mapBufferSize = _mapBufferWidth * _mapBufferHeight;
-            var map = new MapCreator(_mapBufferWidth, _mapBufferHeight).EmptyMap;
-            body = InitBody(Width, Height);
-
-            _mapBody = _mapBuffer = Tile.ToCellsArray(map.Body);
-            Actors = new List<Actor>();
-
-            //SetSymbol(Width / 2 - 3, Height / 2, '+');
-            //SetSymbol(Width / 2 - 4, Height / 2, '+');
-            //SetSymbol(Width / 2 - 5, Height / 2, '+');
-
-            dungeon = new Dungeon(Width, Height, Location)
-            {
-                MaxRoomHeight = 10,
-                MinRoomHeight = 5,
-                MaxRoomWidth = 10,
-                MinRoomWidth = 5,
-                CountOfRooms = 18
-            };
-            foreach (var cell in dungeon.Generate())
-                SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol);
-
-            foreach (var room in dungeon.Rooms)
-                foreach (var goblin in room.Actors)
-                    AddActorToMap(goblin);
-
-            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2 - 3, Height / 2) });
-            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 2) });
-            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 3) });
-            //Actors.Add(new Goblin() { Position = new Vector2D(Width / 2, Height / 2 + 4) });
-            if (player != null)
-                AddActorToMap(player);
+           
         }
         #endregion
 
@@ -206,27 +173,7 @@ namespace RougeLikeRPG.Engine
 
         public void Update()
         {
-            if (_mapBuffer != null)
-                for (int i = 0; i < _mapBufferSize; i++)
-                {
-                    Cell cell = _mapBuffer[i];
-                    if (cell != null)
-                        cell.Position += _mapBufferOffset;
-                }
-            Player.Position += _mapBufferOffset;
-            if (Actors != null)
-            {
-                for (int i = 0; i < Actors.Count; i++)
-                {
-                    if (Actors[i].Hp <= 0)
-                        Actors[i].IsDead = true;
-                }
-                Actors.RemoveAll(actor => actor.IsDead);
-                // MonstersMove();
-                foreach (Actor actor in Actors)
-                    actor.Position +=  _mapBufferOffset;
-            }
-            _mapBufferOffset = new Vector2D(0, 0);
+            
         }
 
         public void PlayerMoveTo(Vector2D vec)
@@ -237,36 +184,7 @@ namespace RougeLikeRPG.Engine
 
         public async override void Draw()
         {
-            await foreach (Cell cell in GetCellsAsync(body))
-                Render.WithOffset(cell, 0, 0);
-
-            await foreach (Cell cell in GetCellsAsync(_mapBuffer))
-            {
-                if (cell.Position.X > 0 && cell.Position.Y > 0)
-                {
-                    if (cell.Position.X < Player.Position.X + Player.FovX /* Width - 1*/
-                         && cell.Position.Y < Player.Position.Y + Player.FovY /*Height - 1*/
-                         && cell.Position.X > Player.Position.X - Player.FovX
-                         && cell.Position.Y > Player.Position.Y - Player.FovY)
-                        Render.WithOffset(cell, 0, 0);
-                }
-            }
-
-            //Отрисовка игрока игрока
-            if (Player != null)
-                Render.WithOffset(Player, 0, 0);
-
-            //Отрисовка других актеров
-            if (Actors != null)
-                foreach (Actor actor in Actors)
-                    if (actor.Position.X > 0 && actor.Position.Y > 0)
-                    {
-                        if (    actor.Position.X < Player.Position.X + Player.FovX /* Width - 1*/
-                             && actor.Position.Y < Player.Position.Y + Player.FovY /*Height - 1*/
-                             && actor.Position.X > Player.Position.X - Player.FovX
-                             && actor.Position.Y > Player.Position.Y - Player.FovY)
-                            Render.WithOffset(actor, 0, 0);
-                    }
+            
         }
         #endregion
 

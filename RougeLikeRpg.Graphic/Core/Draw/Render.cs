@@ -27,15 +27,18 @@ namespace RougeLikeRPG.Graphic.Core
             Console.ResetColor();
             Console.SetCursorPosition(cursor.Item1, cursor.Item2);
             */
-            MoveCursorTo(obj.Position);
-            Console.Write($"{SetBackColor(obj)}{SetColor(obj)}{obj.Symbol}\x1b[39m\x1b[39m");
+            ///MoveCursorTo(obj.Position);
+            Console.Write($"{MovedCursorTo(obj.Position)}{SetBackColor(obj)}{SetColor(obj)}{obj.Symbol}\x1b[39m\x1b[39m");
         }
 
         static void MoveCursorTo(Vector2D position)
         {
             Console.Write($"\x1b[{(position.Y + 1)};{(position.X + 1)}H");
         }
-        
+       
+        static string MovedCursorTo(Vector2D position)
+            => $"\x1b[{(position.Y + 1)};{(position.X + 1)}H";
+
         static string SetBackColor(IRenderable obj)
         {
             return $"\x1b[48;2;{obj.BackColor.Red};{obj.BackColor.Green};{obj.BackColor.Blue}m";
