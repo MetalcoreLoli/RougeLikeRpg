@@ -24,19 +24,9 @@ namespace RougeLikeRPG.Engine
         private char _mapBorder = '#';
 
         private Cell[] _mapBody;
-        ///<summary>
-        ///Буффер, в котором находится всей картa
-        ///</summary>
-        private Cell[] _mapBuffer;
-
-        private Int32 _mapBufferHeight;
-        private Int32 _mapBufferWidth;
-
-        private Int32 _mapBufferSize;
-
-        private Vector2D _mapBufferOffset;
-
+        private Cell[] _mapBodyClean;
         Dungeon dungeon;
+        private Vector2D _mapBufferOffset;
         #endregion
 
         #region Public Properties
@@ -54,7 +44,7 @@ namespace RougeLikeRPG.Engine
         #region Contructors
 
         public Map(int mapWidth, int mapHeight, Graphic.Core.Vector2D _mapLocation)
-            : this(mapWidth, mapHeight, _mapLocation, null, null)
+            : this(mapWidth, mapHeight, _mapLocation, null, new List<Actor>())
         {
         }
 
@@ -69,9 +59,16 @@ namespace RougeLikeRPG.Engine
             Height = mapHeight;
             Location = _mapLocation;
             Player = player;
+            Actors = actors.ToList();
 
+            _mapBody = MapBufferInit(Width, Height);
+            _mapBodyClean = MapBufferInit(Width, Height);
 
-           
+            foreach (var cell in _mapBodyClean)
+            {
+                cell.Symbol = ' ';
+            }
+
         }
         #endregion
 
@@ -166,25 +163,43 @@ namespace RougeLikeRPG.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Vector2D vec) => IsWalkable(vec.X, vec.Y);
 
-        public Cell GetCell(Int32 x, Int32 y) => _mapBuffer.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
+        public Cell GetCell(Int32 x, Int32 y) => _mapBody.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
         public Cell GetCell(Vector2D pos) => GetCell(pos.X, pos.Y);
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
         public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
 
         public void Update()
         {
-            
+            foreach (var cell in _mapBody)
+            {
+                cell.Position = cell.Position + _mapBufferOffset;
+            }
         }
 
         public void PlayerMoveTo(Vector2D vec)
         {
             Vector2D offset = new Vector2D(vec.X * -1, vec.Y * -1);
-            _mapBufferOffset = offset;
+            _mapBufferOffset = vec;
         }
 
         public async override void Draw()
         {
-            
+            foreach (var cell in _mapBodyClean)
+            {
+                if (cell.Position.X < Width && cell.Position.Y < Height)
+                    Render.WithOffset(cell, 0, 0);
+            }
+            foreach (var cell in _mapBody)
+            {
+                if (cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width-1 && cell.Position.Y < Height-1)
+                    Render.WithOffset(cell, 0, 0);
+            }
+
+            foreach (var actor in Actors)
+            {
+                if (actor.Position.X > 0 && actor.Position.Y > 0 && actor.Position.X < Width - 1 && actor.Position.Y < Height - 1)
+                    Render.WithOffset(actor, 0, 0);
+            }
         }
         #endregion
 
