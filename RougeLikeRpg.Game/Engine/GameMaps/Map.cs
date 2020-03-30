@@ -25,6 +25,9 @@ namespace RougeLikeRPG.Engine
 
         private Cell[] _mapBody;
         private Cell[] _mapBodyClean;
+
+        private int _mapBufferWidth = 75;
+        private int _mapBufferHeight = 40;
         Dungeon dungeon;
         private Vector2D _mapBufferOffset;
         #endregion
@@ -61,7 +64,8 @@ namespace RougeLikeRPG.Engine
             Player = player;
             Actors = actors.ToList();
 
-            _mapBody = MapBufferInit(Width, Height);
+
+            _mapBody = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
             _mapBodyClean = MapBufferInit(Width, Height);
 
             foreach (var cell in _mapBodyClean)
@@ -69,6 +73,29 @@ namespace RougeLikeRPG.Engine
                 cell.Symbol = ' ';
             }
 
+            dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
+            {
+                MaxRoomHeight = 10,
+                MinRoomHeight = 7,
+                MaxRoomWidth = 10,
+                MinRoomWidth = 7,
+                CountOfRooms = 18
+            };
+
+            dungeon.Generate().AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
+
+            var offset = new Vector2D((Width)/2, Height / 2) ;
+            foreach (var room in dungeon.Rooms)
+                foreach (var actor in room.Actors)
+                {
+                    actor.Position = actor.Position - offset;
+                    AddActorToMap(actor);
+                }
+
+            foreach (var cell in _mapBody)
+            {
+                cell.Position = cell.Position - offset;
+            }
         }
         #endregion
 
@@ -104,7 +131,7 @@ namespace RougeLikeRPG.Engine
 
         public void SetSymbol(int x, int y, char symbol)
         {
-            _mapBody[x + Width * y].Symbol = symbol;
+            _mapBody[x + _mapBufferWidth * y].Symbol = symbol;
         }
 
         public void AddRangeOfActorToMap(IEnumerable<Actor> actors)
@@ -174,26 +201,40 @@ namespace RougeLikeRPG.Engine
             {
                 cell.Position = cell.Position + _mapBufferOffset;
             }
+            if (Player != null)
+                Player.Position += _mapBufferOffset;
+
+            Actors.RemoveAll(actor => actor.IsDead);
+            foreach (var actor in Actors)
+            {
+
+                actor.Position = actor.Position + _mapBufferOffset;
+            }
+
+            _mapBufferOffset = new Vector2D(0, 0);
         }
 
         public void PlayerMoveTo(Vector2D vec)
         {
             Vector2D offset = new Vector2D(vec.X * -1, vec.Y * -1);
-            _mapBufferOffset = vec;
+            _mapBufferOffset = offset;
         }
 
         public async override void Draw()
         {
-            foreach (var cell in _mapBodyClean)
+            _mapBodyClean.AsParallel().ForAll(cell => 
             {
                 if (cell.Position.X < Width && cell.Position.Y < Height)
                     Render.WithOffset(cell, 0, 0);
-            }
+            });
+        
             foreach (var cell in _mapBody)
             {
-                if (cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width-1 && cell.Position.Y < Height-1)
+                if (cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width - 1 && cell.Position.Y < Height - 1)
                     Render.WithOffset(cell, 0, 0);
             }
+            if (Player != null)
+                Render.WithOffset(Player, 0, 0);
 
             foreach (var actor in Actors)
             {
@@ -221,7 +262,7 @@ namespace RougeLikeRPG.Engine
                                 ColorManager.Black);
                 }
 
-            temp = DrawBordersWithSymbol(temp, mapWidth, mapHeight, _mapBorder);
+            //temp = DrawBordersWithSymbol(temp, mapWidth, mapHeight, _mapBorder);
             return temp;
         }
         #endregion

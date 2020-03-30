@@ -37,7 +37,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
             for(int y = 0; y < height; y++)
                 for (int x = 0; x < width; x++)
                 {
-                    temp[x + width * y] = new Cell('.', new Vector2D(x, y) + location);
+                    temp[x + width * y] = new Cell(' ', new Vector2D(x, y) + location);
                 }
             return temp;
         }
@@ -119,23 +119,23 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                     Position = new Vector2D(x, yPosition)
                 });
 
-                //if (GetCell(x, yPosition - 1).Symbol == '.')
-                //    SetCell(new Cell
-                //    {
-                //        BackColor = backColor,
-                //        Color = color,
-                //        Symbol = '#',
-                //        Position = new Vector2D(x, yPosition - 1)
-                //    });
+                if (GetCell(x, yPosition - 1).Symbol != '.')
+                    SetCell(new Cell
+                    {
+                        BackColor = backColor,
+                        Color = color,
+                        Symbol = '═',
+                        Position = new Vector2D(x, yPosition - 1)
+                    });
 
-                //if (GetCell(x, yPosition + 1).Symbol == '.')
-                //    SetCell(new Cell
-                //    {
-                //        BackColor = backColor,
-                //        Color = color,
-                //        Symbol = '#',
-                //        Position = new Vector2D(x, yPosition + 1 )
-                //    });
+                if (GetCell(x, yPosition + 1).Symbol != '.')
+                    SetCell(new Cell
+                    {
+                        BackColor = backColor,
+                        Color = color,
+                        Symbol = '═',
+                        Position = new Vector2D(x, yPosition + 1)
+                    });
             }
         }
 
@@ -154,23 +154,23 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                     Position = new Vector2D(xPosition, y)
                 });
 
-                //if (GetCell(xPosition - 1, y).Symbol == '.')
-                //    SetCell(new Cell
-                //    {
-                //        BackColor = backColor,
-                //        Color = color,
-                //        Symbol = '#',
-                //        Position = new Vector2D(xPosition - 1, y - 1)
-                //    });
+                if (GetCell(xPosition - 1, y).Symbol != '.')
+                    SetCell(new Cell
+                    {
+                        BackColor = backColor,
+                        Color = color,
+                        Symbol = '║',
+                        Position = new Vector2D(xPosition - 1, y)
+                    });
 
-                //if (GetCell(xPosition + 1, y).Symbol == '.')
-                //    SetCell(new Cell
-                //    {
-                //        BackColor = backColor,
-                //        Color = color,
-                //        Symbol = '#',
-                //        Position = new Vector2D(xPosition + 1, y)
-                //    });
+                if (GetCell(xPosition + 1, y).Symbol != '.')
+                    SetCell(new Cell
+                    {
+                        BackColor = backColor,
+                        Color = color,
+                        Symbol = '║',
+                        Position = new Vector2D(xPosition + 1, y)
+                    });
             }
         }
 
