@@ -84,7 +84,7 @@ namespace RougeLikeRPG.Engine
 
             dungeon.Generate().AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
 
-            var offset = new Vector2D((Width)/2, Height / 2) ;
+            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2);
             foreach (var room in dungeon.Rooms)
                 foreach (var actor in room.Actors)
                 {
