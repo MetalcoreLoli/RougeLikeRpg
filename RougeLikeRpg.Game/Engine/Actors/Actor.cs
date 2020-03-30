@@ -20,6 +20,9 @@ namespace RougeLikeRPG.Engine.Actors
     internal abstract class Actor : IActor
     {
         #region Private Members
+
+        private Color _color;
+        private Color _colorNormal;
         #region Stats
         private Int32 _str;
         private Int32 _dex;
@@ -50,6 +53,12 @@ namespace RougeLikeRPG.Engine.Actors
             {
                 Int32 damage = _hp - value;
                 _hp = value;
+                if ((float)_hp <= ((float)MaxHp  * 0.25f) % 100.0f)
+                {
+                    Color = ColorManager.Red;
+                }
+                else 
+                    Color = NormalColor;
                 if (_hp <= 0)
                 { 
                     IsDead = true;
@@ -71,7 +80,17 @@ namespace RougeLikeRPG.Engine.Actors
         public int MaxExp { get; set; }
         public char Symbol { get; set; }
         public Vector2D Position { get; set; }
-        public Color Color { get; set; }
+        public Color Color 
+        { 
+            get => _color; 
+            set
+            {
+                _color = value;
+            }
+        }
+
+        public Color NormalColor { get; set; }
+
         public Color BackColor { get; set; }
         public int Mana { get; set; }
         public int MaxMana { get; set; }

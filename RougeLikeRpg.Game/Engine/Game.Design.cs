@@ -147,13 +147,18 @@ namespace RougeLikeRPG.Engine
             SetColorsToText();
         }
 
-        private void Player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
+        private async void Player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
         {
             Player actor = sender as Player;
+            var color = e.Enemy.Color;
             if (!e.IsMissed)
+            {
                 HitMessages(actor, e.Enemy, e.Weapon);
-            else MissMessages(actor, e.Weapon);
-
+            }
+            else
+            {
+                MissMessages(actor, e.Weapon);
+            }
         }
 
         private void Player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
