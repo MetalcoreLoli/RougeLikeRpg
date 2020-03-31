@@ -41,7 +41,7 @@ namespace RougeLikeRPG.Engine.Actors.Monsters.Builders
 
         internal override void SetColor(Color color)
         {
-            monster.Color = color;
+            monster.Color       = color;
             monster.NormalColor = color;
         }
 

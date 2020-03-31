@@ -90,8 +90,8 @@ namespace RougeLikeRPG.Engine.Actors.Builders
 
         internal override void SetColor(Color color)
         {
-            player.Color = color;
-            player.NormalColor = color;
+            player.Color        = color;
+            player.NormalColor  = color;
         }
 
         internal override Player Get()

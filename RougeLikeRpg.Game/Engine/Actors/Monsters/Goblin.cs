@@ -17,6 +17,7 @@ namespace RougeLikeRPG.Engine.Actors.Monsters
             //RightArm    = new GameItems.Items.Weapon.ShortSword();
             Symbol  = 'G';
             Color   = ColorManager.Green;
+            NormalColor = ColorManager.Green;
             DropExp = DiceManager.CreateDices("2d4").RollAll().Sum() + 1;
             Str     = RollStat();
             Dex     = RollStat() + 5;

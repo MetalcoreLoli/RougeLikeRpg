@@ -53,12 +53,11 @@ namespace RougeLikeRPG.Engine.Actors
             {
                 Int32 damage = _hp - value;
                 _hp = value;
-                if ((float)_hp <= ((float)MaxHp  * 0.25f) % 100.0f)
-                {
+                if ((float)_hp <= ((float)MaxHp  * 0.35f) % 100.0f)
                     Color = ColorManager.Red;
-                }
                 else 
                     Color = NormalColor;
+                
                 if (_hp <= 0)
                 { 
                     IsDead = true;

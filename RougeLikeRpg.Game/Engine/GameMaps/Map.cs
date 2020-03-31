@@ -30,6 +30,9 @@ namespace RougeLikeRPG.Engine
         private int _mapBufferHeight = 40;
         Dungeon dungeon;
         private Vector2D _mapBufferOffset;
+
+
+        private Stairs downStairs;
         #endregion
 
         #region Public Properties
@@ -72,30 +75,8 @@ namespace RougeLikeRPG.Engine
             {
                 cell.Symbol = ' ';
             }
-
-            dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
-            {
-                MaxRoomHeight = 10,
-                MinRoomHeight = 7,
-                MaxRoomWidth = 10,
-                MinRoomWidth = 7,
-                CountOfRooms = 18
-            };
-
-            dungeon.Generate().AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
-
-            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2);
-            foreach (var room in dungeon.Rooms)
-                foreach (var actor in room.Actors)
-                {
-                    actor.Position = actor.Position - offset;
-                    AddActorToMap(actor);
-                }
-
-            foreach (var cell in _mapBody)
-            {
-                cell.Position = cell.Position - offset;
-            }
+            
+            GenerateUndDrawDungeon();
         }
         #endregion
 
@@ -153,7 +134,8 @@ namespace RougeLikeRPG.Engine
             {
                 if (cell.Position.X.Equals(x) && cell.Position.Y.Equals(y))
                 {
-                    if (cell.Symbol.Equals('.')) flag = true;
+                    if (cell.Symbol.Equals('.') || cell.Symbol.Equals('<')) 
+                        flag = true;
                 }
             }
             foreach (Actor actor in Actors)
@@ -195,12 +177,24 @@ namespace RougeLikeRPG.Engine
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
         public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
 
+        public void GoDown()
+        {
+            if (Player.Position == downStairs.Position)
+            {
+                Console.Title ="Yay"; 
+                GenerateUndDrawDungeon();
+            }
+            else 
+                Console.Title = $"Player position is {Player.Position}; Stairs Position is {downStairs.Position}";
+        }
+
         public void Update()
         {
             foreach (var cell in _mapBody)
             {
                 cell.Position = cell.Position + _mapBufferOffset;
             }
+            downStairs.Position += _mapBufferOffset;
             if (Player != null)
                 Player.Position += _mapBufferOffset;
 
@@ -246,7 +240,46 @@ namespace RougeLikeRPG.Engine
 
         #region Private Methods
 
-       
+      
+        private void GenerateUndDrawDungeon()
+        {
+            dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
+            {
+                MaxRoomHeight = 10,
+                MinRoomHeight = 7,
+                MaxRoomWidth = 10,
+                MinRoomWidth = 7,
+                CountOfRooms = 18
+            };
+
+            dungeon.Generate().AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
+            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2);
+
+            var downStair_pos = dungeon.Rooms.Last().GetCenter();
+            
+            downStairs = new Stairs(
+                    '<',
+                    downStair_pos,
+                    ColorManager.White,
+                    ColorManager.Black);
+
+            SetSymbol(downStair_pos.X, downStair_pos.Y, downStairs.Symbol); 
+
+
+            foreach (var room in dungeon.Rooms)
+                foreach (var actor in room.Actors)
+                {
+                    actor.Position = actor.Position - offset;
+                    AddActorToMap(actor);
+                }
+
+            downStairs.Position -= offset;
+            foreach (var cell in _mapBody)
+            {
+                cell.Position = cell.Position - offset;
+            }
+        }
+
         private Cell[] MapBufferInit(Int32 mapWidth, Int32 mapHeight)
         {
             Cell[] temp = new Cell[mapWidth * mapHeight];

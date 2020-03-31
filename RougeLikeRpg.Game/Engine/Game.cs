@@ -52,6 +52,8 @@ namespace RougeLikeRPG.Engine
             _player.BookOfSpells.Casting += Player_CastingSpells;
             _map.Player = _player;
             _statusScreen.AddRange(_player.GetStats().ToList());
+
+
         }
 
 
@@ -222,7 +224,6 @@ namespace RougeLikeRPG.Engine
         private Player NewPlayer() => _createPlayerScreen.Start();
 
         private void OnKeyDown(ConsoleKey key) => KeyDown?.Invoke(this, new KeyDownEventArgs(key));
-
         
         #endregion
     }

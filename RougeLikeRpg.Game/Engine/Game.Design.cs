@@ -172,9 +172,14 @@ namespace RougeLikeRPG.Engine
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
         {
+            (_messageLogScreen as MessageLogScreen).Add($"{e.Key} was pressed"); 
             Vector2D playersInput = PlayerMoveTo(e.Key);
-            Console.Title = _map.Player.Direction.ToString();
+            //Console.Title = _map.Player.Direction.ToString();
             PlayerCastSpells(e.Key);
+
+            if (e.Key == ConsoleKey.F)
+                _map.GoDown();
+
             PlayerMove(playersInput);
         }
         #endregion
