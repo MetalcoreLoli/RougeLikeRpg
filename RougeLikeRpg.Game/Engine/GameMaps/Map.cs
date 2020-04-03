@@ -68,14 +68,7 @@ namespace RougeLikeRPG.Engine
             Actors = actors.ToList();
 
 
-            _mapBody = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
-            _mapBodyClean = MapBufferInit(Width, Height);
-
-            foreach (var cell in _mapBodyClean)
-            {
-                cell.Symbol = ' ';
-            }
-            
+           
             GenerateUndDrawDungeon();
         }
         #endregion
@@ -105,7 +98,7 @@ namespace RougeLikeRPG.Engine
             }
             else
             {
-                actor.Position += Location;
+                actor.Position -= Location;
                 Actors.Add(actor);
             }
         }
@@ -243,6 +236,14 @@ namespace RougeLikeRPG.Engine
       
         private void GenerateUndDrawDungeon()
         {
+            _mapBodyClean = MapBufferInit(Width, Height);
+
+            foreach (var cell in _mapBodyClean)
+                cell.Symbol = ' ';
+            
+            _mapBody = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
+            if(Actors.Count() > 0)
+                Actors = new List<Actor>();
             dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
             {
                 MaxRoomHeight = 10,
@@ -264,7 +265,6 @@ namespace RougeLikeRPG.Engine
                     ColorManager.Black);
 
             SetSymbol(downStair_pos.X, downStair_pos.Y, downStairs.Symbol); 
-
 
             foreach (var room in dungeon.Rooms)
                 foreach (var actor in room.Actors)
@@ -290,7 +290,7 @@ namespace RougeLikeRPG.Engine
                     temp[x + mapWidth * y]
                         = new Cell(
                                 _mapWalkableCell,
-                                new Vector2D(x, y) + Location + 1,
+                                new Vector2D(x, y) + Location,
                                 ColorManager.White,
                                 ColorManager.Black);
                 }
