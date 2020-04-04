@@ -98,7 +98,7 @@ namespace RougeLikeRPG.Engine
         {
             Actor actor = sender as Actor;
             //actor.IsMoving = true;
-            if (!(_map.IsWalkable(actor)))
+            if (!(_map.IsWalkable(actor.Position)) || actor.Position == _player.Position)
             {
                 actor.Position -= e.MovingPosition;
                 if (actor is Monster)
@@ -114,7 +114,7 @@ namespace RougeLikeRPG.Engine
         private void Player_Moving(object sender, Actors.Events.MovingEventArgs e)
         {
             Player pl = sender as Player;
-            if (_map.IsWalkable(pl.Position))
+            if (_map.IsWalkable(pl.Position) && _map.Actors.FirstOrDefault(a => a.Position == pl.Position) == null)
                 _map.PlayerMoveTo(e.MovingPosition);
             else
             {
@@ -164,7 +164,7 @@ namespace RougeLikeRPG.Engine
         private void Player_LevelUp(object sender, Actors.Events.LevelUpEventArgs e)
         {
             string levelUpMessage = $"+Level of {e.Actor.Name} was Upped+  ";
-            (_messageLogScreen as MessageLogScreen).Add(levelUpMessage); 
+            (_messageLogScreen as MessageLogScreen).Add(levelUpMessage);
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
             line.SetColorToWord(levelUpMessage, ColorManager.Yellow, ColorManager.Black);
             SetColorsToText();
@@ -172,13 +172,25 @@ namespace RougeLikeRPG.Engine
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
         {
-            (_messageLogScreen as MessageLogScreen).Add($"{e.Key} was pressed"); 
+            (_messageLogScreen as MessageLogScreen).Add($"{e.Key} was pressed");
             Vector2D playersInput = PlayerMoveTo(e.Key);
             //Console.Title = _map.Player.Direction.ToString();
             PlayerCastSpells(e.Key);
 
             if (e.Key == ConsoleKey.F)
+            {
                 _map.GoDown();
+                foreach (var actor in _map.Actors)
+                {
+                    if (!(actor is Player))
+                    {
+
+                        actor.Attacking += Hit_Attacking;
+                        actor.Dying += Actor_Dying;
+                        actor.Moving += Actor_Moving;
+                    }
+                }
+            }
 
             PlayerMove(playersInput);
         }
@@ -186,30 +198,25 @@ namespace RougeLikeRPG.Engine
         private void Initialization()
         {
             _createPlayerScreen = new CreatePlayerScreen();
-            
+
             KeyDown += Game_KeyDown;
-          
 
-
-          
-
-
-            _statusScreenWidth          = 25;
-            _statusScreenHeight         = _invetoryScreenHeight + _mapHeight;
+            _statusScreenWidth = 25;
+            _statusScreenHeight = _invetoryScreenHeight + _mapHeight;
 
             _mapWidth += _statusScreenWidth;
 
-            _messageLogScreenWidth      = /*_statusScreenWidth + */_mapWidth;
-            _messageLogScreenHeight     = _invetoryScreenHeight;
+            _messageLogScreenWidth = /*_statusScreenWidth + */_mapWidth;
+            _messageLogScreenHeight = _invetoryScreenHeight;
 
-            _statusScreenLocation       = new Vector2D(_mapWidth, 0);
-            _invetoryScreenLocation     = new Vector2D(0, 0);
-            _mapLocation                = new Vector2D(0, 0);
-            _messageLogScreenLocation   = new Vector2D(
+            _statusScreenLocation = new Vector2D(_mapWidth, 0);
+            _invetoryScreenLocation = new Vector2D(0, 0);
+            _mapLocation = new Vector2D(0, 0);
+            _messageLogScreenLocation = new Vector2D(
                                                         0,
                                                         _mapHeight);
-            
-            _messageLogScreen       = new MessageLogScreen(
+
+            _messageLogScreen = new MessageLogScreen(
                                                 _messageLogScreenWidth,
                                                 _messageLogScreenHeight,
                                                 _messageLogScreenLocation,
@@ -225,27 +232,27 @@ namespace RougeLikeRPG.Engine
                                                ConsoleColor.DarkCyan,
                                                ConsoleColor.Black);
 
-            _statusScreen           = new Screen(
-                                                 _statusScreenWidth, 
+            _statusScreen = new Screen(
+                                                 _statusScreenWidth,
                                                  _statusScreenHeight,
                                                  _statusScreenLocation);
-           
-           
-            _inventoryScreen        = new Screen(
-                                                _invetoryScreenWidth, 
+
+
+            _inventoryScreen = new Screen(
+                                                _invetoryScreenWidth,
                                                 _invetoryScreenHeight,
                                                 _invetoryScreenLocation,
                                                 "",
                                                 ConsoleColor.DarkYellow,
-                                                ConsoleColor.Black); 
-           
-            _map                    = new Map(_mapWidth, _mapHeight, _mapLocation);
-            
+                                                ConsoleColor.Black);
+
+            _map = new Map(_mapWidth, _mapHeight, _mapLocation);
+
 
             string title = "Status";
             _statusScreen.TitleLocation = new Vector2D(
                     (_statusScreen.Width - title.Length - 1) / 4, 2);
-            _statusScreen.Title = title; 
+            _statusScreen.Title = title;
 
             _messageLogScreen.Title = "Message Log";
 

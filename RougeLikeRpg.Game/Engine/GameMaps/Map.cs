@@ -4,6 +4,7 @@ using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Enums;
 using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.GameMaps;
+using RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,9 @@ namespace RougeLikeRPG.Engine
             Actors = actors.ToList();
 
 
-           
+            _mapBodyClean = MapBufferInit(Width, Height);
+            foreach (var cell in _mapBodyClean)
+                cell.Symbol = ' ';
             GenerateUndDrawDungeon();
         }
         #endregion
@@ -95,6 +98,7 @@ namespace RougeLikeRPG.Engine
             {
                 player.Position += dungeon.Rooms.FirstOrDefault().GetCenter() + Location;
                 Player = player;
+                Actors.Add(Player);
             }
             else
             {
@@ -131,33 +135,17 @@ namespace RougeLikeRPG.Engine
                         flag = true;
                 }
             }
+            /*
             foreach (Actor actor in Actors)
             {
                 if (actor.Position.X.Equals(x) && actor.Position.Y.Equals(y))
                 {
                     flag = false;
                 }
-            }
+            }*/
             return flag;
         }
-        public bool IsWalkable(Actor actor)
-        {
-            bool flag = false;
-            foreach (Cell cell in _mapBody)
-            {
-                if (cell.Position.Equals(actor.Position))
-                    if (cell.Symbol.Equals('.')) flag = true;
-            }
-            if (actor.Position.Equals(Player.Position))
-                flag = false;
-            foreach (Actor actr in Actors)
-            {
-                if (!actor.GetHashCode().Equals(actr.GetHashCode()))
-                    if (actr.Position.Equals(actor.Position))
-                        flag = false;
-            }
-            return flag;
-        }
+
         /// <summary>
         /// Метод проверки ячейки на, то что туда можно пройти
         /// </summary>
@@ -188,13 +176,12 @@ namespace RougeLikeRPG.Engine
                 cell.Position = cell.Position + _mapBufferOffset;
             }
             downStairs.Position += _mapBufferOffset;
-            if (Player != null)
+            //if (Player != null)
                 Player.Position += _mapBufferOffset;
 
             Actors.RemoveAll(actor => actor.IsDead);
             foreach (var actor in Actors)
             {
-
                 actor.Position = actor.Position + _mapBufferOffset;
             }
 
@@ -220,7 +207,7 @@ namespace RougeLikeRPG.Engine
                 if (cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width - 1 && cell.Position.Y < Height - 1)
                     Render.WithOffset(cell, 0, 0);
             }
-            if (Player != null)
+            //if (Player != null)
                 Render.WithOffset(Player, 0, 0);
 
             foreach (var actor in Actors)
@@ -233,17 +220,10 @@ namespace RougeLikeRPG.Engine
 
         #region Private Methods
 
-      
         private void GenerateUndDrawDungeon()
         {
-            _mapBodyClean = MapBufferInit(Width, Height);
-
-            foreach (var cell in _mapBodyClean)
-                cell.Symbol = ' ';
-            
             _mapBody = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
-            if(Actors.Count() > 0)
-                Actors = new List<Actor>();
+            Actors = new List<Actor>();
             dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
             {
                 MaxRoomHeight = 10,
@@ -253,8 +233,8 @@ namespace RougeLikeRPG.Engine
                 CountOfRooms = 18
             };
 
-            dungeon.Generate().AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
-            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2);
+            dungeon.Generate(new DefaultDungeonFactory()).AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
+            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2) + Location;
 
             var downStair_pos = dungeon.Rooms.Last().GetCenter();
             

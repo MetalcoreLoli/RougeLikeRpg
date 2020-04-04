@@ -1,5 +1,6 @@
 ﻿using RougeLikeRpg.Graphic.Core;
 using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -52,7 +53,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
             return true;
         }
 
-        internal Cell[] Generate()
+        internal Cell[] Generate(AbstractFactory factory)
         {
             while (CountOfRooms-- > 0)
             {
@@ -60,7 +61,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                 int height = new Random().Next(MinRoomHeight, MaxRoomHeight);
                 int x = new Random().Next(0, this.width - width);
                 int y = new Random().Next(0, this.height - height);
-                Room room = new Room(width, height, new Vector2D(x, y));
+                Room room = factory.MakeRoom(width, height, new Vector2D(x, y));
 
                 while (!CanRoomBePlaced(room))
                 {
@@ -68,7 +69,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                     height = new Random().Next(MinRoomHeight, MaxRoomHeight);
                     x = new Random().Next(0, this.width - width);
                     y = new Random().Next(0, this.height - height);
-                    room = new Room(width, height, new Vector2D(x, y));
+                    room = factory.MakeRoom(width, height, new Vector2D(x, y));
                 }
                 AddRoomToDungeon(room);
             }

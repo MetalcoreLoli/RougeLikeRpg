@@ -50,35 +50,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
                     temp[idx] = new Cell('.', new Vector2D(x, y) + this.Location);
                 }
 
-            for (int y = 0; y < Height; y++)
-                for (int x = 0; x < Width; x++)
-                {
-                    int idx = x + Width * y;
-                    if (x == 0)
-                        temp[idx].Symbol = '║';
-
-                    if (y == 0)
-                        temp[idx].Symbol = '═';
-
-                    if (y == Height - 1)
-                        temp[idx].Symbol = '═';
-
-                    if (x == Width - 1)
-                        temp[idx].Symbol = '║';
-
-                    if (x == 0 && y == 0)
-                        temp[idx].Symbol = '╔';
-
-                    if (x == 0 && y == Height - 1)
-                        temp[idx].Symbol = '╚';
-
-                    if (x == Width - 1 && y == Height - 1)
-                        temp[idx].Symbol = '╝';
-
-                    if (x == Width - 1 && y == 0)
-                        temp[idx].Symbol = '╗';
-                }
-             
+                         
             return temp;
         }
 

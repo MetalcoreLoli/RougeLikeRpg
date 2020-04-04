@@ -1,4 +1,5 @@
 using RougeLikeRPG.Graphic.Core;
+using RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory;
 
 namespace RougeLikeRPG.Engine.GameMaps.Dungeon
 {
@@ -23,7 +24,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon
             BackColor = backColor;
         }
 
-        public Cell[] NextDungeon(Dungeon dungeon)
-            => dungeon.Generate();
+        public Cell[] NextDungeon(Dungeon dungeon, AbstractFactory factory)
+            => dungeon.Generate(factory);
     }
 }
