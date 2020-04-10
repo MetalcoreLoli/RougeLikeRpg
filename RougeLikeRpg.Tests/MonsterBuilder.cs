@@ -4,6 +4,8 @@ using RougeLikeRPG.Engine.Actors.Builders;
 using RougeLikeRPG.Engine.Actors.Enums;
 using RougeLikeRPG.Engine.Actors.Monsters;
 using RougeLikeRPG.Engine.Actors.Monsters.Builders;
+using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Tests
 {
@@ -71,8 +73,8 @@ namespace RougeLikeRpg.Tests
         [Test]
         public void MonsterBuilderSetColorTest()
         {
-            builder.SetColor(ConsoleColor.Green);
-            Assert.AreEqual(ConsoleColor.Green, builder.Get().Color);
+            builder.SetColor(ColorManager.Green);
+            Assert.AreEqual(ColorManager.Green, builder.Get().Color);
         }
 
         [Test]

@@ -10,5 +10,19 @@ namespace RougeLikeRPG.Graphic.Core
 
         public Color(int red, int green, int blue)
             => (Red, Green, Blue) = (red, green, blue);
+
+
+        public override bool Equals(object other)
+        {
+            if (other is Color otherColor)
+            {
+                return 
+                    Red   == otherColor.Red &&
+                    Green == otherColor.Green &&
+                    Blue  == otherColor.Blue;
+            }
+            else 
+                throw new Exception("Type Error");
+        }
     }
 }

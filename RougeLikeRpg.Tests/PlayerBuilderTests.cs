@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRPG.Graphic.Core;
 using RougeLikeRPG.Engine.Actors;
 using RougeLikeRPG.Engine.Actors.Builders;
 using RougeLikeRPG.Engine.Actors.Enums;
@@ -30,7 +32,7 @@ namespace RougeLikeRpg.Tests
         [Test]
         public void BuilderSetColor()
         {
-            ConsoleColor color = ConsoleColor.White;
+            Color color = ColorManager.White;
             builder.SetColor(color);
             Assert.AreEqual(color, builder.Get().Color);
         }

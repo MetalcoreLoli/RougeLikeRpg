@@ -32,8 +32,10 @@ namespace RougeLikeRPG.Engine
         Dungeon dungeon;
         private Vector2D _mapBufferOffset;
 
-
+        
         private Stairs downStairs;
+        
+        private Int32 _numberOfFloor = 0;
         #endregion
 
         #region Public Properties
@@ -177,7 +179,7 @@ namespace RougeLikeRPG.Engine
             }
             downStairs.Position += _mapBufferOffset;
             //if (Player != null)
-                Player.Position += _mapBufferOffset;
+            Player.Position += _mapBufferOffset;
 
             Actors.RemoveAll(actor => actor.IsDead);
             foreach (var actor in Actors)
@@ -232,7 +234,7 @@ namespace RougeLikeRPG.Engine
                 MinRoomWidth = 7,
                 CountOfRooms = 18
             };
-
+            
             dungeon.Generate(new DefaultDungeonFactory()).AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
             var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2) + Location;
 
@@ -245,7 +247,7 @@ namespace RougeLikeRPG.Engine
                     ColorManager.Black);
 
             SetSymbol(downStair_pos.X, downStair_pos.Y, downStairs.Symbol); 
-
+            _numberOfFloor++;
             foreach (var room in dungeon.Rooms)
                 foreach (var actor in room.Actors)
                 {
@@ -258,7 +260,9 @@ namespace RougeLikeRPG.Engine
             {
                 cell.Position = cell.Position - offset;
             }
+            Console.Title = $"Floor {_numberOfFloor}";
         }
+
 
         private Cell[] MapBufferInit(Int32 mapWidth, Int32 mapHeight)
         {

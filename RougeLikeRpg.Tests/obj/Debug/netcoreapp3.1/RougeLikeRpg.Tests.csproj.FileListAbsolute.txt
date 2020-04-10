@@ -295,3 +295,5 @@ D:/Projects/CSharp/Games/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1
 /home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.csproj.CopyComplete
 /home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.dll
 /home/metalcoreLoli/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.pdb
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.csproj.CoreCompileInputs.cache
+/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/Debug/netcoreapp3.1/RougeLikeRpg.Tests.genruntimeconfig.cache
