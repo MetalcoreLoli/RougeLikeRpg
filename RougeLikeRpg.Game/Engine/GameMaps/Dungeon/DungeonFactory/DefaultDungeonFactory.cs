@@ -14,6 +14,7 @@ namespace RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory
                 for (int x = 0; x < Width; x++)
                 {
                     int idx = x + Width * y;
+                    room.Body[idx].Color = ColorManager.White;
                     if (x == 0)
                         room.Body[idx].Symbol = '║';
 

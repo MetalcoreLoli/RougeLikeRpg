@@ -98,7 +98,8 @@ namespace RougeLikeRPG.Engine
         {
             Actor actor = sender as Actor;
             //actor.IsMoving = true;
-            if (!(_map.IsWalkable(actor.Position)) || actor.Position == _player.Position)
+            if (!(_map.IsWalkable(actor.Position)) || 
+                    actor.Position == _player.Position)
             {
                 actor.Position -= e.MovingPosition;
                 if (actor is Monster)
@@ -172,7 +173,7 @@ namespace RougeLikeRPG.Engine
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
         {
-            (_messageLogScreen as MessageLogScreen).Add($"{e.Key} was pressed");
+            //(_messageLogScreen as MessageLogScreen).Add($"{e.Key} was pressed");
             Vector2D playersInput = PlayerMoveTo(e.Key);
             //Console.Title = _map.Player.Direction.ToString();
             PlayerCastSpells(e.Key);

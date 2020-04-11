@@ -26,6 +26,11 @@ namespace RougeLikeRpg.Graphic.Core
             this.Code = Code;
         }
 
+        public static implicit operator AsciiSymbol(char sym)
+            => new AsciiSymbol(sym);
+
+        public static implicit operator AsciiSymbol(UInt16 code)
+            => new AsciiSymbol(code);
 
         public override bool Equals(object other)
         {
@@ -36,5 +41,10 @@ namespace RougeLikeRpg.Graphic.Core
             else
                 throw new Exception("Type Error");
         }
+    }
+
+
+    public class AsciiSymbolManager 
+    {
     }
 }

@@ -10,7 +10,7 @@ namespace RougeLikeRpg.Tests
         [Test]
         public void AsciiSymbolFromCodeTest()
         {
-            AsciiSymbol symbol = new AsciiSymbol(64);
+            AsciiSymbol symbol = 64;
             char character = '@';
             Assert.AreEqual(character, symbol.Symbol);
         }
@@ -19,7 +19,7 @@ namespace RougeLikeRpg.Tests
         [Test]
         public void AsciiSymbolFromCharTest()
         {
-            AsciiSymbol symbol = new AsciiSymbol('!');
+            AsciiSymbol symbol = '!';
             char character = '!';
 
             Assert.AreEqual((UInt16)character, symbol.Code);

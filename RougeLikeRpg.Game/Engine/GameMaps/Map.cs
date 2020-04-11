@@ -114,6 +114,12 @@ namespace RougeLikeRPG.Engine
             _mapBody[x + _mapBufferWidth * y].Symbol = symbol;
         }
 
+        public void SetSymbolWithColor(int x, int y, char symbol, Color color)
+        {
+            _mapBody[x + _mapBufferWidth * y].Symbol = symbol;
+            _mapBody[x + _mapBufferWidth * y].Color = color;
+        }
+
         public void AddRangeOfActorToMap(IEnumerable<Actor> actors)
         {
             foreach (Actor actor in actors)
@@ -234,8 +240,10 @@ namespace RougeLikeRPG.Engine
                 MinRoomWidth = 7,
                 CountOfRooms = 18
             };
-            
-            dungeon.Generate(new DefaultDungeonFactory()).AsParallel().ForAll(cell => SetSymbol(cell.Position.X, cell.Position.Y, cell.Symbol));
+            AbstractFactory factory = new DefaultDungeonFactory(); 
+            if (_numberOfFloor > 1)
+                factory = new FireDungeonFactory();
+            dungeon.Generate(factory).AsParallel().ForAll(cell => SetSymbolWithColor(cell.Position.X, cell.Position.Y, cell.Symbol, cell.Color));
             var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2) + Location;
 
             var downStair_pos = dungeon.Rooms.Last().GetCenter();
