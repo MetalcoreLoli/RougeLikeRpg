@@ -110,8 +110,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         #region Propercted Methods 
         protected override Cell[] InitBody(int width, int height)
         {
-            Cell[] temp = base.InitBody(width, height);
-            temp = InitTextBody(Text);
+            Cell[] temp = InitTextBody(Text);
             return temp;
         }
         #endregion

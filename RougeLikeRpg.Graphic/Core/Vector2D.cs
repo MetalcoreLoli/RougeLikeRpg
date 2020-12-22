@@ -3,12 +3,13 @@ using System.Runtime.CompilerServices;
 
 namespace RougeLikeRPG.Graphic.Core
 {
- 
+
     public readonly struct Vector2D
     {
         public Int32 X { get; }
         public Int32 Y { get; }
-
+        public Int32 Lenght { get => (Int32)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2)); }
+        public Vector2D Normalized => new Vector2D(X / Lenght, Y / Lenght);
         public Vector2D(Int32 x, Int32 y)
         {
             X = x;

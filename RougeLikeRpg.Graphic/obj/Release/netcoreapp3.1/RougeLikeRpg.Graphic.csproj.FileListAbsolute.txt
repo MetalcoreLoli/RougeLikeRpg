@@ -1,0 +1,9 @@
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\bin\Release\netcoreapp3.1\RougeLikeRpg.Graphic.deps.json
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\bin\Release\netcoreapp3.1\RougeLikeRpg.Graphic.dll
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\bin\Release\netcoreapp3.1\RougeLikeRpg.Graphic.pdb
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\obj\Release\netcoreapp3.1\RougeLikeRpg.Graphic.csproj.CoreCompileInputs.cache
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\obj\Release\netcoreapp3.1\RougeLikeRpg.Graphic.AssemblyInfoInputs.cache
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\obj\Release\netcoreapp3.1\RougeLikeRpg.Graphic.AssemblyInfo.cs
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\obj\Release\netcoreapp3.1\RougeLikeRpg.Graphic.dll
+D:\Projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\obj\Release\netcoreapp3.1\RougeLikeRpg.Graphic.pdb
+D:\projects\CSharp\Games\RougeLikeRpg\RougeLikeRpg.Graphic\obj\Release\netcoreapp3.1\RougeLikeRpg.Graphic.csprojAssemblyReference.cache

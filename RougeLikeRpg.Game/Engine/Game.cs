@@ -95,8 +95,8 @@ namespace RougeLikeRPG.Engine
             Console.Clear();
             do
             {
-                Draw();
                 Update();
+                Draw();
                 //Thread.Sleep(1000);
             } while (true);
         }

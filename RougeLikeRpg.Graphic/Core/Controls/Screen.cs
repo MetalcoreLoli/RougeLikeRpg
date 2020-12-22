@@ -15,7 +15,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         
             
         private Vector2D _titleLocation = new Vector2D(1, 0);
-        private Lable _lTitle;
+        private Cell[] _lTitle;
         #endregion
         
         #region Public Properties
@@ -46,7 +46,11 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             set
             {
                 _title = value;
-                _lTitle = new Lable("-| "+_title+" |-", _titleLocation + Location);
+                string title = "-| " + _title + " |-";
+                for (int i = 0; i < title.Length; i++)
+                {
+                    body[i + _titleLocation.X].Symbol = title[i];
+                }
             }
         }
         #endregion 
@@ -126,11 +130,10 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             await foreach (Cell cell in GetCellsAsync(body))
                 Render.WithOffset(cell, 0, 0);
 
-            if(_lTitle != null)
-                _lTitle.Draw();
-
-            foreach (Control item in Items)
-                item.Draw();
+            //foreach (Control item in Items)
+            //{ 
+            //    item.Draw();
+            //}
         }
         ///<summary>
         /// Метод добавления контрола на экран 
@@ -138,19 +141,19 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///<param name="item">Контрол </param>
         public void Add(Control item)
         {
-            item.Location += Location;
+            item.Location = Location;
             Items.Add(item);
-            //foreach (Cell cell in body)
-            //{
-            //    Cell itemCell = item.GetCellByPosition(cell.Position.X, cell.Position.Y);
-            //    if (itemCell != null)
-            //    {
-            //        cell.Color = itemCell.Color;
-            //        cell.BackColor = item.BackgroundColor;
-            //        cell.Symbol = itemCell.Symbol;
+            foreach (Cell cell in body)
+            {
+                Cell itemCell = item.GetCellByPosition(cell.Position.X, cell.Position.Y);
+                if (itemCell != null)
+                {
+                    cell.Color = itemCell.Color;
+                    cell.BackColor = item.BackgroundColor;
+                    cell.Symbol = itemCell.Symbol;
 
-            //    }
-            //}
+                }
+            }
             //for (int x = 0; x < item.Width; x++)
             //    for (int y = 0; y < item.Height; y++)
             //    {
@@ -168,17 +171,18 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             foreach (Cell cell in body)
                 cells.Add(cell);
 
-            foreach (Cell cell in cells)
-            {
-                Cell titleCell = _lTitle.GetCellByPosition(cell.Position.X, cell.Position.Y);
-                if (titleCell != null)
-                {
-                    cell.Color = titleCell.Color;
-                    cell.BackColor = titleCell.BackColor;
-                    cell.Symbol = titleCell.Symbol;
-                }
-            }
+            //foreach (Cell cell in cells)
+            //{
+            //    Cell titleCell = _lTitle.GetCellByPosition(cell.Position.X, cell.Position.Y);
+            //    if (titleCell != null)
+            //    {
+            //        cell.Color = titleCell.Color;
+            //        cell.BackColor = titleCell.BackColor;
+            //        cell.Symbol = titleCell.Symbol;
+            //    }
+            //}
             if (Items != null)
+            {
                 foreach (Cell cell in cells)
                 {
                     foreach (Control control in Items)
@@ -192,7 +196,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                         }
                     }
                 }
-              
+            }
+
             return cells.ToArray();
         }
 

@@ -204,19 +204,14 @@ namespace RougeLikeRPG.Engine
 
         public async override void Draw()
         {
-            _mapBodyClean.AsParallel().ForAll(cell => 
+            foreach (var cell in from cell in _mapBody.AsParallel()
+                                 where cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width - 1 && cell.Position.Y < Height - 1
+                                 select cell)
             {
-                if (cell.Position.X < Width && cell.Position.Y < Height)
-                    Render.WithOffset(cell, 0, 0);
-            });
-        
-            foreach (var cell in _mapBody)
-            {
-                if (cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width - 1 && cell.Position.Y < Height - 1)
-                    Render.WithOffset(cell, 0, 0);
+                Render.WithOffset(cell, 0, 0);
             }
             //if (Player != null)
-                Render.WithOffset(Player, 0, 0);
+            Render.WithOffset(Player, 0, 0);
 
             foreach (var actor in Actors)
             {

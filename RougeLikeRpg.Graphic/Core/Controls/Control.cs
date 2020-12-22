@@ -43,8 +43,13 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             set
             {
                 _backColor = value;
-                if (Width > 0 && Height > 0)
-                    body = InitBody(Width, Height);
+                if (body != null)
+                {
+                    for (int i = 0; i < body.Length; i++)
+                    {
+                        body[i].BackColor = _backColor;
+                    }
+                }
             }
         }
 
@@ -56,9 +61,14 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             get => _foreColor; 
             set
             {
-                _foreColor = value; 
-                if (Width > 0 && Height > 0)
-                    body = InitBody(Width, Height);
+                _foreColor = value;
+                if (body != null)
+                {
+                    for (int i = 0; i < body.Length; i++)
+                    {
+                        body[i].Color = _foreColor;
+                    }
+                }
             }
         }
 
@@ -97,7 +107,17 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             set
             {
                 _location = value;
-                body = InitBody(Width, Height);
+                if (body != null)
+                {
+                    for (int i = 0; i < body.Length; i++)
+                    {
+                        body[i].Position += _location;
+                    }
+                }
+                else
+                { 
+                    body = InitBody(Width, Height);
+                }
             }
         }
         #endregion
