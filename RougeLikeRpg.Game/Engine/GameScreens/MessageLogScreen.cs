@@ -41,7 +41,10 @@ namespace RougeLikeRPG.Engine.GameScreens
         private void AddMessageToLog(string Message)
         {
             if (Items.Count >= Height-2)
+            {
                 Items = new List<Control>();
+                Clear(this.BackgroundColor);
+            }
             Add(new Lable(Message, new Vector2D(1, Items.Count + 1)));
         }
     }

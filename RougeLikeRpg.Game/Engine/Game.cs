@@ -43,7 +43,7 @@ namespace RougeLikeRPG.Engine
             _player = new Player();
             _player = NewPlayer();
             
-            _player.Position    += new Vector2D(_map.Width / 2, _map.Height / 2) + _map.Location;
+            _player.Position    += new Vector2D(_map.Width >> 1, _map.Height >> 1) + _map.Location;
             _player.LevelUp     += Player_LevelUp;
             _player.Attacking   += Player_Attacking;
             _player.Dying       += Actor_Dying;
@@ -93,6 +93,7 @@ namespace RougeLikeRPG.Engine
         public void Start()
         {
             Console.Clear();
+            Draw();
             while (true)
             {
                 Update();
@@ -108,8 +109,6 @@ namespace RougeLikeRPG.Engine
         /// </summary>
         private void Draw()
         {
-            //Thread.Sleep(250);
-            //Console.Clear();
             _map.Draw();
             _messageLogScreen.Draw();
             _statusScreen.Draw();
@@ -159,7 +158,9 @@ namespace RougeLikeRPG.Engine
             _map.Update();
             
             _statusScreen.Items = new List<Control>();
+            _statusScreen.Clear(_statusScreen.BackgroundColor);
             _statusScreen.AddRange(_player.GetStats());
+            
         }
         private void MonstersMove()
         {

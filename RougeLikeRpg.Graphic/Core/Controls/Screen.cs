@@ -11,11 +11,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
     ///</summary>
     public class Screen : Control
     {
-        
         #region Private Members
         private string _title;
-        
-            
         private Vector2D _titleLocation = new Vector2D(1, 0);
         private Cell[] _lTitle;
         #endregion
@@ -127,18 +124,12 @@ namespace RougeLikeRPG.Graphic.Core.Controls
 
 
         #region Public Methods
-
-      
         public async override void Draw()
         {
             await foreach (Cell cell in GetCellsAsync(body))
                 Render.WithOffset(cell, 0, 0);
-
-            //foreach (Control item in Items)
-            //{ 
-            //    item.Draw();
-            //}
         }
+
         ///<summary>
         /// Метод добавления контрола на экран 
         ///</summary>
@@ -193,16 +184,20 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///</summary>
         ///<param name="color">Цвет, которым заполнится очищенное пространоство,
         ///</param>
-        public void Clear(Color color)
+        public virtual void Clear(Color color)
         {
-            
-            foreach (var cell in body.AsParallel())
-                Render.WithOffset(new Cell(' ', cell.Position,color, color), 0, 0);
-            
+            for (int i = 0; i < body.Length; i++) 
+            {
+                body[i].Symbol = ' ';
+                body[i].BackColor = BackgroundColor;
+                body[i].Color = ForegroundColor;
+            }
             body = DrawLeftRightWalls(body, Width, Height, '|');
             body = DrawUpDownWalls(body, Width, Height, '-');
             body = DrawCornel(body, Width, Height, '+');
+            Title = _title;
         }
+
         #endregion
 
     }

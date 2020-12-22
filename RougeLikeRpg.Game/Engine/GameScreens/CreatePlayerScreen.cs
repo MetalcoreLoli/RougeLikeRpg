@@ -60,6 +60,7 @@ namespace RougeLikeRPG.Engine.GameScreens
             Draw();
             while (IsAlive)
             {
+                Clear(this.BackgroundColor);
                 Update();
                 Draw();
             } 
@@ -90,7 +91,6 @@ namespace RougeLikeRPG.Engine.GameScreens
 
             switch (Input.PlayerKeyInput().Result)
             {
-                
                 case ConsoleKey.R: builder.RollStats(); break;
                 case ConsoleKey.Enter: IsAlive = false;  break;
                 case ConsoleKey.RightArrow:
@@ -108,7 +108,6 @@ namespace RougeLikeRPG.Engine.GameScreens
                     }
                     break;
             }
-            
             StartItems(builder.Get());
 
             _statsScreen.Items = new List<Control>();

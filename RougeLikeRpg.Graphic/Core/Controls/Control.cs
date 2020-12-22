@@ -271,6 +271,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         /// Метод отрисовки контрола
         ///</summary>
         public abstract void Draw();
+       
         #endregion
     }
 }
