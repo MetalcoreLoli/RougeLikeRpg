@@ -3,6 +3,7 @@ using System;
 
 namespace RougeLikeRPG.Graphic.Core
 {
+    [Serializable]
     public class Cell : IRenderable
     {
         #region Public Properties

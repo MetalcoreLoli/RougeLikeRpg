@@ -93,12 +93,12 @@ namespace RougeLikeRPG.Engine
         public void Start()
         {
             Console.Clear();
-            do
+            while (true)
             {
                 Update();
                 Draw();
                 //Thread.Sleep(1000);
-            } while (true);
+            } 
         }
         #endregion
 

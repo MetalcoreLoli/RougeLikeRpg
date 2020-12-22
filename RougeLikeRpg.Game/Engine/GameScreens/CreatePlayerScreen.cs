@@ -19,39 +19,37 @@ namespace RougeLikeRPG.Engine.GameScreens
         private Screen _inputPlayerNameScreen;
         private Screen _helpScreen;
 
-        private Render _render;
         private bool IsAlive = false;
         public CreatePlayerScreen() 
-            : base(60, 23,  new Vector2D(0, 0), "Player creating screen", ConsoleColor.White, ConsoleColor.Black)
+            : base(60, 23,  new Vector2D(0, 0), "Player creating screen", ColorManager.Black, ColorManager.White)
         {
             builder = new PlayerBuilder();
 
             builder.SetFovX(15);
             builder.SetFovY(4);
             builder.SetColor(new Color(255, 102, 0));
-            _render = new Render();
-            _inputPlayerNameScreen = new Screen(25, 3, new Vector2D(29, 1));
-            _inputPlayerNameScreen.Title = "Input Player Name";
+            _inputPlayerNameScreen = new Screen(25, 3, new Vector2D(29, 1))
+            {
+                Title = "Input Player Name"
+            };
 
-            _helpScreen = new Screen(30, 18, new Vector2D(29, 4));
-            _helpScreen.Title = "Help";
-            _helpScreen.AddRange(new List<Control> { 
+            _helpScreen = new Screen(30, 18, new Vector2D(29, 4))
+            {
+                Title = "Help"
+            };
+            _helpScreen.AddRange(new List<Control> {
                 new Lable("R     - to roll stats",      new Vector2D(1, 1)),
                 new Lable("Enter - to confirm roll",    new Vector2D(1, 2)),
                 new Lable("->    - to change race",     new Vector2D(1, 3)),
                 new Lable("<-    - to change race",     new Vector2D(1, 4)),
-            });
+            }) ;
 
-            _statsScreen = new Screen(25, 21, new Vector2D(1, 1));
-            _statsScreen.Title = "Player's Stats";
+            _statsScreen = new Screen(25, 21, new Vector2D(1, 1)) { Title = "Player's Stats" };
             _statsScreen.AddRange(builder.Get().GetStats());
 
-            Items.AddRange(new List<Control> { 
-                _inputPlayerNameScreen,
-                _helpScreen,
-                _statsScreen
-            });
-
+            Add(_helpScreen);
+            Add(_statsScreen);
+            Add(_inputPlayerNameScreen);
             PlayersSymbolAndColors();
             
             IsAlive = true;
@@ -59,38 +57,14 @@ namespace RougeLikeRPG.Engine.GameScreens
 
         public Player Start()
         {
-            do
+            Draw();
+            while (IsAlive)
             {
+                Update();
                 Draw();
-                Update(builder.Get());
-            } while (IsAlive);
+            } 
             return builder.Get();
         }
-
-        //private new void Draw()
-        //{
-        //    Console.Clear();
-        //    List<string> frame = new List<string>();
-        //    string line = "";
-        //    List<Cell> cells = new List<Cell>();
-
-        //    foreach (Cell cell in GetCells())
-        //        cells.Add(cell);
-
-        //    foreach (Cell cell in cells)
-        //    {
-        //        line += cell.Symbol;
-        //        if (cell.Position.X.Equals(Width - 1))
-        //        {
-        //            frame.Add(line);
-        //            line = "";
-        //        }
-        //    }
-        //    foreach (Cell cell in GetCells())
-        //        Render.WithOffset(cell, 0, 0);
-        //    //foreach (var l in frame)
-        //    //    Console.WriteLine(l);
-        //}
 
         private void PlayersSymbolAndColors()
         {
@@ -101,20 +75,22 @@ namespace RougeLikeRPG.Engine.GameScreens
         private string InputName()
         {
             (int left, int top) cursor = (Console.CursorLeft, Console.CursorTop);
-            Console.SetCursorPosition(_inputPlayerNameScreen.Location.X + 1, _inputPlayerNameScreen.Location.Y + 1);
+            Vector2D curslocation = _inputPlayerNameScreen.Location + Location;
+            Console.SetCursorPosition(curslocation.X + 1, curslocation.Y + 1);
             string name = Console.ReadLine();
             Console.SetCursorPosition(cursor.left, cursor.top);
             return name;
         }
 
-        private void Update(Player player)
+        public override void Update()
         {
-            //Console.Clear();
+            base.Update();
             if (builder.Get().Name == null)
                 builder.SetName(InputName());
 
             switch (Input.PlayerKeyInput().Result)
             {
+                
                 case ConsoleKey.R: builder.RollStats(); break;
                 case ConsoleKey.Enter: IsAlive = false;  break;
                 case ConsoleKey.RightArrow:

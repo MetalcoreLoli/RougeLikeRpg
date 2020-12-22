@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using RougeLikeRpg.Graphic.Core;
 using RougeLikeRPG.Graphic.Core;
 
 namespace RougeLikeRPG.Graphic.Core.Controls
@@ -75,8 +77,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                     height, 
                     new Vector2D(0, 0),
                     title,
-                    ConsoleColor.Black,
-                    ConsoleColor.White)
+                    ColorManager.Black,
+                    ColorManager.White)
         {
         } 
 
@@ -86,8 +88,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                     height, 
                     location,
                     "",
-                    ConsoleColor.Black,
-                    ConsoleColor.White)
+                    ColorManager.Black,
+                    ColorManager.White)
         {} 
 
         public Screen(
@@ -95,15 +97,17 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                 Int32 height, 
                 Vector2D location,
                 string title,
-                ConsoleColor backColor,
-                ConsoleColor foreColor)
+                Color backColor,
+                Color foreColor)
         {
             Items = new List<Control>();
             Width   = width;
             Height  = height;
             Location = location;
             Title   = title;
-            body    = InitBody(width, height);    
+            body    = InitBody(width, height);
+            ForegroundColor = foreColor;
+            BackgroundColor = backColor;
            // _lTitle = new Lable(title);
         }
         #endregion
@@ -141,98 +145,63 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///<param name="item">Контрол </param>
         public void Add(Control item)
         {
-            item.Location = Location;
+            //item.Location = Location;
             Items.Add(item);
-            foreach (Cell cell in body)
+            foreach (Cell cell in item.GetBody())
             {
-                Cell itemCell = item.GetCellByPosition(cell.Position.X, cell.Position.Y);
+                var cellLocation = cell.Position + Location;
+                Cell itemCell = GetCellByPosition(cellLocation.X, cellLocation.Y);
                 if (itemCell != null)
                 {
-                    cell.Color = itemCell.Color;
-                    cell.BackColor = item.BackgroundColor;
-                    cell.Symbol = itemCell.Symbol;
-
+                    itemCell.Color = cell.Color;
+                    itemCell.BackColor = cell.BackColor;
+                    itemCell.Symbol = cell.Symbol;
                 }
             }
-            //for (int x = 0; x < item.Width; x++)
-            //    for (int y = 0; y < item.Height; y++)
-            //    {
-            //        Vector2D itemCellPostion = new Vector2D(x, y) + item.Location;
-            //        Cell cell = item.GetCellByPosition(itemCellPostion);
-            //        if (cell != null)
-            //            body[cell.Position.X + Width * cell.Position.Y] = cell;
-            //    }
-        }
-
-        public Cell[] GetCells()
-        {
-            List<Cell> cells = new List<Cell>();
-
-            foreach (Cell cell in body)
-                cells.Add(cell);
-
-            //foreach (Cell cell in cells)
-            //{
-            //    Cell titleCell = _lTitle.GetCellByPosition(cell.Position.X, cell.Position.Y);
-            //    if (titleCell != null)
-            //    {
-            //        cell.Color = titleCell.Color;
-            //        cell.BackColor = titleCell.BackColor;
-            //        cell.Symbol = titleCell.Symbol;
-            //    }
-            //}
-            if (Items != null)
-            {
-                foreach (Cell cell in cells)
-                {
-                    foreach (Control control in Items)
-                    {
-                        Cell itemCell = control.GetCellByPosition(cell.Position.X, cell.Position.Y);
-                        if (itemCell != null)
-                        {
-                            cell.Color = itemCell.Color;
-                            cell.BackColor = itemCell.BackColor;
-                            cell.Symbol = itemCell.Symbol;
-                        }
-                    }
-                }
-            }
-
-            return cells.ToArray();
         }
 
         public void AddRange(IEnumerable<Control> items)
         {
-            foreach(Control item in items)
+            foreach (Control item in items)
+            {
                 Add(item);
+            }
         }
 
         ///<summary>
         /// Обновлени и все контролов на экране
         ///</summary>
-        public void Update()
+        public virtual void Update()
         {
-           // body = InitBody(Width, Height);
+            foreach (var item in Items)
+            {
+                foreach (Cell cell in body)
+                {
+                    Cell itemCell = item.GetCellByPosition(cell.Position.X, cell.Position.Y);
+                    if (itemCell != null)
+                    {
+                        cell.Color = itemCell.Color;
+                        cell.BackColor = item.BackgroundColor;
+                        cell.Symbol = itemCell.Symbol;
+                    }
+                }
+            }
         }
 
         ///<summary>
         /// Очистка экрана
         ///</summary>
         ///<param name="color">Цвет, которым заполнится очищенное пространоство,
-        ///по умолчанию - черный</param>
+        ///</param>
         public void Clear(Color color)
         {
-            for (int i = 0; i < Height * Width; i++)
-            {
-                body[i].Symbol = ' ';
-                body[i].BackColor = color; 
-            }
+            
+            foreach (var cell in body.AsParallel())
+                Render.WithOffset(new Cell(' ', cell.Position,color, color), 0, 0);
+            
             body = DrawLeftRightWalls(body, Width, Height, '|');
             body = DrawUpDownWalls(body, Width, Height, '-');
             body = DrawCornel(body, Width, Height, '+');
-
-            //foreach (Cell cell in body)
-            //    Render.WithOffset(cell, 0, 0);
         }
         #endregion
 

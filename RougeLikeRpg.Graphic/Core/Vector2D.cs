@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace RougeLikeRPG.Graphic.Core
 {
-
+    [Serializable]
     public readonly struct Vector2D
     {
         public Int32 X { get; }

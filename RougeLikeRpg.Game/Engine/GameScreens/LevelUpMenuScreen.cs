@@ -21,8 +21,8 @@ namespace RougeLikeRPG.Engine.GameScreens
             Int32 height,
             Vector2D location,
             string title,
-            ConsoleColor backColor,
-            ConsoleColor foreColor)
+            Color backColor,
+            Color foreColor)
             : base(width, height, location, title, backColor, foreColor)
         {
             IsAlive = true;

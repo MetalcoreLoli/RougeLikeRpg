@@ -195,7 +195,7 @@ namespace RougeLikeRPG.Engine
 
             _mapBufferOffset = new Vector2D(0, 0);
         }
-
+         
         public void PlayerMoveTo(Vector2D vec)
         {
             Vector2D offset = new Vector2D(vec.X * -1, vec.Y * -1);
@@ -239,7 +239,7 @@ namespace RougeLikeRPG.Engine
             if (_numberOfFloor > 1)
                 factory = new FireDungeonFactory();
             dungeon.Generate(factory).AsParallel().ForAll(cell => SetSymbolWithColor(cell.Position.X, cell.Position.Y, cell.Symbol, cell.Color));
-            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width / 2, Height / 2) + Location;
+            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width >> 1, Height >> 1) + Location;
 
             var downStair_pos = dungeon.Rooms.Last().GetCenter();
             

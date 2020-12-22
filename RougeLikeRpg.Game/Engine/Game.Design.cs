@@ -222,16 +222,16 @@ namespace RougeLikeRPG.Engine
                                                 _messageLogScreenHeight,
                                                 _messageLogScreenLocation,
                                                 "Message Log",
-                                                ConsoleColor.DarkCyan,
-                                                ConsoleColor.Black);
+                                                ColorManager.Black,
+                                                ColorManager.White);
 
             _levelUpMenuScreen = new LevelUpMenuScreen(
                                                50,
                                                25,
                                                new Vector2D(0, 0),
                                                "Level Up Menu",
-                                               ConsoleColor.DarkCyan,
-                                               ConsoleColor.Black);
+                                               ColorManager.Black,
+                                               ColorManager.White);
 
             _statusScreen = new Screen(
                                                  _statusScreenWidth,
@@ -244,8 +244,8 @@ namespace RougeLikeRPG.Engine
                                                 _invetoryScreenHeight,
                                                 _invetoryScreenLocation,
                                                 "",
-                                                ConsoleColor.DarkYellow,
-                                                ConsoleColor.Black);
+                                                ColorManager.DarkYellow,
+                                                ColorManager.Black);
 
             _map = new Map(_mapWidth, _mapHeight, _mapLocation);
 

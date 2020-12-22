@@ -2,6 +2,7 @@ using System;
 
 namespace RougeLikeRPG.Graphic.Core
 {
+    [Serializable]
     public struct Color
     {
         public Int32 Red {get; set;}

@@ -1,3 +1,4 @@
+using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 
@@ -29,6 +30,17 @@ namespace RougeLikeRPG.Graphic.Core
 
             // MoveCursorTo(obj.Position);
             Console.Write($"{MovedCursorTo(obj.Position)}{SetBackColor(obj)}{SetColor(obj)}{obj.Symbol}\x1b[39m\x1b[39m");
+        }
+
+        public static void DrawLine(Vector2D start, Vector2D end, Color color)
+        {
+            Vector2D endPoint = (start + end);
+            Vector2D dir = endPoint.Normalized;
+            for (int i = 0; i < endPoint.Lenght; i++)
+            {
+                start += dir;
+                WithOffset(new Cell(' ', start, ColorManager.White, color), 0, 0);
+            }
         }
 
         static void MoveCursorTo(Vector2D position)
