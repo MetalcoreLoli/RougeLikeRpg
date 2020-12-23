@@ -1,7 +1,7 @@
 using  System;
 
 
-namespace RougeLikeRPG.Graphic.Core
+namespace RougeLikeRpg.Graphic.Core
 {
     public interface IRenderable
     {

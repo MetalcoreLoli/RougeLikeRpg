@@ -1,11 +1,11 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Engine.Dices;
+using RougeLikeRpg.Engine.Dices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Monsters
+namespace RougeLikeRpg.Engine.Actors.Monsters
 {
     internal class Goblin : Monster
     {

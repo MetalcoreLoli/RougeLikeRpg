@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Threading;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Engine.Actors;
-using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Engine.Magick.Events;
+using RougeLikeRpg.Engine.Actors;
+using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Engine.Magick.Events;
 
-namespace RougeLikeRPG.Engine.Magick
+namespace RougeLikeRpg.Engine.Magick
 {
     internal class HealingSpell : ISpell
     {

@@ -1,10 +1,10 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems.Enums
+namespace RougeLikeRpg.Engine.GameItems.Enums
 {
     internal class WeaponRareColor
     {

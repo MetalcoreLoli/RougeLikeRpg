@@ -1,10 +1,10 @@
-﻿using RougeLikeRPG.Graphic.Core;
+﻿using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameMaps.Dungeon
+namespace RougeLikeRpg.Engine.GameMaps.Dungeon
 {
     internal class Room
     {

@@ -1,11 +1,11 @@
-﻿using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Graphic.Core.Controls;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameScreens
+namespace RougeLikeRpg.Engine.GameScreens
 {
     internal class MessageLogScreen : Screen
     {

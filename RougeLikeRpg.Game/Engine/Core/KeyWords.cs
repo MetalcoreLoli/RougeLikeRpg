@@ -1,11 +1,11 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Graphic.Core.Controls.Text;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Controls.Text;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Core
+namespace RougeLikeRpg.Engine.Core
 {
     internal static class KeyWords
     {

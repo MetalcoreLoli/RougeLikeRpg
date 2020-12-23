@@ -2,7 +2,7 @@ using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 
-namespace RougeLikeRPG.Graphic.Core
+namespace RougeLikeRpg.Graphic.Core
 {
     ///<summary>
     ///Класс занимающийся отрисовкой объектов

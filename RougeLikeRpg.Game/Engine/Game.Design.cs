@@ -1,22 +1,22 @@
-using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Graphic.Core.Controls;
-using RougeLikeRPG.Engine.Actors;
-using RougeLikeRPG.Engine.Actors.Enums;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Graphic.Core.Controls;
+using RougeLikeRpg.Engine.Actors;
+using RougeLikeRpg.Engine.Actors.Enums;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RougeLikeRPG.Engine.GameScreens;
-using RougeLikeRPG.Engine.Events;
-using RougeLikeRPG.Engine.Actors.Monsters;
-using RougeLikeRPG.Engine.GameItems.Items;
-using RougeLikeRPG.Engine.Core;
+using RougeLikeRpg.Engine.GameScreens;
+using RougeLikeRpg.Engine.Events;
+using RougeLikeRpg.Engine.Actors.Monsters;
+using RougeLikeRpg.Engine.GameItems.Items;
+using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Engine
+namespace RougeLikeRpg.Engine
 {
     /// <summary>
     /// Класс реaлизущий игровую логику
@@ -145,7 +145,6 @@ namespace RougeLikeRPG.Engine
         private void Actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
         {
             (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Actor).Name)} and drop exp: {e.DropExp}");
-            SetColorsToText();
         }
 
         private async void Player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
@@ -167,8 +166,6 @@ namespace RougeLikeRPG.Engine
             string levelUpMessage = $"+Level of {e.Actor.Name} was Upped+  ";
             (_messageLogScreen as MessageLogScreen).Add(levelUpMessage);
             var line = ((_messageLogScreen as MessageLogScreen).Items.Last() as Lable);
-            line.SetColorToWord(levelUpMessage, ColorManager.Yellow, ColorManager.Black);
-            SetColorsToText();
         }
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)

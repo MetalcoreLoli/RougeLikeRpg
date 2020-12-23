@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Events
+namespace RougeLikeRpg.Engine.Events
 {
     internal class KeyDownEventArgs : EventArgs
     {

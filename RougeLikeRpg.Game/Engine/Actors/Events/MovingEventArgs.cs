@@ -1,9 +1,9 @@
-﻿using RougeLikeRPG.Graphic.Core;
+﻿using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Events
+namespace RougeLikeRpg.Engine.Actors.Events
 {
     internal class MovingEventArgs : EventArgs
     {

@@ -1,15 +1,15 @@
-﻿using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Graphic.Core.Controls;
-using RougeLikeRPG.Engine.Actors;
-using RougeLikeRPG.Engine.Actors.Builders;
-using RougeLikeRPG.Engine.Dices;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Controls;
+using RougeLikeRpg.Engine.Actors;
+using RougeLikeRpg.Engine.Actors.Builders;
+using RougeLikeRpg.Engine.Dices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Engine.GameScreens
+namespace RougeLikeRpg.Engine.GameScreens
 {
     internal class CreatePlayerScreen : Screen
     {
@@ -61,7 +61,7 @@ namespace RougeLikeRPG.Engine.GameScreens
             while (IsAlive)
             {
                 Clear(this.BackgroundColor);
-                Update();
+                this.Update();
                 Draw();
             } 
             return builder.Get();

@@ -1,6 +1,6 @@
 using System;
 
-namespace RougeLikeRPG.Engine.Magick.Events
+namespace RougeLikeRpg.Engine.Magick.Events
 {
 
     internal class CastingSpellEventArgs : EventArgs

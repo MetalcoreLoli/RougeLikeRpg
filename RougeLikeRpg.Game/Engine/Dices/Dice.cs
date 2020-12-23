@@ -1,6 +1,6 @@
 using System;
 
-namespace RougeLikeRPG.Engine.Dices
+namespace RougeLikeRpg.Engine.Dices
 {
     ///<summary>
     /// Kласс для представления Кости

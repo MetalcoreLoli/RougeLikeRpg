@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace RougeLikeRPG.Graphic.Core
+namespace RougeLikeRpg.Graphic.Core
 {
     [Serializable]
     public readonly struct Vector2D

@@ -1,6 +1,6 @@
 using System;
 
-namespace RougeLikeRPG.Graphic.Core
+namespace RougeLikeRpg.Graphic.Core
 {
     [Serializable]
     public struct Color

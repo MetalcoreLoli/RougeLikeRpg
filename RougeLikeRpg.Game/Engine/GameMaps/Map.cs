@@ -1,18 +1,18 @@
-﻿using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Graphic.Core.Controls;
-using RougeLikeRPG.Engine.Actors;
-using RougeLikeRPG.Engine.Actors.Enums;
-using RougeLikeRPG.Engine.Actors.Monsters;
-using RougeLikeRPG.Engine.GameMaps;
-using RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Controls;
+using RougeLikeRpg.Engine.Actors;
+using RougeLikeRpg.Engine.Actors.Enums;
+using RougeLikeRpg.Engine.Actors.Monsters;
+using RougeLikeRpg.Engine.GameMaps;
+using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Engine.GameMaps.Dungeon;
+using RougeLikeRpg.Engine.GameMaps.Dungeon;
 
-namespace RougeLikeRPG.Engine
+namespace RougeLikeRpg.Engine
 {
     /// <summary>
     /// Класс реализующий логику рaботы игровой карты

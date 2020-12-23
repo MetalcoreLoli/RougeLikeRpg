@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems.Enums
+namespace RougeLikeRpg.Engine.GameItems.Enums
 {
     internal enum WeaponItemModificator
     {

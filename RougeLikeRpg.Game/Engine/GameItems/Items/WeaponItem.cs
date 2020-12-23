@@ -1,11 +1,11 @@
-﻿using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Engine.GameItems.Enums;
+﻿using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Engine.GameItems.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems.Items
+namespace RougeLikeRpg.Engine.GameItems.Items
 {
     /// <summary>
     /// Оружие

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Events
+namespace RougeLikeRpg.Engine.Actors.Events
 {
     /// <summary>
     /// 

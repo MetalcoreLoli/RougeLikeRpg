@@ -1,9 +1,9 @@
-﻿using RougeLikeRPG.Engine.GameItems.Enums;
+﻿using RougeLikeRpg.Engine.GameItems.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems
+namespace RougeLikeRpg.Engine.GameItems
 {
     /// <summary>
     /// Шмотка

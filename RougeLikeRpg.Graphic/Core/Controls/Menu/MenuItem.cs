@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Graphic.Core.Controls.Menu
+namespace RougeLikeRpg.Graphic.Core.Controls.Menu
 {
     /// <summary>
     /// Пункт меню

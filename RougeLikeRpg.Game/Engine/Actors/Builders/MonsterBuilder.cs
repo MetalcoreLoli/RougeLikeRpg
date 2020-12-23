@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
-using RougeLikeRPG.Engine.Actors.Builders;
-using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Engine.Actors.Builders;
+using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Engine.Actors.Monsters.Builders
+namespace RougeLikeRpg.Engine.Actors.Monsters.Builders
 {
     internal class MonsterBuilder<T> : ActorBuilder<T>  where T : Monster, new ()
     {

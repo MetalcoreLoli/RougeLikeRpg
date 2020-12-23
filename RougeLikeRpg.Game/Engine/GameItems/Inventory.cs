@@ -1,10 +1,10 @@
-﻿using RougeLikeRPG.Graphic.Core.Controls;
-using RougeLikeRPG.Engine.GameItems.Items;
+﻿using RougeLikeRpg.Graphic.Core.Controls;
+using RougeLikeRpg.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems
+namespace RougeLikeRpg.Engine.GameItems
 {
     /// <summary>
     /// Класс-контенер для шмоток актеров

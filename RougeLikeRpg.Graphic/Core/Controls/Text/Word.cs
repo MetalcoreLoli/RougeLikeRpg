@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Graphic.Core.Controls.Text
+namespace RougeLikeRpg.Graphic.Core.Controls.Text
 {
     /// <summary>
     /// Слово
@@ -103,18 +103,41 @@ namespace RougeLikeRPG.Graphic.Core.Controls.Text
 
         public Cell[] GetCells() => body;
 
-        #endregion
-
-        #region Private Methods
-
-        private String TextFromCells(Cell[] text)
+        public static String TextFromCells(Cell[] text)
         {
             string message = "";
             foreach (Cell cell in text)
                 message += cell.Symbol;
             return message;
         }
-        
+        public static List<Word> CellsToText (Cell[] cells)
+        {
+            List<Word> text = new List<Word>();
+            List<Cell> word = new List<Cell>();
+            foreach (var cell in cells)
+            {
+                if (cell.Symbol != ' ')
+                {
+                    word.Add(cell);
+                }
+                else 
+                {
+                    text.Add(new Word(word.ToArray()));
+                    word = new List<Cell> ();
+                }
+            }
+            return text;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Word w)
+                return w.Text.Length == Text.Length && w.Text == Text;
+            else 
+                return false;
+        }
+        #endregion
+        #region Private Methods
         private Cell[] InitTextBody(string text)
         {
             Cell[] temp = new Cell[text.Length];

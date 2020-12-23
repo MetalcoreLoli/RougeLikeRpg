@@ -1,11 +1,11 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameMaps.Dungeon
+namespace RougeLikeRpg.Engine.GameMaps.Dungeon
 {
     internal class Dungeon
     {

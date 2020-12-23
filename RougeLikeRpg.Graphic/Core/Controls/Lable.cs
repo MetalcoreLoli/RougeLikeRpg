@@ -1,11 +1,12 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Graphic.Core.Controls.Text;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Controls.Text;
+using RougeLikeRpg.Graphic.Core.Controls.Text;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Graphic.Core.Controls
+namespace RougeLikeRpg.Graphic.Core.Controls
 {
     ///<summary>
     /// Метка содежриt в себе текст
@@ -14,7 +15,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
     {
 
         #region Private Members
-        private string _text = "";
+        private string m_text = "";
+        private readonly ITextColorScheme m_colorScheme; 
         #endregion
 
         #region Public Properties
@@ -24,41 +26,43 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         ///</summary>
         public String Text
         {
-            get => _text;
+            get => m_text;
             set
             {
-                _text = value;
-                body = InitTextBody(_text);
+                m_text = value;
+                body = InitTextBody(m_text);
             }
         }
         #endregion
 
         #region Constructors
         public Lable()
-            : this ("", 1, 1, new Vector2D(0, 1))
+            : this ("", 1, 1, new Vector2D(0, 1), new DefaultTextColorScheme())
         {
         }
 
 
         public Lable (string text)
-            : this (text, text.Length, 1, new Vector2D(0, 1))
+            : this (text, text.Length, 1, new Vector2D(0, 1), new DefaultTextColorScheme())
         {
         }
 
         public Lable (string text, Vector2D location) 
-            : this(text, text.Length, 1, location)
+            : this(text, text.Length, 1, location, new DefaultTextColorScheme())
         {
         }
 
         public Lable (
                 string text, 
-                Int32 width, 
-                Int32 height, 
-                Vector2D location)
+                int width,
+                int height,
+                Vector2D location,
+                ITextColorScheme scheme)
         {
             
             Location = location;
             Text = text;
+            m_colorScheme = scheme;
             Initialization();
         }
 
@@ -81,13 +85,13 @@ namespace RougeLikeRPG.Graphic.Core.Controls
             var lBody = body.ToList();
             List<Word> wordsInbody = GetWordsFrom(lBody.ToArray());
             List<Word> coloredWords = new List<Word>();
-            foreach (Word _word in wordsInbody)
+            foreach (Word m_word in wordsInbody)
             {
-                if (_word.Text.Equals(word))
+                if (m_word.Text.Equals(word))
                 {
-                    _word.Color = color;
-                    _word.BackColor = backColor;
-                    coloredWords.Add(_word);
+                    m_word.Color = color;
+                    m_word.BackColor = backColor;
+                    coloredWords.Add(m_word);
                 }
             }
 
@@ -121,16 +125,16 @@ namespace RougeLikeRPG.Graphic.Core.Controls
         private List<Word> GetWordsFrom(Cell[] body)
         { 
             List<Word> wordsInbody = new List<Word>();
-            List<Cell> _word = new List<Cell>();
+            List<Cell> m_word = new List<Cell>();
             foreach (Cell cell in body)
             {
                 if (cell.Symbol != ' ')
-                    _word.Add(cell);
+                    m_word.Add(cell);
                 else
                 {
-                    Word word = new Word(_word.ToArray(), cell.Position + Location - _word.Count - 1);
+                    Word word = new Word(m_word.ToArray(), cell.Position + Location - m_word.Count - 1);
                     wordsInbody.Add(word);
-                    _word = new List<Cell>();
+                    m_word = new List<Cell>();
                 }
             }
             return wordsInbody;
@@ -147,6 +151,7 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                         backColor);
             return temp;
         }
+
         private void Initialization()
         {
             body = InitTextBody(Text);
@@ -166,6 +171,8 @@ namespace RougeLikeRPG.Graphic.Core.Controls
                        new Vector2D(i, 0) + Location, 
                        ColorManager.White, 
                        ColorManager.Black); 
+
+            m_colorScheme?.Apply(ref temp);
             return temp;
         }
         #endregion

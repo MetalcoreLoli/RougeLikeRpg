@@ -1,10 +1,10 @@
-﻿using RougeLikeRPG.Engine.GameItems.Enums;
-using RougeLikeRPG.Graphic.Core;
+﻿using RougeLikeRpg.Engine.GameItems.Enums;
+using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems.Items
+namespace RougeLikeRpg.Engine.GameItems.Items
 {
     /// <summary>
     /// Редкость Предмета

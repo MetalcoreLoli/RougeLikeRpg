@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RougeLikeRPG.Engine.Magick.Events;
+using RougeLikeRpg.Engine.Magick.Events;
 
-namespace RougeLikeRPG.Engine.Magick
+namespace RougeLikeRpg.Engine.Magick
 {
     internal class BookOfSpells
     {

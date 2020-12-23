@@ -1,7 +1,7 @@
-using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Graphic.Core;
 using System;
 
-namespace RougeLikeRPG.Engine.Actors.Builders
+namespace RougeLikeRpg.Engine.Actors.Builders
 {
     internal abstract class ActorBuilder<T> where T : Actor
     {

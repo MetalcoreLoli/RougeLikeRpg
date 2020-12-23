@@ -1,10 +1,10 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameMaps
+namespace RougeLikeRpg.Engine.GameMaps
 {
     internal struct Tile : IRenderable
     {

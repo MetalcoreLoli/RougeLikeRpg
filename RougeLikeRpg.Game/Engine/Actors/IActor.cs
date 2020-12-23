@@ -1,13 +1,13 @@
-﻿using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Engine.Actors.Enums;
-using RougeLikeRPG.Engine.Actors.Events;
-using RougeLikeRPG.Engine.GameItems;
-using RougeLikeRPG.Engine.GameItems.Items;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.Actors.Enums;
+using RougeLikeRpg.Engine.Actors.Events;
+using RougeLikeRpg.Engine.GameItems;
+using RougeLikeRpg.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors
+namespace RougeLikeRpg.Engine.Actors
 {
     internal interface IActor : IRenderable, IStatsModificator
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace RougeLikeRPG.Engine.Actors.Enums
+namespace RougeLikeRpg.Engine.Actors.Enums
 {
     internal enum Direction
     {

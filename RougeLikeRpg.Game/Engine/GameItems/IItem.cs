@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems
+namespace RougeLikeRpg.Engine.GameItems
 {
     internal interface IItem
     {

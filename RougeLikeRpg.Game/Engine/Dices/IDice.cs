@@ -1,7 +1,7 @@
 using System;
 
 
-namespace RougeLikeRPG.Engine.Dices
+namespace RougeLikeRpg.Engine.Dices
 {
     internal interface IDice
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.GameItems.Items
+namespace RougeLikeRpg.Engine.GameItems.Items
 {
     /// <summary>
     /// Шмоткa

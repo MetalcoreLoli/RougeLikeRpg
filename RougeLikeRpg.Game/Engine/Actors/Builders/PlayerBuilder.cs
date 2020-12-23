@@ -1,13 +1,13 @@
-﻿using RougeLikeRPG.Engine.Actors.Enums;
-using RougeLikeRPG.Engine.Actors.Races;
-using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Graphic.Core;
+﻿using RougeLikeRpg.Engine.Actors.Enums;
+using RougeLikeRpg.Engine.Actors.Races;
+using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Builders
+namespace RougeLikeRpg.Engine.Actors.Builders
 {
     internal class PlayerBuilder : ActorBuilder<Player>
     {

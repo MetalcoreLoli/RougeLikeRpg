@@ -1,9 +1,9 @@
-﻿using RougeLikeRPG.Engine.GameItems.Items;
+﻿using RougeLikeRpg.Engine.GameItems.Items;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Events
+namespace RougeLikeRpg.Engine.Actors.Events
 {
     /// <summary>
     /// Аргумент аттаки

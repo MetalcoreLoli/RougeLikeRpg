@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Enums
+namespace RougeLikeRpg.Engine.Actors.Enums
 {
     internal enum Race
     {

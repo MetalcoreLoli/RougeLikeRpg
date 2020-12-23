@@ -1,8 +1,8 @@
 using System;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Engine.GameMaps.Dungeon.DungeonFactory
+namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory
 {
     internal class FireDungeonFactory : AbstractFactory
     {

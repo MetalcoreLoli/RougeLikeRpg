@@ -1,6 +1,6 @@
 using System;
 
-namespace RougeLikeRPG.Engine.Actors
+namespace RougeLikeRpg.Engine.Actors
 {
     internal interface IStatsModificator
     {

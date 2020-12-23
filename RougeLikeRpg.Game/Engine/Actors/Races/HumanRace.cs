@@ -1,7 +1,7 @@
 using System;
-using RougeLikeRPG.Engine.Actors;
+using RougeLikeRpg.Engine.Actors;
 
-namespace RougeLikeRPG.Engine.Actors.Races
+namespace RougeLikeRpg.Engine.Actors.Races
 {
     internal class HumanRace : RaceAbstract
     {

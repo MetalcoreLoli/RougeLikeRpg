@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRPG.Graphic.Core;
+using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Graphic.Core.Controls
+namespace RougeLikeRpg.Graphic.Core.Controls
 {
     ///<summary>
     /// Родительский класс для всех элементов графического интерфейса

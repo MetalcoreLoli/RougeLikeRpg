@@ -1,23 +1,23 @@
-﻿using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Engine.Dices;
-using RougeLikeRPG.Graphic.Core.Controls;
-using RougeLikeRPG.Engine.Actors;
-using RougeLikeRPG.Engine.Actors.Enums;
-using RougeLikeRPG.Engine.Magick;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Graphic.Core.Controls;
+using RougeLikeRpg.Engine.Actors;
+using RougeLikeRpg.Engine.Actors.Enums;
+using RougeLikeRpg.Engine.Magick;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RougeLikeRPG.Engine.GameScreens;
-using RougeLikeRPG.Engine.Events;
-using RougeLikeRPG.Engine.Actors.Monsters;
-using RougeLikeRPG.Engine.GameItems.Items;
-using RougeLikeRPG.Engine.Core;
+using RougeLikeRpg.Engine.GameScreens;
+using RougeLikeRpg.Engine.Events;
+using RougeLikeRpg.Engine.Actors.Monsters;
+using RougeLikeRpg.Engine.GameItems.Items;
+using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRPG.Engine
+namespace RougeLikeRpg.Engine
 {
     /// <summary>
     /// Класс реaлизущий игровую логику
@@ -40,7 +40,6 @@ namespace RougeLikeRPG.Engine
         {
             Initialization();
 
-            _player = new Player();
             _player = NewPlayer();
             
             _player.Position    += new Vector2D(_map.Width >> 1, _map.Height >> 1) + _map.Location;
@@ -52,24 +51,18 @@ namespace RougeLikeRPG.Engine
             _player.BookOfSpells.Casting += Player_CastingSpells;
             _map.Player = _player;
             _statusScreen.AddRange(_player.GetStats().ToList());
-
-
         }
-
-
 
         private void HitMessages(Actor actor, Actor enemy, WeaponItem weapon)
         {
             string messsage =  $"{enemy.Name} was hitten by {actor.Name} with {weapon.Name} at {weapon.RolledDamage}";
             (_messageLogScreen as MessageLogScreen).Add(messsage);
-            SetColorsToText();
         }
 
         private void MissMessages(Actor actor, WeaponItem weapon)
         {
             string messsage = $"{actor.Name} is miss by {weapon.Name} ";
             (_messageLogScreen as MessageLogScreen).Add(messsage);
-            SetColorsToText();
         }
         
         private void PlayerCastSpells(ConsoleKey key)
@@ -152,8 +145,6 @@ namespace RougeLikeRPG.Engine
             else
                 _player.Color = ColorManager.DarkGray;
 
-            SetColorsToText();
-             
             MonstersMove();
             _map.Update();
             
@@ -176,46 +167,6 @@ namespace RougeLikeRPG.Engine
                         mon.MoveTo(Actor.MoveRandomDirectionVector());
                 }
             });
-        }
-
-        private void SetColorsToText()
-        {
-            foreach (Lable line in from line in _messageLogScreen.Items
-                                 where line is Lable
-                                 select line)
-            {
-                foreach (var word in KeyWords.Words)
-                    line.SetColorToWord(word.Key, word.Value, ColorManager.Black);
-                
-                line.SetColorToPrase($"+Level of {_player.Name} Upped+", ColorManager.DarkYellow, ColorManager.Black);
-                line.SetColorToWord(_player.Name, new Color(255, 102, 0), ColorManager.Black);
-
-                if (_player.LeftArm != null)
-                    SetColorToItemInText(_player.LeftArm, line);
-                if (_player.RightArm != null)
-                    SetColorToItemInText(_player.RightArm, line);
-                foreach (Actor actor in _map.Actors)
-                {
-                    line.SetColorToWord(actor.Name, actor.Color, ColorManager.Black);
-                    if (actor.LeftArm != null)
-                        SetColorToItemInText(actor.LeftArm, line);
-
-                    if (actor.RightArm != null)
-                        SetColorToItemInText(actor.RightArm, line);
-                }
-            }
-        }
-
-        private void SetColorToItemInText(WeaponItem weapon, Lable line)
-        {
-            if (weapon.Name.Split(' ').Count() > 1)
-            {
-                var name = weapon.Name.Split(' ');
-                foreach (var word in name)
-                    line.SetColorToWord(word, weapon.Rare.Color, ColorManager.Black);
-            }
-            else
-                line.SetColorToWord(weapon.Name, weapon.Rare.Color, ColorManager.Black);
         }
 
         /// <summary>

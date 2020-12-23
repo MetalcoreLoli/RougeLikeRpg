@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace RougeLikeRPG.Engine.Dices
+namespace RougeLikeRpg.Engine.Dices
 {
     ///<summary>
     /// Класс для более удобной работы с костями

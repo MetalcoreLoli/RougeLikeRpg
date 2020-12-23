@@ -1,10 +1,10 @@
-﻿using RougeLikeRPG.Graphic.Core;
+﻿using RougeLikeRpg.Graphic.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RougeLikeRPG.Engine
+namespace RougeLikeRpg.Engine
 {
     internal static class Input
     {

@@ -1,10 +1,10 @@
-﻿using RougeLikeRPG.Graphic.Core;
-using RougeLikeRPG.Engine.Actors.Enums;
+﻿using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.Actors.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RougeLikeRPG.Engine.Actors.Monsters
+namespace RougeLikeRpg.Engine.Actors.Monsters
 {
     internal abstract class Monster : Actor
     {
