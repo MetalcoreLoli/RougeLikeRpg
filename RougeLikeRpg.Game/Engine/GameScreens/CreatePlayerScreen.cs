@@ -85,13 +85,16 @@ namespace RougeLikeRpg.Engine.GameScreens
 
         public override void Update()
         {
-            base.Update();
             if (builder.Get().Name == null)
                 builder.SetName(InputName());
 
             switch (Input.PlayerKeyInput().Result)
             {
-                case ConsoleKey.R: builder.RollStats(); break;
+                case ConsoleKey.R: 
+                    builder.RollStats();
+                     _statsScreen.Clear(_statsScreen.BackgroundColor);
+                    break;
+            
                 case ConsoleKey.Enter: IsAlive = false;  break;
                 case ConsoleKey.RightArrow:
                     if (builder.Get().Race + 1 != Actors.Enums.Race.None)
@@ -99,6 +102,7 @@ namespace RougeLikeRpg.Engine.GameScreens
                         builder.Get().Race++;
                         builder.SetRace(builder.Get().Race);
                     }
+                    _statsScreen.Clear(_statsScreen.BackgroundColor);
                     break;
                 case ConsoleKey.LeftArrow:
                     if (builder.Get().Race > 0)
@@ -106,6 +110,7 @@ namespace RougeLikeRpg.Engine.GameScreens
                         builder.Get().Race--;
                         builder.SetRace(builder.Get().Race);
                     }
+                    _statsScreen.Clear(_statsScreen.BackgroundColor);
                     break;
             }
             StartItems(builder.Get());
@@ -113,6 +118,7 @@ namespace RougeLikeRpg.Engine.GameScreens
             _statsScreen.Items = new List<Control>();
             var playerStats = builder.Get().GetStats();
             _statsScreen.AddRange(playerStats);
+            base.Update();
         }
 
         private void StartItems(Player player)
