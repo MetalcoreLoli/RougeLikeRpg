@@ -1,3 +1,0 @@
-/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netstandard2.0/RougeLikeRpg.Graphic.csprojAssemblyReference.cache
-/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netstandard2.0/RougeLikeRpg.Graphic.AssemblyInfoInputs.cache
-/home/daniel/Documents/Projects/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/Debug/netstandard2.0/RougeLikeRpg.Graphic.AssemblyInfo.cs

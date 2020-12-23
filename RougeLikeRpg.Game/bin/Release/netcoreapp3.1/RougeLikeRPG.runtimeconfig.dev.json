@@ -1,9 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\Magical.Cake\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Magical.Cake\\.nuget\\packages",
-      "C:\\Microsoft\\Xamarin\\NuGet"
-    ]
-  }
-}
