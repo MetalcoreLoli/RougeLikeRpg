@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using RougeLikeRpg.Graphic.Core;
 
@@ -12,14 +13,12 @@ namespace RougeLikeRpg.Graphic.Core.Controls.Text
         {
            Scheme = new Dictionary<string, Color>
            {
-                ["Goblin"] = ColorManager.Green,
            };
         }
 
         public void Apply (ref Cell[] cells)
         {
             List<Word> text = Word.CellsToText(cells);
-
             foreach (var word in text)
             {
                 if (Scheme.ContainsKey(word.Text))

@@ -51,6 +51,11 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             : this(text, text.Length, 1, location, new DefaultTextColorScheme())
         {
         }
+        public Lable (string text, Vector2D location, ITextColorScheme scheme) 
+            : this(text, text.Length, 1, location, scheme)
+        {
+        }
+
 
         public Lable (
                 string text, 
@@ -74,40 +79,6 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             foreach (Cell cell in body)
                 Render.WithOffset(cell, 0, 0);
         }
-
-        public void SetColorToPrase(string phrace, Color color, Color backColor)
-        {
-            foreach (var word in phrace.Split(' '))
-                SetColorToWord(word, color, backColor);
-        }
-        public void SetColorToWord(string word, Color color, Color backColor)
-        {
-            var lBody = body.ToList();
-            List<Word> wordsInbody = GetWordsFrom(lBody.ToArray());
-            List<Word> coloredWords = new List<Word>();
-            foreach (Word m_word in wordsInbody)
-            {
-                if (m_word.Text.Equals(word))
-                {
-                    m_word.Color = color;
-                    m_word.BackColor = backColor;
-                    coloredWords.Add(m_word);
-                }
-            }
-
-            foreach (Word wrd in coloredWords)
-            {
-                foreach (Cell cell in wrd.GetCells())
-                {
-                    Cell bodyCell = body.FirstOrDefault(c => c.Position.X.Equals(cell.Position.X));
-                    if (bodyCell != null)
-                    {
-                        bodyCell.Color = cell.Color;
-                        bodyCell.BackColor = cell.BackColor;
-                    }
-                }
-            }
-        }
         #endregion 
 
 
@@ -121,24 +92,6 @@ namespace RougeLikeRpg.Graphic.Core.Controls
 
 
         #region Private Methods
-
-        private List<Word> GetWordsFrom(Cell[] body)
-        { 
-            List<Word> wordsInbody = new List<Word>();
-            List<Cell> m_word = new List<Cell>();
-            foreach (Cell cell in body)
-            {
-                if (cell.Symbol != ' ')
-                    m_word.Add(cell);
-                else
-                {
-                    Word word = new Word(m_word.ToArray(), cell.Position + Location - m_word.Count - 1);
-                    wordsInbody.Add(word);
-                    m_word = new List<Cell>();
-                }
-            }
-            return wordsInbody;
-        }
 
         private Cell[] CreateCellsFromText(String text, Color color, Color backColor)
         {

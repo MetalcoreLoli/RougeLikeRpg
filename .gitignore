@@ -3,6 +3,14 @@ RougeLikeRpg.Game\bin
 RougeLikeRpg.Graphic\bin
 RougeLikeRpg.Tests\bin
 
+RougeLikeRpg.Game\bin\*
+RougeLikeRpg.Graphic\bin\*
+RougeLikeRpg.Tests\bin\*
+
 RougeLikeRpg.Game\obj
 RougeLikeRpg.Graphic\obj
 RougeLikeRpg.Tests\obj
+
+RougeLikeRpg.Game\obj\*
+RougeLikeRpg.Graphic\obj\*
+RougeLikeRpg.Tests\obj\*

@@ -1,7 +1,8 @@
 ﻿using RougeLikeRpg.Graphic.Core;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 
 namespace RougeLikeRpg.Graphic.Core.Controls.Text
 {
@@ -29,7 +30,11 @@ namespace RougeLikeRpg.Graphic.Core.Controls.Text
             set
             {
                 _color = value;
-                body = InitTextBody(Text);
+                if (body != null)
+                {
+                    for (int i = 0; i < body.Length; i++)
+                        body[i].Color = _color;
+                }
             }
         }
         public Color BackColor
@@ -79,13 +84,14 @@ namespace RougeLikeRpg.Graphic.Core.Controls.Text
             BackColor = backColor;
         }
 
-        public Word(Cell[] word) : this(word, new Vector2D(0, 0))
+        public Word(Cell[] word) 
         {
             Text = TextFromCells(word);
             body = word;
         }
 
-        public Word(Cell[] word, Vector2D location) :this(word, location, ColorManager.White, ColorManager.Black)
+        public Word(Cell[] word, Vector2D location) 
+            : this(word, location, ColorManager.White, ColorManager.Black)
         {
         }
 
@@ -110,6 +116,7 @@ namespace RougeLikeRpg.Graphic.Core.Controls.Text
                 message += cell.Symbol;
             return message;
         }
+
         public static List<Word> CellsToText (Cell[] cells)
         {
             List<Word> text = new List<Word>();
@@ -128,6 +135,25 @@ namespace RougeLikeRpg.Graphic.Core.Controls.Text
             }
             return text;
         }
+        
+        public static List<Word> GetWordsFrom(Cell[] body)
+        { 
+            List<Word> wordsInbody = new List<Word>();
+            List<Cell> m_word = new List<Cell>();
+            foreach (Cell cell in body)
+            {
+                if (cell.Symbol != ' ')
+                    m_word.Add(cell);
+                else
+                {
+                    Word word = new Word(m_word.ToArray());
+                    wordsInbody.Add(word);
+                    m_word = new List<Cell>();
+                }
+            }
+            return wordsInbody;
+        }
+
 
         public override bool Equals(object obj)
         {

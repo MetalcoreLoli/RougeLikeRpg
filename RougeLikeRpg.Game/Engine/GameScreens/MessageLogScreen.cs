@@ -1,9 +1,11 @@
-﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using RougeLikeRpg.Engine.Core;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Controls;
 
 namespace RougeLikeRpg.Engine.GameScreens
 {
@@ -45,7 +47,7 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Items = new List<Control>();
                 Clear(this.BackgroundColor);
             }
-            Add(new Lable(Message, new Vector2D(1, Items.Count + 1)));
+            Add(new Lable(Message, new Vector2D(1, Items.Count + 1), new DungeonColorScheme()));
         }
     }
 }
