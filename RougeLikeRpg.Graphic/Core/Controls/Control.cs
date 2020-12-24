@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Core.Controls
 {
@@ -14,14 +13,13 @@ namespace RougeLikeRpg.Graphic.Core.Controls
     {
         #region Private Members
 
-        private Color _backColor = ColorManager.Black;
-        private Color _foreColor = ColorManager.White;
+        private Color m_backColor = ColorManager.Black;
+        private Color m_foreColor = ColorManager.White;
 
-        private Int32 _height;
-
-        private Int32 _width;
+        private Int32 m_height;
+        private Int32 m_width;
         
-        private Vector2D _location;
+        private Vector2D m_location;
         #endregion  
 
         #region Protected Members
@@ -30,7 +28,8 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         /// Основное тело контрола, которое отрисовывается
         ///</summary>
         protected Cell[] body;
-        
+
+        protected readonly IControlConfiguration m_configuration;
         #endregion
 
         #region Public Properties
@@ -39,15 +38,15 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         public Color BackgroundColor 
         { 
-            get => _backColor; 
+            get => m_backColor; 
             set
             {
-                _backColor = value;
+                m_backColor = value;
                 if (body != null)
                 {
                     for (int i = 0; i < body.Length; i++)
                     {
-                        body[i].BackColor = _backColor;
+                        body[i].BackColor = m_backColor;
                     }
                 }
             }
@@ -58,15 +57,15 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         public Color ForegroundColor 
         { 
-            get => _foreColor; 
+            get => m_foreColor; 
             set
             {
-                _foreColor = value;
+                m_foreColor = value;
                 if (body != null)
                 {
                     for (int i = 0; i < body.Length; i++)
                     {
-                        body[i].Color = _foreColor;
+                        body[i].Color = m_foreColor;
                     }
                 }
             }
@@ -77,10 +76,10 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         public Int32 Height 
         {
-            get => _height; 
+            get => m_height; 
             set
             {
-                _height = value;
+                m_height = value;
                 if (Width > 0)
                     body = InitBody(Width, Height);
             }
@@ -91,10 +90,10 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         public Int32 Width
         {
-            get => _width;
+            get => m_width;
             set
             {
-                _width = value;
+                m_width = value;
                 if (Height > 0)
                     body = InitBody(Width, Height);
             }
@@ -103,15 +102,15 @@ namespace RougeLikeRpg.Graphic.Core.Controls
 
         public Vector2D Location 
         { 
-            get => _location; 
+            get => m_location; 
             set
             {
-                _location = value;
+                m_location = value;
                 if (body != null)
                 {
                     for (int i = 0; i < body.Length; i++)
                     {
-                        body[i].Position += _location;
+                        body[i].Position += m_location;
                     }
                 }
                 else
@@ -123,6 +122,19 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         #endregion
 
         #region Public Methods
+
+        public virtual void ApplyConfiguration ()
+        {
+            if (m_configuration != null)
+            {
+                Height          = m_configuration.Height;        
+                Width           = m_configuration.Width;
+                Location        = m_configuration.Location;
+                BackgroundColor = m_configuration.BackgroundColor;
+                ForegroundColor = m_configuration.ForegroundColor;
+            }
+        }
+
         public Cell GetCellByPosition(Int32 x, Int32 y)
         {
             return body.FirstOrDefault(cell => cell.Position.X.Equals(x) && cell.Position.Y.Equals(y));

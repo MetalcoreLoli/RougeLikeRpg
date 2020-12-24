@@ -12,9 +12,9 @@ namespace RougeLikeRpg.Graphic.Core.Controls
     public class Screen : Control
     {
         #region Private Members
-        private string _title;
-        private Vector2D _titleLocation = new Vector2D(1, 0);
-        private Cell[] _lTitle;
+        private string m_title;
+        private Vector2D m_titleLocation = new Vector2D(1, 0);
+        private Cell[] m_lTitle;
         #endregion
         
         #region Public Properties
@@ -23,11 +23,11 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         public Vector2D TitleLocation 
         { 
-            get => _titleLocation;
+            get => m_titleLocation;
             set
             {
-                _titleLocation = value;
-                _titleLocation = new Vector2D(_titleLocation.X, 0);
+                m_titleLocation = value;
+                m_titleLocation = new Vector2D(m_titleLocation.X, 0);
             }
         }
 
@@ -41,14 +41,14 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         public String Title 
         {
-            get => _title;
+            get => m_title;
             set
             {
-                _title = value;
-                string title = "-| " + _title + " |-";
+                m_title = value;
+                string title = "-| " + m_title + " |-";
                 for (int i = 0; i < title.Length; i++)
                 {
-                    body[i + _titleLocation.X].Symbol = title[i];
+                    body[i + m_titleLocation.X].Symbol = title[i];
                 }
             }
         }
@@ -59,6 +59,19 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         public Screen() : this(20, 20)
         {
         }
+
+        public Screen (IControlConfiguration configuration) : this (string.Empty, configuration)
+        {
+        }
+
+        public Screen (string title, IControlConfiguration configuration)
+        {
+            Title = title; 
+            m_configuration = configuration;
+            ApplyConfiguration();
+        }
+
+
 
         public Screen(Int32 width, Int32 height) 
             : this(
@@ -105,7 +118,7 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             body    = InitBody(width, height);
             ForegroundColor = foreColor;
             BackgroundColor = backColor;
-           // _lTitle = new Lable(title);
+           // m_lTitle = new Lable(title);
         }
         #endregion
        
@@ -195,7 +208,7 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             body = DrawLeftRightWalls(body, Width, Height, '|');
             body = DrawUpDownWalls(body, Width, Height, '-');
             body = DrawCornel(body, Width, Height, '+');
-            Title = _title;
+            Title = m_title;
         }
 
         #endregion
