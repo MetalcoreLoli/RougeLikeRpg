@@ -102,6 +102,7 @@ namespace RougeLikeRpg.Engine
         /// </summary>
         private void Draw()
         {
+            _mapScreen.Draw();
             _messageLogScreen.Draw();
             _statusScreen.Draw();
         }

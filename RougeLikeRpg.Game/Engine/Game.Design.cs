@@ -15,6 +15,7 @@ using RougeLikeRpg.Engine.Actors.Monsters;
 using RougeLikeRpg.Engine.GameItems.Items;
 using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.Core.Configuration;
 
 namespace RougeLikeRpg.Engine
 {
@@ -44,44 +45,12 @@ namespace RougeLikeRpg.Engine
         /// </summary>
         private Map _map;
 
-        ///<summary>
-        /// Высота экрана инвенторя
-        ///</summary>
-        private Int32 _invetoryScreenHeight = 10;
-
-        ///<summary>
-        /// Ширина экрана инвенторя
-        ///</summary>
-        private Int32 _invetoryScreenWidth = 50;
-
-        ///<summary>
-        ///расположение экрана инвенторя 
-        ///</summary>
-        private Vector2D _invetoryScreenLocation;
-
-        ///<summary>
-        ///Экран инвенторя
-        ///</summary>
-        private Screen _inventoryScreen;
-
-        private Int32 _statusScreenHeight;
-        private Int32 _statusScreenWidth;
-
-        private Vector2D _statusScreenLocation;
-
-        private Screen _statusScreen;
-
-        private Int32 _messageLogScreenHeight;
-        private Int32 _messageLogScreenWidth;
-
-        private Vector2D _messageLogScreenLocation;
-
-        private Screen _messageLogScreen;
-
         //Экран создания персонажа
         private CreatePlayerScreen _createPlayerScreen;
-
         private LevelUpMenuScreen _levelUpMenuScreen;
+        private Screen _messageLogScreen;
+        private Screen _statusScreen;
+        private MapScreen _mapScreen;
         #endregion
 
         #region Events
@@ -195,64 +164,13 @@ namespace RougeLikeRpg.Engine
         #endregion
         private void Initialization()
         {
-            _createPlayerScreen = new CreatePlayerScreen();
-
             KeyDown += Game_KeyDown;
-
-            _statusScreenWidth = 25;
-            _statusScreenHeight = _invetoryScreenHeight + _mapHeight;
-
-            _mapWidth += _statusScreenWidth;
-
-            _messageLogScreenWidth = /*_statusScreenWidth + */_mapWidth;
-            _messageLogScreenHeight = _invetoryScreenHeight;
-
-            _statusScreenLocation = new Vector2D(_mapWidth, 0);
-            _invetoryScreenLocation = new Vector2D(0, 0);
-            _mapLocation = new Vector2D(0, 0);
-            _messageLogScreenLocation = new Vector2D(
-                                                        0,
-                                                        _mapHeight);
-
-            _messageLogScreen = new MessageLogScreen(
-                                                _messageLogScreenWidth,
-                                                _messageLogScreenHeight,
-                                                _messageLogScreenLocation,
-                                                "Message Log",
-                                                ColorManager.Black,
-                                                ColorManager.White);
-
-            _levelUpMenuScreen = new LevelUpMenuScreen(
-                                               50,
-                                               25,
-                                               new Vector2D(0, 0),
-                                               "Level Up Menu",
-                                               ColorManager.Black,
-                                               ColorManager.White);
-
-            _statusScreen = new Screen(
-                                                 _statusScreenWidth,
-                                                 _statusScreenHeight,
-                                                 _statusScreenLocation);
-
-
-            _inventoryScreen = new Screen(
-                                                _invetoryScreenWidth,
-                                                _invetoryScreenHeight,
-                                                _invetoryScreenLocation,
-                                                "",
-                                                ColorManager.DarkYellow,
-                                                ColorManager.Black);
+            _createPlayerScreen = new CreatePlayerScreen();
+            _messageLogScreen = new MessageLogScreen("Message Log", new MessageLogScreenConfiguration());
+            _statusScreen = new Screen("Status", new StatusScreenConfiguration());
+            _mapScreen = new MapScreen("Dungeon Map", new MapScreenConfiguration());
 
             _map = new Map(_mapWidth, _mapHeight, _mapLocation);
-
-
-            string title = "Status";
-            _statusScreen.TitleLocation = new Vector2D(
-                    (_statusScreen.Width - title.Length - 1)  >> 2, 2);
-            _statusScreen.Title = title;
-
-            _messageLogScreen.Title = "Message Log";
 
 
             foreach (var actor in _map.Actors)

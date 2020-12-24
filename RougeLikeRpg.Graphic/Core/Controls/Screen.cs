@@ -60,15 +60,17 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         {
         }
 
-        public Screen (IControlConfiguration configuration) : this (string.Empty, configuration)
+        public Screen (IControlConfiguration configuration) : this ("", configuration)
         {
         }
 
         public Screen (string title, IControlConfiguration configuration)
         {
-            Title = title; 
             m_configuration = configuration;
             ApplyConfiguration();
+            Init();
+
+            Title = title; 
         }
 
 
@@ -110,12 +112,11 @@ namespace RougeLikeRpg.Graphic.Core.Controls
                 Color backColor,
                 Color foreColor)
         {
-            Items = new List<Control>();
             Width   = width;
             Height  = height;
+            Init();
             Location = location;
             Title   = title;
-            body    = InitBody(width, height);
             ForegroundColor = foreColor;
             BackgroundColor = backColor;
            // m_lTitle = new Lable(title);
@@ -132,6 +133,12 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             temp = DrawUpDownWalls(temp, Width, Height, '-');
             temp = DrawCornel(temp, Width, Height, '+');
             return temp;
+        }
+
+        protected virtual void Init()
+        {
+            body    = InitBody(Width, Height);
+            Items = new List<Control>();
         }
         #endregion
 

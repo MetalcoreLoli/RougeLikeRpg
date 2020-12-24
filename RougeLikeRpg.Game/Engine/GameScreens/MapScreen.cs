@@ -1,5 +1,6 @@
 using System;
 
+
 using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Core;
 using RougeLikeRpg.Graphic.Core.Controls;
@@ -11,6 +12,10 @@ namespace RougeLikeRpg.Engine.GameScreens
     ///</summary>
     public class MapScreen : Screen
     {
+        public MapScreen (string title, IControlConfiguration configuration)
+            : base (title, configuration)
+        {}
+
         public MapScreen (
                 Int32 width, 
                 Int32 height, 

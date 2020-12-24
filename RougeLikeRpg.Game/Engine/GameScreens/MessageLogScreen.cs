@@ -12,6 +12,10 @@ namespace RougeLikeRpg.Engine.GameScreens
     internal class MessageLogScreen : Screen
     {
 
+        public MessageLogScreen (string title, IControlConfiguration configuration)
+            : base (title, configuration)
+        {}
+
         public MessageLogScreen(
             Int32 width,
             Int32 height,

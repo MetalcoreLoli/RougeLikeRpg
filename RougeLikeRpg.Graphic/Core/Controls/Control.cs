@@ -29,7 +29,7 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         ///</summary>
         protected Cell[] body;
 
-        protected readonly IControlConfiguration m_configuration;
+        protected IControlConfiguration m_configuration;
         #endregion
 
         #region Public Properties
