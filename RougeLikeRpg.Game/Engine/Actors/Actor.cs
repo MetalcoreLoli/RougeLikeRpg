@@ -447,7 +447,6 @@ namespace RougeLikeRpg.Engine.Actors
                     LeftArm = item as WeaponItem;
                 else if (RightArm == null)
                     RightArm = item as WeaponItem;
-
             }
         }
         #endregion

@@ -49,13 +49,13 @@ namespace RougeLikeRpg.Engine
             _player.Moving      += Player_Moving;
 
             _player.BookOfSpells.Casting += Player_CastingSpells;
-            _map.Player = _player;
             _statusScreen.AddRange(_player.GetStats().ToList());
         }
 
         private void HitMessages(Actor actor, Actor enemy, WeaponItem weapon)
         {
-            string messsage =  $"{enemy.Name} was hitten by {actor.Name} with {weapon.Name} at {weapon.RolledDamage}";
+            string messsage = 
+                $"{enemy.Name} was hitten by {actor.Name} with {weapon.Name} at {weapon.RolledDamage}";
             (_messageLogScreen as MessageLogScreen).Add(messsage);
         }
 
@@ -102,11 +102,9 @@ namespace RougeLikeRpg.Engine
         /// </summary>
         private void Draw()
         {
-            _map.Draw();
             _messageLogScreen.Draw();
             _statusScreen.Draw();
         }
-
 
         private Vector2D PlayerMoveTo(ConsoleKey key)
         {
@@ -140,6 +138,7 @@ namespace RougeLikeRpg.Engine
         
         private void Update()
         {
+            /*
             if (_player.Hp > 0)
                 PlayerInput();
             else
@@ -147,6 +146,7 @@ namespace RougeLikeRpg.Engine
 
             MonstersMove();
             _map.Update();
+            */
             
             _statusScreen.Items = new List<Control>();
             _statusScreen.Clear(_statusScreen.BackgroundColor);

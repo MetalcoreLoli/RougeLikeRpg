@@ -64,14 +64,12 @@ namespace RougeLikeRpg.Engine
         ///</summary>
         private Screen _inventoryScreen;
 
-
         private Int32 _statusScreenHeight;
         private Int32 _statusScreenWidth;
 
         private Vector2D _statusScreenLocation;
 
         private Screen _statusScreen;
-
 
         private Int32 _messageLogScreenHeight;
         private Int32 _messageLogScreenWidth;
@@ -115,7 +113,8 @@ namespace RougeLikeRpg.Engine
         private void Player_Moving(object sender, Actors.Events.MovingEventArgs e)
         {
             Player pl = sender as Player;
-            if (_map.IsWalkable(pl.Position) && _map.Actors.FirstOrDefault(a => a.Position == pl.Position) == null)
+            if (_map.IsWalkable(pl.Position) 
+                    && _map.Actors.FirstOrDefault(a => a.Position == pl.Position) == null)
                 _map.PlayerMoveTo(e.MovingPosition);
             else
             {
@@ -144,7 +143,8 @@ namespace RougeLikeRpg.Engine
 
         private void Actor_Dying(object sender, Actors.Events.ActorDyingEventArgs e)
         {
-            (_messageLogScreen as MessageLogScreen).Add(e.Name + $" was killed by {((sender as Actor).Name)} and drop exp: {e.DropExp}");
+            (_messageLogScreen as MessageLogScreen).Add(
+                    e.Name + $" was killed by {((sender as Actor).Name)} and drop exp: {e.DropExp}");
         }
 
         private async void Player_Attacking(object sender, Actors.Events.AttackingEventArgs e)
@@ -249,7 +249,7 @@ namespace RougeLikeRpg.Engine
 
             string title = "Status";
             _statusScreen.TitleLocation = new Vector2D(
-                    (_statusScreen.Width - title.Length - 1) / 4, 2);
+                    (_statusScreen.Width - title.Length - 1)  >> 2, 2);
             _statusScreen.Title = title;
 
             _messageLogScreen.Title = "Message Log";

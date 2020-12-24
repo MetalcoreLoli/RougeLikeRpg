@@ -17,6 +17,7 @@ namespace RougeLikeRpg.Engine.Core
         {
             new Dagger(), new ShortSword()
         };
+
         public DungeonColorScheme()
         {
 
@@ -40,8 +41,8 @@ namespace RougeLikeRpg.Engine.Core
                 ["rare"]        = ColorManager.DarkMagenta,
                 ["legendary"]   = ColorManager.DarkYellow,
                 ["miss"]        = ColorManager.Red,
-
             };
+
             foreach (var item in m_items)
             {
                 if (item.Name.Split(' ').Count() > 1)
