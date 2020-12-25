@@ -41,10 +41,5 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Update();
             } while (IsAlive);
         }
-
-        public void Update()
-        { 
-            
-        }
     }
 }

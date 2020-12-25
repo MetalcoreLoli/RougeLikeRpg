@@ -4,18 +4,18 @@ using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Actors.Enums;
 using RougeLikeRpg.Engine.Magick;
+using RougeLikeRpg.Engine.GameScreens;
+using RougeLikeRpg.Engine.Events;
+using RougeLikeRpg.Engine.Actors.Monsters;
+using RougeLikeRpg.Engine.GameItems.Items;
+using RougeLikeRpg.Engine.Core;
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RougeLikeRpg.Engine.GameScreens;
-using RougeLikeRpg.Engine.Events;
-using RougeLikeRpg.Engine.Actors.Monsters;
-using RougeLikeRpg.Engine.GameItems.Items;
-using RougeLikeRpg.Engine.Core;
-using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine
 {
@@ -43,12 +43,12 @@ namespace RougeLikeRpg.Engine
             _player = NewPlayer();
             
             _player.Position    += new Vector2D(_map.Width >> 1, _map.Height >> 1) + _map.Location;
-            _player.LevelUp     += Player_LevelUp;
-            _player.Attacking   += Player_Attacking;
-            _player.Dying       += Actor_Dying;
-            _player.Moving      += Player_Moving;
+            //_player.LevelUp     += Player_LevelUp;
+            //_player.Attacking   += Player_Attacking;
+            //_player.Dying       += Actor_Dying;
+            //_player.Moving      += Player_Moving;
 
-            _player.BookOfSpells.Casting += Player_CastingSpells;
+            //_player.BookOfSpells.Casting += Player_CastingSpells;
             _statusScreen.AddRange(_player.GetStats().ToList());
         }
 
@@ -56,13 +56,13 @@ namespace RougeLikeRpg.Engine
         {
             string messsage = 
                 $"{enemy.Name} was hitten by {actor.Name} with {weapon.Name} at {weapon.RolledDamage}";
-            (_messageLogScreen as MessageLogScreen).Add(messsage);
+            _messageLogScreen.Add(messsage);
         }
 
         private void MissMessages(Actor actor, WeaponItem weapon)
         {
             string messsage = $"{actor.Name} is miss by {weapon.Name} ";
-            (_messageLogScreen as MessageLogScreen).Add(messsage);
+            _messageLogScreen.Add(messsage);
         }
         
         private void PlayerCastSpells(ConsoleKey key)
@@ -106,7 +106,17 @@ namespace RougeLikeRpg.Engine
             _messageLogScreen.Draw();
             _statusScreen.Draw();
         }
-
+        private void Game_KeyDown(object sender, KeyDownEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case ConsoleKey.R:
+                    _mapScreen.Clear(_mapScreen.BackgroundColor);
+                    _map.Rebuild();
+                    _mapScreen.Title = "Dungeon Map | Floor: " + _map.CurrentFloor;
+                    break;
+            }
+        }
         private Vector2D PlayerMoveTo(ConsoleKey key)
         {
             switch (key)
@@ -148,7 +158,8 @@ namespace RougeLikeRpg.Engine
             MonstersMove();
             _map.Update();
             */
-            
+            PlayerInput();
+            _mapScreen.Update();
             _statusScreen.Items = new List<Control>();
             _statusScreen.Clear(_statusScreen.BackgroundColor);
             _statusScreen.AddRange(_player.GetStats());

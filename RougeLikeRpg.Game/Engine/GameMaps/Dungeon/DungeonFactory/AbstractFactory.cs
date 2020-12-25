@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core;
 namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory
 {
     internal abstract class AbstractFactory

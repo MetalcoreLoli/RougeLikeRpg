@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Core.Controls
 {
@@ -53,7 +52,6 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             }
         }
         #endregion 
-        
         
         #region Constructors
         public Screen() : this(20, 20)
@@ -122,7 +120,6 @@ namespace RougeLikeRpg.Graphic.Core.Controls
            // m_lTitle = new Lable(title);
         }
         #endregion
-       
 
         #region Protected Methods
         protected override Cell[] InitBody(Int32 width, Int32 height)
@@ -141,7 +138,6 @@ namespace RougeLikeRpg.Graphic.Core.Controls
             Items = new List<Control>();
         }
         #endregion
-
 
         #region Public Methods
         public async override void Draw()
@@ -219,6 +215,5 @@ namespace RougeLikeRpg.Graphic.Core.Controls
         }
 
         #endregion
-
     }
 }

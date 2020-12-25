@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RougeLikeRpg.Engine.Magick;
-using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine.Actors
 {
@@ -22,7 +21,7 @@ namespace RougeLikeRpg.Engine.Actors
         #region Private Members
 
         private Color _color;
-        private Color _colorNormal;
+        // private Color _colorNormal;
         #region Stats
         private Int32 _str;
         private Int32 _dex;
