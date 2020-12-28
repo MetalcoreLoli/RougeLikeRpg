@@ -4,7 +4,7 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine.Core.Configuration
 {
-
+    [Serializable]
     public class MapScreenConfiguration : IControlConfiguration
     {
         public Color BackgroundColor { get; }
@@ -16,12 +16,24 @@ namespace RougeLikeRpg.Engine.Core.Configuration
         public Vector2D Location { get; }
 
         public MapScreenConfiguration()
+            : base (62, 20, new Vector2D (0, 0), ColorManager.White, ColorManager.Black)
         {
-            BackgroundColor = ColorManager.Black;
-            ForegroundColor = ColorManager.White;
-            Height = 20;
-            Width = 62;
-            Location = new Vector2D (0, 0);
+        }
+
+        public MapScreenConfiguration (IControlConfiguration configuration)
+            : base (configuration.Width, configuration.Height, 
+                    configuration.Location, configuration.ForegroundColor, configuration.BackgroundColor)
+        {
+        }
+
+
+        public MapScreenConfiguration (int width, int height, Vector2D location, Color foregroundColor, Color backgroundColor)
+        {
+            Width = width;
+            Height = height;
+            Location = location;
+            ForegroundColor = foregroundColor;
+            BackgroundColor = backgroundColor;
         }
     }
 }

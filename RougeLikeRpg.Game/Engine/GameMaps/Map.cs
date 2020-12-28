@@ -27,7 +27,7 @@ namespace RougeLikeRpg.Engine
         /// <summary>
         /// Map that player see
         /// </summary>
-        private Cell[] _mapBody;
+        private Cell[] _mapBuffer;
 
         private const int _mapBufferWidth = 75;
         private const int _mapBufferHeight = 40;
@@ -57,21 +57,17 @@ namespace RougeLikeRpg.Engine
 
         #region Contructors
 
-        public Map(int mapWidth, int mapHeight, Graphic.Core.Vector2D _mapLocation)
-            : this(mapWidth, mapHeight, _mapLocation, null, new List<Actor>())
+        public Map(IControlConfiguration configuration)
+            : this(configuration, null, new List<Actor>())
         {
         }
 
         public Map(
-                int mapWidth,
-                int mapHeight,
-                Graphic.Core.Vector2D _mapLocation,
+                IControlConfiguration configuration,
                 Player player,
                 IEnumerable<Actor> actors)
         {
-            Width = mapWidth;
-            Height = mapHeight;
-            Location = _mapLocation;
+            ApplyConfiguration();
             Player = player;
             Actors = actors.ToList();
             GenerateDungeon();
@@ -88,44 +84,33 @@ namespace RougeLikeRpg.Engine
 
         #region Public Methods
 
-
         public Cell CellFromWorldPosition(Vector2D worldPosition)
         {
-            float percentX = (worldPosition.X + Width / 2) / Width;
-            float percentY = (worldPosition.Y + Height / 2) / Height;
+            float percentX = (worldPosition.X + _mapBufferWidth / 2) / _mapBufferWidth;
+            float percentY = (worldPosition.Y + _mapBufferHeight / 2) / _mapBufferHeight;
             percentX = Math.Clamp(percentX, 0.0f, 1.0f);
             percentY = Math.Clamp(percentY, 0.0f, 1.0f);
             
-            int x = (int)Math.Round((Width - 1) * percentX);
-            int y = (int)Math.Round((Height - 1) * percentY);
+            int x = (int)Math.Round((_mapBufferWidth - 1) * percentX);
+            int y = (int)Math.Round((_mapBufferHeight - 1) * percentY);
 
-            return _mapBody[x + y * Width];
+            return _mapBuffer[x + y * Width];
         }
 
         public void AddActorToMap(Actor actor)
         {
-            if (actor is Player player)
-            {
-                player.Position += dungeon.Rooms.FirstOrDefault().GetCenter() + Location;
-                Player = player;
-                Actors.Add(Player);
-            }
-            else
-            {
-                actor.Position -= Location;
-                Actors.Add(actor);
-            }
+               Actors.Add(actor);
         }
 
         public void SetSymbol(int x, int y, char symbol)
         {
-            _mapBody[x + _mapBufferWidth * y].Symbol = symbol;
+            _mapBuffer[x + _mapBufferWidth * y].Symbol = symbol;
         }
 
         public void SetSymbolWithColor(int x, int y, char symbol, Color color)
         {
-            _mapBody[x + _mapBufferWidth * y].Symbol = symbol;
-            _mapBody[x + _mapBufferWidth * y].Color = color;
+            _mapBuffer[x + _mapBufferWidth * y].Symbol = symbol;
+            _mapBuffer[x + _mapBufferWidth * y].Color = color;
         }
 
         internal void Rebuild()
@@ -149,7 +134,7 @@ namespace RougeLikeRpg.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Int32 x, Int32 y)
         {
-            foreach (Cell cell in _mapBody)
+            foreach (Cell cell in _mapBuffer)
             {
                 if (cell.Position.X.Equals(x) && cell.Position.Y.Equals(y))
                 {
@@ -169,7 +154,7 @@ namespace RougeLikeRpg.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Vector2D vec) => IsWalkable(vec.X, vec.Y);
 
-        public Cell GetCell(Int32 x, Int32 y) => _mapBody.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
+        public Cell GetCell(Int32 x, Int32 y) => _mapBuffer.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
         public Cell GetCell(Vector2D pos) => GetCell(pos.X, pos.Y);
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
         public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
@@ -191,15 +176,15 @@ namespace RougeLikeRpg.Engine
 
         public void Move (Vector2D offset)
         {
-            foreach (var cell in _mapBody)
+            foreach (var cell in _mapBuffer)
                 cell.Position -= offset;
 
-            FillBodyWithDrawableCells(_mapBody, Width, Height);
+            FillBodyWithDrawableCells(_mapBuffer, Width, Height);
         }
         
         public async override void Draw()
         {
-            //foreach (var cell in from cell in _mapBody.AsParallel()
+            //foreach (var cell in from cell in _mapBuffer.AsParallel()
             //                     where cell.Position.X > 0 && cell.Position.Y > 0 && cell.Position.X < Width - 1 && cell.Position.Y < Height - 1
             //                     select cell)
             //{
@@ -219,7 +204,7 @@ namespace RougeLikeRpg.Engine
         #region Private Methods
         private void GenerateDungeon()
         {
-            //_mapBody = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
+            //_mapBuffer = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
             Actors = new List<Actor>();
             dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
             {
@@ -234,20 +219,21 @@ namespace RougeLikeRpg.Engine
             //    factory = new FireDungeonFactory();
 
 
-            _mapBody = dungeon.Generate(factory);
+            _mapBuffer = dungeon.Generate(factory);
 
             var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width >> 1, Height >> 1) + Location;
 
             var downStair_pos = dungeon.Rooms.Last().GetCenter();
-            
+
             downStairs = new Stairs(
                     '<',
                     downStair_pos,
                     ColorManager.White,
                     ColorManager.Black);
 
+            CellFromWorldPosition (downStair_pos).BackColor = ColorManager.White;
 
-            FillBodyWithDrawableCells(_mapBody, Width, Height);
+            FillBodyWithDrawableCells(_mapBuffer, Width, Height);
             _numberOfFloor++;
         }
 

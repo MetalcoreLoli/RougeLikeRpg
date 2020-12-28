@@ -49,6 +49,7 @@ namespace RougeLikeRpg.Engine
             //_player.Moving      += Player_Moving;
 
             //_player.BookOfSpells.Casting += Player_CastingSpells;
+            
             _statusScreen.AddRange(_player.GetStats().ToList());
         }
 
@@ -106,6 +107,7 @@ namespace RougeLikeRpg.Engine
             _messageLogScreen.Draw();
             _statusScreen.Draw();
         }
+
         private void Game_KeyDown(object sender, KeyDownEventArgs e)
         {
             switch (e.Key)
@@ -119,6 +121,7 @@ namespace RougeLikeRpg.Engine
                     break;
             }
         }
+
         private Vector2D PlayerMoveTo(ConsoleKey key)
         {
             switch (key)
