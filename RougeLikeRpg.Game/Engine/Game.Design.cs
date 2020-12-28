@@ -1,19 +1,20 @@
-using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Engine.Dices;
-using RougeLikeRpg.Graphic.Core.Controls;
-using RougeLikeRpg.Engine.Actors;
-using RougeLikeRpg.Engine.Actors.Enums;
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RougeLikeRpg.Engine.GameScreens;
+using System.Collections.Generic;
+
+using RougeLikeRpg.Engine.Core;
+using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Engine.Dices;
+using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Events;
+using RougeLikeRpg.Engine.GameScreens;
+using RougeLikeRpg.Engine.Actors.Enums;
+using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors.Monsters;
 using RougeLikeRpg.Engine.GameItems.Items;
-using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Engine.Core.Configuration;
 
 namespace RougeLikeRpg.Engine
@@ -23,7 +24,6 @@ namespace RougeLikeRpg.Engine
     /// </summary>
     internal partial class Game
     {
-
         #region Private Members
         /// <summary>
         /// Высота карты
@@ -56,17 +56,16 @@ namespace RougeLikeRpg.Engine
         #endregion
         private void Initialization()
         {
-            KeyDown += Game_KeyDown;
+            Console.Write("\x1b[?25l");
+            KeyDown             += Game_KeyDown;
             var mapConfig       = new MapScreenConfiguration();
             _createPlayerScreen = new CreatePlayerScreen();
             _messageLogScreen   = new MessageLogScreen("Message Log", new MessageLogScreenConfiguration());
             _statusScreen       = new Screen("Status", new StatusScreenConfiguration());
 
-            _map = new Map(mapConfig.Width- 2, mapConfig.Height - 2, mapConfig.Location + 1);
-            _mapScreen = new MapScreen("Dungeon Map | Floor: " + _map.CurrentFloor, mapConfig);
+            _map        = new Map(mapConfig.Width - 2, mapConfig.Height - 2, mapConfig.Location + 1);
+            _mapScreen  = new MapScreen("Dungeon Map | Floor: " + _map.CurrentFloor, mapConfig);
             _mapScreen.Add(_map);
         }
-
-      
     }
 }

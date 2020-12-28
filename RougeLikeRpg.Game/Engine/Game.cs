@@ -111,9 +111,11 @@ namespace RougeLikeRpg.Engine
             switch (e.Key)
             {
                 case ConsoleKey.R:
-                    _mapScreen.Clear(_mapScreen.BackgroundColor);
                     _map.Rebuild();
                     _mapScreen.Title = "Dungeon Map | Floor: " + _map.CurrentFloor;
+                    break;
+                default:
+                    _map.Move (PlayerMoveTo (e.Key));
                     break;
             }
         }
@@ -122,19 +124,15 @@ namespace RougeLikeRpg.Engine
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    _map.Player.Direction = Direction.Up;
                     return Actor.MoveDirectionVector(Direction.Up);
 
                 case ConsoleKey.DownArrow:
-                    _map.Player.Direction = Direction.Down;
                     return Actor.MoveDirectionVector(Direction.Down);
 
                 case ConsoleKey.LeftArrow:
-                    _map.Player.Direction = Direction.Left;
                     return Actor.MoveDirectionVector(Direction.Left);
 
                 case ConsoleKey.RightArrow:
-                    _map.Player.Direction = Direction.Right;
                     return Actor.MoveDirectionVector(Direction.Right);
 
                 default:
@@ -159,6 +157,7 @@ namespace RougeLikeRpg.Engine
             _map.Update();
             */
             PlayerInput();
+            _mapScreen.Clear(_mapScreen.BackgroundColor);
             _mapScreen.Update();
             _statusScreen.Items = new List<Control>();
             _statusScreen.Clear(_statusScreen.BackgroundColor);
@@ -188,7 +187,6 @@ namespace RougeLikeRpg.Engine
         private Player NewPlayer() => _createPlayerScreen.Start();
 
         private void OnKeyDown(ConsoleKey key) => KeyDown?.Invoke(this, new KeyDownEventArgs(key));
-        
         #endregion
     }
 }

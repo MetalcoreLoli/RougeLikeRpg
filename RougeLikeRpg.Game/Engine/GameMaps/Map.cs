@@ -88,6 +88,20 @@ namespace RougeLikeRpg.Engine
 
         #region Public Methods
 
+
+        public Cell CellFromWorldPosition(Vector2D worldPosition)
+        {
+            float percentX = (worldPosition.X + Width / 2) / Width;
+            float percentY = (worldPosition.Y + Height / 2) / Height;
+            percentX = Math.Clamp(percentX, 0.0f, 1.0f);
+            percentY = Math.Clamp(percentY, 0.0f, 1.0f);
+            
+            int x = (int)Math.Round((Width - 1) * percentX);
+            int y = (int)Math.Round((Height - 1) * percentY);
+
+            return _mapBody[x + y * Width];
+        }
+
         public void AddActorToMap(Actor actor)
         {
             if (actor is Player player)
@@ -173,29 +187,16 @@ namespace RougeLikeRpg.Engine
 
         public void Update()
         {
-            foreach (var cell in _mapBody)
-            {
-                cell.Position = cell.Position + _mapBufferOffset;
-            }
-            downStairs.Position += _mapBufferOffset;
-            //if (Player != null)
-            Player.Position += _mapBufferOffset;
-
-            Actors.RemoveAll(actor => actor.IsDead);
-            foreach (var actor in Actors)
-            {
-                actor.Position = actor.Position + _mapBufferOffset;
-            }
-
-            _mapBufferOffset = new Vector2D(0, 0);
         }
-         
-        public void PlayerMoveTo(Vector2D vec)
+
+        public void Move (Vector2D offset)
         {
-            Vector2D offset = new Vector2D(vec.X * -1, vec.Y * -1);
-            _mapBufferOffset = offset;
-        }
+            foreach (var cell in _mapBody)
+                cell.Position -= offset;
 
+            FillBodyWithDrawableCells(_mapBody, Width, Height);
+        }
+        
         public async override void Draw()
         {
             //foreach (var cell in from cell in _mapBody.AsParallel()
@@ -247,7 +248,6 @@ namespace RougeLikeRpg.Engine
 
 
             FillBodyWithDrawableCells(_mapBody, Width, Height);
-
             _numberOfFloor++;
         }
 
@@ -262,7 +262,6 @@ namespace RougeLikeRpg.Engine
             {
                 body[i] = drawableCells[i];
             }
-
         }
         #endregion
     }
