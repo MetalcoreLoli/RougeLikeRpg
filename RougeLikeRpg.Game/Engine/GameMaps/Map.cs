@@ -160,21 +160,6 @@ namespace RougeLikeRpg.Engine
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
         public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
 
-        public void GoDown()
-        {
-            if (Player.Position == downStairs.Position)
-            {
-                Console.Title ="Yay"; 
-                GenerateDungeon();
-            }
-            else 
-                Console.Title = $"Player position is {Player.Position}; Stairs Position is {downStairs.Position}";
-        }
-
-        public void Update()
-        {
-        }
-
         public void Move (Vector2D offset)
         {
             foreach (var cell in _mapBuffer)
@@ -205,7 +190,6 @@ namespace RougeLikeRpg.Engine
         #region Private Methods
         private void GenerateDungeon()
         {
-            //_mapBuffer = MapBufferInit(_mapBufferWidth, _mapBufferHeight);
             Actors = new List<Actor>();
             dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
             {
@@ -215,24 +199,12 @@ namespace RougeLikeRpg.Engine
                 MinRoomWidth = 7,
                 CountOfRooms = 18
             };
+
             AbstractFactory factory = new DefaultDungeonFactory(); 
             //if (_numberOfFloor > 1)
             //    factory = new FireDungeonFactory();
 
-
             _mapBuffer = dungeon.Generate(factory);
-
-            var offset = dungeon.Rooms.First().GetCenter() - new Vector2D(Width >> 1, Height >> 1) + Location;
-
-            var downStair_pos = dungeon.Rooms.Last().GetCenter();
-
-            downStairs = new Stairs(
-                    '<',
-                    downStair_pos,
-                    ColorManager.White,
-                    ColorManager.Black);
-
-            CellFromWorldPosition (downStair_pos).BackColor = ColorManager.White;
 
             FillBodyWithDrawableCells(_mapBuffer, Width, Height);
             _numberOfFloor++;
@@ -242,7 +214,7 @@ namespace RougeLikeRpg.Engine
         {
             Cell[] drawableCells = (from cell in source
                                     where cell.Position.X > 1 && cell.Position.Y > 1 
-                                    where cell.Position.X < width && cell.Position.Y < height
+                                    where cell.Position.X < width-1 && cell.Position.Y < height-1
                                     select cell).ToArray();
 
             for (int i = 0; i < drawableCells.Length; i++)

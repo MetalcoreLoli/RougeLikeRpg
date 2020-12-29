@@ -53,24 +53,6 @@ namespace RougeLikeRpg.Engine
             _statusScreen.AddRange(_player.GetStats().ToList());
         }
 
-        private void HitMessages(Actor actor, Actor enemy, WeaponItem weapon)
-        {
-            string messsage = 
-                $"{enemy.Name} was hitten by {actor.Name} with {weapon.Name} at {weapon.RolledDamage}";
-            _messageLogScreen.Add(messsage);
-        }
-
-        private void MissMessages(Actor actor, WeaponItem weapon)
-        {
-            string messsage = $"{actor.Name} is miss by {weapon.Name} ";
-            _messageLogScreen.Add(messsage);
-        }
-        
-        private void PlayerCastSpells(ConsoleKey key)
-        {
-            _player.BookOfSpells.CastMappedSpell(key);
-        }
-        
         private void PlayerMove(Vector2D playersInput)
         {
             _player.MoveTo(playersInput);
@@ -90,14 +72,22 @@ namespace RougeLikeRpg.Engine
             Draw();
             while (true)
             {
+                Clear();
                 Update();
                 Draw();
                 //Thread.Sleep(1000);
             } 
         }
+
+
         #endregion
 
         #region Private Methods
+        private void Clear()
+        {
+            _mapScreen.Clear(_mapScreen.BackgroundColor);
+            _statusScreen.Clear(_statusScreen.BackgroundColor);
+        }
         /// <summary>
         ///  Метод, в который занимается отрисовка интрефейса
         /// </summary>
@@ -124,23 +114,14 @@ namespace RougeLikeRpg.Engine
 
         private Vector2D PlayerMoveTo(ConsoleKey key)
         {
-            switch (key)
+            return key switch
             {
-                case ConsoleKey.UpArrow:
-                    return Actor.MoveDirectionVector(Direction.Up);
-
-                case ConsoleKey.DownArrow:
-                    return Actor.MoveDirectionVector(Direction.Down);
-
-                case ConsoleKey.LeftArrow:
-                    return Actor.MoveDirectionVector(Direction.Left);
-
-                case ConsoleKey.RightArrow:
-                    return Actor.MoveDirectionVector(Direction.Right);
-
-                default:
-                    return new Vector2D(0, 0);
-            }
+                ConsoleKey.UpArrow => Actor.MoveDirectionVector(Direction.Up),
+                ConsoleKey.DownArrow => Actor.MoveDirectionVector(Direction.Down),
+                ConsoleKey.LeftArrow => Actor.MoveDirectionVector(Direction.Left),
+                ConsoleKey.RightArrow => Actor.MoveDirectionVector(Direction.Right),
+                _ => new Vector2D(0, 0),
+            };
         }
 
         private async void PlayerInput()
@@ -160,10 +141,9 @@ namespace RougeLikeRpg.Engine
             _map.Update();
             */
             PlayerInput();
-            _mapScreen.Clear(_mapScreen.BackgroundColor);
             _mapScreen.Update();
             _statusScreen.Items = new List<Control>();
-            _statusScreen.Clear(_statusScreen.BackgroundColor);
+
             _statusScreen.AddRange(_player.GetStats());
             
         }
