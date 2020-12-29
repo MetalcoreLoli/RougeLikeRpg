@@ -2,7 +2,6 @@ using System;
 
 namespace RougeLikeRpg.Graphic.Core
 {
-    [Serializable]
     public interface IControlConfiguration
     {
         Color BackgroundColor { get; }

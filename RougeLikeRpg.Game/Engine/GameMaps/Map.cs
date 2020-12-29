@@ -67,6 +67,7 @@ namespace RougeLikeRpg.Engine
                 Player player,
                 IEnumerable<Actor> actors)
         {
+            m_configuration = configuration;
             ApplyConfiguration();
             Player = player;
             Actors = actors.ToList();

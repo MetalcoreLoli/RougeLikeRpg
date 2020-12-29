@@ -60,13 +60,18 @@ namespace RougeLikeRpg.Engine
             KeyDown             += Game_KeyDown;
 
             var mapScreenConfig = new MapScreenConfiguration();
-            var mapConfig       = new MapScreenConfiguration(mapScreenConfig);
+            var mapConfig       = new MapScreenConfiguration(
+                mapScreenConfig.Width - 2, 
+                mapScreenConfig.Height - 2, 
+                mapScreenConfig.Location + 1, 
+                mapScreenConfig.ForegroundColor,
+                mapScreenConfig.BackgroundColor);
 
             _createPlayerScreen = new CreatePlayerScreen();
             _messageLogScreen   = new MessageLogScreen("Message Log", new MessageLogScreenConfiguration());
             _statusScreen       = new Screen("Status", new StatusScreenConfiguration());
 
-            _map        = new Map(mapConfig.Width - 2, mapConfig.Height - 2, mapConfig.Location + 1);
+            _map        = new Map(mapConfig);
             _mapScreen  = new MapScreen("Dungeon Map | Floor: " + _map.CurrentFloor, mapScreenConfig);
             _mapScreen.Add(_map);
         }

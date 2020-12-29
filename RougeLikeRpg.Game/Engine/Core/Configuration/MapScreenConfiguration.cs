@@ -16,12 +16,12 @@ namespace RougeLikeRpg.Engine.Core.Configuration
         public Vector2D Location { get; }
 
         public MapScreenConfiguration()
-            : base (62, 20, new Vector2D (0, 0), ColorManager.White, ColorManager.Black)
+            : this (62, 20, new Vector2D (0, 0), ColorManager.White, ColorManager.Black)
         {
         }
 
         public MapScreenConfiguration (IControlConfiguration configuration)
-            : base (configuration.Width, configuration.Height, 
+            : this (configuration.Width, configuration.Height, 
                     configuration.Location, configuration.ForegroundColor, configuration.BackgroundColor)
         {
         }

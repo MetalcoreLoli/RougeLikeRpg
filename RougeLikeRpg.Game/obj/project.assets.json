@@ -27,32 +27,39 @@
     ]
   },
   "packageFolders": {
-    "/home/daniel/.nuget/packages/": {}
+    "C:\\Users\\Magical.Cake\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj",
+      "projectUniqueName": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Game\\RougeLikeRPG.csproj",
       "projectName": "RougeLikeRPG",
-      "projectPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj",
-      "packagesPath": "/home/daniel/.nuget/packages/",
-      "outputPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Game/obj/",
+      "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Game\\RougeLikeRPG.csproj",
+      "packagesPath": "C:\\Users\\Magical.Cake\\.nuget\\packages\\",
+      "outputPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Game\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/home/daniel/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Magical.Cake\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5"
+        "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5",
           "projectReferences": {
-            "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
-              "projectPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj"
+            "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\RougeLikeRpg.Graphic.csproj": {
+              "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\RougeLikeRpg.Graphic.csproj"
             }
           }
         }
@@ -81,7 +88,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/daniel/dotnet/sdk/5.0.100-rc.1.20452.10/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
