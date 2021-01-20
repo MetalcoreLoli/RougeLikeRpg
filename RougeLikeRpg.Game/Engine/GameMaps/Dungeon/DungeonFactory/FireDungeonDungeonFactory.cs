@@ -3,12 +3,12 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory
 {
-    internal class FireDungeonDungeonFactory : AbstractDungeonFactory
+    internal class FireDungeonFactory : AbstractDungeonFactory
     {
     
         public override Room MakeRoom(int Width, int Height, Vector2D location) 
         {
-            var room = new DefaultDungeonDungeonFactory().MakeRoom(Width, Height, location);
+            var room = new DefaultDungeonFactory().MakeRoom(Width, Height, location);
            
             for(int i =0; i < room.Body.Length;i++)
             {

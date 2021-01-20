@@ -1226,17 +1226,17 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "RougeLikeRPG/1.0.0": {
+      "RougeLikeRpg/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "RougeLikeRpg.Graphic": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/RougeLikeRPG.dll": {}
+          "bin/placeholder/RougeLikeRpg.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RougeLikeRPG.dll": {}
+          "bin/placeholder/RougeLikeRpg.dll": {}
         }
       },
       "RougeLikeRpg.Graphic/1.0.0": {
@@ -4642,7 +4642,7 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "RougeLikeRPG/1.0.0": {
+    "RougeLikeRpg/1.0.0": {
       "type": "project",
       "path": "../RougeLikeRpg.Game/RougeLikeRPG.csproj",
       "msbuildProject": "../RougeLikeRpg.Game/RougeLikeRPG.csproj"
@@ -4657,44 +4657,37 @@
     "net5.0": [
       "Microsoft.NET.Test.Sdk >= 16.4.0",
       "NUnit3TestAdapter >= 3.15.1",
-      "RougeLikeRPG >= 1.0.0",
+      "RougeLikeRpg >= 1.0.0",
       "nunit >= 3.12.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Magical.Cake\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "/home/daniel/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Tests\\RougeLikeRpg.Tests.csproj",
+      "projectUniqueName": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
       "projectName": "RougeLikeRpg.Tests",
-      "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Tests\\RougeLikeRpg.Tests.csproj",
-      "packagesPath": "C:\\Users\\Magical.Cake\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Tests\\obj\\",
+      "projectPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
+      "packagesPath": "/home/daniel/.nuget/packages/",
+      "outputPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Magical.Cake\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "/home/daniel/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "net5"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5",
           "projectReferences": {
-            "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Game\\RougeLikeRPG.csproj": {
-              "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Game\\RougeLikeRPG.csproj"
+            "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj": {
+              "projectPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj"
             }
           }
         }
@@ -4737,7 +4730,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
       }
     }
   }

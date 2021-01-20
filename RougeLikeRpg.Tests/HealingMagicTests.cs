@@ -3,6 +3,7 @@ using RougeLikeRPG.Engine.Actors;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RougeLikeRpg.Engine.Actors;
 
 namespace RougeLikeRpg.Tests
 {

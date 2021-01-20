@@ -1,16 +1,13 @@
 ﻿using RougeLikeRpg.Graphic.Core;
 using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors;
-using RougeLikeRpg.Engine.Actors.Enums;
-using RougeLikeRpg.Engine.Actors.Monsters;
-using RougeLikeRpg.Engine.GameMaps;
 using RougeLikeRpg.Engine.GameMaps.Dungeon;
 using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory;
+using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace RougeLikeRpg.Engine
 {
@@ -34,11 +31,13 @@ namespace RougeLikeRpg.Engine
         
         private Vector2D _mapBufferOffset;
 
-        private Dungeon dungeon;
+        private Dungeon _dungeon;
         
-        private Stairs downStairs;
+        private Stairs _downStairs;
         
         private Int32 _numberOfFloor = 0;
+
+        private IDungeonConfiguration _dungeonConfiguration;
         #endregion
 
         #region Public Properties
@@ -68,6 +67,8 @@ namespace RougeLikeRpg.Engine
                 IEnumerable<Actor> actors)
         {
             m_configuration = configuration;
+            _dungeonConfiguration = new DefaultDungeonConfiguration(
+                _mapBufferWidth, _mapBufferHeight, 18, Location, 7,  5, 7, 5);
             ApplyConfiguration();
             Player = player;
             Actors = actors.ToList();
@@ -191,20 +192,15 @@ namespace RougeLikeRpg.Engine
         private void GenerateDungeon()
         {
             Actors = new List<Actor>();
-            dungeon = new Dungeon(_mapBufferWidth, _mapBufferHeight, Location) 
-            {
-                MaxRoomHeight = 10,
-                MinRoomHeight = 7,
-                MaxRoomWidth = 10,
-                MinRoomWidth = 7,
-                CountOfRooms = 18
-            };
+            
+            _dungeon = new Dungeon (new TestDungeonConfiguration(Location)); // only for tests
+            //_dungeon = new Dungeon (_dungeonConfiguration);
 
-            AbstractFactory factory = new DefaultDungeonFactory(); 
+            AbstractDungeonFactory factory = new DefaultDungeonFactory(); 
             //if (_numberOfFloor > 1)
             //    factory = new FireDungeonFactory();
 
-            _mapBuffer = dungeon.Generate(factory);
+            _mapBuffer = _dungeon.Generate(factory);
 
             FillBodyWithDrawableCells(_mapBuffer, Width, Height);
             _numberOfFloor++;

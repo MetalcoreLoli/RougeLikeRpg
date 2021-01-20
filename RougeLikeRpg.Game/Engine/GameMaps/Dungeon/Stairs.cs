@@ -24,7 +24,7 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
             BackColor = backColor;
         }
 
-        public Cell[] NextDungeon(Dungeon dungeon, AbstractFactory factory)
+        public Cell[] NextDungeon(Dungeon dungeon, AbstractDungeonFactory factory)
             => dungeon.Generate(factory);
     }
 }

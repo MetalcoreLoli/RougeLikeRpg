@@ -1,6 +1,6 @@
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Engine.GameMaps.Dungeon
+namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration
 {
     internal interface IDungeonConfiguration
     {
@@ -8,9 +8,9 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
         int Height { get; }
         int CountOfRooms { get; }
         Vector2D Location { get; }
-        int MinRoomWidth { get; init; }
-        int MaxRoomWidth { get; init; }
-        int MinRoomHeight { get; set; }
-        int MaxRoomHeight { get; set; }
+        int MinRoomWidth { get; }
+        int MaxRoomWidth { get; }
+        int MinRoomHeight { get; }
+        int MaxRoomHeight { get; }
     }
 }
