@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Graphic.Core.Controls.Text 
+namespace RougeLikeRpg.Graphic.Controls.Text 
 {
     public interface ITextColorScheme
     {

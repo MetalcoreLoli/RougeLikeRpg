@@ -16,6 +16,7 @@ using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors.Monsters;
 using RougeLikeRpg.Engine.GameItems.Items;
 using RougeLikeRpg.Engine.Core.Configuration;
+using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine
 {

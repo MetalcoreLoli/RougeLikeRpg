@@ -4,6 +4,7 @@ using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RougeLikeRpg.Engine.GameMaps.Dungeon
 {
@@ -34,12 +35,7 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
 
         private bool CanRoomBePlaced(Room room)
         {
-            foreach (var r in Rooms)
-            {
-                if (r.Intersect(room))
-                    return false;
-            }
-            return true;
+            return Rooms.All(r => !r.Intersect(room));
         }
 
         internal Cell[] Generate(AbstractDungeonFactory factory)

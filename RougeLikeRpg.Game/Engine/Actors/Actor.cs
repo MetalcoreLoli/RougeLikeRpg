@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RougeLikeRpg.Engine.Magick;
+using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine.Actors
 {

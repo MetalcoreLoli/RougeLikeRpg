@@ -1,9 +1,7 @@
-﻿using RougeLikeRpg.Graphic.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Graphic.Core.Controls
+namespace RougeLikeRpg.Graphic.Controls
 {
     public class Progressbar : Control
     {

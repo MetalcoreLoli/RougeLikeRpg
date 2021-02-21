@@ -4,6 +4,10 @@
     <TargetFramework>net5</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>RougeLikeRpg.Game.Test</AssemblyName>
+
+    <RootNamespace>RougeLikeRpg.Game.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

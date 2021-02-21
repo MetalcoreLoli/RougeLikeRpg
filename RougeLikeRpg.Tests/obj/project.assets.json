@@ -4667,11 +4667,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
-      "projectName": "RougeLikeRpg.Tests",
-      "projectPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
+      "projectUniqueName": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
+      "projectName": "RougeLikeRpg.Game.Test",
+      "projectPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/RougeLikeRpg.Tests.csproj",
       "packagesPath": "/home/daniel/.nuget/packages/",
-      "outputPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/",
+      "outputPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/daniel/.nuget/NuGet/NuGet.Config"
@@ -4686,8 +4686,8 @@
         "net5.0": {
           "targetAlias": "net5",
           "projectReferences": {
-            "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj": {
-              "projectPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj"
+            "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj": {
+              "projectPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Game/RougeLikeRPG.csproj"
             }
           }
         }
@@ -4730,7 +4730,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/daniel/dotnet/sdk/5.0.100-rc.1.20452.10/RuntimeIdentifierGraph.json"
       }
     }
   }

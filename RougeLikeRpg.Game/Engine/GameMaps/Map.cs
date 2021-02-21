@@ -8,6 +8,7 @@ using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine
 {
@@ -136,17 +137,7 @@ namespace RougeLikeRpg.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Int32 x, Int32 y)
         {
-            foreach (Cell cell in _mapBuffer)
-            {
-                if (cell.Position.X.Equals(x) && cell.Position.Y.Equals(y))
-                {
-                    if (cell.Symbol.Equals('.') || cell.Symbol.Equals('<'))
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            return false;
+            return (from cell in _mapBuffer where cell.Position.X.Equals(x) && cell.Position.Y.Equals(y) select cell.Symbol.Equals('.') || cell.Symbol.Equals('<')).FirstOrDefault();
         }
 
         /// <summary>

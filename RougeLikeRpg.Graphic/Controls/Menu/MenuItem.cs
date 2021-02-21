@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RougeLikeRpg.Graphic.Core.Controls.Menu
+namespace RougeLikeRpg.Graphic.Controls.Menu
 {
     /// <summary>
     /// Пункт меню

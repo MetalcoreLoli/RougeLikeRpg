@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Graphic.Core.Controls
+namespace RougeLikeRpg.Graphic.Controls
 {
     ///<summary>
     /// Родительский класс для всех элементов графического интерфейса
@@ -44,9 +44,9 @@ namespace RougeLikeRpg.Graphic.Core.Controls
                 m_backColor = value;
                 if (body != null)
                 {
-                    for (int i = 0; i < body.Length; i++)
+                    foreach (var t in body)
                     {
-                        body[i].BackColor = m_backColor;
+                        t.BackColor = m_backColor;
                     }
                 }
             }

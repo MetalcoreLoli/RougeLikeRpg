@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Graphic.Core.Controls
+namespace RougeLikeRpg.Graphic.Controls
 {
     ///<summary>
     /// Класс контейнер для контролов

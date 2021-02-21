@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Graphic.Core.Controls.Menu
+namespace RougeLikeRpg.Graphic.Controls.Menu
 {
     /// <summary>
     /// Меню

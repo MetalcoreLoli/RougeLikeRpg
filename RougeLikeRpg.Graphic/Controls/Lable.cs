@@ -1,12 +1,8 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls.Text;
-using RougeLikeRpg.Graphic.Core.Controls.Text;
+using RougeLikeRpg.Graphic.Controls.Text;
 using RougeLikeRpg.Graphic.Core;
 
-namespace RougeLikeRpg.Graphic.Core.Controls
+namespace RougeLikeRpg.Graphic.Controls
 {
     ///<summary>
     /// Метка содежриt в себе текст

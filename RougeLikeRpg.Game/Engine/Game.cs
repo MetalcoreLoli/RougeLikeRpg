@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine
 {
@@ -31,7 +32,8 @@ namespace RougeLikeRpg.Engine
         private Player _player;
 
         #endregion
-
+        
+        
         #region Constructors
         /// <summary>
         ///  Коструктор по умолчанию
@@ -104,7 +106,7 @@ namespace RougeLikeRpg.Engine
             {
                 case ConsoleKey.R:
                     _map.Rebuild();
-                    _mapScreen.Title = "Dungeon Map | Floor: " + _map.CurrentFloor;
+                    _mapScreen.Title = $"Dungeon Map | Floor: {_map.CurrentFloor}";
                     break;
                 default:
                     _map.Move (PlayerMoveTo (e.Key));
@@ -124,11 +126,6 @@ namespace RougeLikeRpg.Engine
             };
         }
 
-        private async void PlayerInput()
-        {
-            OnKeyDown(Input.PlayerKeyInput().Result);
-        }
-        
         private void Update()
         {
             /*
@@ -140,7 +137,7 @@ namespace RougeLikeRpg.Engine
             MonstersMove();
             _map.Update();
             */
-            PlayerInput();
+            OnKeyDown(Input.PlayerKeyInput().Result);
             _mapScreen.Update();
             _statusScreen.Items = new List<Control>();
 
@@ -154,8 +151,7 @@ namespace RougeLikeRpg.Engine
                 if (actor is Monster)
                 {
                     var mon = actor as Monster;
-                    Direction moveDir = Direction.None;
-                    if (mon.IsActorInFovXY(_player, 5, 5, out moveDir))
+                    if (mon.IsActorInFovXY(_player, 5, 5, out var moveDir))
                         mon.MoveTo(Actor.MoveDirectionVector(moveDir));
                     else
                         mon.MoveTo(Actor.MoveRandomDirectionVector());

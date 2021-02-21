@@ -3,10 +3,10 @@ using System.Linq;
 using System.Collections.Generic;
 
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls.Text;
 using RougeLikeRpg.Engine.GameItems;
 using RougeLikeRpg.Engine.GameItems.Items;
 using RougeLikeRpg.Engine.GameItems.Items.Weapon;
+using RougeLikeRpg.Graphic.Controls.Text;
 
 namespace RougeLikeRpg.Engine.Core
 {
