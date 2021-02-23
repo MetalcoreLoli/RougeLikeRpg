@@ -1,4 +1,5 @@
 ﻿using System;
+using RougeLikeRpg.Graphic.Controls.Binding;
 using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Controls
@@ -15,17 +16,17 @@ namespace RougeLikeRpg.Graphic.Controls
         /// <summary>
         /// Текст, котороый отрисуется на прогрессбаре
         /// </summary>
-        private String _text = "";
+        private TextDependencyProperty _text = "";
 
         //private Lable _lText;
 
-        private Int32 _value = 5;
-        private Int32 _maxValue = 17;
+        private NumericDependencyProperty _value = 5;
+        private NumericDependencyProperty _maxValue = 17;
         #endregion
 
         #region Public Properties
 
-        public String Text
+        public TextDependencyProperty Text
         {
             get => _text;
             set
@@ -79,7 +80,7 @@ namespace RougeLikeRpg.Graphic.Controls
         /// <summary>
         /// Текущее значение 
         /// </summary>
-        public Int32 Value
+        public NumericDependencyProperty Value
         {
             get => _value;
             set 
@@ -93,7 +94,7 @@ namespace RougeLikeRpg.Graphic.Controls
         /// <summary>
         /// Максимальное значение 
         /// </summary>
-        public Int32 MaxValue
+        public NumericDependencyProperty MaxValue
         {
             get => _maxValue;
             set
@@ -129,7 +130,7 @@ namespace RougeLikeRpg.Graphic.Controls
 
         #region  Protected Methods
 
-        protected override Cell[] InitBody(int width, int height)
+        protected sealed override Cell[] InitBody(int width, int height)
         {
             Cell[] temp = base.InitBody(width, height);
             Int32 persent   = (Int32)((double)Value / (double)MaxValue * 100.0);

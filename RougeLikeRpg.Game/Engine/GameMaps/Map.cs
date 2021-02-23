@@ -66,7 +66,7 @@ namespace RougeLikeRpg.Engine
                 Player player,
                 IEnumerable<Actor> actors)
         {
-            m_configuration = configuration;
+            MConfiguration = configuration;
             _dungeonConfiguration = new DefaultDungeonConfiguration(
                 _mapBufferWidth, _mapBufferHeight, 18, Location, 7,  5, 7, 5);
             ApplyConfiguration();

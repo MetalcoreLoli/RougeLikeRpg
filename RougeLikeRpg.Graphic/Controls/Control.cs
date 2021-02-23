@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RougeLikeRpg.Graphic.Controls.Binding;
 using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Controls
@@ -13,13 +14,13 @@ namespace RougeLikeRpg.Graphic.Controls
     {
         #region Private Members
 
-        private Color m_backColor = ColorManager.Black;
-        private Color m_foreColor = ColorManager.White;
+        private Color _mBackColor = ColorManager.Black;
+        private Color _mForeColor = ColorManager.White;
 
-        private Int32 m_height;
-        private Int32 m_width;
+        private NumericDependencyProperty _mHeight = new NumericDependencyProperty(0);
+        private NumericDependencyProperty _mWidth = new NumericDependencyProperty(0);
         
-        private Vector2D m_location;
+        private Vector2D _mLocation;
         #endregion  
 
         #region Protected Members
@@ -29,7 +30,7 @@ namespace RougeLikeRpg.Graphic.Controls
         ///</summary>
         protected Cell[] body;
 
-        protected IControlConfiguration m_configuration;
+        protected IControlConfiguration MConfiguration;
         #endregion
 
         #region Public Properties
@@ -38,15 +39,15 @@ namespace RougeLikeRpg.Graphic.Controls
         ///</summary>
         public Color BackgroundColor 
         { 
-            get => m_backColor; 
+            get => _mBackColor; 
             set
             {
-                m_backColor = value;
+                _mBackColor = value;
                 if (body != null)
                 {
                     foreach (var t in body)
                     {
-                        t.BackColor = m_backColor;
+                        t.BackColor = _mBackColor;
                     }
                 }
             }
@@ -57,15 +58,15 @@ namespace RougeLikeRpg.Graphic.Controls
         ///</summary>
         public Color ForegroundColor 
         { 
-            get => m_foreColor; 
+            get => _mForeColor; 
             set
             {
-                m_foreColor = value;
+                _mForeColor = value;
                 if (body != null)
                 {
                     for (int i = 0; i < body.Length; i++)
                     {
-                        body[i].Color = m_foreColor;
+                        body[i].Color = _mForeColor;
                     }
                 }
             }
@@ -74,12 +75,12 @@ namespace RougeLikeRpg.Graphic.Controls
         ///<summary>
         /// Высота конторола, которая является высотой столбца
         ///</summary>
-        public Int32 Height 
+        public NumericDependencyProperty Height 
         {
-            get => m_height; 
+            get => _mHeight; 
             set
             {
-                m_height = value;
+                _mHeight = value;
                 if (Width > 0)
                     body = InitBody(Width, Height);
             }
@@ -88,12 +89,12 @@ namespace RougeLikeRpg.Graphic.Controls
         ///<summary>
         /// Ширина контрола, которая является длиной строки
         ///</summary>
-        public Int32 Width
+        public NumericDependencyProperty Width
         {
-            get => m_width;
+            get => _mWidth;
             set
             {
-                m_width = value;
+                _mWidth = value;
                 if (Height > 0)
                     body = InitBody(Width, Height);
             }
@@ -102,15 +103,15 @@ namespace RougeLikeRpg.Graphic.Controls
 
         public Vector2D Location 
         { 
-            get => m_location; 
+            get => _mLocation; 
             set
             {
-                m_location = value;
+                _mLocation = value;
                 if (body != null)
                 {
                     for (int i = 0; i < body.Length; i++)
                     {
-                        body[i].Position += m_location;
+                        body[i].Position += _mLocation;
                     }
                 }
                 else
@@ -125,13 +126,13 @@ namespace RougeLikeRpg.Graphic.Controls
 
         public virtual void ApplyConfiguration ()
         {
-            if (m_configuration != null)
+            if (MConfiguration != null)
             {
-                Height          = m_configuration.Height;        
-                Width           = m_configuration.Width;
-                Location        = m_configuration.Location;
-                BackgroundColor = m_configuration.BackgroundColor;
-                ForegroundColor = m_configuration.ForegroundColor;
+                Height          = MConfiguration.Height;        
+                Width           = MConfiguration.Width;
+                Location        = MConfiguration.Location;
+                BackgroundColor = MConfiguration.BackgroundColor;
+                ForegroundColor = MConfiguration.ForegroundColor;
             }
         }
 
@@ -252,11 +253,10 @@ namespace RougeLikeRpg.Graphic.Controls
     
         protected async IAsyncEnumerable<Cell> GetCellsAsync(Cell[] cells)
         {
-           for (int i = 0; i < cells.Length; i++)
+            foreach (var t in cells)
             {
                 await Task.Delay(0);
-                yield return cells[i];
-
+                yield return t;
             }
         }
 

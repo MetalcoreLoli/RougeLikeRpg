@@ -63,7 +63,7 @@ namespace RougeLikeRpg.Graphic.Controls
 
         public Screen (string title, IControlConfiguration configuration)
         {
-            m_configuration = configuration;
+            MConfiguration = configuration;
             ApplyConfiguration();
             Init();
 

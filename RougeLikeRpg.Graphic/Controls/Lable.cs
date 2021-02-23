@@ -12,8 +12,8 @@ namespace RougeLikeRpg.Graphic.Controls
     {
 
         #region Private Members
-        private TextDependencyProperty m_text = "";
-        private readonly ITextColorScheme m_colorScheme; 
+        private TextDependencyProperty _mText = "";
+        private readonly ITextColorScheme _mColorScheme; 
         #endregion
 
         #region Public Properties
@@ -23,11 +23,11 @@ namespace RougeLikeRpg.Graphic.Controls
         ///</summary>
         public TextDependencyProperty Text
         {
-            get => m_text;
+            get => _mText;
             set
             {
-                m_text = value;
-                body = InitTextBody((string)m_text.Value);
+                _mText = value;
+                body = InitTextBody((string)_mText.Value);
             }
         }
         #endregion
@@ -64,7 +64,7 @@ namespace RougeLikeRpg.Graphic.Controls
             
             Location = location;
             Text = text;
-            m_colorScheme = scheme;
+            _mColorScheme = scheme;
             Initialization();
         }
 
@@ -122,7 +122,7 @@ namespace RougeLikeRpg.Graphic.Controls
                        ColorManager.White, 
                        ColorManager.Black); 
 
-            m_colorScheme?.Apply(ref temp);
+            _mColorScheme?.Apply(ref temp);
             return temp;
         }
         #endregion
