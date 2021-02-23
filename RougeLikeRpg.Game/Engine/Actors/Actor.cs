@@ -1,5 +1,4 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors.Enums;
 using RougeLikeRpg.Engine.Actors.Events;
 using RougeLikeRpg.Engine.Dices;

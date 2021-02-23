@@ -1,5 +1,4 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.GameMaps.Dungeon;
 using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory;

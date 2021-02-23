@@ -12,7 +12,6 @@ using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Events;
 using RougeLikeRpg.Engine.GameScreens;
 using RougeLikeRpg.Engine.Actors.Enums;
-using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors.Monsters;
 using RougeLikeRpg.Engine.GameItems.Items;
 using RougeLikeRpg.Engine.Core.Configuration;

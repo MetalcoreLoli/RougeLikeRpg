@@ -6,7 +6,6 @@ using System.Text;
 using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Controls;
 using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls;
 
 namespace RougeLikeRpg.Engine.GameScreens
 {

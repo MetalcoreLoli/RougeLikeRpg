@@ -1,4 +1,5 @@
 using System;
+using RougeLikeRpg.Graphic.Controls.Binding;
 using RougeLikeRpg.Graphic.Controls.Text;
 using RougeLikeRpg.Graphic.Core;
 
@@ -11,7 +12,7 @@ namespace RougeLikeRpg.Graphic.Controls
     {
 
         #region Private Members
-        private string m_text = "";
+        private TextDependencyProperty m_text = "";
         private readonly ITextColorScheme m_colorScheme; 
         #endregion
 
@@ -20,13 +21,13 @@ namespace RougeLikeRpg.Graphic.Controls
         ///<summary>
         /// Текст, который содежрит метка
         ///</summary>
-        public String Text
+        public TextDependencyProperty Text
         {
             get => m_text;
             set
             {
                 m_text = value;
-                body = InitTextBody(m_text);
+                body = InitTextBody((string)m_text.Value);
             }
         }
         #endregion
@@ -81,7 +82,7 @@ namespace RougeLikeRpg.Graphic.Controls
         #region Propercted Methods 
         protected override Cell[] InitBody(int width, int height)
         {
-            Cell[] temp = InitTextBody(Text);
+            Cell[] temp = InitTextBody((string)Text.Value);
             return temp;
         }
         #endregion
@@ -103,7 +104,7 @@ namespace RougeLikeRpg.Graphic.Controls
 
         private void Initialization()
         {
-            body = InitTextBody(Text);
+            body = InitTextBody((string)Text.Value);
         }
 
         ///<summary>

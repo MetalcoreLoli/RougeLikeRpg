@@ -1,5 +1,4 @@
-﻿using RougeLikeRpg.Graphic.Core.Controls;
-using RougeLikeRpg.Engine;
+﻿using RougeLikeRpg.Engine;
 using System;
 using System.Runtime.CompilerServices;
 

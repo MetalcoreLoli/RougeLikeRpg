@@ -1,8 +1,6 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Graphic.Core.Controls;
 using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Actors.Builders;
-using RougeLikeRpg.Engine.Dices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
