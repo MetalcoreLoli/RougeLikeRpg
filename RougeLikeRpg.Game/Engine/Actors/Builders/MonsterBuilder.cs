@@ -22,7 +22,7 @@ namespace RougeLikeRpg.Engine.Actors.Monsters.Builders
 
         internal override  void RollStats()
         {
-            monster.Hp      = monster.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
+            monster.Hp      = monster.MaxHp = DiceFactroy.CreateDices("4d6").RollAll().Sum();
             monster.Mana    = monster.MaxMana = 2;
             monster.Exp     = 0;
             monster.MaxExp  = 20;

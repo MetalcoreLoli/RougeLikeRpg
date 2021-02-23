@@ -7,7 +7,7 @@ namespace RougeLikeRpg.Engine.Dices
     ///<summary>
     /// Класс для более удобной работы с костями
     ///</summary>
-    internal static  class DiceManager
+    internal static  class DiceFactroy
     {
         #region Public Properties
         
@@ -15,7 +15,7 @@ namespace RougeLikeRpg.Engine.Dices
         #endregion 
     
         #region Constructors
-        static DiceManager()
+        static DiceFactroy()
         {
         
         }

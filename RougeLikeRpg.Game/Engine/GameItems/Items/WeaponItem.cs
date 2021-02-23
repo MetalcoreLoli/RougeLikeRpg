@@ -28,7 +28,7 @@ namespace RougeLikeRpg.Engine.GameItems.Items
             set
             {
                 _damage = value;
-                RolledDamage = DiceManager.CreateDices(_damage).RollAll().Sum();
+                RolledDamage = DiceFactroy.CreateDices(_damage).RollAll().Sum();
             }
         }
 

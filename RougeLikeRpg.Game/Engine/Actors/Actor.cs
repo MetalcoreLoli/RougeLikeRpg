@@ -294,7 +294,7 @@ namespace RougeLikeRpg.Engine.Actors
 
         public Int32 RollStat()
         {
-            Int32[] values = DiceManager.CreateDices("4d6").RollAll();
+            Int32[] values = DiceFactroy.CreateDices("4d6").RollAll();
             Int32 minDiceValue = values.Min();
             return values.Where(val => val != minDiceValue).Sum();
         }
@@ -358,7 +358,7 @@ namespace RougeLikeRpg.Engine.Actors
 
         private void HitByWeapon(Actor actor, WeaponItem weapon)
         {
-            Int32 isHit = DiceManager.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(weapon.Modificator);
+            Int32 isHit = DiceFactroy.CreateDice("1d20").Roll() + GetValueOfModificatorByWeapon(weapon.Modificator);
             if (isHit > 10)
             {
                 Int32 damage = isHit != 20 ? weapon.RolledDamage : weapon.RolledDamage + weapon.RolledDamage;
@@ -407,7 +407,7 @@ namespace RougeLikeRpg.Engine.Actors
             OnLevelUp(this);
             Level++;
             MaxExp  *= 2;
-            MaxHp   += DiceManager.CreateDices("2d6").RollAll().Sum();
+            MaxHp   += DiceFactroy.CreateDices("2d6").RollAll().Sum();
             Hp      = MaxHp;
             Mana    = (Level % 2 == 0 ? MaxMana += 1: MaxMana);
         }

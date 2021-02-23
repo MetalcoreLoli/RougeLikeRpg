@@ -71,7 +71,7 @@ namespace RougeLikeRpg.Engine.Actors.Builders
 
         internal override void RollStats()
         {
-            player.Hp       = player.MaxHp = DiceManager.CreateDices("4d6").RollAll().Sum();
+            player.Hp       = player.MaxHp = DiceFactroy.CreateDices("4d6").RollAll().Sum();
             player.Mana     = player.MaxMana = 2;
             player.Exp      = 0;
             player.MaxExp   = 20;

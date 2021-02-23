@@ -12,13 +12,13 @@ namespace RougeLikeRpg.Engine.Actors.Monsters
         public Goblin()
         {
             Name = "Goblin";
-            Hp = MaxHp = Dices.DiceManager.CreateDice("3d8").Roll();
+            Hp = MaxHp = Dices.DiceFactroy.CreateDice("3d8").Roll();
             LeftArm     = new GameItems.Items.Weapon.Dagger();
             //RightArm    = new GameItems.Items.Weapon.ShortSword();
             Symbol  = 'G';
             Color   = ColorManager.Green;
             NormalColor = ColorManager.Green;
-            DropExp = DiceManager.CreateDices("2d4").RollAll().Sum() + 1;
+            DropExp = DiceFactroy.CreateDices("2d4").RollAll().Sum() + 1;
             Str     = RollStat();
             Dex     = RollStat() + 5;
             Intell  = RollStat();

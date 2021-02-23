@@ -44,7 +44,7 @@ namespace RougeLikeRpg.Engine.Magick
             {
                 var color = _actorToHeal.Color;
                 _actorToHeal.Color = ColorManager.Yellow;
-                Int32 healingValue = DiceManager.CreateDices($"{_actorToHeal.Level}d8").RollAll().Sum();
+                Int32 healingValue = DiceFactroy.CreateDices($"{_actorToHeal.Level}d8").RollAll().Sum();
                 _actorToHeal.Hp += CurrentHealingValue(_actorToHeal.Hp, healingValue, _actorToHeal.MaxHp);
                 _actorToHeal.Mana--;
                 Thread.Sleep(250);
