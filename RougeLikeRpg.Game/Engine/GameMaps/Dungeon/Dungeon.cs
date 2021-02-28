@@ -41,6 +41,42 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
         internal Cell[] Generate(AbstractDungeonFactory factory)
         {
             int currentCountOfRooms = _configuration.CountOfRooms;
+            Rooms = GenerateRooms(factory, currentCountOfRooms).ToList();
+            if (Rooms.Count > 1)
+            {
+                for (int i = 1; i < Rooms.Count; i++)
+                {
+                    var prev = Rooms[i - 1];
+                    var current = Rooms[i];
+                    ConnectTwoRooms(prev, current);
+                }
+            }
+            Console.Title = "Location was generated";
+            return body;
+        }
+
+        private void ConnectTwoRooms(Room prev, Room current)
+        {
+            int path = new Random().Next(0, 2);
+            if (path == 0)
+            {
+                CreateHorizontalPath(prev.GetCenter().X, current.GetCenter().X, prev.GetCenter().Y, ColorManager.White,
+                    ColorManager.Black);
+                CreateVecticalPath(current.GetCenter().Y, prev.GetCenter().Y, current.GetCenter().X, ColorManager.White,
+                    ColorManager.Black);
+            }
+            else
+            {
+                CreateHorizontalPath(current.GetCenter().X, prev.GetCenter().X, current.GetCenter().Y, ColorManager.White,
+                    ColorManager.Black);
+                CreateVecticalPath(prev.GetCenter().Y, current.GetCenter().Y, prev.GetCenter().X, ColorManager.White,
+                    ColorManager.Black);
+            }
+        }
+
+        private IEnumerable<Room> GenerateRooms(AbstractDungeonFactory factory, int currentCountOfRooms)
+        {
+            var rooms = new List<Room>();
             while (currentCountOfRooms-- > 0)
             {
                 Room room = GenerateRoom(factory, _configuration);
@@ -48,27 +84,9 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
                 {
                     room = GenerateRoom(factory, _configuration);
                 }
-                AddRoomToDungeon(room);
+                rooms.Add(room);
             }
-
-            for (int i = 1; i < Rooms.Count; i++)
-            {
-                Room prev       = Rooms[i - 1];
-                Room current    = Rooms[i];
-                int path = new Random().Next(0, 2);
-                if (path == 0)
-                {
-                    CreateHorizontalPath(prev.GetCenter().X, current.GetCenter().X, prev.GetCenter().Y, ColorManager.White, ColorManager.Black);
-                    CreateVecticalPath(current.GetCenter().Y, prev.GetCenter().Y, current.GetCenter().X, ColorManager.White, ColorManager.Black);
-                }
-                else
-                {
-                    CreateHorizontalPath(current.GetCenter().X, prev.GetCenter().X, current.GetCenter().Y, ColorManager.White, ColorManager.Black);
-                    CreateVecticalPath(prev.GetCenter().Y, current.GetCenter().Y, prev.GetCenter().X, ColorManager.White, ColorManager.Black);
-                }
-            }
-            Console.Title = "Location was generated";
-            return body;
+            return rooms;
         }
 
         private Room GenerateRoom(AbstractDungeonFactory f, IDungeonConfiguration configuration)

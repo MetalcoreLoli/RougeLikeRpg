@@ -76,7 +76,6 @@ namespace RougeLikeRpg.Engine
                 Clear();
                 Update();
                 Draw();
-                //Thread.Sleep(1000);
             } 
         }
 

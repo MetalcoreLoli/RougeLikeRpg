@@ -124,7 +124,7 @@ namespace RougeLikeRpg.Graphic.Controls
         protected override Cell[] InitBody(Int32 width, Int32 height)
         {
             Cell[] temp = base.InitBody(width, height);
-            ///temp = DrawBordersWithSymbol(temp, width, height, '#');
+            //temp = DrawBordersWithSymbol(temp, width, height, '#');
             temp = DrawLeftRightWalls(temp, Width, Height, '|');
             temp = DrawUpDownWalls(temp, Width, Height, '-');
             temp = DrawCornel(temp, Width, Height, '+');
@@ -184,12 +184,10 @@ namespace RougeLikeRpg.Graphic.Controls
                 foreach (Cell cell in body)
                 {
                     Cell itemCell = item.GetCellByPosition(cell.Position.X, cell.Position.Y);
-                    if (itemCell != null)
-                    {
-                        cell.Color = itemCell.Color;
-                        cell.BackColor = item.BackgroundColor;
-                        cell.Symbol = itemCell.Symbol;
-                    }
+                    if (itemCell == null) continue;
+                    cell.Color = itemCell.Color;
+                    cell.BackColor = item.BackgroundColor;
+                    cell.Symbol = itemCell.Symbol;
                 }
             }
         }

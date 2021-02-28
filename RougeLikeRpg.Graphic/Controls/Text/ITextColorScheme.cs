@@ -9,3 +9,7 @@ namespace RougeLikeRpg.Graphic.Controls.Text
         void Apply (ref Cell[] cells);
     }
 }
+
+/*
+ * 
+ */

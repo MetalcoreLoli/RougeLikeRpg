@@ -1,10 +1,10 @@
 namespace RougeLikeRpg.Graphic.Controls.Binding
 {
-    public class Binding
+    public class Binder
     {
         private readonly DataContext _context;
         private DependencyProperty _property;
-        public Binding(DataContext context)
+        public Binder(DataContext context)
         {
             _context = context;
         }

@@ -2,7 +2,7 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration
 {
-    internal  class TestDungeonConfiguration :IDungeonConfiguration
+    internal  class TestDungeonConfiguration : IDungeonConfiguration
     {
         public TestDungeonConfiguration(Vector2D location)
         {
