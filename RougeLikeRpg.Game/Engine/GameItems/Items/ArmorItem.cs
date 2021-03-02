@@ -7,7 +7,7 @@ namespace RougeLikeRpg.Engine.GameItems.Items
     /// <summary>
     /// Шмоткa
     /// </summary>
-    internal class ArmorItem : Item
+    public class ArmorItem : Item
     {
 
         /// <summary>

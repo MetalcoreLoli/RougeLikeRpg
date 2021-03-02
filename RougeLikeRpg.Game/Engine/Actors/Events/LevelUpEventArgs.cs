@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RougeLikeRpg.Engine.Actors.Events
 {
-    internal class LevelUpEventArgs : EventArgs
+    public class LevelUpEventArgs : EventArgs
     {
 
         public LevelUpEventArgs(Actor actor)

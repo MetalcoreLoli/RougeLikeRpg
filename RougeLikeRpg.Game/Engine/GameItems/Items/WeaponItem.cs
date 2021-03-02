@@ -10,7 +10,7 @@ namespace RougeLikeRpg.Engine.GameItems.Items
     /// <summary>
     /// Оружие
     /// </summary>
-    internal class WeaponItem : Item
+    public class WeaponItem : Item
     {
         #region Private Members
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RougeLikeRpg.Engine.Actors.Enums
 {
-    internal enum Race
+    public enum Race
     {
         Human       = 0,
         Elf         = 1,

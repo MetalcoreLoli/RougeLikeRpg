@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RougeLikeRpg.Engine.Actors.Events
 {
-    internal class MovingEventArgs : EventArgs
+    public class MovingEventArgs : EventArgs
     {
         public Vector2D MovingPosition { get; private set; }
 

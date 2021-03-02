@@ -8,7 +8,7 @@ namespace RougeLikeRpg.Engine.GameItems
     /// <summary>
     /// Класс-контенер для шмоток актеров
     /// </summary>
-    internal class Inventory
+    public class Inventory
     {
         #region Public Properties
 

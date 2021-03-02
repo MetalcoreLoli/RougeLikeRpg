@@ -2,8 +2,7 @@ using System;
 
 namespace RougeLikeRpg.Engine.Magick.Events
 {
-
-    internal class CastingSpellEventArgs : EventArgs
+    public class CastingSpellEventArgs : EventArgs
     {
         #region Public Properties
         public string Name { get; private set; }

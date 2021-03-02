@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RougeLikeRpg.Engine.GameMaps.Dungeon
 {
-    internal class Room
+    public class Room
     {
         public Int32 Width { get; set; }
         public Int32 Height { get; set; }

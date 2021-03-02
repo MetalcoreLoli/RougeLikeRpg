@@ -3,7 +3,7 @@ using RougeLikeRpg.Engine.Magick.Events;
 
 namespace RougeLikeRpg.Engine.Magick
 {
-    internal interface ISpell
+    public interface ISpell
     {
         string Name { get; set; }
         void Cast();

@@ -114,14 +114,7 @@ namespace RougeLikeRpg.Graphic.Controls
         ///<returns>сформированное из текста тело</returns>
         private Cell[] InitTextBody(string text)
         {
-            Cell[] temp = new Cell[text.Length];
-            for (Int32 i = 0; i < text.Length; i++)
-               temp[i] = new Cell(
-                       text[i], 
-                       new Vector2D(i, 0) + Location, 
-                       ColorManager.White, 
-                       ColorManager.Black); 
-
+            Cell[] temp = CreateCellsFromText(text, ColorManager.White, ColorManager.Black); 
             _mColorScheme?.Apply(ref temp);
             return temp;
         }

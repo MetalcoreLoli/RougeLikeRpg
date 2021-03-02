@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace RougeLikeRpg.Graphic.Controls.Binding
 {
     public class Binder

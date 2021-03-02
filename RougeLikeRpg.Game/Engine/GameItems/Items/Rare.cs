@@ -9,7 +9,7 @@ namespace RougeLikeRpg.Engine.GameItems.Items
     /// <summary>
     /// Редкость Предмета
     /// </summary>
-    internal class Rare
+    public class Rare
     {
 
         #region Private Members

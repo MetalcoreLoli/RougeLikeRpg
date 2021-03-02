@@ -5,7 +5,7 @@ using RougeLikeRpg.Engine.Magick.Events;
 
 namespace RougeLikeRpg.Engine.Magick
 {
-    internal class BookOfSpells
+    public class BookOfSpells
     {
         #region Events
         public event EventHandler<CastingSpellEventArgs> Casting;

@@ -182,24 +182,24 @@ namespace RougeLikeRpg.Engine
         private void GenerateDungeon()
         {
             Actors = new List<Actor>();
+
+            _dungeon =
+                new DungeonBuilder(new DefaultDungeonFactory(), new TestDungeonConfiguration(Location)) // only for test
+                    .GenerateRooms().ConnectAllRooms().Construct();
             
-            _dungeon = new Dungeon (new TestDungeonConfiguration(Location)); // only for tests
-            //_dungeon = new Dungeon (_dungeonConfiguration);
+             //_dungeon = new Dungeon (new TestDungeonConfiguration(Location));
+             //_dungeon = new Dungeon (_dungeonConfiguration);
 
-            AbstractDungeonFactory factory = new DefaultDungeonFactory(); 
-            //if (_numberOfFloor > 1)
-            //    factory = new FireDungeonFactory();
-
-            _mapBuffer = _dungeon.Generate(factory);
-
-            FillBodyWithDrawableCells(_mapBuffer, Width, Height);
+             _mapBuffer = _dungeon.Buffer;
+             
+            FillBodyWithDrawableCells(_mapBuffer,  Width, Height);
             _numberOfFloor++;
         }
 
         private void FillBodyWithDrawableCells(Cell[] source, int width, int height)
         {
             Cell[] drawableCells = (from cell in source
-                                    where cell.Position.X > 1 && cell.Position.Y > 1 
+                                    where cell.Position.X > 0 && cell.Position.Y > 0 
                                     where cell.Position.X < width-1 && cell.Position.Y < height-1
                                     select cell).ToArray();
 

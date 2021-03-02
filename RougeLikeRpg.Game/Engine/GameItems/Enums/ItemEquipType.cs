@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RougeLikeRpg.Engine.GameItems.Enums
 {
-    internal enum ItemEquipType
+    public enum ItemEquipType
     {
         Head          = 0,
         Armor         = 1,

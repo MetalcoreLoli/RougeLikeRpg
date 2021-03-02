@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RougeLikeRpg.Engine.GameItems.Enums
 {
-    internal enum WeaponItemModificator
+    public enum WeaponItemModificator
     {
         Str  = 0,
         Int  = 1,

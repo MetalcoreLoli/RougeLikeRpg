@@ -7,7 +7,7 @@ namespace RougeLikeRpg.Engine.Actors.Events
     /// <summary>
     /// 
     /// </summary>
-    internal class ActorDyingEventArgs : EventArgs
+    public class ActorDyingEventArgs : EventArgs
     {
 
         /// <summary>

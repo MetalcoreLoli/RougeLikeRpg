@@ -8,7 +8,7 @@ namespace RougeLikeRpg.Engine.Actors.Events
     /// <summary>
     /// Аргумент аттаки
     /// </summary>
-    internal class AttackingEventArgs : EventArgs
+    public class AttackingEventArgs : EventArgs
     {
         #region Public Properties
         /// <summary>

@@ -2,7 +2,7 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration
 {
-    internal interface IDungeonConfiguration
+    public interface IDungeonConfiguration
     {
         int Width { get; }
         int Height { get; }

@@ -16,7 +16,7 @@ namespace RougeLikeRpg.Engine.Actors
     /// <summary>
     /// Абсктракный класс обозначаюший ирока/моба/нпс
     /// </summary>
-    internal abstract class Actor : IActor
+    public abstract class Actor : IActor
     {
         #region Private Members
 

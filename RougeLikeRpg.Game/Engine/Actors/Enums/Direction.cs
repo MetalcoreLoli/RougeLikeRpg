@@ -2,7 +2,7 @@ using System;
 
 namespace RougeLikeRpg.Engine.Actors.Enums
 {
-    internal enum Direction
+    public enum Direction
     {
         Up      = 0,
         Down    = 1,
