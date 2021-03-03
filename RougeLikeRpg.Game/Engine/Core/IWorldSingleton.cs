@@ -1,3 +1,5 @@
+using System;
+
 namespace RougeLikeRpg.Engine.Core
 {
     public interface IWorldSingleton
@@ -6,12 +8,16 @@ namespace RougeLikeRpg.Engine.Core
         IWorldSingleton AddToWorld(object entity);
         IWorldSingleton DropFromWorld(object entity);
         IWorldSingleton DropFromAllOf<T>();  
-        object FromWorld(object entity);
+        T FromWorldBy<T>(Func<T, bool> predicate);
         T FirstFromWorldOf<T>();
     }
     
     public class EntityWorldSingleton : IWorldSingleton
     {
+        private EntityWorldSingleton()
+        {
+        }
+
         public IWorldSingleton Registry<T>()
         {
             throw new System.NotImplementedException();
@@ -32,9 +38,9 @@ namespace RougeLikeRpg.Engine.Core
             throw new System.NotImplementedException();
         }
 
-        public object FromWorld(object entity)
+        public T FromWorldBy<T>(Func<T, bool> predicate)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public T FirstFromWorldOf<T>()
@@ -42,6 +48,7 @@ namespace RougeLikeRpg.Engine.Core
             throw new System.NotImplementedException();
         }
 
-        public static EntityWorldSingleton Instance { get; set; }
+        private static Lazy<EntityWorldSingleton> _instance = new Lazy<EntityWorldSingleton>(() => new EntityWorldSingleton());
+        public static EntityWorldSingleton Instance => _instance.Value;
     }
 }
