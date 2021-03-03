@@ -187,7 +187,6 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
             }
             return this;
         }
-
         public Dungeon Construct()
         {
             _dungeon.UpdateBuffer(_dungeonFloorBuffer);

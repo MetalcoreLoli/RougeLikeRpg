@@ -9,7 +9,7 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Engine.GameScreens
 {
-    internal class MessageLogScreen : Screen
+    internal class MessageLogScreen : Screen, ILogger
     {
 
         public MessageLogScreen (string title, IControlConfiguration configuration)
@@ -52,6 +52,11 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Clear(this.BackgroundColor);
             }
             Add(new Lable(Message, new Vector2D(1, Items.Count + 1), new DungeonColorScheme()));
+        }
+
+        public void Write(string msg)
+        {
+            AddMessageToLog($"[INFO]: {msg}"); 
         }
     }
 }
