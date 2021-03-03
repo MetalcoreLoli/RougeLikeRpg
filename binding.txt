@@ -1,0 +1,5 @@
+
+
+
+var binder = this.CreateBinding<View, ViewModel>().From(v => v.Property).To(vm => vm.Property);
+
