@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine.GameScreens
@@ -61,7 +62,8 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Clear(this.BackgroundColor);
                 this.Update();
                 Draw();
-            } 
+            }
+            EntityWorldSingleton.Instance.Registry<Player>().AddToWorld(builder.Get());
             return builder.Get();
         }
 

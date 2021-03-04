@@ -6,8 +6,8 @@ namespace RougeLikeRpg.Engine.Core
 {
     public class EntityWorldSingleton : IWorldSingleton
     {
-        private static Lazy<Dictionary<Type, IList<object>>> _lazyWorldCache
-            = new Lazy<Dictionary<Type, IList<object>>>(() => new Dictionary<Type, IList<object>>());
+        private static Dictionary<Type, IList<object>>_lazyWorldCache
+            = new Dictionary<Type, IList<object>>();
         private EntityWorldSingleton()
         {
         }
@@ -15,16 +15,16 @@ namespace RougeLikeRpg.Engine.Core
         public IWorldSingleton Registry<T>()
         {
             var type = typeof(T);
-            if (!_lazyWorldCache.Value.ContainsKey(type))
-                _lazyWorldCache.Value.Add(type, new List<object>());
+            if (!_lazyWorldCache.ContainsKey(type))
+                _lazyWorldCache.Add(type, new List<object>());
             return this;
         }
 
         public IWorldSingleton AddToWorld(object entity)
         {
             var type = entity.GetType();
-            if (_lazyWorldCache.Value.ContainsKey(type))
-                _lazyWorldCache.Value[type].Add(entity);
+            if (_lazyWorldCache.ContainsKey(type))
+                _lazyWorldCache[type].Add(entity);
             else
                 throw new ArgumentException($"world does not know about type {type.Name} yet !!!");
             return this;
@@ -33,11 +33,11 @@ namespace RougeLikeRpg.Engine.Core
         public IWorldSingleton DropFromWorld(object entity)
         {
             var type = entity.GetType();
-            if (!_lazyWorldCache.Value.ContainsKey(type))
+            if (!_lazyWorldCache.ContainsKey(type))
                 throw new ArgumentException($"world does not know about type {type.Name} yet !!!");
 
-            if (_lazyWorldCache.Value[type].Contains(entity))
-                _lazyWorldCache.Value[type].Remove(entity);
+            if (_lazyWorldCache[type].Contains(entity))
+                _lazyWorldCache[type].Remove(entity);
             else
                 throw new AggregateException($"world does not contains {type.Name}");
 
@@ -47,35 +47,35 @@ namespace RougeLikeRpg.Engine.Core
         public IWorldSingleton DropFromAllOf<T>()
         {
             var type = typeof(T);
-            if (!_lazyWorldCache.Value.ContainsKey(type))
+            if (!_lazyWorldCache.ContainsKey(type))
                 throw new ArgumentException($"world does not know about type {type.Name} yet !!!");
             
-            _lazyWorldCache.Value.Remove(type);
+            _lazyWorldCache.Remove(type);
             return this;
         }
 
         public bool Contains(object entity)
         {
             var type = entity.GetType();
-            if (!_lazyWorldCache.Value.ContainsKey(type))
+            if (!_lazyWorldCache.ContainsKey(type))
                 return false;
 
-            return _lazyWorldCache.Value[type].Contains(entity);
+            return _lazyWorldCache[type].Contains(entity);
         }
 
         public bool Contains<T>()
         {
             var type = typeof(T);
-            return _lazyWorldCache.Value.ContainsKey(type);
+            return _lazyWorldCache.ContainsKey(type);
         }
 
         public T FromWorldBy<T>(Func<T, bool> predicate)
         {
             var type = typeof(T);
-            if (!_lazyWorldCache.Value.ContainsKey(type))
+            if (!_lazyWorldCache.ContainsKey(type))
                 throw new ArgumentException($"world does not know about type {type.Name} yet !!!");
 
-            foreach (T o in _lazyWorldCache.Value[type])
+            foreach (T o in _lazyWorldCache[type])
                 if (predicate(o)) return o;
 
             return default;
@@ -84,10 +84,10 @@ namespace RougeLikeRpg.Engine.Core
         public T FirstFromWorldOf<T>()
         {
             var type = typeof(T);
-            if (!_lazyWorldCache.Value.ContainsKey(type))
+            if (!_lazyWorldCache.ContainsKey(type))
                 throw new ArgumentException($"world does not know about type {type.Name} yet !!!");
 
-            return (T) _lazyWorldCache.Value[type].First();
+            return (T) _lazyWorldCache[type].First();
         }
 
         private static readonly Lazy<EntityWorldSingleton> _instance = new(() => new EntityWorldSingleton());

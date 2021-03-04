@@ -71,9 +71,12 @@ namespace RougeLikeRpg.Engine
             _messageLogScreen   = new MessageLogScreen("Message Log", new MessageLogScreenConfiguration());
             _statusScreen       = new Screen("Status", new StatusScreenConfiguration());
 
+            EntityWorldSingleton.Instance.Registry<MessageLogScreen>().AddToWorld(_messageLogScreen);
+            
             _map        = new Map(mapConfig);
             _mapScreen  = new MapScreen("Dungeon Map | Floor: " + _map.CurrentFloor, mapScreenConfig);
             _mapScreen.Add(_map);
+
         }
     }
 }

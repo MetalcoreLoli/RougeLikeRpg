@@ -7,6 +7,9 @@ using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RougeLikeRpg.Engine.Core;
+using RougeLikeRpg.Engine.Core.Commands;
+using RougeLikeRpg.Engine.GameScreens;
 using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine
@@ -186,7 +189,6 @@ namespace RougeLikeRpg.Engine
             _dungeon =
                 new DungeonBuilder(new DefaultDungeonFactory(), new TestDungeonConfiguration(Location)) // only for test
                     .GenerateRooms().ConnectAllRooms().Construct();
-            
              //_dungeon = new Dungeon (new TestDungeonConfiguration(Location));
              //_dungeon = new Dungeon (_dungeonConfiguration);
 
@@ -194,12 +196,14 @@ namespace RougeLikeRpg.Engine
              
             FillBodyWithDrawableCells(_mapBuffer,  Width, Height);
             _numberOfFloor++;
+            var messageLog = new TakeFromWorldQuery<MessageLogScreen>(EntityWorldSingleton.Instance).Execute();
+            messageLog.Write($"Welcome to floor {_numberOfFloor}");
         }
 
         private void FillBodyWithDrawableCells(Cell[] source, int width, int height)
         {
             Cell[] drawableCells = (from cell in source
-                                    where cell.Position.X > 0 && cell.Position.Y > 0 
+                                    where cell.Position.X >= 0 && cell.Position.Y >= 0 
                                     where cell.Position.X < width-1 && cell.Position.Y < height-1
                                     select cell).ToArray();
 

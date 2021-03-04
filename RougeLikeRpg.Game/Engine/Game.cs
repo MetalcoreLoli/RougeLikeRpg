@@ -32,7 +32,6 @@ namespace RougeLikeRpg.Engine
 
         #endregion
         
-        
         #region Constructors
         /// <summary>
         ///  Коструктор по умолчанию
