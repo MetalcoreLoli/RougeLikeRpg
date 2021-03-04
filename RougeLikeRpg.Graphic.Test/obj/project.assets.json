@@ -4644,11 +4644,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/RougeLikeRpg.Graphic.Test.csproj",
+      "projectUniqueName": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/RougeLikeRpg.Graphic.Test.csproj",
       "projectName": "RougeLikeRpg.Graphic.Test",
-      "projectPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/RougeLikeRpg.Graphic.Test.csproj",
+      "projectPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/RougeLikeRpg.Graphic.Test.csproj",
       "packagesPath": "/home/daniel/.nuget/packages/",
-      "outputPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/obj/",
+      "outputPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/daniel/.nuget/NuGet/NuGet.Config"
@@ -4663,8 +4663,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
-              "projectPath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj"
+            "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
+              "projectPath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj"
             }
           }
         }
@@ -4707,7 +4707,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/daniel/dotnet/sdk/5.0.100-rc.1.20452.10/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
       }
     }
   }

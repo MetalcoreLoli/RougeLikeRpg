@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q4yHunAiHLxaA3XK3dNOmYlEUmTUsvH6uNIHFVbG3OwRaeyPySBbjjSrEBJwFDfPFiz54us3qREo1ctBs0c82w==",
+  "dgSpecHash": "hxC0L1bZbP4Ru1HRmw2MuQZmRe/oYfLT0MHhonHRLnzAnyF1qREFyA+mroW7S7pCmVd5pOuMsxV/Se9xJMdoUQ==",
   "success": true,
-  "projectFilePath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/RougeLikeRpg.Graphic.Test.csproj",
+  "projectFilePath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic.Test/RougeLikeRpg.Graphic.Test.csproj",
   "expectedPackageFiles": [
     "/home/daniel/.nuget/packages/microsoft.codecoverage/16.5.0/microsoft.codecoverage.16.5.0.nupkg.sha512",
     "/home/daniel/.nuget/packages/microsoft.csharp/4.0.1/microsoft.csharp.4.0.1.nupkg.sha512",
