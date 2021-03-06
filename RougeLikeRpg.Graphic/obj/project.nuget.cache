@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v8V5LWG9RyW2oj+Ea1A+ZNNES6jeR/G1kWQhVsXDD21HFAQumh5l22rwVCNw8YYwLt9KgE7qkvcwswH481MVYw==",
+  "dgSpecHash": "KxVg7Szjv7dU3T0rDBpcAAHKI0Oc7a+kLEI5yZigV6u82zcyxoSsDffcIpOtzF8DZOQJzcDH6JkwIrwh6s1Fbw==",
   "success": true,
-  "projectFilePath": "/home/daniel/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
+  "projectFilePath": "/home/daniel/Project/CSharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

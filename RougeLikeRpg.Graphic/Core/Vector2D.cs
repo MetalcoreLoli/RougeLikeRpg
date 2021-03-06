@@ -9,7 +9,7 @@ namespace RougeLikeRpg.Graphic.Core
         public double X { get; }
         public double Y { get; }
         public double Lenght { get => (Int32)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2)); }
-        public Vector2D Normalized => new Vector2D(X / Lenght, Y / Lenght);
+        public Vector2D Normalized => new(X / Lenght, Y / Lenght);
         public Vector2D(double x, double y)
         {
             X = x;

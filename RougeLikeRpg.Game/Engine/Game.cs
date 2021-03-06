@@ -6,7 +6,10 @@ using RougeLikeRpg.Engine.Actors.Monsters;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RougeLikeRpg.Engine.Core;
+using RougeLikeRpg.Engine.Core.Commands;
+using RougeLikeRpg.Engine.GameScreens;
 using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine
@@ -38,16 +41,6 @@ namespace RougeLikeRpg.Engine
 
             //_player.BookOfSpells.Casting += Player_CastingSpells;
             _map.Player = _player;
-
-            var centerRoomPos = _map.Floor.Rooms.First().Location;
-            var dir = (centerRoomPos + _player.Position).Normalized;
-
-            while (centerRoomPos != _player.Position)
-            {
-                centerRoomPos += dir;
-                _map.Move(centerRoomPos);
-            }
-
             _statusScreen.AddRange(_player.GetStats().ToList());
         }
 

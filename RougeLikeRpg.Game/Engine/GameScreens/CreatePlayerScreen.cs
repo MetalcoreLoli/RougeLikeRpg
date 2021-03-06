@@ -81,7 +81,7 @@ namespace RougeLikeRpg.Engine.GameScreens
         {
             (int left, int top) cursor = (Console.CursorLeft, Console.CursorTop);
             Vector2D curslocation = _inputPlayerNameScreen.Location + Location;
-            Console.SetCursorPosition(curslocation.X + 1, curslocation.Y + 1);
+            Console.SetCursorPosition((int) (curslocation.X + 1), (int) (curslocation.Y + 1));
             string name = Console.ReadLine();
             Console.SetCursorPosition(cursor.left, cursor.top);
             return name;

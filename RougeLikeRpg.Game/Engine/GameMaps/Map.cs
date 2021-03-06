@@ -98,8 +98,8 @@ namespace RougeLikeRpg.Engine
 
         public Cell CellFromWorldPosition(Vector2D worldPosition)
         {
-            float percentX = (worldPosition.X + _mapBufferWidth / 2) / _mapBufferWidth;
-            float percentY = (worldPosition.Y + _mapBufferHeight / 2) / _mapBufferHeight;
+            double percentX = (worldPosition.X + _mapBufferWidth / 2) / _mapBufferWidth;
+            double percentY = (worldPosition.Y + _mapBufferHeight / 2) / _mapBufferHeight;
             percentX = Math.Clamp(percentX, 0.0f, 1.0f);
             percentY = Math.Clamp(percentY, 0.0f, 1.0f);
             
@@ -145,7 +145,7 @@ namespace RougeLikeRpg.Engine
         /// <param name="x">Х</param>
         /// <param name="y">У</param>
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
-        public bool IsWalkable(Int32 x, Int32 y)
+        public bool IsWalkable(double x, double y)
         {
             return (from cell in _mapBuffer
                 where cell.Position.X.Equals(x) && cell.Position.Y.Equals(y)
@@ -160,9 +160,9 @@ namespace RougeLikeRpg.Engine
         public bool IsWalkable(Vector2D vec) => IsWalkable(vec.X, vec.Y);
 
         public Cell GetCell(Int32 x, Int32 y) => _mapBuffer.FirstOrDefault(cell => cell.Position.X == x && cell.Position.Y == y);
-        public Cell GetCell(Vector2D pos) => GetCell(pos.X, pos.Y);
+        public Cell GetCell(Vector2D pos) => GetCell((int) pos.X, (int) pos.Y);
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
-        public Actor GetActor(Vector2D pos) => GetActor(pos.X, pos.Y);
+        public Actor GetActor(Vector2D pos) => GetActor((int) pos.X, (int) pos.Y);
 
         public void Move (Vector2D offset)
         {

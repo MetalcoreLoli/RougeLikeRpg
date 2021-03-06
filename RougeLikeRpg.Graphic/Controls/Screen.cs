@@ -50,7 +50,7 @@ namespace RougeLikeRpg.Graphic.Controls
                 string title = "-| " + m_title + " |-";
                 for (int i = 0; i < title.Length; i++)
                 {
-                    body[i + m_titleLocation.X].Symbol = title[i];
+                    body[(int) (i + m_titleLocation.X)].Symbol = title[i];
                 }
             }
         }

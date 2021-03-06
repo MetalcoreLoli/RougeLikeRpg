@@ -47,14 +47,14 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
             return tmp;
         }
 
-        private void CreateHorizontalPath(int xStart, int xEnd, int yPosition, Color color, Color backColor)
+        private void CreateHorizontalPath(double xStart, double xEnd, double yPosition, Color color, Color backColor)
         {
-            int min = Math.Min(xStart, xEnd);
-            int max = Math.Max(xStart, xEnd);
+            int min = (int) Math.Min(xStart, xEnd);
+            int max = (int) Math.Max(xStart, xEnd);
             
             for (int x = min; x < max + 1; x++)
             {
-                _dungeonFloorBuffer[x + yPosition * _configuration.Width]  = new Cell 
+                _dungeonFloorBuffer[(int) (x + yPosition * _configuration.Width)]  = new Cell 
                 {
                     BackColor =backColor,
                     Color = color,
@@ -62,8 +62,8 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
                     Position = new Vector2D(x, yPosition)
                 };
 
-                int upIdx = x + (yPosition - 1) * _configuration.Width;
-                int downIdx = x + (yPosition + 1) * _configuration.Width;
+                int upIdx = (int) (x + (yPosition - 1) * _configuration.Width);
+                int downIdx = (int) (x + (yPosition + 1) * _configuration.Width);
                 if (_dungeonFloorBuffer[upIdx].Symbol != '.')
                     _dungeonFloorBuffer[upIdx] = new Cell
                     {
@@ -84,14 +84,14 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
             }
         }
 
-        private void CreateVecticalPath(int yStart, int yEnd, int xPosition, Color color, Color backColor)
+        private void CreateVecticalPath(double yStart, double yEnd, double xPosition, Color color, Color backColor)
         {
-            int min = Math.Min(yStart, yEnd);
-            int max = Math.Max(yStart, yEnd);
+            int min = (int) Math.Min(yStart, yEnd);
+            int max = (int) Math.Max(yStart, yEnd);
 
             for (int y = min; y < max + 1; y++)
             {
-                _dungeonFloorBuffer[xPosition + y * _configuration.Width] = new Cell
+                _dungeonFloorBuffer[(int) (xPosition + y * _configuration.Width)] = new Cell
                 {
                     BackColor = backColor,
                     Color = color,
@@ -100,8 +100,8 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
                 };
 
 
-                int upIdx = (xPosition - 1) + y * _configuration.Width;
-                int downIdx = (xPosition + 1) + y * _configuration.Width;
+                int upIdx = (int) ((xPosition - 1) + y * _configuration.Width);
+                int downIdx = (int) ((xPosition + 1) + y * _configuration.Width);
                 if (_dungeonFloorBuffer[upIdx].Symbol != '.')
                     _dungeonFloorBuffer[upIdx] = new Cell
                     {
@@ -157,7 +157,7 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
         {
             foreach (var cell in room.Body)
             {
-                int idx = cell.Position.X + cell.Position.Y * _configuration.Width;
+                int idx = (int) (cell.Position.X + cell.Position.Y * _configuration.Width);
                 _dungeonFloorBuffer[idx] = cell;
             }
             _dungeon.Rooms.Add(room);

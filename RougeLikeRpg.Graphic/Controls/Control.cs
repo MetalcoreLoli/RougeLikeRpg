@@ -136,7 +136,7 @@ namespace RougeLikeRpg.Graphic.Controls
             }
         }
 
-        public Cell GetCellByPosition(Int32 x, Int32 y)
+        public Cell GetCellByPosition(double x, double y)
         {
             return body.FirstOrDefault(cell => cell.Position.X.Equals(x) && cell.Position.Y.Equals(y));
         }

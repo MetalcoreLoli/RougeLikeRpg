@@ -37,7 +37,6 @@ namespace RougeLikeRpg.Engine.Core.Commands
         {
             try
             {
-
                 _logger.Write($"from world was taken ref to {typeof(T).Name}");
                 return _query.Execute();
             }
