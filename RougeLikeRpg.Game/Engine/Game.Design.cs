@@ -68,6 +68,9 @@ namespace RougeLikeRpg.Engine
                 mapScreenConfig.BackgroundColor);
 
             _createPlayerScreen = new CreatePlayerScreen();
+            _player = NewPlayer();
+            
+            
             _messageLogScreen   = new MessageLogScreen("Message Log", new MessageLogScreenConfiguration());
             _statusScreen       = new Screen("Status", new StatusScreenConfiguration());
 
@@ -76,6 +79,8 @@ namespace RougeLikeRpg.Engine
             _map        = new Map(mapConfig);
             _mapScreen  = new MapScreen("Dungeon Map | Floor: " + _map.CurrentFloor, mapScreenConfig);
             _mapScreen.Add(_map);
+            
+            _player.Position    += new Vector2D(_map.Width >> 1, _map.Height >> 1) + _map.Location;
 
         }
     }

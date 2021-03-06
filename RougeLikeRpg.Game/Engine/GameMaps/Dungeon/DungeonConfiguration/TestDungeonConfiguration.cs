@@ -9,13 +9,13 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration
             Location = location;
         }
 
-        public int Width { get; } = 25;
-        public int Height { get; } = 15;
-        public int CountOfRooms { get; } = 2;
+        public int Width { get; } = 62;
+        public int Height { get; } = 20;
+        public int CountOfRooms { get; } = 3;
         public Vector2D Location { get; }
         public int MinRoomWidth { get; } = 5;
-        public int MaxRoomWidth { get; } = 10;
+        public int MaxRoomWidth { get; } = 7;
         public int MinRoomHeight { get; } = 5;
-        public int MaxRoomHeight { get; } = 10;
+        public int MaxRoomHeight { get; } = 7;
     }
 }

@@ -40,6 +40,8 @@ namespace RougeLikeRpg.Engine
         
         private Int32 _numberOfFloor = 0;
 
+        private Vector2D _currentMapOffset;
+        
         private IDungeonConfiguration _dungeonConfiguration;
         #endregion
 
@@ -55,7 +57,12 @@ namespace RougeLikeRpg.Engine
         public List<Actors.Actor> Actors { get; set; }
 
         public Int32 CurrentFloor => _numberOfFloor;
+
+        public Dungeon Floor => _dungeon;
+        
         #endregion
+        
+        
 
         #region Contructors
 
@@ -71,7 +78,7 @@ namespace RougeLikeRpg.Engine
         {
             MConfiguration = configuration;
             _dungeonConfiguration = new DefaultDungeonConfiguration(
-                _mapBufferWidth, _mapBufferHeight, 18, Location, 7,  5, 7, 5);
+                _mapBufferWidth, _mapBufferHeight, 18, Location, 7,  5, 5, 7);
             ApplyConfiguration();
             Player = player;
             Actors = actors.ToList();
@@ -104,7 +111,8 @@ namespace RougeLikeRpg.Engine
 
         public void AddActorToMap(Actor actor)
         {
-               Actors.Add(actor);
+            actor.Position -= _currentMapOffset; 
+            Actors.Add(actor);
         }
 
         public void SetSymbol(int x, int y, char symbol)
@@ -139,7 +147,9 @@ namespace RougeLikeRpg.Engine
         /// <returns>True - если на ячейку можно пройти, False - если нельзя</returns>
         public bool IsWalkable(Int32 x, Int32 y)
         {
-            return (from cell in _mapBuffer where cell.Position.X.Equals(x) && cell.Position.Y.Equals(y) select cell.Symbol.Equals('.') || cell.Symbol.Equals('<')).FirstOrDefault();
+            return (from cell in _mapBuffer
+                where cell.Position.X.Equals(x) && cell.Position.Y.Equals(y)
+                select cell.Symbol.Equals('.') || cell.Symbol.Equals('<')).FirstOrDefault();
         }
 
         /// <summary>
@@ -159,7 +169,7 @@ namespace RougeLikeRpg.Engine
             foreach (var cell in _mapBuffer)
                 cell.Position -= offset;
 
-            FillBodyWithDrawableCells(_mapBuffer, Width, Height);
+            _currentMapOffset = offset;
         }
         
         public async override void Draw()
@@ -170,14 +180,12 @@ namespace RougeLikeRpg.Engine
             //{
             //    Render.WithOffset(cell, 0, 0);
             //}
-            ////if (Player != null)
-            //Render.WithOffset(Player, 0, 0);
 
-            //foreach (var actor in Actors)
-            //{
-            //    if (actor.Position.X > 0 && actor.Position.Y > 0 && actor.Position.X < Width - 1 && actor.Position.Y < Height - 1)
-            //        Render.WithOffset(actor, 0, 0);
-            //}
+            foreach (var actor in Actors)
+            {
+                if (actor.Position.X > 0 && actor.Position.Y > 0 && actor.Position.X < Width - 1 && actor.Position.Y < Height - 1)
+                    Render.WithOffset(actor, 0, 0);
+            }
         }
         #endregion
 
@@ -187,30 +195,14 @@ namespace RougeLikeRpg.Engine
             Actors = new List<Actor>();
 
             _dungeon =
-                new DungeonBuilder(new DefaultDungeonFactory(), new TestDungeonConfiguration(Location)) // only for test
+                new DungeonBuilder(new DefaultDungeonFactory(), _dungeonConfiguration) // only for test
                     .GenerateRooms().ConnectAllRooms().Construct();
-             //_dungeon = new Dungeon (new TestDungeonConfiguration(Location));
-             //_dungeon = new Dungeon (_dungeonConfiguration);
 
              _mapBuffer = _dungeon.Buffer;
-             
-            FillBodyWithDrawableCells(_mapBuffer,  Width, Height);
+             body = _mapBuffer;
             _numberOfFloor++;
             var messageLog = new TakeFromWorldQuery<MessageLogScreen>(EntityWorldSingleton.Instance).Execute();
             messageLog.Write($"Welcome to floor {_numberOfFloor}");
-        }
-
-        private void FillBodyWithDrawableCells(Cell[] source, int width, int height)
-        {
-            Cell[] drawableCells = (from cell in source
-                                    where cell.Position.X >= 0 && cell.Position.Y >= 0 
-                                    where cell.Position.X < width-1 && cell.Position.Y < height-1
-                                    select cell).ToArray();
-
-            for (int i = 0; i < drawableCells.Length; i++)
-            {
-                body[i] = drawableCells[i];
-            }
         }
         #endregion
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection.Emit;
 using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonConfiguration;
 using RougeLikeRpg.Engine.GameMaps.Dungeon.DungeonFactory;
 using RougeLikeRpg.Graphic.Core;
@@ -187,6 +188,18 @@ namespace RougeLikeRpg.Engine.GameMaps.Dungeon
             }
             return this;
         }
+
+        public DungeonBuilder Norm()
+        {
+            foreach (var cell in _dungeonFloorBuffer)
+            {
+                if (cell.Symbol != '.' && cell.Symbol != ' ')
+                    cell.Symbol = '#';
+            }
+
+            return this;
+        }
+        
         public Dungeon Construct()
         {
             _dungeon.UpdateBuffer(_dungeonFloorBuffer);

@@ -1,20 +1,12 @@
 ﻿using RougeLikeRpg.Graphic.Core;
-using RougeLikeRpg.Engine.Dices;
 using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Actors.Enums;
-using RougeLikeRpg.Engine.Magick;
-using RougeLikeRpg.Engine.GameScreens;
 using RougeLikeRpg.Engine.Events;
 using RougeLikeRpg.Engine.Actors.Monsters;
-using RougeLikeRpg.Engine.GameItems.Items;
-using RougeLikeRpg.Engine.Core;
-
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Controls;
 
 namespace RougeLikeRpg.Engine
@@ -39,17 +31,23 @@ namespace RougeLikeRpg.Engine
         public Game()
         {
             Initialization();
-
-            _player = NewPlayer();
-            
-            _player.Position    += new Vector2D(_map.Width >> 1, _map.Height >> 1) + _map.Location;
             //_player.LevelUp     += Player_LevelUp;
             //_player.Attacking   += Player_Attacking;
             //_player.Dying       += Actor_Dying;
             //_player.Moving      += Player_Moving;
 
             //_player.BookOfSpells.Casting += Player_CastingSpells;
-            
+            _map.Player = _player;
+
+            var centerRoomPos = _map.Floor.Rooms.First().Location;
+            var dir = (centerRoomPos + _player.Position).Normalized;
+
+            while (centerRoomPos != _player.Position)
+            {
+                centerRoomPos += dir;
+                _map.Move(centerRoomPos);
+            }
+
             _statusScreen.AddRange(_player.GetStats().ToList());
         }
 
@@ -84,8 +82,8 @@ namespace RougeLikeRpg.Engine
         #region Private Methods
         private void Clear()
         {
-            _mapScreen.Clear(_mapScreen.BackgroundColor);
-            _statusScreen.Clear(_statusScreen.BackgroundColor);
+              _mapScreen.Clear(_mapScreen.BackgroundColor);
+              _statusScreen.Clear(_statusScreen.BackgroundColor);
         }
         /// <summary>
         ///  Метод, в который занимается отрисовка интрефейса
@@ -95,6 +93,8 @@ namespace RougeLikeRpg.Engine
             _mapScreen.Draw();
             _messageLogScreen.Draw();
             _statusScreen.Draw();
+            
+            Render.WithOffset(_player, 0, 0); 
         }
 
         private void Game_KeyDown(object sender, KeyDownEventArgs e)

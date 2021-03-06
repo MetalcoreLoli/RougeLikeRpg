@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Controls
@@ -13,6 +15,8 @@ namespace RougeLikeRpg.Graphic.Controls
         private string m_title;
         private Vector2D m_titleLocation = new Vector2D(1, 0);
         private Cell[] m_lTitle;
+
+        private Cell[] _innerSpace;
         #endregion
         
         #region Public Properties
@@ -128,6 +132,11 @@ namespace RougeLikeRpg.Graphic.Controls
             temp = DrawLeftRightWalls(temp, Width, Height, '|');
             temp = DrawUpDownWalls(temp, Width, Height, '-');
             temp = DrawCornel(temp, Width, Height, '+');
+            _innerSpace = temp
+                .AsParallel().Where(cel =>
+                    cel.Position.X > Location.X && cel.Position.X < Width - 1 + Location.X &&
+                    cel.Position.Y > Location.Y && cel.Position.Y < Height - 1 + Location.Y)
+                .ToArray();
             return temp;
         }
 
@@ -181,13 +190,15 @@ namespace RougeLikeRpg.Graphic.Controls
         {
             foreach (var item in Items)
             {
-                foreach (Cell cell in body)
+                foreach (Cell cell in _innerSpace)
                 {
-                    Cell itemCell = item.GetCellByPosition(cell.Position.X, cell.Position.Y);
-                    if (itemCell == null) continue;
-                    cell.Color = itemCell.Color;
-                    cell.BackColor = item.BackgroundColor;
-                    cell.Symbol = itemCell.Symbol;
+                    Cell itemCell = item.GetCellByPosition(cell.Position - Location);
+                    if (itemCell != null)
+                    {
+                        cell.Color = itemCell.Color;
+                        cell.BackColor = item.BackgroundColor;
+                        cell.Symbol = itemCell.Symbol;
+                    }
                 }
             }
         }
@@ -199,12 +210,20 @@ namespace RougeLikeRpg.Graphic.Controls
         ///</param>
         public virtual void Clear(Color color)
         {
-            for (int i = 0; i < body.Length; i++) 
+            foreach (var t in body.AsParallel())
             {
-                body[i].Symbol = ' ';
-                body[i].BackColor = BackgroundColor;
-                body[i].Color = ForegroundColor;
+                t.Symbol = ' ';
+                t.BackColor = BackgroundColor;
+                t.Color = ForegroundColor;
             }
+
+            foreach (var cell in _innerSpace)
+            {
+                cell.Symbol = ' ';
+                cell.BackColor = BackgroundColor;
+                cell.Color = ForegroundColor;
+            }
+            
             body = DrawLeftRightWalls(body, Width, Height, '|');
             body = DrawUpDownWalls(body, Width, Height, '-');
             body = DrawCornel(body, Width, Height, '+');

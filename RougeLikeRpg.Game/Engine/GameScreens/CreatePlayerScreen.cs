@@ -3,8 +3,10 @@ using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Actors.Builders;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using RougeLikeRpg.Engine.Core;
 using RougeLikeRpg.Graphic.Controls;
 
@@ -59,12 +61,14 @@ namespace RougeLikeRpg.Engine.GameScreens
             Draw();
             while (IsAlive)
             {
-                Clear(this.BackgroundColor);
-                this.Update();
+                Clear(BackgroundColor);
+                Update();
                 Draw();
             }
-            EntityWorldSingleton.Instance.Registry<Player>().AddToWorld(builder.Get());
-            return builder.Get();
+
+            return EntityWorldSingleton.Instance.Registry<Player>()
+                .AddToWorld(builder.Get())
+                .FirstFromWorldOf<Player>();
         }
 
         private void PlayersSymbolAndColors()

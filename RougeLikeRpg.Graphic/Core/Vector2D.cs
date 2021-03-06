@@ -6,11 +6,11 @@ namespace RougeLikeRpg.Graphic.Core
     [Serializable]
     public readonly struct Vector2D
     {
-        public Int32 X { get; }
-        public Int32 Y { get; }
-        public Int32 Lenght { get => (Int32)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2)); }
+        public double X { get; }
+        public double Y { get; }
+        public double Lenght { get => (Int32)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2)); }
         public Vector2D Normalized => new Vector2D(X / Lenght, Y / Lenght);
-        public Vector2D(Int32 x, Int32 y)
+        public Vector2D(double x, double y)
         {
             X = x;
             Y = y;
@@ -28,7 +28,7 @@ namespace RougeLikeRpg.Graphic.Core
         public static Vector2D operator -(Vector2D a, Int32 b)
            => new Vector2D(a.X - b, a.Y - b);
 
-        public static Int32 operator *(Vector2D a, Vector2D b)
+        public static double operator *(Vector2D a, Vector2D b)
            => (b.X * a.X) + (b.Y * a.Y);
 
         public static Vector2D operator *(Vector2D a, Int32 b)

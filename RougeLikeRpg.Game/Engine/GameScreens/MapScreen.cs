@@ -1,7 +1,8 @@
 using System;
-
-
+using System.Threading.Tasks;
+using RougeLikeRpg.Engine.Actors;
 using RougeLikeRpg.Engine.Core;
+using RougeLikeRpg.Engine.Core.Commands;
 using RougeLikeRpg.Graphic.Controls;
 using RougeLikeRpg.Graphic.Core;
 
@@ -25,6 +26,11 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Color foreColor)
             : base (width, height, location, title, backColor, foreColor) 
         {
+        }
+
+        public override void Update()
+        {
+            base.Update();
         }
     }
 }
