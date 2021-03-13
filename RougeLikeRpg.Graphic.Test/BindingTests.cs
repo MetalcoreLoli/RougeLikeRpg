@@ -48,7 +48,6 @@ namespace RougeLikeRpg.Graphic.Test
             _binder.Bind(_property, "Title");
             _mock.Title = "test";
            
-            CreateBinding<, ViewModel>
             Assert.AreEqual(_property.Value.ToString(), _mock.Title);
         }
 
