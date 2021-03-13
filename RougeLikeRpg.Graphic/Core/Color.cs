@@ -25,5 +25,7 @@ namespace RougeLikeRpg.Graphic.Core
             else 
                 throw new Exception("Type Error");
         }
+
+        public override string ToString() => $"[{Red};{Green};{Blue}]";
     }
 }

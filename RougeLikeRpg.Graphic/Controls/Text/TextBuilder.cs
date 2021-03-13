@@ -22,6 +22,13 @@ namespace RougeLikeRpg.Graphic.Controls.Text
             return this;
         }
 
+        public TextBuilder Append(string testText, ITextFormat format)
+        {
+            var word = new Word(testText, _startLocation, ColorManager.White, ColorManager.Black);
+            format.Apply(word);
+            _buffer.Add(word);
+            return this;
+        }
 
         public TextBuilder AppendWords(string test)
         {

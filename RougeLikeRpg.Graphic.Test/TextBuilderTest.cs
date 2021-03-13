@@ -4,6 +4,21 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Test
 {
+    internal class TestGreenWordFormat : ITextFormat
+    {
+        public void Apply(Word word)
+        {
+            word.Color = ColorManager.Green;
+        }
+    }
+
+    internal class TestWhiteWordFormat : ITextFormat
+    {
+        public void Apply(Word word)
+        {
+            word.Color = ColorManager.White;
+        }
+    }
     public class TextBuilderTest
     {
         private TextBuilder _builder;
@@ -42,7 +57,21 @@ namespace RougeLikeRpg.Graphic.Test
             }
         }
 
+        [Test]
+        public void FormattedTextAppendTest()
+        {
+            const string greenText = "Hello";
+            const string whiteText = "World";
+            var greenUndWhiteText = 
+                _builder.Append(greenText, new TestGreenWordFormat())
+                        .Append(whiteText, new TestWhiteWordFormat())
+                        .Construct();
 
+            for (int i = 0; i < greenText.Length; i++)
+                Assert.AreEqual(ColorManager.Green, greenUndWhiteText[i].Color);
 
+            for (int i = whiteText.Length + 1; i < whiteText.Length + greenText.Length - 1; i++)
+                Assert.AreEqual(ColorManager.White, greenUndWhiteText[i].Color); 
+        }
     }
 }
