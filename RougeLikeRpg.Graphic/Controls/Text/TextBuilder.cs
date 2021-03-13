@@ -17,9 +17,7 @@ namespace RougeLikeRpg.Graphic.Controls.Text
 
         public TextBuilder Append(string testText)
         {
-            var word = new Word(testText, _startLocation, ColorManager.White, ColorManager.Black);
-            _buffer.Add(word);
-            return this;
+            return  Append(testText, new WhiteUndBlackTextFormat());
         }
 
         public TextBuilder Append(string testText, ITextFormat format)
