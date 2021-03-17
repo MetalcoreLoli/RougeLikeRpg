@@ -4,7 +4,7 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Controls.Text
 {
-    public class TextBuilder
+    public class TextBuilder : ITextBuilder
     {
         private List<Word> _buffer;
         private Vector2D _startLocation;
@@ -58,4 +58,5 @@ namespace RougeLikeRpg.Graphic.Controls.Text
             return cells.ToArray();
         }
     }
+
 }
