@@ -1,5 +1,8 @@
+using System;
+using System.Linq;
 using NUnit.Framework;
 using RougeLikeRpg.Graphic.Controls.Text;
+using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Test
 {
@@ -11,12 +14,16 @@ namespace RougeLikeRpg.Graphic.Test
         public void SetUp()
         {
             _scheme = new TemplateTextColorScheme();
+            _scheme.Scheme.Add("hello", ColorManager.Green);
+            _scheme.Scheme.Add("world", ColorManager.Red);
         }
 
         [Test]
-        public void Adapt()
+        public void Convert()
         {
-            Assert.Pass();
+            var formats = new TextFormatConverter(_scheme).Convert();
+            Assert.AreEqual(ColorManager.Green, formats[0].Color);
+            Assert.AreEqual(ColorManager.Red, formats[1].Color);
         }
     }
 }
