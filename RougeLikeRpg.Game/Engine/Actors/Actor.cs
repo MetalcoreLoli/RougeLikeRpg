@@ -301,28 +301,28 @@ namespace RougeLikeRpg.Engine.Actors
         public IEnumerable<Control> GetStats()
         {
             var temp            = new List<Control>(); 
-            var nameLable       = new Lable($"Name: {Name}", new Vector2D(1, 1));
-            var raceLable       = new Lable($"Race: {Race}", new Vector2D(1, 2));
-            var lvlLable        = new Lable($"Level: {Level}", new Vector2D(1, 5));
+            var nameLable       = new Label($"Name: {Name}", new Vector2D(1, 1));
+            var raceLable       = new Label($"Race: {Race}", new Vector2D(1, 2));
+            var lvlLable        = new Label($"Level: {Level}", new Vector2D(1, 5));
             
             var lvlProgerss     = new Progressbar(23, 1, ColorManager.DarkYellow,   ColorManager.DarkGray,      new Vector2D(1, 6), Exp,    MaxExp);
             var hpProgerss      = new Progressbar(23, 1, ColorManager.DarkRed,      ColorManager.DarkGray,      new Vector2D(1, 3), Hp,     MaxHp);
             var mpProgerss      = new Progressbar(23, 1, ColorManager.DarkBlue,     ColorManager.DarkGray,      new Vector2D(1, 4), Mana,   MaxMana);
 
-            var lineLable       = new Lable("-----------------------", new Vector2D(1, 7));
-            var strLable        = new Lable($"Str:    {Str} ({((StrMod > 0)? $"+{StrMod}": $"{StrMod}")})", new Vector2D(1, 8));
-            var dexLable        = new Lable($"Dex:    {Dex} ({((DexMod > 0) ? $"+{DexMod}" : $"{DexMod}")})", new Vector2D(1, 9));
-            var intelLable      = new Lable($"Int:    {Intell} ({((IntellMod > 0) ? $"+{IntellMod}" : $"{IntellMod}")})", new Vector2D(1, 10));
-            var lckLable        = new Lable($"Lck:    {Lucky} ({((LuckyMod > 0) ? $"+{LuckyMod}" : $"{LuckyMod}")})", new Vector2D(1, 11));
-            var chrLable        = new Lable($"Chr:    {Chari} ({((ChariMod > 0) ? $"+{ChariMod}" : $"{ChariMod}")})", new Vector2D(1, 12));
-            var lineOneLable    = new Lable("-----------------------", new Vector2D(1, 13));
+            var lineLable       = new Label("-----------------------", new Vector2D(1, 7));
+            var strLable        = new Label($"Str:    {Str} ({((StrMod > 0)? $"+{StrMod}": $"{StrMod}")})", new Vector2D(1, 8));
+            var dexLable        = new Label($"Dex:    {Dex} ({((DexMod > 0) ? $"+{DexMod}" : $"{DexMod}")})", new Vector2D(1, 9));
+            var intelLable      = new Label($"Int:    {Intell} ({((IntellMod > 0) ? $"+{IntellMod}" : $"{IntellMod}")})", new Vector2D(1, 10));
+            var lckLable        = new Label($"Lck:    {Lucky} ({((LuckyMod > 0) ? $"+{LuckyMod}" : $"{LuckyMod}")})", new Vector2D(1, 11));
+            var chrLable        = new Label($"Chr:    {Chari} ({((ChariMod > 0) ? $"+{ChariMod}" : $"{ChariMod}")})", new Vector2D(1, 12));
+            var lineOneLable    = new Label("-----------------------", new Vector2D(1, 13));
 
-            var headLable           = new Lable($"Head:     {(Head != null? Head.Name : "Nothing")}", new Vector2D(1, 14));
-            var armorLable          = new Lable($"Armor:    {(Armor != null ? Armor.Name : "Nothing")}", new Vector2D(1, 15));
-            var footsLable          = new Lable($"Foots:    {(Foots != null ? Foots.Name : "Nothing")}", new Vector2D(1, 16));
-            var lArmLable           = new Lable($"Lt Hand:  {(LeftArm != null? LeftArm.Name : "Nothing")}", new Vector2D(1, 17));
-            var rArmLable           = new Lable($"Rh Hand:  {(RightArm != null ? RightArm.Name : "Nothing")}", new Vector2D(1, 18));
-            var armorClassLable     = new Lable($"Ar Class: {ArmorClass}", new Vector2D(1, 19));
+            var headLable           = new Label($"Head:     {(Head != null? Head.Name : "Nothing")}", new Vector2D(1, 14));
+            var armorLable          = new Label($"Armor:    {(Armor != null ? Armor.Name : "Nothing")}", new Vector2D(1, 15));
+            var footsLable          = new Label($"Foots:    {(Foots != null ? Foots.Name : "Nothing")}", new Vector2D(1, 16));
+            var lArmLable           = new Label($"Lt Hand:  {(LeftArm != null? LeftArm.Name : "Nothing")}", new Vector2D(1, 17));
+            var rArmLable           = new Label($"Rh Hand:  {(RightArm != null ? RightArm.Name : "Nothing")}", new Vector2D(1, 18));
+            var armorClassLable     = new Label($"Ar Class: {ArmorClass}", new Vector2D(1, 19));
 
             hpProgerss.Text         = $"Hp:     {Hp} / {MaxHp}";
             mpProgerss.Text         = $"Mana:   {Mana} / {MaxMana}";

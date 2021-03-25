@@ -148,7 +148,7 @@ namespace RougeLikeRpg.Graphic.Controls
         #endregion
 
         #region Public Methods
-        public async override void Draw()
+        public override async void Draw()
         {
             await foreach (Cell cell in GetCellsAsync(body))
                 Render.WithOffset(cell, 0, 0);

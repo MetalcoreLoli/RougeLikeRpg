@@ -8,7 +8,7 @@ namespace RougeLikeRpg.Graphic.Controls
     ///<summary>
     /// Метка содежриt в себе текст
     ///</summary>
-    public class Lable : Control
+    public class Label : Control
     {
 
         #region Private Members
@@ -33,28 +33,28 @@ namespace RougeLikeRpg.Graphic.Controls
         #endregion
 
         #region Constructors
-        public Lable()
+        public Label()
             : this ("", 1, 1, new Vector2D(0, 1), new TemplateTextColorScheme())
         {
         }
 
 
-        public Lable (string text)
+        public Label (string text)
             : this (text, text.Length, 1, new Vector2D(0, 1), new TemplateTextColorScheme())
         {
         }
 
-        public Lable (string text, Vector2D location) 
+        public Label (string text, Vector2D location) 
             : this(text, text.Length, 1, location, new TemplateTextColorScheme())
         {
         }
-        public Lable (string text, Vector2D location, ITextColorScheme scheme) 
+        public Label (string text, Vector2D location, ITextColorScheme scheme) 
             : this(text, text.Length, 1, location, scheme)
         {
         }
 
 
-        public Lable (
+        public Label (
                 string text, 
                 int width,
                 int height,
