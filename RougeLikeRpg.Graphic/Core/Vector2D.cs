@@ -16,6 +16,8 @@ namespace RougeLikeRpg.Graphic.Core
             Y = y;
         }
 
+        public static Vector2D Zero => new Vector2D(0, 0);
+        
         public static Vector2D operator +(Vector2D a, Vector2D b)
             => new Vector2D(a.X + b.X, a.Y + b.Y);
 
