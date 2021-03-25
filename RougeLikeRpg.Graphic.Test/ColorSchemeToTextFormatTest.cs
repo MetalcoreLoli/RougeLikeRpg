@@ -21,7 +21,7 @@ namespace RougeLikeRpg.Graphic.Test
         [Test]
         public void Convert()
         {
-            var formats = new TextFormatConverter(_scheme).Convert();
+            var formats = new TextFormatConverter(_scheme).Convert().ToArray();
             Assert.AreEqual(ColorManager.Green, formats[0].Color);
             Assert.AreEqual(ColorManager.Red, formats[1].Color);
         }
