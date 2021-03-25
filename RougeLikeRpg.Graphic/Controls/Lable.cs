@@ -34,18 +34,18 @@ namespace RougeLikeRpg.Graphic.Controls
 
         #region Constructors
         public Lable()
-            : this ("", 1, 1, new Vector2D(0, 1), new DefaultTextColorScheme())
+            : this ("", 1, 1, new Vector2D(0, 1), new TemplateTextColorScheme())
         {
         }
 
 
         public Lable (string text)
-            : this (text, text.Length, 1, new Vector2D(0, 1), new DefaultTextColorScheme())
+            : this (text, text.Length, 1, new Vector2D(0, 1), new TemplateTextColorScheme())
         {
         }
 
         public Lable (string text, Vector2D location) 
-            : this(text, text.Length, 1, location, new DefaultTextColorScheme())
+            : this(text, text.Length, 1, location, new TemplateTextColorScheme())
         {
         }
         public Lable (string text, Vector2D location, ITextColorScheme scheme) 

@@ -3,11 +3,11 @@ using RougeLikeRpg.Graphic.Core;
 
 namespace RougeLikeRpg.Graphic.Controls.Text 
 {
-    public class DefaultTextColorScheme : ITextColorScheme
+    public class TemplateTextColorScheme : ITextColorScheme
     {
         public Dictionary<string, Color> Scheme { get; } 
 
-        public DefaultTextColorScheme ()
+        public TemplateTextColorScheme ()
         {
            Scheme = new Dictionary<string, Color>
            {
