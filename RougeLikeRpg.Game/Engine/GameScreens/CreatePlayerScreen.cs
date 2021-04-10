@@ -39,10 +39,10 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Title = "Help"
             };
             _helpScreen.AddRange(new List<Control> {
-                new Lable("R     - to roll stats",      new Vector2D(1, 1)),
-                new Lable("Enter - to confirm roll",    new Vector2D(1, 2)),
-                new Lable("->    - to change race",     new Vector2D(1, 3)),
-                new Lable("<-    - to change race",     new Vector2D(1, 4)),
+                new Label("R     - to roll stats",      new Vector2D(1, 1)),
+                new Label("Enter - to confirm roll",    new Vector2D(1, 2)),
+                new Label("->    - to change race",     new Vector2D(1, 3)),
+                new Label("<-    - to change race",     new Vector2D(1, 4)),
             }) ;
 
             _statsScreen = new Screen(25, 21, new Vector2D(1, 1)) { Title = "Player's Stats" };

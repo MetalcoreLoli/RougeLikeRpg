@@ -34,8 +34,7 @@ namespace RougeLikeRpg.Engine.GameScreens
             IEnumerable<char> _text = text;
             while (_text.Count() >= 1) 
             {
-                foreach (char s in _text.Take(Width - 2))
-                    msg += s;
+                msg = _text.Take(Width - 2).Aggregate(msg, (current, s) => current + s);
                 messages.Add(msg);
                 msg = "";
                 _text = _text.Skip(Width - 2);
@@ -51,7 +50,7 @@ namespace RougeLikeRpg.Engine.GameScreens
                 Items = new List<Control>();
                 Clear(this.BackgroundColor);
             }
-            Add(new Lable(Message, new Vector2D(1, Items.Count + 1), new DungeonColorScheme()));
+            Add(new Label(Message, new Vector2D(1, Items.Count + 1), new DungeonColorScheme()));
         }
 
         public void Write(string msg)

@@ -46,7 +46,7 @@ namespace RougeLikeRpg.Graphic.Test
         [Test]
         public void AppendRangeTest()
         {
-            string test = "hello world";
+            const string test = "hello world";
             var text = _builder.AppendWords(test).Construct();
             
             Assert.AreEqual(test.Length,  text.Length);
