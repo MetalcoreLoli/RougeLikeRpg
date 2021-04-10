@@ -1,15 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RougeLikeRPG", "RougeLikeRpg.Game\RougeLikeRPG.csproj", "{B5716E86-4563-46A6-B801-E8D3CFEC9ACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RougeLikeRPG", "RougeLikeRpg.Game\RougeLikeRPG.csproj", "{B5716E86-4563-46A6-B801-E8D3CFEC9ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RougeLikeRpg.Graphic", "RougeLikeRpg.Graphic\RougeLikeRpg.Graphic.csproj", "{D7DD23E4-23F3-465E-A8A3-731F3775C2E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RougeLikeRpg.Graphic", "RougeLikeRpg.Graphic\RougeLikeRpg.Graphic.csproj", "{D7DD23E4-23F3-465E-A8A3-731F3775C2E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RougeLikeRpg.Graphic.Test", "RougeLikeRpg.Graphic.Test\RougeLikeRpg.Graphic.Test.csproj", "{B56645B4-D5B1-4F3E-8BCA-46242CBBBC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RougeLikeRpg.Graphic.Test", "RougeLikeRpg.Graphic.Test\RougeLikeRpg.Graphic.Test.csproj", "{B56645B4-D5B1-4F3E-8BCA-46242CBBBC40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RougeLikeRpg.Game.Test", "RougeLikeRpg.Game.Test\RougeLikeRpg.Game.Test.csproj", "{7A0D9557-1BF5-4807-AA95-15FEF1E14C55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RougeLikeRpg.Game.Test", "RougeLikeRpg.Game.Test\RougeLikeRpg.Game.Test.csproj", "{7A0D9557-1BF5-4807-AA95-15FEF1E14C55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D260D383-A545-4540-B7C9-8DB49F5D0DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RougeLikeRpg.RuleBook", "RougeLikeRpg.RuleBook\RougeLikeRpg.RuleBook.csproj", "{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RougeLikeRpg.RuleBook.Test", "RougeLikeRpg.RuleBook.Test\RougeLikeRpg.RuleBook.Test.csproj", "{1ABA5903-8913-4596-8F18-33889FC8E57C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B5716E86-4563-46A6-B801-E8D3CFEC9ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +75,40 @@ Global
 		{7A0D9557-1BF5-4807-AA95-15FEF1E14C55}.Release|x64.Build.0 = Release|Any CPU
 		{7A0D9557-1BF5-4807-AA95-15FEF1E14C55}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A0D9557-1BF5-4807-AA95-15FEF1E14C55}.Release|x86.Build.0 = Release|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Debug|x64.Build.0 = Debug|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Debug|x86.Build.0 = Debug|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Release|x64.ActiveCfg = Release|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Release|x64.Build.0 = Release|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9AA9002-BD8C-43C0-B71B-E7DFE0D59748}.Release|x86.Build.0 = Release|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Debug|x64.Build.0 = Debug|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Debug|x86.Build.0 = Debug|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Release|x64.ActiveCfg = Release|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Release|x64.Build.0 = Release|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1ABA5903-8913-4596-8F18-33889FC8E57C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B56645B4-D5B1-4F3E-8BCA-46242CBBBC40} = {D260D383-A545-4540-B7C9-8DB49F5D0DF4}
+		{7A0D9557-1BF5-4807-AA95-15FEF1E14C55} = {D260D383-A545-4540-B7C9-8DB49F5D0DF4}
+		{1ABA5903-8913-4596-8F18-33889FC8E57C} = {D260D383-A545-4540-B7C9-8DB49F5D0DF4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60875FEF-C495-4719-A598-F80A201DE46D}
 	EndGlobalSection
 EndGlobal

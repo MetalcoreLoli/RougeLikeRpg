@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "RougeLikeRpg/1.0.0": {
+      "RougeLikeRPG/1.0.0": {
         "dependencies": {
           "RougeLikeRpg.Graphic": "1.0.0"
         },
         "runtime": {
-          "RougeLikeRpg.dll": {}
+          "RougeLikeRPG.dll": {}
         }
       },
       "RougeLikeRpg.Graphic/1.0.0": {
@@ -22,7 +22,7 @@
     }
   },
   "libraries": {
-    "RougeLikeRpg/1.0.0": {
+    "RougeLikeRPG/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
