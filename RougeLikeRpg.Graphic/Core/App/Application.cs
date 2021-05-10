@@ -26,7 +26,9 @@ namespace RougeLikeRpg.Graphic.Core
         public void Run(IRunArguments args)
         {
            OnStart();
+           Clear();
            Update();
+           Draw();
            OnEnd();
         }
 
