@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+UFvxlELwpk914VhfFuzS0kWfS5TF93i/kR0bzgNpr+f4PHT23+TYNUF3FXeD7U87x3xb/V0jWtqfwR5Y/6oLA==",
+  "dgSpecHash": "ZWwz8kprr+dSu+tN1MReQSTQN9JW6X41CzEsafYZpbFDrOFvBDCMCEHCYUKbF9DgBclxOcVmUxA39kfHTCUKpg==",
   "success": true,
-  "projectFilePath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.RuleBook\\RougeLikeRpg.RuleBook.csproj",
+  "projectFilePath": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.RuleBook/RougeLikeRpg.RuleBook.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

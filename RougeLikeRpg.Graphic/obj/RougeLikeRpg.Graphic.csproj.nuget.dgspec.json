@@ -1,33 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\RougeLikeRpg.Graphic.csproj": {}
+    "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {}
   },
   "projects": {
-    "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\RougeLikeRpg.Graphic.csproj": {
+    "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\RougeLikeRpg.Graphic.csproj",
+        "projectUniqueName": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
         "projectName": "RougeLikeRpg.Graphic",
-        "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\RougeLikeRpg.Graphic.csproj",
-        "packagesPath": "C:\\Users\\Magical.Cake\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.Graphic\\obj\\",
+        "projectPath": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/RougeLikeRpg.Graphic.csproj",
+        "packagesPath": "/home/danielfreedman/.nuget/packages/",
+        "outputPath": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.Graphic/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Magical.Cake\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/home/danielfreedman/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net5"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
         }
       }
     }

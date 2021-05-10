@@ -4639,42 +4639,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Magical.Cake\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "/home/danielfreedman/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.RuleBook.Test\\RougeLikeRpg.RuleBook.Test.csproj",
+      "projectUniqueName": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.RuleBook.Test/RougeLikeRpg.RuleBook.Test.csproj",
       "projectName": "RougeLikeRpg.RuleBook.Test",
-      "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.RuleBook.Test\\RougeLikeRpg.RuleBook.Test.csproj",
-      "packagesPath": "C:\\Users\\Magical.Cake\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.RuleBook.Test\\obj\\",
+      "projectPath": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.RuleBook.Test/RougeLikeRpg.RuleBook.Test.csproj",
+      "packagesPath": "/home/danielfreedman/.nuget/packages/",
+      "outputPath": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.RuleBook.Test/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Magical.Cake\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "/home/danielfreedman/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.RuleBook\\RougeLikeRpg.RuleBook.csproj": {
-              "projectPath": "D:\\projects\\CSharp\\Games\\RougeLikeRpg\\RougeLikeRpg.RuleBook\\RougeLikeRpg.RuleBook.csproj"
+            "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.RuleBook/RougeLikeRpg.RuleBook.csproj": {
+              "projectPath": "/home/danielfreedman/Projects/csharp/RougeLikeRpg/RougeLikeRpg.RuleBook/RougeLikeRpg.RuleBook.csproj"
             }
           }
         }
@@ -4717,7 +4707,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
       }
     }
   }

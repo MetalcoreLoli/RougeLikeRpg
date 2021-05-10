@@ -2,7 +2,8 @@
 
 namespace RougeLikeRpg.RuleBook
 {
-    public class Class1
+    public interface IRule
     {
+        
     }
 }
