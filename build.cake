@@ -9,7 +9,9 @@ Task("Clean")
     .Does(() => 
     {
         CleanDirectory(outputFolder);
-        CleanDirectory($"./src//bin/{configuration}");
+        CleanDirectory($"./src/RougeLikeRpg.Game/bin/{configuration}");
+        CleanDirectory($"./src/RougeLikeRpg.Graphic/bin/{configuration}");
+        CleanDirectory($"./src/RougeLikeRpg.RuleBook/bin{configuration}");
     });
 
 Task("Restore").Does(() => {
