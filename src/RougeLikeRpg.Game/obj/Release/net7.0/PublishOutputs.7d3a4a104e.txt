@@ -1,7 +1,0 @@
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.dll
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.deps.json
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.runtimeconfig.json
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.pdb
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.Graphic.dll
-/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.Graphic.pdb

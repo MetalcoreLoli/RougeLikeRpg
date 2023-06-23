@@ -41,3 +41,17 @@ tests/RougeLikeRpg.RuleBook.Test/obj
 tests/RougeLikeRpg.Graphic.Test/bin/Release/net7.0
 tests/RougeLikeRpg.RuleBook.Test/obj
 tests/RougeLikeRpg.RuleBook.Test/bin
+src/RougeLikeRpg.Game/bin
+src/RougeLikeRpg.Game/bin
+src/RougeLikeRpg.Game/obj
+src/RougeLikeRpg.Game/obj
+src/RougeLikeRpg.Graphic/bin
+src/RougeLikeRpg.Graphic/obj
+src/RougeLikeRpg.RuleBook/bin
+src/RougeLikeRpg.RuleBook/obj
+tests/RougeLikeRpg.Game.Test/bin/Release/net7.0
+tests/RougeLikeRpg.Game.Test/obj
+tests/RougeLikeRpg.Graphic.Test/bin/Release/net7.0
+tests/RougeLikeRpg.Graphic.Test/obj
+tests/RougeLikeRpg.RuleBook.Test/bin
+tests/RougeLikeRpg.RuleBook.Test/obj
