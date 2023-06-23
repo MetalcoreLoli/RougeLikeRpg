@@ -99,7 +99,8 @@ namespace RougeLikeRpg.Engine
                     _mapScreen.Title = $"Dungeon Map | Floor: {_map.CurrentFloor}";
                     break;
                 default:
-                    _map.Move (PlayerMoveTo (e.Key));
+                    var  direction = PlayerMoveTo (e.Key);
+                    _map.Move(direction);
                     break;
             }
         }

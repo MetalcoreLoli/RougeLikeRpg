@@ -166,6 +166,8 @@ namespace RougeLikeRpg.Engine
 
         public void Move (Vector2D offset)
         {
+            if (!IsWalkable(Player.Position + offset))
+                return;
             foreach (var cell in _mapBuffer)
                 cell.Position -= offset;
 
