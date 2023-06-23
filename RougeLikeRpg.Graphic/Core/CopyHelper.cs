@@ -9,11 +9,12 @@ namespace RougeLikeRpg.Graphic.Core
     {
         public static T DeepCopy<T>(this T graph) where T : class 
         {
-            using var mem = new MemoryStream();
-            var formatter = new BinaryFormatter();
-            formatter.Serialize(mem, graph);
-            mem.Seek(0, SeekOrigin.Begin);
-            return formatter.Deserialize(mem) as T;
+            throw new NotImplementedException();
+            //using var mem = new MemoryStream();
+            //var formatter = new BinaryFormatter();
+            //formatter.Serialize(mem, graph);
+            //mem.Seek(0, SeekOrigin.Begin);
+            //return formatter.Deserialize(mem) as T;
         }
     }
 }
