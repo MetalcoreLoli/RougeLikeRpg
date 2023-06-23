@@ -1,0 +1,3 @@
+/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.RuleBook.dll
+/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.RuleBook.deps.json
+/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.RuleBook.pdb

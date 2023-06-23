@@ -1,0 +1,3 @@
+/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.Graphic.dll
+/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.Graphic.deps.json
+/home/danielf/Projects/cs/RougeLikeRpg/artifacts/RougeLikeRpg.Graphic.pdb
