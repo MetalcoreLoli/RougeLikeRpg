@@ -1,6 +1,5 @@
-using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Draw;
 using System;
-using System.Collections.Generic;
 
 namespace RougeLikeRpg.Graphic.Core
 {
@@ -43,11 +42,16 @@ namespace RougeLikeRpg.Graphic.Core
             }
         }
 
+        public static void Frame (FrameBuffer buffer)
+        {
+            Console.Write(buffer);
+        }
+
         static void MoveCursorTo(Vector2D position)
         {
             Console.Write($"\x1b[{(position.Y + 1)};{(position.X + 1)}H");
         }
-       
+
         static string MovedCursorTo(Vector2D position)
             => $"\x1b[{(position.Y + 1)};{(position.X + 1)}H";
 
@@ -59,5 +63,6 @@ namespace RougeLikeRpg.Graphic.Core
         {
             return $"\x1b[38;2;{obj.Color.Red};{obj.Color.Green};{obj.Color.Blue}m";
         }
+
     }
 }

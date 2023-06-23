@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RougeLikeRpg.Graphic.Core;
+using RougeLikeRpg.Graphic.Core.Draw;
 
 namespace RougeLikeRpg.Graphic.Controls
 {
@@ -17,8 +18,9 @@ namespace RougeLikeRpg.Graphic.Controls
         private Cell[] m_lTitle;
 
         private Cell[] _innerSpace;
+        private FrameBuffer _frame;
         #endregion
-        
+
         #region Public Properties
         ///<summary>
         /// Расположение заголовка
@@ -144,14 +146,16 @@ namespace RougeLikeRpg.Graphic.Controls
         {
             body    = InitBody(Width, Height);
             Items = new List<Control>();
+            _frame = FrameBuffer.CreateFrom(body);
         }
         #endregion
 
         #region Public Methods
         public override async void Draw()
         {
-            await foreach (Cell cell in GetCellsAsync(body))
-                Render.WithOffset(cell, 0, 0);
+            Render.Frame(_frame);
+            //await foreach (Cell cell in GetCellsAsync(body))
+            //    Render.WithOffset(cell, 0, 0);
         }
 
         ///<summary>
@@ -188,6 +192,7 @@ namespace RougeLikeRpg.Graphic.Controls
         ///</summary>
         public virtual void Update()
         {
+            _frame = FrameBuffer.CreateFrom(body);
             foreach (var item in Items)
             {
                 foreach (Cell cell in _innerSpace)
@@ -199,6 +204,7 @@ namespace RougeLikeRpg.Graphic.Controls
                         cell.BackColor = item.BackgroundColor;
                         cell.Symbol = itemCell.Symbol;
                     }
+                    _frame.Append(cell);
                 }
             }
         }
