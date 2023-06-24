@@ -15,4 +15,11 @@
     <ProjectReference Include="..\RougeLikeRpg.Graphic\RougeLikeRpg.Graphic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+      <ProjectReference 
+          Include="../RougeLikeRpg.Game.SourceGen/RougeLikeRpg.Game.SourceGen.csproj" 
+          OutputItemType="Analyzer"
+          ReferenceOutputAssembly="true"
+          />
+  </ItemGroup>
 </Project>

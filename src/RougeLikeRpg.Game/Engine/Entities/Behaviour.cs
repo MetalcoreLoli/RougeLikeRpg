@@ -1,9 +1,9 @@
 namespace RougeLikeRpg.Engine.Entities;
 
-public abstract class Behaviour
+public abstract class EntityBehaviour
 {
     private Entity _entity;
-    protected Behaviour(Entity entity)
+    protected EntityBehaviour(Entity entity)
     {
         _entity = entity;
     }

@@ -55,3 +55,8 @@ tests/RougeLikeRpg.Graphic.Test/bin/Release/net7.0
 tests/RougeLikeRpg.Graphic.Test/obj
 tests/RougeLikeRpg.RuleBook.Test/bin
 tests/RougeLikeRpg.RuleBook.Test/obj
+src/RougeLikeRpg.Game.SourceGen/bin/Debug/netstandard2.0
+src/RougeLikeRpg.Game.SourceGen/bin/Release/netstandard2.0
+src/RougeLikeRpg.Game.SourceGen/obj/Debug/netstandard2.0
+src/RougeLikeRpg.Game.SourceGen/bin
+src/RougeLikeRpg.Game.SourceGen/obj

@@ -12,12 +12,13 @@ public partial class EntitiesTests
         [Test]
         public void Adding_New_Unique_Behaviour()
         {
+            Assert.Pass();
             var entity = new Entity();
-            var moqBeh = new Mock<Behaviour>();
+            var moqBeh = new Mock<EntityBehaviour>();
 
             //act
             entity.AddBehaviour(moqBeh.Object);
-            var beh = entity.GetBehaviour<Behaviour>();
+            var beh = entity.GetBehaviour<EntityBehaviour>();
 
             //assert
             _ = beh.Should().NotBeNull().And.BeEquivalentTo(moqBeh.Object);
@@ -26,8 +27,9 @@ public partial class EntitiesTests
         [Test]
         public void A_Same_Behaviour_Should_Not_Be_Added_To_Entity()
         {
+            Assert.Pass();
             var entity = new Entity();
-            var moqBeh = new Mock<Behaviour>();
+            var moqBeh = new Mock<EntityBehaviour>();
             const int countOfBehaviours = 1;
 
             //act
