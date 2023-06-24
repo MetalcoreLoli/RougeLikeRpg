@@ -100,7 +100,8 @@ namespace RougeLikeRpg.Engine
                     break;
                 default:
                     var  direction = PlayerMoveTo (e.Key);
-                    _map.Move(direction);
+                    if (_map.IsWalkable(_player.Position + direction))
+                        _map.Offset(direction);
                     break;
             }
         }

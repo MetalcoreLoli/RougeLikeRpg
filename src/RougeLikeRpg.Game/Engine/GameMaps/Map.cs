@@ -164,10 +164,10 @@ namespace RougeLikeRpg.Engine
         public Actor GetActor(Int32 x, Int32 y) => Actors.FirstOrDefault(actor => actor.Position.X == x && actor.Position.Y == y);
         public Actor GetActor(Vector2D pos) => GetActor((int) pos.X, (int) pos.Y);
 
-        public void Move (Vector2D offset)
+        public void Offset (Vector2D offset)
         {
-            if (!IsWalkable(Player.Position + offset))
-                return;
+            //if (!IsWalkable(Player.Position + offset))
+            //    return;
             foreach (var cell in _mapBuffer)
                 cell.Position -= offset;
 
